@@ -70,7 +70,7 @@
  <h1 class="reveal" style="animation-delay:.08s"><span class="a">West</span><em>vs</em><span class="b">China</span></h1>
  <div class="rule reveal" style="animation-delay:.14s"></div>
  <p class="sub reveal" style="animation-delay:.2s" id="hero"><span id="hx_tok">&mdash;</span> &mdash; but tokens aren't dollars. <span id="hx_val"></span> Weekly (Mon–Sun, labeled by week-ending date), <span id="hx_span">&mdash;</span>.</p>
- <p class="src reveal" style="animation-delay:.24s">SOURCE OpenRouter public rankings + model catalog list prices · updated 2026-09-29 · weekly Mon–Sun buckets labeled by ending date · value = token volume × estimated $/token (free tier = $0)</p>
+ <p class="src reveal" style="animation-delay:.24s">SOURCE OpenRouter public rankings + model catalog list prices · updated 2026-10-06 · weekly Mon–Sun buckets labeled by ending date · value = token volume × estimated $/token (free tier = $0)</p>
 
  <div class="cards" id="cards"></div>
 
@@ -4821,17 +4821,19 @@ __chartsReady( function(){
  <div class="secrule"></div>
  <div class="seckick">External cross-check &middot; capability &amp; efficiency</div>
  <div class="sechead">The other half of the picture: <b>what the dollars buy</b></div>
- <div class="secsub">The panels above are OpenRouter traffic. Panels 1&ndash;5, 2b and 2c here are
+ <div class="secsub">The panels above are OpenRouter traffic. Panels 1&ndash;5, 2b, 2c and 7&ndash;9 here are
    <span class="ext">EXTERNAL &mdash; Artificial Analysis benchmark + METR</span> data, not OpenRouter&rsquo;s: capability, token
-   efficiency, cost to run a benchmark, cost and time <i>per task</i>, <i>serving</i> speed and task length. Panel&nbsp;6 pairs Artificial Analysis
+   efficiency, cost to run a benchmark, cost and time <i>per task</i>, <i>serving</i> speed, task length and capability <i>over time</i>. Panel&nbsp;6 pairs Artificial Analysis
    scores with OpenRouter&rsquo;s realized input prices. They test one reading of the token/dollar gap &mdash; that a low
    per-token price overstates the cost advantage once tokens per task and capability are counted. In the 25&nbsp;Jun&nbsp;2026 Artificial Analysis
    snapshot the Index&nbsp;<span id="aa_secband"></span> band <span id="aa_secfront"></span>; Panels 2b&ndash;2c and 6 use later snapshots, where index levels differ.
-   <b style="color:#1f63d6">US/West blue</b>, <b style="color:#d83a2c">China red</b> throughout. Reasoning/max-effort variants <i>unless noted</i>
+   <b style="color:#1f63d6">US/West blue</b>, <b style="color:#d83a2c">China red</b> throughout (Panel&nbsp;7&rsquo;s optional &ldquo;Colour by lab&rdquo; view keeps the bloc as a coloured ring).
+   Panels 1&ndash;4: reasoning/max-effort variants <i>unless noted</i>
    (Tencent&nbsp;Hy3 is AA's <b>non-reasoning</b> measurement); Panels 2b&ndash;2c use Artificial Analysis&rsquo; default effort setting
-   for each release. <b>Panels 1&ndash;4</b> are fixed at 25&nbsp;Jun&nbsp;2026; <b>Panels 2b&ndash;2c</b>
+   for each release; <b>Panels 7&ndash;9</b> use whichever variant AA plots for each model (reasoning, effort-tiered and non-reasoning mixed), and Panels 8&ndash;9 compare the best point in the selection regardless of effort setting. <b>Panels 1&ndash;4</b> are fixed at 25&nbsp;Jun&nbsp;2026; <b>Panels 2b&ndash;2c</b>
    are a separate manual Artificial Analysis snapshot of <span id="aa_c2b_asof2"></span> (cost and decode time per Index task); <b>panel&nbsp;5</b> is
-   METR's published data; <b>panel&nbsp;6</b> pairs Artificial Analysis scores with OpenRouter realized input prices as of <span id="aa_asof1"></span>.</div>
+   METR's published data; <b>panel&nbsp;6</b> pairs Artificial Analysis scores with OpenRouter realized input prices as of <span id="aa_asof1"></span>.
+   <b>Panels 7&ndash;9</b> are a third Artificial Analysis snapshot, of <span id="aa_t_asof0"></span> (Intelligence Index over model release date, and the Western-vs-Chinese gap and catch-up lag read off it); the series is the chart as plotted on that date, and Artificial Analysis&rsquo; leaderboard may already list newer releases.</div>
 
  <div class="panel">
   <div class="ptitle">1 &middot; The frontier ceiling &mdash; as of the 25 Jun 2026 snapshot, no Chinese model reached it
@@ -4924,12 +4926,45 @@ __chartsReady( function(){
   <div id="aa_c6" class="chart" style="height:420px"></div>
   <div class="note" id="aa_c6note"></div>
  </div>
+ <div class="panel">
+  <div class="ptitle">7 &middot; Intelligence over time &mdash; <span id="aa_t7_ttl">each model, by release date</span>
+    <small class="wide">Artificial Analysis Intelligence Index (y) against model release date (x), for <span id="aa_t7_sel"></span>.
+      <span id="aa_t7_ptdef"></span> <span id="aa_t7_frontdef"></span> Bold lines are each bloc&rsquo;s <b>frontier</b>; the larger dots are the models that set it.
+      <span id="aa_t7_blocrule"></span></small></div>
+  <div class="aaleg"><span class="legitems" id="aa_t7_leg"></span><span class="toggle" id="aa_t7_labtoggle"><span class="sw"></span>Colour by lab</span></div>
+  <div id="aa_t7" class="chart tall"></div>
+  <div class="aakey" id="aa_t7_key"></div>
+  <div class="note" id="aa_t7_note"></div>
+  <div class="note" id="aa_t7_scale"></div>
+  <div class="note" id="aa_t7_src"></div>
+ </div>
+
+ <div class="panel">
+  <div class="ptitle">8 &middot; The gap &mdash; top Western model vs top Chinese model, in % of the Western frontier
+    <small class="wide"><b>Gap = (Western frontier &minus; Chinese frontier) &divide; Western frontier</b>, from the first date both blocs have a model, redrawn at every date either
+      frontier moves and extended to the latest release. <span id="aa_t8_def"></span> A line below zero would mean China leads; shading would mark such a period.</small></div>
+  <div class="aaleg" id="aa_t8_leg"></div>
+  <div id="aa_t8" class="chart"></div>
+  <div class="note" id="aa_t8_note"></div>
+  <div class="note" id="aa_t8_src"></div>
+ </div>
+
+ <div class="panel">
+  <div class="ptitle">9 &middot; The time gap &mdash; <span id="aa_t9_ttl">how long ago the West first reached each Chinese frontier score</span>
+    <small class="wide"><span id="aa_t9_def"></span></small></div>
+  <div class="aaleg"><span class="legitems" id="aa_t9_leg"></span><span class="toggle" id="aa_t9_fwdtoggle"><span class="sw"></span>Look forward from Western frontier points</span></div>
+  <div id="aa_t9" class="chart tall"></div>
+  <div class="aakey" id="aa_t9_key"></div>
+  <div class="note" id="aa_t9_note"></div>
+  <div class="note" id="aa_t9_src"></div>
+ </div>
  <p class="src">SOURCE Panels 1&ndash;4: <a href="https://artificialanalysis.ai/" target="_blank" rel="noopener">Artificial Analysis</a> (Intelligence Index,
   tokens and cost to run the Index, per-provider output speed; model and provider pages, 25 Jun 2026) &middot; Panel 5:
   <a href="https://metr.org/time-horizons/" target="_blank" rel="noopener">METR time horizons</a> (<span id="aa_srcmetr"></span>) &middot; Panel 6: Intelligence
   Index scores by Artificial Analysis with OpenRouter realized prices, via <a href="https://openrouter.ai/rankings" target="_blank" rel="noopener">OpenRouter rankings</a>,
   as of <span id="aa_asof4"></span> &middot; Panels 2b&ndash;2c: <a href="https://artificialanalysis.ai/" target="_blank" rel="noopener">Artificial Analysis</a>
-  (artificialanalysis.ai), manual snapshot <span id="aa_c2b_srcdate"></span></p>
+  (artificialanalysis.ai), manual snapshot <span id="aa_c2b_srcdate"></span> &middot; Panels 7&ndash;9: <a href="https://artificialanalysis.ai/" target="_blank" rel="noopener">Artificial Analysis</a>
+  (artificialanalysis.ai), snapshot of <span id="aa_t_srcdate"></span>, Intelligence Index <span id="aa_t_srcver"></span></p>
 </section>
 <script>
 __chartsReady( function(){
@@ -5005,6 +5040,10 @@ __chartsReady( function(){
  var AA_SWEEP_DATE_PRETTY = prettyRange(SWEEP_DATES[0], SWEEP_DATES[SWEEP_DATES.length-1]);
  ['aa_c2b_asof2','aa_c2b_asof3','aa_c2b_srcdate'].forEach(function(id){put(id, AA_SWEEP_DATE_PRETTY);});
  var AA_SNAP='25 Jun 2026';
+ var aaT7Hook=null;
+
+ var AA_TIME_SWEEP = [{"model": "Claude Instant", "variant": "Standard", "creator": "Anthropic", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2023-03-14", "intelligence_index": 5.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Claude 2.0", "variant": "Standard", "creator": "Anthropic", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2023-07-11", "intelligence_index": 6.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Claude 3 Opus", "variant": "Standard", "creator": "Anthropic", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2024-03-04", "intelligence_index": 9.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Claude 3.7 Sonnet (Reasoning)", "variant": "Standard", "creator": "Anthropic", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-02-24", "intelligence_index": 18.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Claude 4 Opus (Reasoning)", "variant": "Standard", "creator": "Anthropic", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-05-22", "intelligence_index": 21.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Claude 4.1 Opus (Reasoning)", "variant": "Standard", "creator": "Anthropic", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-08-05", "intelligence_index": 23.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Claude Opus 4.5 (Reasoning)", "variant": "Standard", "creator": "Anthropic", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-11-24", "intelligence_index": 29.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Claude Opus 4.6 (Max)", "variant": "Standard", "creator": "Anthropic", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-02-05", "intelligence_index": 32.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Claude Opus 4.7 (Max)", "variant": "Standard", "creator": "Anthropic", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-04-16", "intelligence_index": 41.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Claude Opus 4.8 (Max)", "variant": "Standard", "creator": "Anthropic", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-05-28", "intelligence_index": 42.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Claude Fable 5 (Max, Opus 4.8 Fallback)", "variant": "Standard", "creator": "Anthropic", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-06-09", "intelligence_index": 50.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Claude Opus 4.8 (Max)", "variant": "Change: Claude Fable 5 disabled", "creator": "Anthropic", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-06-13", "intelligence_index": 42.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": "AA tooltip 'Change' annotation point (series fallback/restore), not a new model release; non-frontier-setting"}, {"model": "Claude Fable 5 (Max, Opus 4.8 Fallback)", "variant": "Change: Claude Fable 5 re-enabled", "creator": "Anthropic", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-07-01", "intelligence_index": 50.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": "AA tooltip 'Change' annotation point (series fallback/restore), not a new model release; non-frontier-setting"}, {"model": "Claude Opus 5 (Max)", "variant": "Standard", "creator": "Anthropic", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-07-24", "intelligence_index": 51.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Claude Fable 5.1 (Max, Default Fallback)", "variant": "Standard", "creator": "Anthropic", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-09-01", "intelligence_index": 53.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Claude Opus 5.5 (Max, Default Fallback)", "variant": "Standard", "creator": "Anthropic", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-09-22", "intelligence_index": 58.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": "name resolved from tooltip in 2nd independent hover pass (1st pass tooltip returned a neighbouring series model)"}, {"model": "GPT-3.5 Turbo", "variant": "Standard", "creator": "OpenAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2022-11-30", "intelligence_index": 5.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "GPT-4", "variant": "Standard", "creator": "OpenAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2023-03-14", "intelligence_index": 7.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "GPT-4o (Aug '24)", "variant": "Standard", "creator": "OpenAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2024-08-06", "intelligence_index": 8.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "o1-preview", "variant": "Standard", "creator": "OpenAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2024-09-12", "intelligence_index": 11.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "o1", "variant": "Standard", "creator": "OpenAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2024-12-05", "intelligence_index": 15.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "o3", "variant": "Standard", "creator": "OpenAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-04-16", "intelligence_index": 20.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "o3-pro", "variant": "Standard", "creator": "OpenAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-06-10", "intelligence_index": 22.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "GPT-5 (High)", "variant": "Standard", "creator": "OpenAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-08-07", "intelligence_index": 23.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "GPT-5 Codex (High)", "variant": "Standard", "creator": "OpenAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-09-23", "intelligence_index": 25.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "GPT-5.2 (Xhigh)", "variant": "Standard", "creator": "OpenAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-12-11", "intelligence_index": 30.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "GPT-5.3 Codex (Xhigh)", "variant": "Standard", "creator": "OpenAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-02-05", "intelligence_index": 33.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "GPT-5.4 (Xhigh)", "variant": "Standard", "creator": "OpenAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-03-05", "intelligence_index": 39.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "GPT-5.6 Sol (Max)", "variant": "Standard", "creator": "OpenAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-07-09", "intelligence_index": 47.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "GPT-6 Astra (Max)", "variant": "Standard", "creator": "OpenAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-09-03", "intelligence_index": 53.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "PALM-2", "variant": "Standard", "creator": "Google", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2023-05-10", "intelligence_index": 5.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Gemini 1.0 Ultra", "variant": "Standard", "creator": "Google", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2023-12-06", "intelligence_index": 6.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Gemini 1.5 Pro (Sep '24)", "variant": "Standard", "creator": "Google", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2024-09-24", "intelligence_index": 8.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Gemini 2.0 Flash Thinking Experimental (Jan '25)", "variant": "Standard", "creator": "Google", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-01-21", "intelligence_index": 9.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Gemini 2.5 Pro Preview (Mar' 25)", "variant": "Standard", "creator": "Google", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-03-25", "intelligence_index": 15.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Gemini 2.5 Pro", "variant": "Standard", "creator": "Google", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-06-05", "intelligence_index": 16.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Gemini 3 Pro Preview (High)", "variant": "Standard", "creator": "Google", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-11-18", "intelligence_index": 28.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Gemini 3.1 Pro Preview", "variant": "Standard", "creator": "Google", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-02-19", "intelligence_index": 30.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Gemini 3.5 Flash (Medium)", "variant": "Standard", "creator": "Google", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-05-19", "intelligence_index": 34.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Gemini 3.7 Flash (Medium)", "variant": "Standard", "creator": "Google", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-08-13", "intelligence_index": 40.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Gemini 3.8 Flash (High)", "variant": "Standard", "creator": "Google", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-09-02", "intelligence_index": 41.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Gemini 4 Argon (High)", "variant": "Standard", "creator": "Google", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-09-30", "intelligence_index": 53.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Llama 65B", "variant": "Standard", "creator": "Meta", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2023-02-24", "intelligence_index": 5.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Llama 2 Chat 7B", "variant": "Standard", "creator": "Meta", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2023-07-18", "intelligence_index": 6.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Llama 3.1 Instruct 405B", "variant": "Standard", "creator": "Meta", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2024-07-23", "intelligence_index": 7.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Llama 3.3 Instruct 70B", "variant": "Standard", "creator": "Meta", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2024-12-06", "intelligence_index": 8.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": "name resolved from tooltip in 2nd independent hover pass (1st pass tooltip returned a neighbouring series model)"}, {"model": "Llama 4 Maverick", "variant": "Standard", "creator": "Meta", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-04-05", "intelligence_index": 10.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Muse Spark", "variant": "Standard", "creator": "Meta", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-04-08", "intelligence_index": 31.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Muse Spark 1.1 (Xhigh)", "variant": "Standard", "creator": "Meta", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-07-09", "intelligence_index": 34.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Muse Spark 1.2 (Xhigh)", "variant": "Standard", "creator": "Meta", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-08-05", "intelligence_index": 40.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Muse Spark 1.3 (Max)", "variant": "Standard", "creator": "Meta", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-09-02", "intelligence_index": 48.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Grok-1", "variant": "Standard", "creator": "SpaceXAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2024-03-17", "intelligence_index": 6.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Grok Beta", "variant": "Standard", "creator": "SpaceXAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2024-08-13", "intelligence_index": 7.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Grok 3 mini Reasoning (High)", "variant": "Standard", "creator": "SpaceXAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-02-19", "intelligence_index": 15.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Grok 4", "variant": "Standard", "creator": "SpaceXAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-07-10", "intelligence_index": 22.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Grok 4.20 0309 (Reasoning)", "variant": "Standard", "creator": "SpaceXAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-03-10", "intelligence_index": 25.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Grok 4.20 0309 v2 (Reasoning)", "variant": "Standard", "creator": "SpaceXAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-04-07", "intelligence_index": 26.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Grok Build 0.1 0616", "variant": "Standard", "creator": "SpaceXAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-06-16", "intelligence_index": 27.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Grok 4.5 (High)", "variant": "Standard", "creator": "SpaceXAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-07-08", "intelligence_index": 39.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Grok 4.6 (High)", "variant": "Standard", "creator": "SpaceXAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-08-12", "intelligence_index": 44.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Grok 4.7 (Xhigh)", "variant": "Standard", "creator": "SpaceXAI", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-09-21", "intelligence_index": 46.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "MiMo-V2-Flash (Feb 2026)", "variant": "Standard", "creator": "Xiaomi", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-12-16", "intelligence_index": 22.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "MiMo-V2-Pro", "variant": "Standard", "creator": "Xiaomi", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-03-18", "intelligence_index": 29.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "MiMo-V2.6-Pro", "variant": "Standard", "creator": "Xiaomi", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-09-21", "intelligence_index": 46.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": "exact pixel overlap with Grok 4.7 (Xhigh) on 2026-09-21 (both 46); name resolved by filtering the chart to Xiaomi only"}, {"model": "Qwen Chat 14B", "variant": "Standard", "creator": "Alibaba", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2023-09-25", "intelligence_index": 5.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Qwen1.5 Chat 110B", "variant": "Standard", "creator": "Alibaba", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2024-04-25", "intelligence_index": 6.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Qwen2.5 Instruct 72B", "variant": "Standard", "creator": "Alibaba", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2024-09-19", "intelligence_index": 8.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "QwQ 32B", "variant": "Standard", "creator": "Alibaba", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-03-05", "intelligence_index": 9.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Qwen3 235B A22B 2507 Instruct", "variant": "Standard", "creator": "Alibaba", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-07-21", "intelligence_index": 12.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Qwen3 235B A22B 2507 (Reasoning)", "variant": "Standard", "creator": "Alibaba", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-07-25", "intelligence_index": 13.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Qwen3 Max", "variant": "Standard", "creator": "Alibaba", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-09-23", "intelligence_index": 16.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Qwen3 Max Thinking", "variant": "Standard", "creator": "Alibaba", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-01-26", "intelligence_index": 21.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Qwen3.5 27B (Reasoning)", "variant": "Standard", "creator": "Alibaba", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-02-24", "intelligence_index": 23.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Qwen3.6 Plus", "variant": "Standard", "creator": "Alibaba", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-04-02", "intelligence_index": 27.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Qwen3.6 Max Preview", "variant": "Standard", "creator": "Alibaba", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-04-20", "intelligence_index": 28.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Qwen3.7 Max", "variant": "Standard", "creator": "Alibaba", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-05-19", "intelligence_index": 29.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Qwen3.8 Max", "variant": "Standard", "creator": "Alibaba", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-08-03", "intelligence_index": 40.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Qwen3.8 Max (0902)", "variant": "Standard", "creator": "Alibaba", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-09-02", "intelligence_index": 45.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "GLM-4.5 (Reasoning)", "variant": "Standard", "creator": "Z AI", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-07-28", "intelligence_index": 13.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "GLM-4.6 (Reasoning)", "variant": "Standard", "creator": "Z AI", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-09-30", "intelligence_index": 19.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "GLM-4.7 (Reasoning)", "variant": "Standard", "creator": "Z AI", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-12-22", "intelligence_index": 22.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "GLM-5 (Reasoning)", "variant": "Standard", "creator": "Z AI", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-02-11", "intelligence_index": 28.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "GLM-5.2 (Max)", "variant": "Standard", "creator": "Z AI", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-06-16", "intelligence_index": 34.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "GLM-5.3 (Max)", "variant": "Standard", "creator": "Z AI", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-08-18", "intelligence_index": 45.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Step3 VL 10B", "variant": "Standard", "creator": "StepFun", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-01-20", "intelligence_index": 8.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Step 3.5 Flash", "variant": "Standard", "creator": "StepFun", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-02-02", "intelligence_index": 17.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Step 3.7 Flash", "variant": "Standard", "creator": "StepFun", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-05-29", "intelligence_index": 19.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Step 5 Preview", "variant": "Standard", "creator": "StepFun", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-09-18", "intelligence_index": 44.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Kimi K2", "variant": "Standard", "creator": "Kimi", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-07-11", "intelligence_index": 13.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Kimi K2 0905", "variant": "Standard", "creator": "Kimi", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-09-05", "intelligence_index": 15.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Kimi K2 Thinking", "variant": "Standard", "creator": "Kimi", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-11-06", "intelligence_index": 22.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Kimi K2.5 (Reasoning)", "variant": "Standard", "creator": "Kimi", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-01-27", "intelligence_index": 23.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Kimi K2.6 (Reasoning)", "variant": "Standard", "creator": "Kimi", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-04-20", "intelligence_index": 27.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Kimi K3 (Max)", "variant": "Standard", "creator": "Kimi", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-07-16", "intelligence_index": 44.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": "name resolved from tooltip in 2nd independent hover pass (1st pass tooltip returned a neighbouring series model)"}, {"model": "DeepSeek LLM 67B Chat (V1)", "variant": "Standard", "creator": "DeepSeek", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2023-11-29", "intelligence_index": 5.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "DeepSeek-V2-Chat", "variant": "Standard", "creator": "DeepSeek", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2024-05-06", "intelligence_index": 6.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "DeepSeek-V2.5", "variant": "Standard", "creator": "DeepSeek", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2024-09-06", "intelligence_index": 7.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "DeepSeek V3 (Dec '24)", "variant": "Standard", "creator": "DeepSeek", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2024-12-26", "intelligence_index": 8.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "DeepSeek R1 (Jan '25)", "variant": "Standard", "creator": "DeepSeek", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-01-20", "intelligence_index": 11.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "DeepSeek R1 0528 (May '25)", "variant": "Standard", "creator": "DeepSeek", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-05-28", "intelligence_index": 13.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "DeepSeek V3.1 (Non-reasoning)", "variant": "Standard", "creator": "DeepSeek", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-08-21", "intelligence_index": 14.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "DeepSeek V3.1 Terminus (Reasoning)", "variant": "Standard", "creator": "DeepSeek", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-09-22", "intelligence_index": 15.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "DeepSeek V3.2 Exp (Reasoning)", "variant": "Standard", "creator": "DeepSeek", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-09-29", "intelligence_index": 17.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "DeepSeek V3.2 (Reasoning)", "variant": "Standard", "creator": "DeepSeek", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-12-01", "intelligence_index": 21.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "DeepSeek V4 Pro 0424 (Max)", "variant": "Standard", "creator": "DeepSeek", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-04-24", "intelligence_index": 30.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "DeepSeek V4 Flash 0731 (Max)", "variant": "Standard", "creator": "DeepSeek", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-07-31", "intelligence_index": 34.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "DeepSeek V4 Pro 0813 (Max)", "variant": "Standard", "creator": "DeepSeek", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-08-13", "intelligence_index": 36.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "DeepSeek V4.1 Flash (Max)", "variant": "Standard", "creator": "DeepSeek", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-09-10", "intelligence_index": 39.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "K2-V2 (High)", "variant": "Standard", "creator": "Institute of Foundation Models", "country": "ae", "bloc": "Other", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-12-05", "intelligence_index": 10.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": "UAE lab; bloc Other, excluded from gap/lag"}, {"model": "K2 Think V2", "variant": "Standard", "creator": "Institute of Foundation Models", "country": "ae", "bloc": "Other", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-12-15", "intelligence_index": 11.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": "UAE lab; bloc Other, excluded from gap/lag"}, {"model": "K2 Horizon 375B A23B", "variant": "Standard", "creator": "Institute of Foundation Models", "country": "ae", "bloc": "Other", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-09-03", "intelligence_index": 31.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": "UAE lab; bloc Other, excluded from gap/lag"}, {"model": "MiniMax M1 80k", "variant": "Standard", "creator": "MiniMax", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-06-17", "intelligence_index": 12.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "MiniMax-M2", "variant": "Standard", "creator": "MiniMax", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-10-26", "intelligence_index": 19.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "MiniMax-M2.1", "variant": "Standard", "creator": "MiniMax", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-12-23", "intelligence_index": 21.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "MiniMax-M2.5", "variant": "Standard", "creator": "MiniMax", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-02-12", "intelligence_index": 23.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": "name resolved from tooltip in 2nd independent hover pass (1st pass tooltip returned a neighbouring series model)"}, {"model": "MiniMax-M3", "variant": "Standard", "creator": "MiniMax", "country": "cn", "bloc": "Chinese", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-06-01", "intelligence_index": 29.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Inkling (Xhigh)", "variant": "Standard", "creator": "Thinking Machines", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-07-15", "intelligence_index": 25.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Inkling Small", "variant": "Standard", "creator": "Thinking Machines", "country": "us", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-07-30", "intelligence_index": 26.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Mistral 7B Instruct", "variant": "Standard", "creator": "Mistral", "country": "fr", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2023-09-27", "intelligence_index": 5.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Mistral Large (Feb '24)", "variant": "Standard", "creator": "Mistral", "country": "fr", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2024-02-26", "intelligence_index": 6.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Mistral Large 2 (Jul '24)", "variant": "Standard", "creator": "Mistral", "country": "fr", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2024-07-24", "intelligence_index": 7.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Mistral Large 2 (Nov '24)", "variant": "Standard", "creator": "Mistral", "country": "fr", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2024-11-18", "intelligence_index": 8.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Mistral Medium 3", "variant": "Standard", "creator": "Mistral", "country": "fr", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-05-07", "intelligence_index": 9.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Magistral Medium 1.2", "variant": "Standard", "creator": "Mistral", "country": "fr", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2025-09-18", "intelligence_index": 12.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}, {"model": "Mistral Medium 3.5", "variant": "Standard", "creator": "Mistral", "country": "fr", "bloc": "Western", "is_open_weights": null, "is_reasoning": null, "release_date": "2026-04-29", "intelligence_index": 14.0, "creator_selected_by_default": true, "plotted_by_default": true, "source_url": "https://artificialanalysis.ai/", "sweep_date": "2026-10-06", "index_version": "v4.3.2", "notes": ""}];
+ var AA_TIME_META = {"creators_available": 58, "evaluations": ["AA-Briefcase v1.1", "GDPval-AA v2.1", "AutomationBench-AA", "Terminal-Bench 4.0", "SciCode", "Humanity's Last Exam", "GDP.pdf", "CritPt", "AA-Omniscience", "AA-LCR v1.1"]};
 
  var charts=[];
  function mk(id){var e=document.getElementById(id);if(!e)return null;var ch=echarts.init(e);charts.push(ch);return ch;}
@@ -5116,13 +5155,13 @@ __chartsReady( function(){
   }
 
   function rp(a,x,y){var dx=Math.max(a.x-x,0,x-(a.x+a.w)), dy=Math.max(a.y-y,0,y-(a.y+a.h));return Math.sqrt(dx*dx+dy*dy);}
-  function ambiguous(r,own,dots){
+  function ambiguous(r,own,dots,tight){
     var ownClr=rp(r,own.cx,own.cy)-own.r;
     return dots.some(function(o){
       if(o.key===own.key) return false;
       var clr=rp(r,o.cx,o.cy)-o.r;
       if(clr<Math.min(ownClr,14)+3) return true;
-      if(o.cy>r.y-3 && o.cy<r.y+r.h+3 && clr<34) return true;
+      if(o.cy>r.y-3 && o.cy<r.y+r.h+3 && clr<(tight?20:34)) return true;
       if(o.cx>r.x-3 && o.cx<r.x+r.w+3 && clr<12) return true;
       return false;
     });
@@ -5161,8 +5200,9 @@ __chartsReady( function(){
           if(state.rects.some(function(o){return sr(ld,o,1);})) continue;
           if(state.dots.some(function(o){return o.key!==it.key && sc(ld,o,3);})) continue;
           if(state.leads.some(function(o){return ss(ld,o);})) continue;
+          if(it.avoidSegs && state.segs.some(function(o){return ss(ld,o);})) continue;
         }
-        if(ambiguous(r,d,state.dots)) continue;
+        if(ambiguous(r,d,state.dots,it.tight)) continue;
         if(it.badge && state.lbls.some(function(o){return r.y<o.y+o.h+2 && o.y<r.y+r.h+2 &&
           (Math.abs(r.x+r.w-o.x)<16 || Math.abs(o.x+o.w-r.x)<16 || rr(r,o,0));})) continue;
         got={rect:r,lead:c.lead};
@@ -5464,6 +5504,581 @@ __chartsReady( function(){
     put('aa_c2c_scale', scaleTxt);
     put('aa_c2c_note', noteFor(resTime, function(v){return v.toFixed(1)+' min';}, 'fastest point', 'time'));
   }
+
+  (function(){
+   var TS=AA_TIME_SWEEP, META=AA_TIME_META, MO=30.44, DAY=86400000;
+   var MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+   function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+   function tms(iso){return Date.parse(iso+'T00:00:00Z');}
+   function isoOf(t){return new Date(t).toISOString().slice(0,10);}
+   function pd(t){return prettyDate(isoOf(t));}
+   function fi(v){return Number.isInteger(v)?String(v):v.toFixed(1);}
+   function mo1(v){return Math.abs(v).toFixed(1);}
+   function mon(v){return mo1(v)+(mo1(v)==='1.0'?' month':' months');}     // '1.0 month' / '3.4 months'
+   function smon(v){return v<0?'China '+mon(v)+' ahead':mon(v);}          // sign kept: a negative lag is a Chinese lead
+   function nameB(m){var c=blocCls(m.bloc);return '<b'+(c?' class="'+c+'"':'')+'>'+esc(m.lab)+'</b>';}
+
+   var EFF_RE=/\s*\((?:max|xhigh|high|medium|low|reasoning|non-reasoning)\b[^)]*\)\s*$/i;      // effort suffix
+   var DATE_RE=/\s*\([A-Z][a-z]{2}'?\s*'?\d{2,4}\)\s*$/;                                       // "(Jan '25)"
+   var TM=[];
+   TS.forEach(function(r,k){
+     if(r.intelligence_index==null || !r.release_date) return;
+     var nm=r.model, base=nm.replace(EFF_RE,'');
+     TM.push({ord:k, key:'t'+k, full:nm, lab:base.replace(DATE_RE,''), mk:base.toLowerCase().replace(/[^a-z0-9]/g,''),
+       creator:r.creator, country:(r.country||'').toLowerCase(), bloc:blocOf(r), date:r.release_date, t:tms(r.release_date),
+       idx:r.intelligence_index, variant:r.variant||'', change:/^change\b/i.test(r.variant||''), ver:r.index_version, fs:false});
+   });
+   if(!TM.length) return;
+   var REL=TM.filter(function(m){return !m.change;});
+   var RW=REL.filter(function(m){return m.bloc==='Western';}), RC=REL.filter(function(m){return m.bloc==='Chinese';});
+   var latestT=Math.max.apply(null,REL.map(function(m){return m.t;}));
+   var creators=[]; TM.forEach(function(m){if(creators.indexOf(m.creator)<0) creators.push(m.creator);});
+   var versions=[]; TM.forEach(function(m){if(m.ver && versions.indexOf(m.ver)<0) versions.push(m.ver);});
+   var verTxt=versions.length?versions.join(' / '):'(not recorded)';
+   var sweepDates=[]; TS.forEach(function(r){if(r.sweep_date && sweepDates.indexOf(r.sweep_date)<0) sweepDates.push(r.sweep_date);});
+   sweepDates.sort();
+   var TS_PRETTY=prettyRange(sweepDates[0],sweepDates[sweepDates.length-1]);
+   var nChange=TM.length-REL.length;
+   var nCreatorRec=(function(){var byC={}, n=0; REL.forEach(function(m){(byC[m.creator]=byC[m.creator]||[]).push(m);});
+     Object.keys(byC).forEach(function(c){var best=-Infinity;
+       byC[c].slice().sort(function(a,b){return a.t-b.t || b.idx-a.idx || a.ord-b.ord;}).forEach(function(m){if(m.idx>best){n++;best=m.idx;}});});
+     return n;})();
+   var allCreatorRec=(nCreatorRec===REL.length);
+   function pl(n,w){return n+' '+w+(n===1?'':'s');}
+
+   function annotPairs(){
+     var ch=TM.filter(function(a){return a.change;}).slice().sort(function(a,b){return a.t-b.t;}), out=[];
+     ch.forEach(function(a){
+       var mm=/^Change[:]\s*(.+?)\s+disabled\s*$/i.exec(a.variant||''); if(!mm) return;
+       var en=null;
+       ch.forEach(function(b){ if(en||b.t<a.t) return; var m2=/^Change[:]\s*(.+?)\s+re-enabled\s*$/i.exec(b.variant||''); if(m2 && m2[1]===mm[1]) en=b; });
+       if(en) out.push({name:mm[1],dis:a.t,en:en.t,fb:a.lab,fbIdx:a.idx});
+     });
+     return out;
+   }
+
+   function recordsOf(list){
+     var ms=list.slice().sort(function(a,b){return a.t-b.t || b.idx-a.idx || a.ord-b.ord;}), out=[], best=-Infinity;
+     ms.forEach(function(m){if(m.idx>best){out.push(m);best=m.idx;}});
+     out.forEach(function(m){m.fs=true;});
+     return out;
+   }
+   var FW=recordsOf(RW), FC=recordsOf(RC);
+   function fAt(F,t){var r=null;F.forEach(function(m){if(m.t<=t) r=m;});return r;}
+   function firstAtLeast(list,v){var b=null;
+     list.forEach(function(m){ if(m.idx>=v && (!b || m.t<b.t || (m.t===b.t && (m.idx<b.idx || (m.idx===b.idx && m.ord<b.ord))))) b=m; });
+     return b;}
+   var haveBoth=FW.length>0 && FC.length>0;
+
+   var GAP=[];
+   if(haveBoth){
+     var t0=Math.max(Math.min.apply(null,RW.map(function(m){return m.t;})), Math.min.apply(null,RC.map(function(m){return m.t;})));
+     var evT=[t0]; FW.concat(FC).forEach(function(m){if(m.t>t0 && evT.indexOf(m.t)<0) evT.push(m.t);});
+     if(latestT>t0 && evT.indexOf(latestT)<0) evT.push(latestT);
+     evT.sort(function(a,b){return a-b;});
+     evT.forEach(function(t){
+       var w=fAt(FW,t), c=fAt(FC,t), pts=w.idx-c.idx;
+       GAP.push({t:t,w:w,c:c,pts:pts,pct:100*pts/w.idx,since:Math.max(w.t,c.t)});
+     });
+   }
+   var LB=[], LF=[];
+   if(haveBoth){
+     LB=FC.map(function(c){var w=firstAtLeast(RW,c.idx);
+       return w?{m:c,ref:w,t:c.t,y:(c.t-w.t)/DAY/MO,open:false,col:CHINA}
+               :{m:c,ref:null,t:c.t,y:-(latestT-c.t)/DAY/MO,open:true,col:CHINA};});
+     LF=FW.map(function(w){var c=firstAtLeast(RC,w.idx);
+       return c?{m:w,ref:c,t:w.t,y:(c.t-w.t)/DAY/MO,open:false,col:WEST}
+               :{m:w,ref:null,t:w.t,y:(latestT-w.t)/DAY/MO,open:true,col:WEST};});
+   }
+   function lagStats(ser){
+     var ok=ser.filter(function(e){return !e.open;}), ys=ok.map(function(e){return e.y;});
+     var pos=ok.filter(function(e){return e.y>0;}), neg=ok.filter(function(e){return e.y<0;}), lo=null, hi=null;
+     pos.forEach(function(e){ if(!lo||e.y<lo.y) lo=e; if(!hi||e.y>hi.y) hi=e; });     // shortest/longest among POSITIVE lags only
+     var op=ser.filter(function(e){return e.open;});
+     return {n:ser.length, ok:ok, pos:pos, neg:neg, open:op, med:med(ys), lo:lo, hi:hi, last:ser[ser.length-1],
+             medAll:med(ys.concat(op.map(function(e){return e.y;})))};
+   }
+
+   var allT=TM.map(function(m){return m.t;});
+   var d0=new Date(Math.min.apply(null,allT)), d1=new Date(latestT);
+   var xMin=Date.UTC(d0.getUTCFullYear(),d0.getUTCMonth(),1), xMax=Date.UTC(d1.getUTCFullYear(),d1.getUTCMonth()+2,1);
+   function gridRight(ch){return Math.round(Math.min(96,Math.max(48,ch.getWidth()*0.09)));}
+   function xAxisT(nar,nm){return {type:'time',min:xMin,max:xMax,name:nm||(nar?'Release date →':'Model release date →'),nameLocation:'middle',nameGap:26,
+     nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:nar?10:11},splitNumber:nar?4:8,
+     axisLabel:axL({hideOverlap:true,formatter:function(v){var d=new Date(v);return MN[d.getUTCMonth()]+" '"+String(d.getUTCFullYear()).slice(2);}}),
+     axisLine:{lineStyle:{color:'#d8d2c6'}},splitLine:{lineStyle:{color:GRID}}};}
+   function lineKey(color,w,dash){return '<span><i style="border:none;border-bottom:'+w+'px '+(dash||'solid')+' '+color+';border-radius:0;width:18px;height:0;margin-bottom:3px"></i>';}
+
+   var CTRY={us:'the US',cn:'China',fr:'France',ae:'the UAE'};
+   function ctry(c){return CTRY[c]||String(c).toUpperCase();}
+   function blocCountries(b){var s=[];TM.forEach(function(m){if(m.bloc===b && s.indexOf(m.country)<0) s.push(m.country);});return s;}
+   function blocLabs(b,pred){var s=[];TM.forEach(function(m){if(m.bloc===b && (!pred||pred(m)) && s.indexOf(m.creator)<0) s.push(m.creator);});return s;}
+   var otherLabs=blocLabs('Other'), westNonUS=blocLabs('Western',function(m){return m.country!=='us';});
+   var BLOC_RULE='<b>Bloc</b> follows the lab&rsquo;s country: <span class="c">Chinese</span> = '+listJoin(blocCountries('Chinese').map(ctry))+
+     '; <span class="w">Western</span> = '+listJoin(blocCountries('Western').map(ctry))+(westNonUS.length?' ('+listJoin(westNonUS)+')':'')+
+     (otherLabs.length?'; any other country is <b>Other</b> ('+listJoin(otherLabs)+', '+listJoin(blocCountries('Other').map(ctry))+') &mdash; plotted in grey but left out of the gap and lag':'')+'.';
+   var SAME_DAY=' Models released on the same day count as one step: the highest Index sets the record (a tie keeps the earlier-listed model).';
+   var FRONT_SHORT='<b>Frontier</b> = the highest Index among the <b>plotted</b> models of a bloc released on or before a date &mdash; the best of this selection, not necessarily the global frontier.'+SAME_DAY;
+   var FRONT_DEF='<b>Frontier</b> = the highest Index among the <b>plotted</b> models of a bloc released on or before a date &mdash; the best of this selection of <b>'+
+     creators.length+' of '+META.creators_available+'</b> model creators, not necessarily the global frontier.'+SAME_DAY;
+   var SRC_LINE='Source: <a href="https://artificialanalysis.ai/" target="_blank" rel="noopener">Artificial Analysis</a> (artificialanalysis.ai), snapshot of '+TS_PRETTY+', Intelligence Index '+verTxt+'.';
+   ['aa_t_asof0','aa_t_srcdate'].forEach(function(id){put(id,TS_PRETTY);});
+   put('aa_t_srcver',verTxt);
+   ['aa_t7_src','aa_t8_src','aa_t9_src'].forEach(function(id){put(id,SRC_LINE);});
+
+   var tScale=(function(){
+     var seen={}, mine=[]; REL.forEach(function(m){if(!seen[m.mk]){seen[m.mk]=1;mine.push(m);}});
+     var dk={}; D.forEach(function(x){dk[x.m.toLowerCase().replace(/[^a-z0-9]/g,'')]=x;});
+     var s14=mine.filter(function(m){return dk[m.mk];}).map(function(m){var x=dk[m.mk];return {m:m.lab,was:x.idx,now:m.idx,dl:m.idx-x.idx};});
+     var head1='Every point here is on the Index version of '+TS_PRETTY+' ('+verTxt+'), so the series is internally consistent. ';
+     var t1;
+     if(!s14.length) t1='It shares no model with Panels 1&ndash;4 ('+AA_SNAP+' snapshot), so their levels cannot be compared.';
+     else {
+       var dl=s14.map(function(o){return o.dl;}), lo=Math.min.apply(null,dl), hi=Math.max.apply(null,dl);
+       var mag=hi<0?mo1(hi)+(mo1(hi)!==mo1(lo)?'&ndash;'+mo1(lo):'')+' points lower'
+              :(lo>0?mo1(lo)+(mo1(hi)!==mo1(lo)?'&ndash;'+mo1(hi):'')+' points higher':mo1(lo)+' points lower to '+mo1(hi)+' points higher');
+       t1='It is <b>not comparable with Panels 1&ndash;4</b> ('+AA_SNAP+'): the '+s14.length+' model'+(s14.length>1?'s':'')+' in both ('+
+         s14.map(function(o){return o.m+' '+o.was+'&rarr;'+o.now;}).join(', ')+') score '+mag+' here.';
+     }
+     var tk={}; AA_TASK_SWEEP.forEach(function(r){if(r.intelligence_index!=null) tk[r.model_release.replace(EFF_RE,'').toLowerCase().replace(/[^a-z0-9]/g,'')]=r;});
+     var s2=mine.filter(function(m){return tk[m.mk];}).map(function(m){var r=tk[m.mk];return {m:m.lab,a:r.intelligence_index,b:m.idx,ok:Math.round(r.intelligence_index)===m.idx};});
+     var t2;
+     if(!s2.length) t2=' It shares no model with Panels 2b&ndash;2c ('+AA_SWEEP_DATE_PRETTY+'), so the two cannot be compared.';
+     else {
+       var bad=s2.filter(function(o){return !o.ok;}), verRec=AA_TASK_SWEEP.some(function(r){return r.index_version;});
+       t2=' Against Panels 2b&ndash;2c ('+AA_SWEEP_DATE_PRETTY+'), <b>'+(s2.length-bad.length)+' of '+s2.length+'</b> shared releases carry the same Index to the nearest integer'+
+         (bad.length?'; the exceptions are '+bad.map(function(o){return o.m+' ('+o.a.toFixed(1)+' vs '+o.b+')';}).join(', ')+', so compare Index values within one snapshot'
+                    :', consistent with one Index version')+
+         (verRec?'.':' &mdash; that sweep does not record its version, so this is inferred from the values, not recorded.');
+     }
+     return head1+t1+t2;
+   })();
+   aaT7Hook=function(B){
+     var seen={}, mine=[]; REL.forEach(function(m){if(!seen[m.mk]){seen[m.mk]=1;mine.push(m);}});
+     var p6={}; (B.models||[]).forEach(function(x){var k=String(x.name||'').replace(EFF_RE,'').toLowerCase().replace(/[^a-z0-9]/g,''); (p6[k]=p6[k]||[]).push(x);});
+     var sh=mine.filter(function(m){return p6[m.mk];}).map(function(m){
+       var xs=p6[m.mk], hit=xs.filter(function(x){return Math.round(x.score)===m.idx;})[0];
+       var near=xs.slice().sort(function(a,b){return Math.abs(a.score-m.idx)-Math.abs(b.score-m.idx);})[0];
+       return {m:m.lab,now:m.idx,a:hit?hit.score:near.score,ok:!!hit};});
+     var t;
+     if(!sh.length) t=' It shares no model with Panel 6 ('+BENCH_ASOF+'), so the two cannot be compared.';
+     else {
+       var bad=sh.filter(function(o){return !o.ok;});
+       t=' Against Panel 6 ('+BENCH_ASOF+'), <b>'+(sh.length-bad.length)+' of '+sh.length+'</b> shared models carry the same Index to the nearest integer'+
+         (bad.length?'; the exceptions are '+bad.map(function(o){return esc(o.m)+' ('+o.a.toFixed(1)+' vs '+o.now+')';}).join(', '):'')+'.';
+     }
+     t+=' Panel 6 carries one decimal; Panels 7&ndash;9 use Artificial Analysis&rsquo; whole-number chart values, so ties, frontier records and lags are decided at integer resolution, and a difference of one point or less is within rounding.';
+     put('aa_t7_p6',t);
+   };
+   function oldNewGap(){
+     var seen={}, byMk={}; REL.forEach(function(m){if(!seen[m.mk]){seen[m.mk]=1;byMk[m.mk]=m;}});
+     var sh=D.filter(function(x){return byMk[x.m.toLowerCase().replace(/[^a-z0-9]/g,'')];});
+     function top(c){var b=null;sh.forEach(function(x){if(x.c===c && (!b||x.idx>b.idx)) b=x;});return b;}
+     var w=top('US'), c=top('CN'); if(!w||!c||!(w.idx>0)) return '';
+     var wn=byMk[w.m.toLowerCase().replace(/[^a-z0-9]/g,'')], cn=byMk[c.m.toLowerCase().replace(/[^a-z0-9]/g,'')];
+     var go=100*(w.idx-c.idx)/w.idx, gn=100*(wn.idx-cn.idx)/wn.idx;
+     return 'The Index has no true zero (it is a re-scaled composite), so the percentage belongs to this scale and version and is <b>not a capability ratio</b>: the same two models, '+
+       esc(w.m)+' and '+esc(c.m)+', score '+w.idx+' and '+c.idx+' on the '+AA_SNAP+' index (a <b>'+go.toFixed(1)+'%</b> gap) and '+wn.idx+' and '+cn.idx+' on '+esc(verTxt)+' (<b>'+gn.toFixed(1)+'%</b>)'+
+       annotPairs().filter(function(q){return q.name===wn.lab;}).map(function(q){return '; '+esc(q.name)+' is the model Artificial Analysis shows as disabled '+pd(q.dis)+' to '+pd(q.en);}).join('')+'.';
+   }
+
+   function layoutLabels(ch,chId,S){
+     var nar=narrowOf(ch), fs=nar?9:10.5;
+     var L=ch.convertToPixel({xAxisIndex:0},S.xMin), R=ch.convertToPixel({xAxisIndex:0},S.xMax);
+     var T=ch.convertToPixel({yAxisIndex:0},S.yMax), B=ch.convertToPixel({yAxisIndex:0},S.yMin);
+     if([L,R,T,B].some(function(v){return v==null||isNaN(v);})) return null;
+     R=Math.max(R,ch.getWidth()-6);     // the empty right margin of the grid is free label room
+     function px(x,y){return ch.convertToPixel({xAxisIndex:0,yAxisIndex:0},[x,y]);}
+     var pos={}; S.dots.forEach(function(d){pos[d.key]=px(d.x,d.y);});
+     var segPx=S.segs.map(function(s){var a=px(s.x1,s.y1), b=px(s.x2,s.y2);return {x1:a[0],y1:a[1],x2:b[0],y2:b[1]};});
+     var labelled={}; S.labels.forEach(function(l){labelled[l.key]=1;});
+     var alias={};
+     S.dots.forEach(function(d){ if(labelled[d.key]) return;
+       S.labels.forEach(function(l){var a=pos[d.key], b=pos[l.key]; if(Math.abs(a[0]-b[0])<=2 && Math.abs(a[1]-b[1])<=2) alias[d.key]=l.key;}); });
+     function freshState(){
+       var st={L:L,R:R,T:T,B:B,rects:[],lbls:[],leads:[],segs:segPx.slice(),dots:[]};
+       S.dots.forEach(function(d){var q=pos[d.key];st.dots.push({key:alias[d.key]||d.key,orig:d.key,cx:q[0],cy:q[1],r:d.sz/2+1});});
+       return st;
+     }
+     var state=freshState(), dotOf={}; state.dots.forEach(function(d){if(d.orig===d.key) dotOf[d.key]=d;});
+     var named={}; S.labels.forEach(function(l){if(l.named) named[l.key]=1;});
+     var maxReach=nar?30:42;
+     function itemsOf(list,tight){return list.map(function(l){
+       return {key:l.key,txt:l.txt,fs:fs,wt:600,dot:dotOf[l.key],fine:!!named[l.key],tight:!!(tight&&named[l.key]),avoidSegs:!!S.avoidSegs,reach:named[l.key]?maxReach+68:maxReach+60};});}
+     var ord=S.labels.slice(), best=null;
+     for(var round=0;round<6;round++){
+       var st=freshState(), r0=placeAll(itemsOf(ord,round>=3),st,maxReach);
+       var miss=r0.failed.filter(function(k){return named[k];});
+       var score=[miss.length,-Object.keys(r0.placed).length];
+       if(!best || score[0]<best.score[0] || (score[0]===best.score[0] && score[1]<best.score[1])) best={res:r0,st:st,score:score};
+       if(!miss.length) break;
+       var mset={}; miss.forEach(function(k){mset[k]=1;});
+       ord=ord.filter(function(l){return mset[l.key];}).concat(ord.filter(function(l){return !mset[l.key];}));
+     }
+     var res=best.res; state=best.st;
+     var byKey={}; S.labels.forEach(function(l){byKey[l.key]=l;});
+     var keyed=S.labels.filter(function(l){return res.failed.indexOf(l.key)>=0;}).sort(function(a,b){return a.sortKey-b.sortKey;});
+     var num={}; keyed.forEach(function(l,j){num[l.key]=j+1;});
+     var bfs=nar?8.5:9.5;
+     var bItems=keyed.map(function(l){return {key:l.key,txt:String(num[l.key]),fs:bfs,wt:700,dot:dotOf[l.key],badge:true,avoidSegs:!!S.avoidSegs};});
+     var bres=placeAll(bItems,state,72);
+     var bl=placeAll(bItems.filter(function(it){return bres.failed.indexOf(it.key)>=0;}),state,72,true);
+     Object.keys(bl.placed).forEach(function(k){bres.placed[k]=bl.placed[k];});
+     var els=[];
+     function leader(lead,color){els.push({type:'line',z:3,silent:true,shape:lead,style:{stroke:color,lineWidth:1,opacity:.6}});}
+     S.labels.forEach(function(l){
+       var g=res.placed[l.key]; if(!g) return;
+       if(g.lead) leader(g.lead,l.color);
+       els.push({type:'text',name:'aalbl',z:12,silent:true,style:{text:l.txt,x:g.rect.x+2,y:g.rect.y+g.rect.h/2,textAlign:'left',
+         textVerticalAlign:'middle',fontFamily:MONO,fontSize:fs,fontWeight:600,fill:INK,stroke:'#fff',lineWidth:3}});
+     });
+     keyed.forEach(function(l){
+       var g=bres.placed[l.key], d=dotOf[l.key], r;
+       if(g){ r=g.rect; if(g.lead) leader(g.lead,l.color); }
+       else { var w=Math.ceil(textW(String(num[l.key]),bfs,700))+8, h=Math.ceil(bfs*1.25)+3; r={x:d.cx-w/2,y:d.cy-h/2,w:w,h:h}; }
+       els.push({type:'rect',name:'aabadge',z:13,silent:true,shape:{x:r.x,y:r.y,width:r.w,height:r.h,r:3},style:{fill:'#fff',stroke:l.color,lineWidth:1.2}});
+       els.push({type:'text',z:14,silent:true,style:{text:String(num[l.key]),x:r.x+r.w/2,y:r.y+r.h/2,textAlign:'center',textVerticalAlign:'middle',
+         fontFamily:MONO,fontSize:bfs,fontWeight:700,fill:INK}});
+     });
+     ch.setOption({graphic:[{id:chId+'_lbl',type:'group',children:els}]},{replaceMerge:['graphic']});
+     var ke=document.getElementById(S.keyId);
+     if(ke) ke.innerHTML=keyed.length?'<span class="kh">NUMBERED POINTS</span>'+keyed.map(function(l){
+       return '<span><b style="border-color:'+l.color+'">'+num[l.key]+'</b>'+esc(l.full)+' <i>'+l.note+'</i></span>';}).join(''):'';
+     ch.getDom().setAttribute('data-lbl',S.dots.length+'/'+Object.keys(res.placed).length+'/'+keyed.length);
+     ch.getDom().setAttribute('data-named-unlabelled',Object.keys(named).filter(function(k){return !res.placed[k];}).join('|'));
+     return {labelled:Object.keys(res.placed).length,keyed:keyed.length};
+   }
+   function watch(ch,render){
+     var tmr;
+     function relay(){clearTimeout(tmr);tmr=setTimeout(function(){ch.resize();render();},120);}
+     window.addEventListener('resize',relay);
+     if(window.ResizeObserver) new ResizeObserver(relay).observe(ch.getDom());
+     if(document.fonts && document.fonts.ready) document.fonts.ready.then(function(){render();});
+   }
+   function stepSegs(F){
+     var d=F.map(function(m){return [m.t,m.idx];}); d.push([latestT,F[F.length-1].idx]);
+     var s=[]; for(var k=0;k+1<d.length;k++){
+       s.push({x1:d[k][0],y1:d[k][1],x2:d[k+1][0],y2:d[k][1]}); s.push({x1:d[k+1][0],y1:d[k][1],x2:d[k+1][0],y2:d[k+1][1]}); }
+     return {pts:d,segs:s};
+   }
+
+   (function(){
+    var ch=mk('aa_t7'); if(!ch) return;
+    var byLab=false;
+    var yMin=0, yMax=Math.ceil((Math.max.apply(null,TM.map(function(m){return m.idx;}))+1)/10)*10;
+    function colorOf(m){return byLab?colLab(m.creator):colBloc(m.bloc);}
+    function sizeOf(m,nar){return m.change?(nar?9:11):(m.fs?(nar?12:15):(nar?7:9));}
+    var sW=haveBoth?stepSegs(FW):null, sC=haveBoth?stepSegs(FC):null;
+    var named={};
+    if(haveBoth){ named[FW[FW.length-1].key]=1; named[FC[FC.length-1].key]=1; var lw=LB[LB.length-1].ref; if(lw) named[lw.key]=1; }
+    var labelled=FW.concat(FC).sort(function(a,b){return ((named[b.key]?1:0)-(named[a.key]?1:0)) || (b.idx-a.idx) || (b.t-a.t);});
+
+    function paintLeg(){
+      var e=document.getElementById('aa_t7_leg'); if(!e) return;
+      var items;
+      if(byLab){
+        var out=creators.slice().sort();
+        items=out.map(function(c){var bl=null;TM.forEach(function(m){if(m.creator===c) bl=m.bloc;});
+          return '<span><i style="background:'+colLab(c)+';border:2px solid '+colBloc(bl)+'"></i>'+esc(c)+'</span>';}).join('')+
+          '<span><b>ring = bloc:</b> <b style="color:'+WEST+'">Western</b> blue, <b style="color:'+CHINA+'">Chinese</b> red, grey = other</span>';
+      } else {
+        items=['Western','Chinese','Other'].filter(function(b){return TM.some(function(m){return m.bloc===b;});})
+          .map(function(b){return '<span><i style="background:'+colBloc(b)+'"></i>'+blocWord(b)+(b==='Other'?' (excluded from Panels 8&ndash;9)':'')+'</span>';}).join('');
+      }
+      e.innerHTML=items+(haveBoth?lineKey(WEST,3)+'Western frontier</span>'+lineKey(CHINA,3)+'Chinese frontier</span>':'')+
+        '<span><i style="background:'+DIM+';border-radius:50%;width:13px;height:13px;vertical-align:-2px"></i>larger dot = sets its bloc&rsquo;s frontier</span>'+
+        (nChange?'<span><i style="background:#fff;border:1.5px solid '+DIM+';transform:rotate(45deg);width:9px;height:9px;border-radius:1px"></i>annotation point, not a release</span>':'');
+    }
+    function render(){
+      var nar=narrowOf(ch);
+      var G={left:nar?40:56,right:nar?10:gridRight(ch),top:14,bottom:nar?44:48};
+      var scatter={name:'points',type:'scatter',z:5,symbolSize:function(v,p){return sizeOf(TM[p.dataIndex],nar);},
+        data:TM.map(function(m){var c=colorOf(m);
+          return m.change?{value:[m.t,m.idx],symbol:'diamond',itemStyle:{color:'#fff',borderColor:c,borderWidth:1.6,opacity:1}}
+                         :{value:[m.t,m.idx],itemStyle:{color:c,opacity:.9,borderColor:byLab?colBloc(m.bloc):'#fff',borderWidth:byLab?2.2:(m.fs?1.6:1)}};})};
+      function stepLine(name,sg,color){return {name:name,type:'line',step:'end',symbol:'none',silent:true,z:3,animation:false,
+        lineStyle:{color:color,width:nar?2.4:3.2,opacity:.9},data:sg.pts};}
+      ch.setOption({useUTC:true,grid:G,
+        tooltip:tip({trigger:'item',formatter:function(p){
+          var m=TM[p.dataIndex]; if(!m||p.seriesName!=='points') return '';
+          return '<b>'+esc(m.full)+'</b><br/><span style="color:#6a7180">'+esc(m.creator)+' &middot; '+blocWord(m.bloc)+'</span><br/>Index <b>'+fi(m.idx)+'</b> &middot; '+
+            prettyDate(m.date)+'<br/><span style="color:#6a7180">Intelligence Index '+esc(m.ver||'(version not recorded)')+'</span>'+
+            (m.change?'<br/>AA annotation: '+esc(m.variant)+' (not a new release)':(m.fs?'<br/><b>Sets a new '+blocWord(m.bloc)+' frontier record</b>':''));
+        }}),
+        xAxis:xAxisT(nar),
+        yAxis:{type:'value',min:yMin,max:yMax,interval:10,name:'AA Intelligence Index',nameLocation:'middle',nameGap:nar?24:34,
+          nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:nar?10:11},axisLabel:axL(),splitLine:{lineStyle:{color:GRID}}},
+        series:(haveBoth?[stepLine('Western frontier',sW,WEST),stepLine('Chinese frontier',sC,CHINA)]:[]).concat([scatter])
+      },true);
+      paintLeg();
+      var dots=TM.map(function(m){return {key:m.key,x:m.t,y:m.idx,sz:sizeOf(m,nar)};});
+      layoutLabels(ch,'aa_t7',{xMin:xMin,xMax:xMax,yMin:yMin,yMax:yMax,dots:dots,segs:haveBoth?sW.segs.concat(sC.segs):[],keyId:'aa_t7_key',
+        labels:labelled.map(function(m){return {key:m.key,txt:m.lab,full:m.full,color:colorOf(m),named:!!named[m.key],sortKey:m.t,
+          note:fi(m.idx)+' &middot; '+prettyDate(m.date)};})});
+    }
+    render();
+    var tgl=document.getElementById('aa_t7_labtoggle');
+    if(tgl) tgl.addEventListener('click',function(){byLab=!byLab;tgl.classList.toggle('on',byLab);render();});
+    watch(ch,render);
+
+    put('aa_t7_sel','<b>'+creators.length+' of '+META.creators_available+'</b> model creators ('+pl(TM.length,'plotted point')+', release dates '+
+      pd(Math.min.apply(null,allT))+' to '+pd(latestT)+')');
+    put('aa_t7_ttl',allCreatorRec?'each creator&rsquo;s record-setting models, by release date':'each model, by release date');
+    put('aa_t7_ptdef',allCreatorRec
+      ? 'Each point is a <b>creator&rsquo;s record-setting model</b> (every plotted model scores above its creator&rsquo;s earlier plotted models)'+
+        (nChange?', plus <b>'+pl(nChange,'series-change annotation')+'</b> (open diamonds: a model disabled or re-enabled, not a release)':'')+'.'
+      : 'Each point is a model'+(nChange?', plus '+pl(nChange,'series-change annotation')+' (open diamonds: a model disabled or re-enabled, not a release)':'')+'.');
+    put('aa_t7_frontdef',FRONT_SHORT);
+    put('aa_t7_blocrule',BLOC_RULE);
+    var bits=['<b>Read:</b> '+REL.length+(allCreatorRec?' record-setting models':' models')+(nChange?' plus '+pl(nChange,'annotation point')+' (AA marks a model being disabled or re-enabled; they are not releases and never set a frontier)':'')+
+      ' from '+creators.length+' creators.'];
+    if(haveBoth){
+      var w=FW[FW.length-1], c=FC[FC.length-1];
+      bits.push('The Western frontier is now '+nameB(w)+' (Index '+fi(w.idx)+', '+prettyDate(w.date)+') and the Chinese frontier '+nameB(c)+' (Index '+fi(c.idx)+', '+prettyDate(c.date)+'); '+
+        'each bloc has set '+FW.length+' (Western) and '+FC.length+' (Chinese) records in the selection.');
+    }
+    var ev=META.evaluations||[];
+    bits.push('The Index combines '+ev.length+' evaluations ('+esc(ev.join(', '))+'), version '+esc(verTxt)+'.');
+    if(allCreatorRec) bits.push('Models that AA&rsquo;s chart leaves out because they did not beat their own creator&rsquo;s earlier best cannot move a frontier or a lag here: an earlier model of the same creator already scored at least as high.');
+    bits.push('Small samples: this is a record of the points on the chart, not a trend.');
+    put('aa_t7_note',bits.join(' '));
+    put('aa_t7_scale','<b>Index scale and comparability.</b> '+tScale+'<span id="aa_t7_p6"></span> The series is the chart as plotted on '+TS_PRETTY+'; Artificial Analysis&rsquo; leaderboard may list newer releases that this chart does not yet show.');
+   })();
+
+   if(!haveBoth){
+     ['aa_t8_note','aa_t9_note'].forEach(function(id){put(id,'<b>Not computable:</b> the plotted selection lacks a Western or a Chinese model.');});
+     return;
+   }
+   put('aa_t8_def',FRONT_DEF+' '+BLOC_RULE);
+   function disabledRows(){
+     var out=[];
+     annotPairs().forEach(function(q){
+       var rows=[];
+       GAP.forEach(function(e,k){ var end=GAP[k+1]?GAP[k+1].t:e.t, lo=Math.max(e.t,q.dis), hi=Math.min(end,q.en);
+         if(e.w.lab===q.name && lo<hi) rows.push({e:e,lo:lo,hi:hi,alt:100*(q.fbIdx-e.c.idx)/q.fbIdx}); });
+       if(rows.length) out.push({q:q,rows:rows});
+     });
+     return out;
+   }
+
+   (function(){
+    var ch=mk('aa_t8'); if(!ch) return;
+    var pcts=GAP.map(function(e){return e.pct;});
+    var yMin=Math.min(0,Math.floor(Math.min.apply(null,pcts)/10)*10), yMax=Math.max(10,Math.ceil(Math.max.apply(null,pcts)/10)*10);
+    var last=GAP[GAP.length-1];
+    var lead=[]; GAP.forEach(function(e,k){ if(e.pts<0) lead.push([{xAxis:e.t},{xAxis:(GAP[k+1]?GAP[k+1].t:latestT)}]); });
+    function stateAt(v){var r=null;GAP.forEach(function(e){if(e.t<=v) r=e;});return r;}
+    function paintLatest(){
+      function px(x,y){return ch.convertToPixel({xAxisIndex:0,yAxisIndex:0},[x,y]);}
+      var p=px(last.t,last.pct); if(!p||isNaN(p[0])) return;
+      var Lp=px(xMin,0)[0], Rp=px(xMax,0)[0], Tp=px(xMin,yMax)[1];
+      var nr=narrowOf(ch), txt='latest '+last.pct.toFixed(1)+'%'+(nr?'':' ('+fi(last.pts)+' pts)'), fs=nr?9.5:10.5;
+      var w=Math.ceil(textW(txt,fs,600))+6, h=Math.ceil(fs*1.25)+2;
+      var segs=[], dots=[];
+      GAP.forEach(function(e,k){var a=px(e.t,e.pct); dots.push({cx:a[0],cy:a[1],r:4});
+        if(GAP[k+1]){var b=px(GAP[k+1].t,e.pct), c=px(GAP[k+1].t,GAP[k+1].pct);
+          segs.push({x1:a[0],y1:a[1],x2:b[0],y2:b[1]}); segs.push({x1:b[0],y1:b[1],x2:c[0],y2:c[1]});}});
+      var Bp=px(xMin,yMin)[1], got=null, bestCost=Infinity;
+      for(var dy=14; dy<=170; dy+=6){
+        [-1,1].forEach(function(side){
+          var y=side<0?p[1]-dy-h:p[1]+dy;
+          if(y<Tp || y+h>Bp-2) return;
+          for(var x=Math.max(Lp+2,p[0]-w-60); x<=Math.min(Rp-2-w,p[0]+30); x+=6){
+            var r={x:x,y:y,w:w,h:h}, cost=dy+(side>0?30:0)+1.0*Math.abs(x+w/2-p[0]);   // above is preferred over below
+            if(cost>=bestCost) continue;
+            if(segs.some(function(sg){return sr(sg,r,3);}) || dots.some(function(d){return rc(r,d,2);})) continue;
+            got=r; bestCost=cost;
+          }
+        });
+        if(got && dy>bestCost) break;      // a longer leader cannot beat the best slot found
+      }
+      if(!got) got={x:Math.max(Lp+2,Math.min(Rp-2-w,p[0]-w-10)),y:Math.max(Tp,p[1]-h-10),w:w,h:h};
+      var lx=Math.max(got.x+2,Math.min(got.x+got.w-2,p[0]));
+      ch.setOption({graphic:[{id:'aa_t8_lbl',type:'group',children:[
+        {type:'text',silent:true,z:12,style:{text:txt,x:got.x+3,y:got.y+got.h/2,textAlign:'left',textVerticalAlign:'middle',fontFamily:MONO,fontSize:fs,fontWeight:600,fill:INK,stroke:'#fff',lineWidth:3}},
+        {type:'line',silent:true,z:11,shape:{x1:lx,y1:(got.y<p[1]?got.y+got.h:got.y),x2:p[0],y2:(got.y<p[1]?p[1]-5:p[1]+5)},style:{stroke:INK,lineWidth:1,opacity:.6}}]}]},{replaceMerge:['graphic']});
+    }
+    var DIS=disabledRows();
+    function render(){
+      var nar=narrowOf(ch);
+      var bands=DIS.map(function(d){return [{xAxis:d.q.dis,itemStyle:{color:'rgba(110,110,110,.13)'},
+        label:{show:!nar,position:'insideTop',formatter:d.q.name+' disabled',color:DIM,fontFamily:MONO,fontSize:9}},{xAxis:d.q.en}];});
+      ch.setOption({useUTC:true,grid:{left:nar?40:56,right:nar?12:gridRight(ch),top:16,bottom:nar?44:48},
+        tooltip:tip({trigger:'axis',axisPointer:{type:'line',snap:false,lineStyle:{color:DIM,type:'dashed'}},formatter:function(ps){
+          var v=ps&&ps[0]?ps[0].axisValue:null, e=v==null?null:stateAt(v); if(!e) return '';
+          return '<b>'+pd(v)+'</b><br/>Gap <b>'+e.pct.toFixed(1)+'%</b> of the Western frontier ('+fi(e.pts)+' Index points)<br/>'+
+            '<span style="color:#1f63d6">Western frontier: <b>'+esc(e.w.lab)+'</b> '+fi(e.w.idx)+' ('+prettyDate(e.w.date)+')</span><br/>'+
+            '<span style="color:#d83a2c">Chinese frontier: <b>'+esc(e.c.lab)+'</b> '+fi(e.c.idx)+' ('+prettyDate(e.c.date)+')</span><br/>'+
+            '<span style="color:#6a7180">in force since '+pd(e.since)+'</span>';
+        }}),
+        xAxis:xAxisT(nar),
+        yAxis:{type:'value',min:yMin,max:yMax,name:nar?'Gap (% of West)':'Gap, % of the Western frontier',nameLocation:'middle',nameGap:nar?28:38,
+          nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:nar?10:11},axisLabel:axL({formatter:function(v){return v+'%';}}),splitLine:{lineStyle:{color:GRID}}},
+        series:[{name:'gap',type:'line',step:'end',z:3,symbol:'circle',symbolSize:nar?5:6,animation:false,
+          lineStyle:{color:INK,width:2.4},itemStyle:{color:INK,borderColor:'#fff',borderWidth:1},
+          data:GAP.map(function(e){return [e.t,e.pct];}),
+          markLine:{silent:true,symbol:'none',animation:false,lineStyle:{color:'#8d8676',type:'solid',width:1.2},
+            label:{show:true,position:'insideStartTop',formatter:'level with the West',color:DIM,fontFamily:MONO,fontSize:9.5},data:[{yAxis:0}]},
+          markArea:{silent:true,itemStyle:{color:'rgba(216,58,44,.13)'},data:lead.concat(bands)}}]
+      },true);
+      var e=document.getElementById('aa_t8_leg');
+      if(e) e.innerHTML=lineKey(INK,3)+'gap, step line (moves when either frontier moves)</span>'+
+        '<span><i style="background:'+INK+';border-radius:50%;width:8px;height:8px;vertical-align:0"></i>date a frontier moved</span>'+
+        '<span><i style="background:rgba(216,58,44,.2);border:1px solid rgba(216,58,44,.5)"></i>China leads (shaded; none unless the line goes below zero)</span>'+
+        (DIS.length?'<span><i style="background:rgba(110,110,110,.25);border:1px solid rgba(110,110,110,.5)"></i>grey band: the Western frontier model was disabled (AA annotation)</span>':'');
+      paintLatest();
+    }
+    render(); watch(ch,render);
+
+    var mn=GAP.reduce(function(a,e){return e.pct<a.pct?e:a;},GAP[0]), mx=GAP.reduce(function(a,e){return e.pct>a.pct?e:a;},GAP[0]);
+    var first=GAP[0], nLead=GAP.filter(function(e){return e.pts<0;}).length, nTie=GAP.filter(function(e){return e.pts===0;}).length;
+    var t=['<b>Read:</b> from '+pd(first.t)+', when both blocs first had a model, to '+pd(last.t)+' the series has <b>'+GAP.length+'</b> points.',
+      'The latest gap is <b>'+last.pct.toFixed(1)+'%</b> ('+fi(last.pts)+' Index points): Western frontier '+nameB(last.w)+' ('+fi(last.w.idx)+', '+prettyDate(last.w.date)+
+        ') against Chinese frontier '+nameB(last.c)+' ('+fi(last.c.idx)+', '+prettyDate(last.c.date)+').',
+      'Across the series it ranges from <b>'+mn.pct.toFixed(1)+'%</b> ('+pd(mn.t)+') to <b>'+mx.pct.toFixed(1)+'%</b> ('+pd(mx.t)+').',
+      nLead? 'China led at <b>'+nLead+'</b> of the '+GAP.length+' points (shaded).' : 'China never led at any of the '+GAP.length+' points'+(nTie?' ('+nTie+' ties)':'')+'.',
+      'Scale: a single Index point is <b>'+(100/first.w.idx).toFixed(1)+'%</b> of the Western frontier at the start and <b>'+(100/last.w.idx).toFixed(1)+'%</b> at the latest, so early percentages move in large steps; Index values are whole numbers, so a gap of one point or less ('+(100/last.w.idx).toFixed(1)+'% or less at the latest) is within rounding.',
+      DIS.map(function(d){
+        function rng(a){var lo=Math.min.apply(null,a), hi=Math.max.apply(null,a); return lo.toFixed(1)===hi.toFixed(1)?'<b>'+lo.toFixed(1)+'%</b>':'<b>'+lo.toFixed(1)+'%</b> to <b>'+hi.toFixed(1)+'%</b>';}
+        var q=d.q, w=d.rows[0].e.w, lo=Math.min.apply(null,d.rows.map(function(r){return r.lo;})), hi=Math.max.apply(null,d.rows.map(function(r){return r.hi;}));
+        return 'Over '+pd(lo)+' to '+pd(hi)+' the Western frontier is '+nameB(w)+' ('+fi(w.idx)+'), a model Artificial Analysis shows as <b>disabled</b>'+(lo===q.dis&&hi===q.en?'':' '+pd(q.dis)+' to '+pd(q.en))+' (its series fell back to '+esc(q.fb)+' at '+fi(q.fbIdx)+'): '+
+          'the gap on those dates is '+rng(d.rows.map(function(r){return r.e.pct;}))+', measured against a model that was off, and would be '+rng(d.rows.map(function(r){return r.alt;}))+' against the fallback.';
+      }).join(' '),
+      oldNewGap(),
+      'Index values are Artificial Analysis&rsquo; '+esc(verTxt)+' throughout &mdash; see Panel 7 for how that compares with Panels 1&ndash;4 and 2b&ndash;2c. Small samples: read the points, not a trend.'];
+    put('aa_t8_note',t.join(' '));
+   })();
+
+   (function(){
+    var ch=mk('aa_t9'); if(!ch) return;
+    var fwd=false;
+    function ser(){return fwd?LF:LB;}
+    function bound(e){return mo1(e.y);}
+    function sizeOf(nar){return nar?9:12;}
+    function labTxt(e){return e.m.lab+(e.open?' ('+String.fromCharCode(8805)+bound(e)+' mo)':'');}
+    function axisRange(s){
+      var ys=s.map(function(e){return e.y;}), lo=Math.min(0,Math.min.apply(null,ys)), hi=Math.max(0,Math.max.apply(null,ys));
+      return {min:lo<0?Math.floor(lo/2)*2:0, max:Math.ceil((hi+1)/2)*2};
+    }
+    function tipOf(e){
+      var m=e.m, h='<b>'+esc(m.full)+'</b><br/><span style="color:#6a7180">'+blocWord(m.bloc)+' frontier-setting model &middot; Index '+fi(m.idx)+' &middot; '+prettyDate(m.date)+'</span><br/>';
+      if(!fwd){
+        if(e.open) return h+'<b>Not yet matched by the West</b>: no Western model has reached Index '+fi(m.idx)+' by '+pd(latestT)+', so China is ahead by <b>at least '+mon(e.y)+'</b> (right-censored, not a measured lag).';
+        return h+'First Western model at or above Index '+fi(m.idx)+': <b>'+esc(e.ref.lab)+'</b> ('+fi(e.ref.idx)+', '+prettyDate(e.ref.date)+
+          (e.ref.idx>m.idx?'; '+fi(e.ref.idx-m.idx)+' points above this model':'')+')<br/>'+
+          (e.y>0?'The West first reached this score <b>'+mon(e.y)+'</b> earlier':(e.y<0?'China was <b>'+mon(e.y)+' ahead</b> of the West':'Same day'));
+      }
+      if(e.open) return h+'<b>Not yet matched</b>: no Chinese model has reached Index '+fi(m.idx)+' by '+pd(latestT)+' &mdash; <b>at least '+mon(e.y)+'</b> so far (right-censored, not a measured lag).';
+      return h+'First Chinese model at or above Index '+fi(m.idx)+': <b>'+esc(e.ref.lab)+'</b> ('+fi(e.ref.idx)+', '+prettyDate(e.ref.date)+')<br/>'+
+        (e.y>0?'<b>'+mon(e.y)+'</b> later':(e.y<0?'China was <b>'+mon(e.y)+' earlier</b>':'Same day'));
+    }
+    function paintLeg(){
+      var e=document.getElementById('aa_t9_leg'); if(!e) return;
+      var c=fwd?WEST:CHINA, who=fwd?'Western':'Chinese', nOpen=lagStats(ser()).open.length;
+      e.innerHTML='<span><i style="background:'+c+';border-radius:50%"></i>'+who+' frontier-setting model</span>'+
+        '<span><i style="background:#fff;border:2px solid '+c+';border-radius:50%"></i>not yet matched (at least; hollow, dashed stem)</span>'+lineKey(DIM,1.3,'dashed')+'median of the measured points'+
+        (nOpen?' (leaves out the '+nOpen+' not yet matched'+(fwd?', whose lags are still running':'')+')':'')+'</span>'+
+        lineKey('#8d8676',1.5)+'zero = same day</span>';
+    }
+    function render(){
+      var nar=narrowOf(ch), s=ser(), rg=axisRange(s), st=lagStats(s), sz=sizeOf(nar);
+      var stems=s.map(function(e){return [{coord:[e.t,0],lineStyle:{color:e.col,width:1.3,opacity:.5,type:e.open?'dashed':'solid'}},{coord:[e.t,e.y]}];});
+      var lines=[{yAxis:0,lineStyle:{color:'#8d8676',width:1.4,type:'solid'},label:{show:!nar,position:'end',distance:5,formatter:'same day',color:DIM,fontFamily:MONO,fontSize:9.5}}];
+      if(st.ok.length) lines.push({yAxis:st.med,lineStyle:{color:DIM,width:1.1,type:'dashed',opacity:.85},
+        label:{show:!nar,position:'end',distance:5,formatter:'median '+st.med.toFixed(1)+' mo',color:DIM,fontFamily:MONO,fontSize:9.5}});
+      ch.setOption({useUTC:true,grid:{left:nar?40:56,right:nar?12:gridRight(ch),top:16,bottom:nar?44:48},
+        tooltip:tip({trigger:'item',formatter:function(p){var e=s[p.dataIndex];return e?tipOf(e):'';}}),
+        xAxis:xAxisT(nar,(fwd?'Western':'Chinese')+(nar?' release date →':' model release date →')),
+        yAxis:{type:'value',min:rg.min,max:rg.max,name:nar?(fwd?'Months to match':'Months West led'):(fwd?'Months until China matched it':'Months the West was ahead'),nameLocation:'middle',nameGap:nar?26:36,
+          nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:nar?10:11},axisLabel:axL(),splitLine:{lineStyle:{color:GRID}}},
+        series:[{name:'lag',type:'scatter',z:5,symbolSize:sz,animation:false,
+          data:s.map(function(e){return {value:[e.t,e.y],itemStyle:e.open?{color:'#fff',borderColor:e.col,borderWidth:2}:{color:e.col,borderColor:'#fff',borderWidth:1.2}};}),
+          markLine:{silent:true,symbol:'none',animation:false,data:stems.concat(lines)}}]
+      },true);
+      paintLeg();
+      put('aa_t9_def',defText());
+      put('aa_t9_ttl',fwd?'how long China took to reach each Western frontier score':'how long ago the West first reached each Chinese frontier score');
+      var segs=s.map(function(e){return {x1:e.t,y1:0,x2:e.t,y2:e.y};});
+      var pw=ch.getWidth()-(nar?40:56)-(nar?12:gridRight(ch)), ext=(xMax-xMin)*(nar?60:84)/Math.max(pw,1);
+      segs.push({x1:xMin,y1:0,x2:xMax+ext,y2:0});
+      if(st.ok.length) segs.push({x1:xMin,y1:st.med,x2:xMax+ext,y2:st.med});
+      var named={}; st.open.forEach(function(e){named[e.m.key]=1;}); if(st.last) named[st.last.m.key]=1;
+      var order=s.slice().sort(function(a,b){return ((named[b.m.key]?1:0)-(named[a.m.key]?1:0)) || (b.t-a.t);});
+      layoutLabels(ch,'aa_t9',{xMin:xMin,xMax:xMax,yMin:rg.min,yMax:rg.max,keyId:'aa_t9_key',segs:segs,avoidSegs:true,
+        dots:s.map(function(e){return {key:e.m.key,x:e.t,y:e.y,sz:sz};}),
+        labels:order.map(function(e){return {key:e.m.key,txt:labTxt(e),full:e.m.full+(e.open?' (not yet matched)':''),color:e.col,named:!!named[e.m.key],sortKey:e.t,
+          note:(e.open?'&ge;':'')+mo1(e.y)+' mo &middot; '+prettyDate(e.m.date)};})});
+      note();
+    }
+    function statLine(st){
+      var t='Median <b>'+smon(st.med)+'</b>';
+      if(st.pos.length) t+='; shortest <b>'+mon(st.lo.y)+'</b> ('+esc(st.lo.m.lab)+'), longest <b>'+mon(st.hi.y)+'</b> ('+esc(st.hi.m.lab)+', at Index '+fi(st.hi.m.idx)+', where one whole-number point is '+(100/st.hi.m.idx).toFixed(0)+'% of the score)'+
+        (st.pos.length<st.ok.length?' (among the '+pl(st.pos.length,'point')+' with a positive lag)':'');
+      t+='.';
+      if(st.neg.length) t+=' China was <b>ahead</b> at <b>'+st.neg.length+'</b> of the '+st.ok.length+' measured points: '+
+        listJoin(st.neg.map(function(e){return esc(e.m.lab)+' ('+mon(e.y)+' ahead)';}))+'.';
+      return t;
+    }
+    function annotNote(){      // AA "disabled / re-enabled" annotation windows on a Western reference model
+      var wins={}; TM.forEach(function(a){ if(!a.change) return; var mm=/^Change[:]\s*(.+?)\s+(disabled|re-enabled)\s*$/i.exec(a.variant||''); if(!mm) return;
+        (wins[mm[1]]=wins[mm[1]]||[]).push({t:a.t,kind:mm[2].toLowerCase()}); });
+      var out=[], done={};
+      LB.forEach(function(e){ if(e.open||!e.ref||done[e.ref.key]) return; var w=wins[e.ref.lab]; if(!w) return;
+        var dis=null, en=null; w.slice().sort(function(x,y){return x.t-y.t;}).forEach(function(x){ if(x.kind==='disabled' && x.t>=e.ref.t && !dis) dis=x; if(x.kind==='re-enabled' && dis && !en && x.t>=dis.t) en=x; });
+        if(!dis||!en) return; done[e.ref.key]=1;
+        var after=LB.filter(function(f){return !f.open && f.ref===e.ref && f.m.t>=en.t;});
+        out.push(esc(e.ref.lab)+' (released '+pd(e.ref.t)+') was disabled '+pd(dis.t)+' to '+pd(en.t)+' (Artificial Analysis annotation); lags above run from its original release'+
+          (after.length?', and measured from the re-enable they would be '+listJoin(after.map(function(f){return mon((f.m.t-en.t)/DAY/MO)+' ('+esc(f.m.lab)+')';})):'')+'.');
+      });
+      return out.join(' ');
+    }
+    function note(){
+      var s=ser(), st=lagStats(s), t=[];
+      if(!fwd){
+        var wl=FW[FW.length-1], cl=FC[FC.length-1], gl=GAP[GAP.length-1];
+        t.push('<b>Read:</b> <b>'+st.n+'</b> Chinese frontier-setting '+(st.n===1?'model':'models')+(st.open.length?' ('+st.ok.length+' matched, '+st.open.length+' not yet matched by the West)':'')+'.');
+        if(st.last && !st.last.open){ var L=st.last;
+          t.push('For the latest, '+nameB(L.m)+' (Index '+fi(L.m.idx)+', '+prettyDate(L.m.date)+'), the West first reached or exceeded that score '+
+            (L.y>0?'<b>'+mon(L.y)+'</b> earlier':(L.y<0?'<b>'+mon(L.y)+'</b> later':'on the same day'))+', with '+nameB(L.ref)+' ('+fi(L.ref.idx)+', '+prettyDate(L.ref.date)+
+            (L.ref.idx>L.m.idx?'; '+fi(L.ref.idx-L.m.idx)+' points above it':'')+').');
+          annotPairs().filter(function(q){return q.name===L.ref.lab && L.ref.t<q.dis && L.m.t>=q.en;}).forEach(function(q){
+            t.push(esc(L.ref.lab)+' was disabled '+pd(q.dis)+' to '+pd(q.en)+' (detail below); <b>measured from the re-enable the lag for '+esc(L.m.lab)+' is '+mon((L.m.t-q.en)/DAY/MO)+'</b>.');
+          });
+        }
+        if(st.ok.length) t.push(statLine(st));
+        if(st.open.length) t.push('Not yet matched: '+listJoin(st.open.map(function(e){return esc(e.m.lab)+' (China ahead by at least '+mon(e.y)+')';}))+'.');
+        t.push('Each lag is measured against the <b>first Western model at or above the Chinese score</b>, not against today&rsquo;s Western frontier: that is now '+nameB(wl)+' at '+fi(wl.idx)+
+          ' against the Chinese '+nameB(cl)+' at '+fi(cl.idx)+' ('+gl.pct.toFixed(1)+'% gap, Panel&nbsp;8)'+(gl.pts>0?', so a short lag here does not mean China is that close to the frontier today.':'.'));
+        var an=annotNote(); if(an) t.push(an);
+      } else {
+        t.push('<b>Read:</b> from each of the <b>'+st.n+'</b> Western frontier-setting models, the months until a Chinese model scored at least as high: <b>'+st.ok.length+'</b> matched'+
+          (st.open.length?', <b>'+st.open.length+'</b> not yet matched.':'.'));
+        if(st.ok.length) t.push(statLine(st));
+        if(st.open.length){
+          t.push('Not yet matched (right-censored at '+pd(latestT)+', so these are minimums, not measured lags): '+
+            listJoin(st.open.map(function(e){return nameB(e.m)+' ('+fi(e.m.idx)+', at least '+mon(e.y)+')';}))+'.');
+          t.push('<b>The median above leaves out those '+pl(st.open.length,'point')+'</b>: they are Western records that no Chinese model has yet reached, so their lags are still running. Counting each at its minimum gives a median of <b>'+smon(st.medAll)+'</b>; the true median is at least that and moves as those points resolve.');
+        }
+      }
+      t.push('Index values are whole numbers, so a match is found to the nearest model release and one-point differences are within rounding. Small samples and one creator selection: read the points, not a trend. '+
+        'Frontier = highest Index in the plotted selection (not necessarily the global frontier). Index scale and Panel 6 comparison: see Panel 7.');
+      put('aa_t9_note',t.join(' '));
+    }
+    var tgl=document.getElementById('aa_t9_fwdtoggle');
+    if(tgl) tgl.addEventListener('click',function(){fwd=!fwd;tgl.classList.toggle('on',fwd);render();});
+    render(); watch(ch,render);
+
+    function defText(){
+      var common='Frontier = highest Index among the plotted selection, not necessarily the global frontier. Other-bloc labs are left out.';
+      var rec='(a new record for the %B% bloc; a tie keeps the earlier model; same-day releases count as one step, the higher Index setting the record)';
+      if(!fwd) return 'For each <b>Chinese frontier-setting model</b> '+rec.replace('%B%','Chinese')+' the dot is the number of months by which the first Western model scoring <b>at least as high</b> (it may score well above the Chinese point) <b>came earlier</b> &mdash; i.e. how long ago the West first reached that score, not how far behind China is today (release-date difference &divide; '+MO.toFixed(2)+' days): positive = China behind, negative = China first, hollow = the West has not matched it yet. '+
+        'Toggle &ldquo;look forward&rdquo; for the mirror view. '+common;
+      return 'For each <b>Western frontier-setting model</b> '+rec.replace('%B%','Western')+' the dot is the number of months until the first <b>Chinese</b> model scoring <b>at least as high</b> was released &mdash; i.e. how long China took to reach that Western score (release-date difference &divide; '+MO.toFixed(2)+' days): positive = China later, negative = a Chinese model was first, hollow = no Chinese model has reached it yet. '+
+        'A hollow marker reads &ldquo;not yet matched, at least N months&rdquo;, counted to the latest release ('+pd(latestT)+'): it is right-censored, not a measured lag. Switch the toggle off for the look-back view. '+common;
+    }
+    put('aa_t9_def',defText());
+   })();
+  })();
  })();
 
  (function(){var ch=mk('aa_c2');if(!ch)return;var d=D.filter(function(x){return x.idx>=40 && x.tok!=null;}).slice().sort(function(a,b){return a.tok-b.tok;});
@@ -6544,6 +7159,7 @@ __chartsReady( function(){
     "anthropic/claude-opus-5.5-20260921"
   ]
 };
+  if(typeof aaT7Hook==='function') aaT7Hook(B);
   var models = B.models;
   var paretoSet = {}; B.pareto.forEach(function(ps){paretoSet[ps]=true;});
   var blocs=['Western','Chinese','Other'];
