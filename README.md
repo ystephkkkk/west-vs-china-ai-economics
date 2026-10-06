@@ -6,7 +6,7 @@ Weekly token volume and estimated economic value on OpenRouter, split between We
 model vendors, with the within-vendor tier mix for Anthropic, OpenAI and Google and an external
 capability cross-check (Artificial Analysis, METR).
 
-Data through the week ending 2026-09-27 (weeks run Monday to Sunday and are labelled by their ending date).
+Data through the week ending 2026-10-04 (weeks run Monday to Sunday and are labelled by their ending date). That week is provisional: its totals were still being revised when the dashboard was built.
 
 - **Sources:** [OpenRouter rankings](https://openrouter.ai/rankings) and
   [model catalog](https://openrouter.ai/models) (token volume, list prices);
