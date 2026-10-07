@@ -1919,7 +1919,7 @@ __chartsReady( function(){
   ],
   "aa": {
     "metric": "intelligence",
-    "n": 219,
+    "n": 218,
     "by_slug": {
       "anthropic/claude-opus-5.5": {
         "score": 57.6,
@@ -2100,16 +2100,6 @@ __chartsReady( function(){
         "score": 41.8,
         "name": "Claude Opus 4.8 (Max)",
         "org": "anthropic"
-      },
-      "inclusionai/ling-3.1-flash": {
-        "score": 41.1,
-        "name": "Ling 3.1 Flash",
-        "org": "inclusionai"
-      },
-      "inclusionai/ling-3.1-flash-20261002": {
-        "score": 41.1,
-        "name": "Ling 3.1 Flash",
-        "org": "inclusionai"
       },
       "google/gemini-3.8-flash": {
         "score": 40.9,
@@ -7311,8 +7301,8 @@ __chartsReady( function(){
   var B = {
   "metric": "intelligence",
   "source": "openrouter.ai/rankings",
-  "n_models": 219,
-  "n_skipped_no_price": 126,
+  "n_models": 218,
+  "n_skipped_no_price": 127,
   "models": [
     {
       "permaslug": "anthropic/claude-opus-5.5-20260921",
@@ -7484,15 +7474,6 @@ __chartsReady( function(){
       "bloc": "Western",
       "score": 41.8,
       "price": 1.9486
-    },
-    {
-      "permaslug": "inclusionai/ling-3.1-flash-20261002",
-      "openrouter_slug": "inclusionai/ling-3.1-flash",
-      "name": "Ling 3.1 Flash",
-      "org": "inclusionai",
-      "bloc": "Chinese",
-      "score": 41.1,
-      "price": 0
     },
     {
       "permaslug": "google/gemini-3.8-flash-20260902",
@@ -9287,7 +9268,9 @@ __chartsReady( function(){
     }
   ],
   "pareto": [
-    "inclusionai/ling-3.1-flash-20261002",
+    "inclusionai/ling-3.0-flash-vl-20260910",
+    "xiaomi/mimo-v2.6-flash-20260921",
+    "deepseek/deepseek-v4.1-flash-20260910",
     "xiaomi/mimo-v2.6-pro-20260921",
     "openai/gpt-6.1-sol-20260929",
     "anthropic/claude-sonnet-5.5-20260928",
@@ -9305,6 +9288,8 @@ __chartsReady( function(){
     + '<span><i style="background:#fff;border:1.5px solid '+INK+';box-shadow:none"></i>larger dot = Pareto frontier</span>';
 
   var G={left:56,right:70,top:38,bottom:42}, YMIN=30;
+  var XMAX=(function(){var mx=0;models.forEach(function(m){if(m.score>=YMIN && m.price>mx) mx=m.price;});
+    var step=mx>=2?0.5:(mx>=1?0.25:0.1); return Math.ceil(mx*1.06/step)*step;})();
   function setGrid(){var n=narrowOf(ch);G.left=n?46:56;G.right=n?16:70;}
   var NAME_FLOOR=50;            // every model at/above this Index gets named
   var FS=10.5, PITCH=13;        // label size / minimum vertical pitch between two labels (desktop)
@@ -9415,7 +9400,7 @@ __chartsReady( function(){
         if(p.seriesType==='line') return p.name+'<br/>Index <b>'+p.value[1].toFixed(1)+'</b> &middot; $'+p.value[0].toFixed(2)+'/M &middot; <b>Pareto frontier</b>';
         return p.data.name+'<br/>Index <b>'+p.value[1].toFixed(1)+'</b> &middot; $'+p.value[0].toFixed(2)+'/M input'+(paretoSet[p.data.value[2]]?' &middot; <b>Pareto frontier</b>':'');
       }}),
-     xAxis:{type:'value',min:0,name:'$/1M tokens (weighted avg input) →',nameLocation:'middle',nameGap:26,nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:11},axisLabel:axL({formatter:function(v){return '$'+v.toFixed(2);}}),splitLine:{lineStyle:{color:GRID}}},
+     xAxis:{type:'value',min:0,max:XMAX,name:'$/1M tokens (weighted avg input) →',nameLocation:'middle',nameGap:26,nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:11},axisLabel:axL({formatter:function(v){return '$'+v.toFixed(2);}}),splitLine:{lineStyle:{color:GRID}}},
      yAxis:{type:'value',name:'AA Index Score',nameLocation:'middle',nameGap:36,min:YMIN,max:function(v){return Math.ceil((v.max+4)/5)*5;},nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:11},axisLabel:axL(),splitLine:{lineStyle:{color:GRID}}},
      series: showPareto ? buildScatter(true).concat([lineSeries]) : buildScatter(false)
     },true);
@@ -9525,7 +9510,7 @@ __chartsReady( function(){
   put('aa_c6span', 'spanning Index <b>'+Math.min.apply(null,scores).toFixed(1)+'</b> to <b>'+Math.max.apply(null,scores).toFixed(1)+'</b>');
   put('aa_c6skip', B.n_skipped_no_price
     ? ' ('+B.n_skipped_no_price+' further AA-scored model'+(B.n_skipped_no_price>1?'s carry':' carries')+
-      ' no OpenRouter price and '+(B.n_skipped_no_price>1?'are':'is')+' dropped)'
+      ' no usable OpenRouter price (none, or free-tier traffic only) and '+(B.n_skipped_no_price>1?'are':'is')+' dropped)'
     : '');
   put('aa_c6floor', NAME_FLOOR);
   put('aa_c6ymin', YMIN);
