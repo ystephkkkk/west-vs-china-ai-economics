@@ -70,6 +70,7 @@
  .idxh{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim)}
  #idxRead{font-size:13px;color:#3f4654;margin:6px 0 8px}
  @media(max-width:1100px){.idxgrid{grid-template-columns:minmax(0,1fr)}}
+ #chartIdxZ{width:100%;height:46px;margin-top:2px}   
 </style><script>function __chartsReady(f){var done=0;function run(){if(!done){done=1;f();}}function go(){var p=window.__pageFonts;if(p&&typeof p.then==='function')p.then(run,run);else run();}window.addEventListener('load',go);document.addEventListener('DOMContentLoaded',function(){setTimeout(go,2000);});}</script>
 </head>
 <body><div class="wrap">
@@ -77,7 +78,7 @@
  <h1 class="reveal" style="animation-delay:.08s"><span class="a">West</span><em>vs</em><span class="b">China</span></h1>
  <div class="rule reveal" style="animation-delay:.14s"></div>
  <p class="sub reveal" style="animation-delay:.2s" id="hero"><span id="hx_tok">&mdash;</span> &mdash; but tokens aren't dollars. <span id="hx_val"></span> Weekly (Mon–Sun, labeled by week-ending date), <span id="hx_span">&mdash;</span>.</p>
- <p class="src reveal" style="animation-delay:.24s">SOURCE OpenRouter public rankings + model catalog list prices · updated 2026-10-22 · weekly Mon–Sun buckets labeled by ending date · value = token volume × estimated $/token (free tier = $0)</p>
+ <p class="src reveal" style="animation-delay:.24s">SOURCE OpenRouter public rankings + model catalog list prices · updated 2026-10-23 · weekly Mon–Sun buckets labeled by ending date · value = token volume × estimated $/token (free tier = $0)</p>
 
  <div class="cards" id="cards"></div>
 
@@ -117,7 +118,7 @@
 
  <div class="panel reveal" style="animation-delay:.66s">
   <div class="phead">
-   <div class="ptitle">Value attribution <small>Estimated value = volume × price. Left: indexed to 100 at the first visible week; drag the slider to move the base. The gap between <b>volume</b> and <b>value</b> is the <b>price</b> contribution. Right: 4 complete weeks over the same 4 weeks a year earlier, log scale; <b>volume</b> × <b>price</b> = <b>value</b>. Pick an aggregate or a single vendor.</small></div>
+   <div class="ptitle">Value attribution <small>Estimated value = volume × price. One slider under both charts sets the window for both. Left: indexed to 100 at the first week of the window, so the gap between <b>volume</b> and <b>value</b> is the <b>price</b> contribution. Right: 4 complete weeks over the same 4 weeks a year earlier, log scale; a multiple needs a year of history, so the line starts later. <b>volume</b> × <b>price</b> = <b>value</b>. Pick an aggregate or a single vendor.</small></div>
    <div class="ctrls"><select class="sel" id="selS">
      <optgroup label="Aggregate"><option value="Overall">Overall</option><option value="Western">Western</option><option value="Chinese">Chinese</option></optgroup>
      <optgroup label="Single vendor" id="selVendors"></optgroup>
@@ -127,6 +128,7 @@
    <div class="idxcol"><div class="idxhd"><span class="idxh">Indexed to 100</span><div class="seg" id="segIdxAx"><button data-ax="one" class="active">One axis</button><button data-ax="two">Price on right axis</button></div></div><div id="chartIdx" class="chart"></div></div>
    <div class="idxcol"><div class="idxhd"><span class="idxh">Year on year</span></div><div id="chartIdxY" class="chart"></div></div>
   </div>
+  <div id="chartIdxZ"></div>
   <p class="note" id="idxRead"></p>
  </div>
 
@@ -9592,7 +9594,7 @@ __chartsReady( function(){
  #infra .seg{display:inline-flex;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:3px}
  #infra .seg button{border:0;background:transparent;color:var(--dim);font-family:var(--mono);font-size:11px;letter-spacing:.03em;padding:7px 11px;border-radius:7px;cursor:pointer;transition:.15s}
  #infra .seg button:hover{color:var(--ink)} #infra .seg button.active{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(24,26,31,.16),inset 0 0 0 1px var(--line)}
- #infra input[type=date]{font-family:var(--mono);font-size:11px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:5px 8px}
+ #infra input[type=date],#infra select{font-family:var(--mono);font-size:11px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:5px 8px}
  #infra .ixkey{display:flex;flex-wrap:wrap;gap:4px 16px;margin:6px 2px 2px;font-family:var(--mono);font-size:11px;color:#454b57;line-height:1.5}
  #infra .ixkey:empty{display:none}
  #infra .ixkey span{display:inline-block}
@@ -9881,8 +9883,12 @@ __chartsReady( function(){
   <p class="lead" id="ix_a2_n1"></p>
   <div class="subhd" id="ix_a2i_hd"><span id="ix_a2i_t">Indexed</span>
     <small id="ix_a2i_sub"></small></div>
+  <div class="ixctl" id="ix_a2i_ctl">
+   <span class="grp"><b>Base</b><span class="seg" id="ix_a2i_base"></span><select id="ix_a2i_mon" aria-label="Custom base month"></select></span>
+  </div>
   <div class="ixkey" id="ix_a2i_key"></div>
   <div id="ix_a2i" class="chart"></div>
+  <p class="lead" id="ix_a2i_n0"></p>
   <p class="lead" id="ix_a2i_n1"></p>
   <p class="lead" id="ix_a2_n2"></p>
   <details class="aadef"><summary>Launch months and definitions</summary><div class="note" id="ix_a2_def"></div></details>
@@ -10787,50 +10793,106 @@ __chartsReady( function(){
   function baseOf(o){for(var q=0;q<o.pts.length;q++){if(!pre(o.pts[q])) return o.pts[q];} return null;}
   function atK(o,k){for(var q=0;q<o.pts.length;q++){if(o.pts[q].k===k) return o.pts[q];} return null;}
   function ixOf(o,b){var pts=o.pts.map(function(p){return Object.assign({},p,{r:p.m,m:p.m/b.m*100});}); return {s:o.s,b:pts[o.pts.indexOf(b)],pts:pts};}
-  var IX=[], IXL=[], NOBASE=[], SPLIT=[];
-  A2.forEach(function(L){
-   var ls=[L.main].concat(L.thin), own=ls.map(baseOf), ok=[];
-   ls.forEach(function(o,k){if(own[k]) ok.push(o); else NOBASE.push(o.s);});
-   if(!ok.length) return;
-   var k0=Math.max.apply(null,own.filter(function(b){return b;}).map(function(b){return b.k;})), kb=null;
-   ok[0].pts.some(function(p){if(p.k>=k0&&ok.every(function(o){return atK(o,p.k);})){kb=p.k; return true;} return false;});
-   if(kb==null&&ok.length>1) SPLIT.push(L.c.chip);
-   var xs=ok.map(function(o){return ixOf(o,kb!=null?atK(o,kb):baseOf(o));});
-   var M=ok[0]===L.main?xs[0]:null;
-   IX.push({L:L,main:M,thin:M?xs.slice(1):xs,shared:kb!=null&&ok.length>1});
-   xs.forEach(function(x){IXL.push(x);});
-  });
+  var ALLN=[]; A2.forEach(function(L){[L.main].concat(L.thin).forEach(function(o){if(o.pts.length) ALLN.push(o);});});
+  var HASIX=ALLN.length>0;
+  var MONTHS=[]; ALLN.forEach(function(o){o.pts.forEach(function(p){if(MONTHS.indexOf(p.k)<0) MONTHS.push(p.k);});});
+  MONTHS.sort(function(a,b){return a-b;});
+  var STARTS=ALLN.map(function(o){return baseOf(o);}).filter(function(b){return b;}).map(function(b){return b.k;});
+  var K0=STARTS.length?Math.max.apply(null,STARTS):(MONTHS.length?MONTHS[0]:0);
+  var K_SAME=null, KN=-1;
+  MONTHS.forEach(function(k){if(k<K0) return; var n=ALLN.filter(function(o){return atK(o,k);}).length; if(n>KN){KN=n; K_SAME=k;}});
+  if(K_SAME==null&&MONTHS.length) K_SAME=MONTHS[MONTHS.length-1];
+  var BM={mode:'first',kc:K_SAME};
+  function baseK(){return BM.mode==='custom'?BM.kc:K_SAME;}
+  var IX=[], IXL=[], DROP=[];
+  function buildIX(){
+   IX=[]; IXL=[]; DROP=[];
+   A2.forEach(function(L){
+    var xs=[];
+    [L.main].concat(L.thin).forEach(function(o){
+     if(!o.pts.length) return;
+     var b=BM.mode==='first'?o.pts[0]:atK(o,baseK());
+     if(b) xs.push({o:o,x:ixOf(o,b)}); else DROP.push(o.s);
+    });
+    if(!xs.length) return;
+    var m=xs[0].o===L.main?xs[0].x:null;
+    IX.push({L:L,main:m,thin:(m?xs.slice(1):xs).map(function(z){return z.x;})});
+    xs.forEach(function(z){IXL.push(z.x);});
+   });
+  }
   function linesOf(x){return (x.main?[x.main]:[]).concat(x.thin);}
   function atEdge(o){return o.s.launchI!=null&&o.b.i0<o.s.launchI+LAUNCH_EDGE;}
   (function(){
    var chI=mk('ix_a2i'); if(!chI) return;
-   if(!IXL.length){var hd=document.getElementById('ix_a2i_hd'), dm=chI.getDom(); if(hd) hd.style.display='none'; dm.style.display='none'; return;}
-   var ANYNL=IXL.some(function(o){return o.s.launchI==null;}), ANYPRE_I=IXL.some(function(o){return o.pts.some(pre);});
-   var ANYSH=IX.some(function(x){return x.shared;}), ANYB=IXL.some(function(o){return o.pts[0].k<o.b.k;});
-   var MAXN=Math.max.apply(null,IX.map(function(x){return linesOf(x).length;})), BA=[];
-   IXL.forEach(function(o){if(BA.indexOf(o.b.age)<0) BA.push(o.b.age);});
+   if(!HASIX){[document.getElementById('ix_a2i_hd'),document.getElementById('ix_a2i_ctl'),chI.getDom()].forEach(function(n){if(n) n.style.display='none';}); return;}
+   var ANYNL=ALLN.some(function(o){return o.s.launchI==null;});
    var ownTxt='the first full month since the provider&rsquo;s public launch of that index'+(ANYNL?', or its first month here when the index has no public launch date here':'');
-   put('ix_a2i_t',ANYSH?'Indexed: each chip&rsquo;s lines are 100 in the same base month':'Indexed: each line is 100 at its own base month');
-   put('ix_a2i_sub','Each line is its index&rsquo;s monthly mean rent divided by the same index&rsquo;s mean in the base month, times 100. '+
-    (ANYSH?'A chip&rsquo;s base month is the first month '+(MAXN>2?'all':'both')+' its lines cover from their own start: '+ownTxt+'. The lines of a chip then cover the same months.':'The base month is '+ownTxt+'.')+
-    (BA.length>1?' The base month sits at a different age for each '+(ANYSH?'chip':'line')+', so compare '+(ANYSH?'the lines of one chip':'the shape and size of each move')+' here; the chart above shows the levels at the same age.':'')+
-    (ANYPRE_I?' Dotted months come before the provider&rsquo;s public launch of the index.':'')+(ANYB?' Months before the base use the same base.':'')+' The age axis rests on our launch-month estimate.');
-   put('ix_a2i_key','<span><i class="bm"></i><em>'+(ANYSH?'base month of each chip, where its lines equal 100':'base month of each line, where it equals 100')+'</em></span>');
-   var Y=(function(){
+   var OPTS=[['first','First print'],['same','Same month'],['custom','Custom']];
+   var Y={min:0,max:200,st:20};
+   function yRange(){
     var v=[100]; IXL.forEach(function(o){o.pts.forEach(function(p){v.push(p.m);});});
     var lo=Math.min.apply(null,v), hi=Math.max.apply(null,v), st=(hi-lo)>200?50:((hi-lo)>80?20:10);
     return {min:Math.floor((lo-st*0.15)/st)*st,max:Math.ceil((hi+st*0.15)/st)*st,st:st};
-   })();
+   }
+   function ageTxt(a){return a<0?(-a)+' months before launch':a+(a===1?' month':' months');}
+   function textI(){
+    var mode=BM.mode, first=mode==='first', bt=mon({k:baseK()});
+    var ANYPRE_I=IXL.some(function(o){return o.pts.some(pre);}), ANYB=IXL.some(function(o){return o.pts[0].k<o.b.k;});
+    var BA=[]; IXL.forEach(function(o){if(BA.indexOf(o.b.age)<0) BA.push(o.b.age);});
+    put('ix_a2i_t',first?'Indexed: each line is 100 at its own start':(mode==='same'?'Indexed: every line is 100 in the same base month, '+bt:'Indexed: every line is 100 in '+bt));
+    var s='Each line is its index&rsquo;s monthly mean rent divided by the same index&rsquo;s mean in its base month, times 100. ';
+    if(first){
+     s+='Base: each line&rsquo;s first month with at least '+MM_MIN+' prints, so every line starts at 100 and each chip&rsquo;s life path reads on the age axis. First print, base month and the chip&rsquo;s age in it: '+
+      IX.map(function(x){return esc(x.L.c.chip)+': '+linesOf(x).map(function(o){return esc(o.s.provider)+' first print '+pdt(tOf(o.s.first))+', base '+mon(o.b)+' ('+ageTxt(o.b.age)+')';}).join('; ');}).join('. ')+'. ';
+     var top=null;
+     IX.forEach(function(x){var ag=linesOf(x).map(function(o){return o.b.age;}), mn=Math.min.apply(null,ag); if(!top||mn>top.mn) top={x:x,mn:mn,ag:ag};});
+     if(top&&top.mn>0){
+      var ua=top.ag.filter(function(v,k,a){return a.indexOf(v)===k;}).sort(function(a,b){return a-b;}), cp=top.x.L.c.launch.split('-');
+      s+='An index&rsquo;s first print is not the chip&rsquo;s launch: the '+esc(top.x.L.c.chip)+' launched in '+MN[+cp[1]-1]+' '+cp[0]+' (our estimate) and '+(top.ag.length>1?'its indexes start':'its index starts')+' at '+listJoin(ua.map(String))+' months'+(BA.length>1?', so the lines start at different ages':'')+'. ';
+     } else if(BA.length>1) s+='The lines start at different ages. ';
+    } else {
+     s+='Base: '+bt+(mode==='same'?' for every line, by default the first month, from the latest of the lines&rsquo; own starts, in which '+(DROP.length?'the most lines have':'every line has')+' a value (a line&rsquo;s own start is '+ownTxt+')':', picked above, for every line with at least '+MM_MIN+' prints in it')+'. '+
+      (BA.length>1?'The base month sits at a different age for each chip, so compare the lines of one chip here; the chart above shows the levels at the same age. ':'');
+    }
+    s+=(ANYB?'Months before the base use the same base. ':'')+(ANYPRE_I?'Dotted months come before the provider&rsquo;s public launch of the index. ':'')+'The age axis rests on our launch-month estimate.';
+    put('ix_a2i_sub',s);
+    put('ix_a2i_key','<span><i class="bm"></i><em>'+(first?'base month of each line, where it equals 100':'base month, where every line drawn equals 100')+'</em></span>');
+    put('ix_a2i_n0',DROP.length?'<b>Left out:</b> '+listJoin(DROP.map(function(d){return esc(d.short);}))+(DROP.length>1?' have':' has')+' fewer than '+MM_MIN+' prints in '+bt+', so '+(DROP.length>1?'they are':'it is')+' not drawn.':'');
+    var out=[], RL=[];
+    IX.forEach(function(x){var ls=linesOf(x).filter(function(o){return lastPt(o).k>o.b.k;}); if(ls.length) RL.push({c:x.L.c.chip,ls:ls});});
+    var AL=[]; RL.forEach(function(r){AL=AL.concat(r.ls);});
+    var allS=AL.length&&AL.every(function(o){return o.b.k===AL[0].b.k&&lastPt(o).k===lastPt(AL[0]).k;});
+    var diff=false;
+    var parts=RL.map(function(r){
+     var same=allS||r.ls.every(function(o){return o.b.k===r.ls[0].b.k&&lastPt(o).k===lastPt(r.ls[0]).k;});
+     if(!same) diff=true;
+     return esc(r.c)+(same&&!allS?', '+mon(r.ls[0].b)+' to '+mon(lastPt(r.ls[0])):'')+(same&&!allS?', ':' ')+r.ls.map(function(o){var a=o.b, b=lastPt(o);
+      return esc(o.s.provider)+' '+bd('$'+f2(a.r))+' to '+bd('$'+f2(b.r))+' ('+pct((b.r/a.r-1)*100)+(same?'':', '+mon(a)+' to '+mon(b))+')';}).join(', ');
+    });
+    if(parts.length) out.push('<b>From '+(first?'each line&rsquo;s base month':'the base month')+' to the latest</b> ('+(allS?mon(AL[0].b)+' to '+mon(lastPt(AL[0]))+(RL.length>1?' for every chip':'')+'; ':'')+'monthly means; the latest month ends at the last print): '+parts.join('; ')+'.'+(diff?' The lines of a chip cover different months here, so read each change with the months given.':''));
+    var EL=[], EK={};
+    PORD.forEach(function(p){IX.forEach(function(x){linesOf(x).forEach(function(o){
+     if(o.s.provider!==p||o.s.launchI==null||lastPt(o).k<=o.b.k) return;
+     var cl=pre(o.b)?'before':(atEdge(o)?'within '+LAUNCH_EDGE+' days after':'');
+     if(!cl) return;
+     var k=p+'|'+cl+'|'+o.s.launchI; if(!EK[k]){EK[k]={p:p,cl:cl,li:o.s.launchI,c:[]}; EL.push(EK[k]);} EK[k].c.push(esc(o.s.gpu));});});});
+    EL.forEach(function(e){
+     var pl=e.c.length>1, ed=e.cl!=='before';
+     out.push('The '+esc(e.p)+' '+listJoin(e.c)+' base'+(pl?'s start ':' starts ')+e.cl+' '+esc(e.p)+'&rsquo;s public launch of '+(pl?'these indexes':'the index')+' (around '+monthOf(e.li)+'), so '+(pl?'they':'it')+' '+
+      (ed?'sit'+(pl?'':'s')+' at the edge of the history '+esc(e.p)+' says is live, where a base can fall on an unusual stretch.':'may be back-filled.'));
+    });
+    put('ix_a2i_n1',out.length?'<b>Read:</b> '+out.join(' '):'');
+   }
    function tipIx(ps){
     if(!ps||!ps.length) return '';
-    var ax=Math.round(+ps[0].axisValue), rows=[];
+    var ax=Math.round(+ps[0].axisValue), rows=[], first=BM.mode==='first';
     IX.forEach(function(x){
-     var its=(x.main?[x.main]:[]).concat(x.thin).map(function(o){var r=ptAt(o.pts,ax); return r?{o:o,r:r}:null;}).filter(function(z){return z;});
+     var its=linesOf(x).map(function(o){var r=ptAt(o.pts,ax); return r?{o:o,r:r}:null;}).filter(function(z){return z;});
      if(!its.length) return;
      rows.push('<div style="margin-top:5px">'+dot(STYLE[x.L.main.s.id].c)+'<b>'+esc(x.L.c.chip)+'</b> <span style="color:#6a7180">'+mon(its[0].r)+'</span>'+its.map(function(z){
-      return '<div style="margin-left:14px">'+esc(rowLbl(z.o.s))+' <b>'+f1(z.r.m)+'</b> <span style="color:#6a7180">rent '+f2(z.r.r)+(z.r.part?', month to '+pds(tOf(z.r.i1)):'')+'; base '+mon(z.o.b)+'</span>'+(pre(z.r)?' <span style="color:#9aa0ab">(before its public launch)</span>':'')+'</div>';}).join('')+'</div>');
+      return '<div style="margin-left:14px">'+esc(rowLbl(z.o.s))+' <b>'+f1(z.r.m)+'</b> <span style="color:#6a7180">rent '+f2(z.r.r)+(z.r.part?', month to '+pds(tOf(z.r.i1)):'')+(pre(z.r)?' <span style="color:#9aa0ab">(this month is before its public launch)</span>':'')+'; base '+mon(z.o.b)+' at '+f2(z.o.b.r)+'</span></div>';}).join('')+'</div>');
     });
-    return rows.length?'<b>'+ax+' months after launch</b> <span style="color:#6a7180">(launch month our estimate); index, base month = 100; rent = monthly mean, USD per GPU-hour</span>'+rows.join(''):'';
+    return rows.length?'<b>'+ax+' months after launch</b> <span style="color:#6a7180">(launch month our estimate); index = 100 at the base shown on each line; rent = monthly mean, USD per GPU-hour</span>'+rows.join(''):'';
    }
    function renderI(){
     var nar=narrowOf(chI), series=[];
@@ -10844,7 +10906,8 @@ __chartsReady( function(){
     });
     series.forEach(function(sr){if(sr.endLabel) sr.labelLayout=SHIFT;});
     var BD=[];
-    IX.forEach(function(x){var ag=[]; linesOf(x).forEach(function(o){if(ag.indexOf(o.b.age)>=0) return; ag.push(o.b.age);
+    IX.forEach(function(x){var ag=[]; linesOf(x).forEach(function(o){
+     if(BM.mode!=='first'){if(ag.indexOf(o.b.age)>=0) return; ag.push(o.b.age);}
      BD.push({value:[o.b.age,100],itemStyle:{color:STYLE[o.s.id].c,borderColor:'#fff',borderWidth:1.5}});});});
     series.unshift({name:'base = 100',type:'line',z:2,silent:true,animation:false,showSymbol:false,lineStyle:{color:'#8d8676',type:'dashed',width:1},data:[[0,100],[XMAX,100]],emphasis:{disabled:true},tooltip:{show:false}});
     series.push({name:'base month',type:'scatter',z:7,silent:true,animation:false,symbolSize:nar?6:7,
@@ -10852,33 +10915,24 @@ __chartsReady( function(){
     chI.setOption({grid:gridA2(nar),
      tooltip:tip({trigger:'axis',axisPointer:{type:'line',snap:true,lineStyle:{color:DIM,type:'dashed'}},formatter:tipIx}),
      xAxis:xAxA2(nar),
-     yAxis:Object.assign({type:'value',min:Y.min,max:Y.max,interval:Y.st,axisLabel:axL(),splitLine:{lineStyle:{color:GRID}}},yName(nar?'Index, base = 100':'Index, base month = 100',nar)),
+     yAxis:Object.assign({type:'value',min:Y.min,max:Y.max,interval:Y.st,axisLabel:axL(),splitLine:{lineStyle:{color:GRID}}},yName('Index, base = 100',nar)),
      series:series},true);
    }
-   renderI(); watch(chI,renderI);
-   var out=[], RL=[];
-   IX.forEach(function(x){var ls=linesOf(x).filter(function(o){return lastPt(o).k>o.b.k;}); if(ls.length) RL.push({c:x.L.c.chip,ls:ls});});
-   var AL=[]; RL.forEach(function(r){AL=AL.concat(r.ls);});
-   var allS=AL.length&&AL.every(function(o){return o.b.k===AL[0].b.k&&lastPt(o).k===lastPt(AL[0]).k;});
-   var parts=RL.map(function(r){
-    var same=allS||r.ls.every(function(o){return o.b.k===r.ls[0].b.k&&lastPt(o).k===lastPt(r.ls[0]).k;});
-    return esc(r.c)+(same&&!allS?', '+mon(r.ls[0].b)+' to '+mon(lastPt(r.ls[0])):'')+(same&&!allS?', ':' ')+r.ls.map(function(o){var a=o.b, b=lastPt(o);
-     return esc(o.s.provider)+' '+bd('$'+f2(a.r))+' to '+bd('$'+f2(b.r))+' ('+pct((b.r/a.r-1)*100)+(same?'':', '+mon(a)+' to '+mon(b))+')';}).join(', ');
-   });
-   if(parts.length) out.push('<b>From each '+(ANYSH?'chip&rsquo;s':'line&rsquo;s')+' base month to the latest</b> ('+(allS?mon(AL[0].b)+' to '+mon(lastPt(AL[0]))+(RL.length>1?' for every '+(ANYSH?'chip':'line'):'')+'; ':'')+'monthly means; the latest month ends at the last print): '+parts.join('; ')+'.');
-   if(SPLIT.length) out.push('The '+listJoin(SPLIT.map(esc))+' lines share no month here, so each of them is based on its own first month by the rule above.');
-   var EL=[], EK={};
-   PORD.forEach(function(p){IX.forEach(function(x){linesOf(x).forEach(function(o){
-    if(o.s.provider!==p||!atEdge(o)||lastPt(o).k<=o.b.k) return;
-    var k=p+'|'+o.s.launchI; if(!EK[k]){EK[k]={p:p,li:o.s.launchI,c:[]}; EL.push(EK[k]);} EK[k].c.push(esc(o.s.gpu));});});});
-   if(EL.length){
-    var nb=EL.reduce(function(a,e){return a+e.c.length;},0);
-    var s0=listJoin(EL.map(function(e){var pl=e.c.length>1;
-     return 'the '+esc(e.p)+' '+listJoin(e.c)+' base'+(pl?'s start':' starts')+' within '+LAUNCH_EDGE+' days after '+esc(e.p)+'&rsquo;s public launch of '+(pl?'these indexes':'the index')+' (around '+monthOf(e.li)+')';}));
-    out.push(s0.charAt(0).toUpperCase()+s0.slice(1)+', so '+(nb>1?'these bases sit':'that base sits')+' at the edge of the history '+(EL.length>1?'each provider says is live':esc(EL[0].p)+' says is live')+', where a base can fall on an unusual stretch.');
+   var segEl=document.getElementById('ix_a2i_base'), selEl=document.getElementById('ix_a2i_mon');
+   function syncCtl(){
+    if(segEl) Array.prototype.forEach.call(segEl.children,function(b){var on=b.getAttribute('data-v')===BM.mode; b.classList.toggle('active',on); b.setAttribute('aria-pressed',on?'true':'false');});
+    if(selEl){selEl.value=String(BM.kc); selEl.style.display=BM.mode==='custom'?'':'none';}
    }
-   if(NOBASE.length) out.push(listJoin(NOBASE.map(function(s){return esc(s.short);}))+(NOBASE.length>1?' have':' has')+' no month here from '+(NOBASE.length>1?'their providers&rsquo;':esc(NOBASE[0].provider)+'&rsquo;s')+' public launch on, so '+(NOBASE.length>1?'they are':'it is')+' left out of the indexed chart.');
-   put('ix_a2i_n1',out.length?'<b>Read:</b> '+out.join(' '):'');
+   function applyI(){buildIX(); Y=yRange(); syncCtl(); textI(); renderI();}
+   if(segEl){
+    segEl.innerHTML=OPTS.map(function(o){return '<button type="button" data-v="'+o[0]+'">'+o[1]+'</button>';}).join('');
+    segEl.addEventListener('click',function(e){var b=e.target.closest('button'); if(!b||b.disabled) return; BM.mode=b.getAttribute('data-v'); applyI();});
+   }
+   if(selEl){
+    selEl.innerHTML=MONTHS.map(function(k){return '<option value="'+k+'">'+mon({k:k})+'</option>';}).join('');
+    selEl.addEventListener('change',function(){BM.mode='custom'; BM.kc=+selEl.value; applyI();});
+   }
+   applyI(); watch(chI,renderI);
   })();
 
   (function(){
@@ -10921,7 +10975,7 @@ __chartsReady( function(){
     var e=LINES.filter(function(o){return o.s.provider===p&&o.s.launchI==null&&o.pts.length&&o.pts[0].i0<ls[0].launchI;}).map(function(o){return esc(o.s.gpu);});
     return e.length?' The '+listJoin(e)+' histor'+(e.length>1?'ies start':'y starts')+' before '+esc(p)+'&rsquo;s public launch of its '+esc(ls[0].gpu)+' index ('+monthOf(ls[0].launchI)+'); '+(e.length>1?'their':'its')+' months before then may be back-filled.':'';
    }
-   put('ix_a2_n2','Launch months are our estimate: the month each chip&rsquo;s first cloud instances became available, from any cloud, '+pmTxt+'. Moving one slides that chip&rsquo;s '+(IXL.length?'lines sideways in both charts':'line sideways')+' and changes which months line up across chips; the rents '+(IXL.length?'and index values ':'')+'on each line stay the same.'+
+   put('ix_a2_n2','Launch months are our estimate: the month each chip&rsquo;s first cloud instances became available, from any cloud, '+pmTxt+'. Moving one slides that chip&rsquo;s '+(HASIX?'lines sideways in both charts':'line sideways')+' and changes which months line up across chips; the rents '+(HASIX?'and index values ':'')+'on each line stay the same.'+
     NLP.map(function(p){var c=NL[p]; return ' '+esc(p)+'&rsquo;s '+listJoin(c.map(esc))+' index'+(c.length>1?'es have':' has')+' no public launch date here, so none of '+(c.length>1?'their':'its')+' months is dotted.'+earlyTxt(p);}).join('')+
     (NOAGE.length?' '+listJoin(NOAGE.map(esc))+(NOAGE.length>1?' have':' has')+' no launch month here, so '+(NOAGE.length>1?'they are':'it is')+' left out of this chart.':''));
   })();
@@ -10932,9 +10986,11 @@ __chartsReady( function(){
    h.push('<p><b>Points.</b> Each point is the mean of one index&rsquo;s daily prints in a calendar month, after the data-error rule under Panel A, for months with at least '+MM_MIN+' prints; age is the month&rsquo;s distance from the launch month. A month cut short by the end of the data is labelled with its last day in the tooltip. Gaps of a month or more break a line.</p>');
    h.push('<p><b>Lines.</b> Bold: '+listJoin(mainP.map(esc))+'. Thin: '+(thinP.length?listJoin(thinP.map(esc)):'none')+'.'+(tipP.length?' The '+listJoin(tipP)+' appears in the tooltip, to keep two lines per chip.':'')+' A ring marks a thin line&rsquo;s latest month when it sits over '+Math.round(RING_APART*100)+'% away from the bold line&rsquo;s latest month. Months before a provider&rsquo;s public launch of an index are drawn dotted and fainter, and the tooltip flags them; they may be back-filled. A month is counted as before the launch when its first print is.</p>');
    var own='the line&rsquo;s first month that is not before the provider&rsquo;s public launch of the index (the first full month since that launch), or its first month here when the index has no public launch date here';
-   if(IXL.length) h.push('<p><b>Indexed chart.</b> Each drawn line is divided by its own mean in the base month, times 100. '+
-    (IX.some(function(x){return x.shared;})?'A chip&rsquo;s base month is the first month, from the latest of its lines&rsquo; own first months on, in which every line of that chip has a point; a line&rsquo;s own first month is '+own+'. Both lines of a chip are then 100 in the same month, so their end values cover the same months.'+(SPLIT.length?' A chip whose lines share no such month has each line based on its own first month.':''):'The base month is '+own+'.')+
-    ' Months before the base use the same base; those before a public launch are drawn dotted. The base month is a calendar month, so moving a launch month leaves every index value unchanged and slides the line sideways. A base whose first print falls within '+LAUNCH_EDGE+' days after the public launch is named in its Read, by the rule the 12-month bars under Panel A use.'+(tipP.length?' The '+listJoin(tipP)+(tipP.length>1?' are':' is')+' not indexed here.':'')+'</p>');
+   if(HASIX) h.push('<p><b>Indexed chart.</b> Each drawn line is divided by its own mean in the base month, times 100. The control above the chart sets the base. '+
+    '<b>First print</b>: each line&rsquo;s first plotted month, which is its first month with at least '+MM_MIN+' prints, so every line starts at 100 at its own start; a line whose first month has fewer prints starts a month later than its first print, and the subtitle gives both. An index&rsquo;s first print is not the chip&rsquo;s launch, so the lines start at different ages. '+
+    '<b>Same month</b>: one calendar month for every line, by default the first month, from the latest of the lines&rsquo; own starts, in which the most lines have a value; a line&rsquo;s own start is '+own+'. '+
+    '<b>Custom</b>: any month in which at least one line has a monthly mean; a line with fewer than '+MM_MIN+' prints in it is left out and named under the chart. '+
+    'Months before the base use the same base; those before a public launch are drawn dotted. A base is a calendar month, so moving a launch month leaves every index value unchanged and slides the line sideways. A base before the public launch, or whose first print falls within '+LAUNCH_EDGE+' days after it, is named in the Read, by the rule the 12-month bars under Panel A use.'+(tipP.length?' The '+listJoin(tipP)+(tipP.length>1?' are':' is')+' not indexed here.':'')+'</p>');
    put('ix_a2_def',h.join(''));
   })();
  })();
@@ -12624,8 +12680,17 @@ function renderP(){
   endpointLabels(opt,fy);
   cP.setOption(opt,true);
 }
-const cI=echarts.init(document.getElementById('chartIdx')),cIY=echarts.init(document.getElementById('chartIdxY'));
-let scopeI='Overall',zI={start:0,end:100},_bI=-1,idxTwo=false;
+const cI=echarts.init(document.getElementById('chartIdx')),cIY=echarts.init(document.getElementById('chartIdxY')),cIZ=echarts.init(document.getElementById('chartIdxZ'));   // cIZ draws only the one date slider that sets the window of both charts
+let scopeI='Overall',zI={start:0,end:100},_bI=-1,idxTwo=false,idxY={m:[],ts:[]},_rbT=0;
+const IDX_BOT=44;   // room under each plot for the x labels and the legend; the date slider is its own strip below the pair
+const stackedView=()=>window.matchMedia('(max-width:1100px)').matches;   // same breakpoint as .idxgrid
+const idxMargins=()=>{const nar=narrowView();return {left:nar?54:62,rightL:idxTwo?(nar?70:134):(nar?18:74),rightR:nar?18:74};};   // plot margins: left chart (with or without the price axis) and right chart
+const idxShell=opt=>{
+  opt.dataZoom=[{type:'inside',start:zI.start,end:zI.end}];
+  opt.grid.bottom=IDX_BOT;
+  opt.legend=Object.assign({},opt.legend,{bottom:4});
+  return opt;
+};
 const YOY_WIN=4,YOY_LAG=52,YOY_TREND=8,YOY_FLAT=0.02;   // weeks in each window, lag in weeks, weeks back for the trend read, band around 1x (or around the earlier read) that counts as flat
 function idxScope(){
   const isBloc=['Overall','Western','Chinese'].includes(scopeI);
@@ -12651,7 +12716,7 @@ function renderIdxL(){
   const mk=(name,col,a,w)=>({name,type:'line',smooth:true,symbol:'none',color:col,lineStyle:{width:w},emphasis:{focus:'series'},data:idx(a)});
   const series=[mk('Economic value','#7c3aed',val,3.4),mk('Token volume','#1f8a4c',vol,2.4),mk('Price $/Mtok','#e0701a',pri,2.4)];series[0].data=clipAbs(series[0].data);series[1].data=clipAbs(series[1].data);
   const opt=frame(series,x=>(+x).toFixed(0),false,false);
-  opt.dataZoom[0].start=zI.start;opt.dataZoom[0].end=zI.end;
+  idxShell(opt);
   series[0].markLine={silent:true,symbol:'none',lineStyle:{color:'#c9cdd4',type:'dashed'},
     data:[{yAxis:100}],label:{formatter:'base = 100 · wk '+xlab[b0],color:'#9aa0ab',fontFamily:FMONO,fontSize:10,position:'insideEndTop'}};
   endpointLabels(opt,x=>(+x).toFixed(0));
@@ -12712,50 +12777,77 @@ function idxReadLine(m,ts){
 function renderIdxY(){
   const m=yoyMultiples(idxScope());
   const ts=[];m.forEach((r,t)=>{if(r)ts.push(t);});
+  idxY={m,ts};
   idxReadLine(m,ts);
-  const span=ts.length? Array.from({length:ts[ts.length-1]-ts[0]+1},(_,k)=>ts[0]+k) : [];   // first to last week with a multiple; a week inside it without one stays on the axis as a break in the line
-  const f=frame([],x=>x,false,false);   // shared look: tooltip box, legend, grid top
   const defs=[['Economic value','#7c3aed','valX',3.4],['Token volume','#1f8a4c','volX',2.4],['Price $/Mtok','#e0701a','priceX',2.4]];
-  const series=defs.map(d=>({name:d[0],type:'line',smooth:true,symbol:'none',color:d[1],lineStyle:{width:d[3]},emphasis:{focus:'series'},data:span.map(t=>m[t]? m[t][d[2]] : null)}));
+  const series=defs.map(d=>({name:d[0],type:'line',smooth:true,symbol:'none',color:d[1],lineStyle:{width:d[3]},emphasis:{focus:'series'},data:m.map(r=>r? r[d[2]] : null)}));
   const vals=[].concat(...series.map(s=>s.data)).filter(v=>v!=null);
   const below=YOY_LADDER.filter(x=>x<=Math.min(1,...vals)/1.1), above=YOY_LADDER.filter(x=>x>=Math.max(1,...vals)*1.1);
   const lo=below.length? below[below.length-1] : YOY_LADDER[0], hi=above.length? above[0] : YOY_LADDER[YOY_LADDER.length-1];
-  const tk=YOY_LADDER.filter(x=>x>=lo&&x<=hi);
+  const tk=YOY_LADDER.filter(x=>x>=lo&&x<=hi);   // the log axis spans every multiple in the history, so it does not jump when the window moves
   series[0].markLine={silent:true,symbol:'none',lineStyle:{color:'#c9cdd4',type:'dashed'},
     data:[{yAxis:1}],label:{formatter:'flat year on year',color:'#9aa0ab',fontFamily:FMONO,fontSize:10,position:'insideEndTop'}};
-  const nar=narrowView();
-  if(!nar) series.forEach(s=>{   // end-of-line value labels (own copy: endpointLabels indexes partial weeks by position in the full weekly series)
-    let l=-1; s.data.forEach((v,i)=>{if(v!=null)l=i;}); if(l<0) return;
-    s.data[l]={value:s.data[l],symbol:'circle',symbolSize:7,itemStyle:{color:s.color,borderColor:'#fff',borderWidth:1.5},
-      label:{show:true,position:'right',distance:7,formatter:p=>yoyFmt(p.value),color:s.color,fontFamily:FMONO,fontSize:11,fontWeight:700,
-        backgroundColor:'rgba(255,255,255,.92)',padding:[2,5],borderRadius:4,textBorderColor:'#fff',textBorderWidth:2}};
-    s.labelLayout={moveOverlap:'shiftY',hideOverlap:false};
-  });
-  const tt=Object.assign({},f.tooltip,{formatter:ps=>{
+  const opt=idxShell(frame(series,yoyFmt,false,false));   // frame: the left chart's x axis, legend and partial-week marker
+  endpointLabels(opt,yoyFmt);
+  if(stackedView()) opt.grid.right=idxMargins().rightL;   // stacked: the same plot width as the left chart, so a week lines up vertically
+  opt.tooltip=Object.assign({},opt.tooltip,{formatter:ps=>{
     if(!ps.length) return '';
-    const t=span[ps[0].dataIndex], r=m[t];
-    if(!r) return `<div style="font-family:'IBM Plex Mono';font-size:11px;color:#6a7180">${xlab[t]}: no multiple, one of the 8 weeks compared has no traffic</div>`;
+    const t=ps[0].dataIndex, r=m[t];
+    if(!r){
+      const why=_PW.has(t)? 'week in progress' : (ts.length&&t<ts[0]? 'no multiple yet, it needs a year of history' : 'no multiple, one of the 8 weeks compared has no traffic');
+      return `<div style="font-family:'IBM Plex Mono';font-size:11px;color:#6a7180">${xlab[t]}: ${why}</div>`;
+    }
     const mkr=n=>{const p=ps.find(q=>q.seriesName===n);return p?p.marker:'';};
     const row=(n,lab,v)=>`<div style="display:flex;justify-content:space-between;gap:22px;line-height:1.7"><span>${mkr(n)}${lab}</span><b style="font-family:'IBM Plex Mono';font-variant-numeric:tabular-nums">${yoyFmt(v)}</b></div>`;
     return `<div style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.05em;color:#6a7180;text-transform:uppercase;margin-bottom:7px">${YOY_WIN} weeks to ${xlab[t]} vs a year earlier</div>`+
       row('Token volume','Volume',r.volX)+row('Price $/Mtok','Price',r.priceX)+row('Economic value','Value',r.valX)+
       `<div style="margin-top:6px;padding-top:6px;border-top:1px solid #efeae0;font-family:'IBM Plex Mono';font-size:11px;color:#454b57">volume ${yoyFmt(r.volX)} × price ${yoyFmt(r.priceX)} = value ${yoyFmt(r.valX)}</div>`;}});
-  const opt={
-    color:series.map(s=>s.color),
-    grid:Object.assign({},f.grid,{left:nar?54:62,right:nar?18:74}),
-    legend:f.legend,
-    tooltip:tt,
-    xAxis:{type:'category',data:span.map(t=>xlab[t]),boundaryGap:false,
-      axisLabel:{fontSize:10.5,color:AX,fontFamily:FMONO,interval:nar?Math.ceil(span.length/3):Math.max(0,Math.floor(span.length/5)),hideOverlap:true},
-      axisLine:{lineStyle:{color:'#d8d2c6'}},axisTick:{show:false}},
-    yAxis:{type:'log',logBase:10,min:lo,max:hi,
-      axisLabel:{fontSize:10.5,color:AX,fontFamily:FMONO,customValues:tk,formatter:yoyAxFmt},
-      axisTick:{show:false,customValues:tk},axisLine:{show:false},splitLine:{lineStyle:{color:GRID}}},   // the grid lines follow axisTick.customValues
-    series};
-  if(!ts.length) opt.graphic={type:'text',left:'center',top:'middle',style:{text:'No year-on-year multiple for this scope',fill:'#9aa0ab',font:'12px '+FMONO}};
+  opt.yAxis={type:'log',logBase:10,min:lo,max:hi,
+    axisLabel:{fontSize:10.5,color:AX,fontFamily:FMONO,customValues:tk,formatter:yoyAxFmt},
+    axisTick:{show:false,customValues:tk},axisLine:{show:false},splitLine:{lineStyle:{color:GRID}}};   // the grid lines follow axisTick.customValues
+  opt.graphic=[yoyNote()];
   cIY.setOption(opt,true);
 }
-function renderIdx(){renderIdxL();renderIdxY();}
+function yoyNote(){
+  const t0=zoomStart(zI), t1=Math.max(t0,Math.min(N-1,Math.round(zI.end/100*(N-1)))), ts=idxY.ts;
+  let tx='';
+  if(!ts.length) tx='No year-on-year multiple for this scope';
+  else if(!ts.some(t=>t>=t0&&t<=t1)) tx= t1<ts[0]? `Year on year starts ${xlab[ts[0]]}:\nit needs a year of history` : 'No year-on-year multiple in this window';
+  return {id:'yoyNote',type:'text',left:'center',top:'middle',silent:true,invisible:!tx,z:100,style:{text:tx,fill:'#6a7180',font:'12px '+FMONO,textAlign:'center',textVerticalAlign:'middle'}};
+}
+const IDX_HANDLE='path://M4,0H16a4,4 0 0 1 4,4V30a4,4 0 0 1 -4,4H4a4,4 0 0 1 -4,-4V4a4,4 0 0 1 4,-4z M7.2,11V23H8.8V11z M11.2,11V23H12.8V11z';
+function renderIdxZ(){
+  const mg=idxMargins(), R=stackedView()? mg.rightL : mg.rightR;   // side by side: from the left plot's edge to the right plot's edge; stacked: the plot width of the pair
+  cIZ.setOption({animation:false,
+    grid:{left:mg.left,right:R,top:0,bottom:0},
+    xAxis:{type:'category',data:xlab,boundaryGap:false,show:false},
+    yAxis:{type:'value',scale:true,show:false},
+    series:[{type:'line',silent:true,symbol:'none',lineStyle:{width:0,opacity:0},data:clipAbs(idxScope().val.map(v=>v>0? v : null))}],
+    dataZoom:[{type:'slider',xAxisIndex:0,start:zI.start,end:zI.end,left:mg.left,right:R,top:10,height:18,borderColor:'#e7e1d6',fillerColor:'rgba(31,99,214,.10)',
+      handleIcon:IDX_HANDLE,handleSize:34,handleStyle:{color:'#1f63d6',borderColor:'#ffffff',borderWidth:1.5},textStyle:{color:'#9aa0ab',fontSize:10,fontFamily:FMONO}}]},true);
+}
+function renderIdx(){renderIdxL();renderIdxY();renderIdxZ();}
+function idxWindow(s,e,src){
+  if(Math.abs(s-zI.start)<1e-4&&Math.abs(e-zI.end)<1e-4) return;
+  zI={start:s,end:e};
+  [cIZ,cI,cIY].forEach(c=>{if(c!==src)c.dispatchAction({type:'dataZoom',dataZoomIndex:0,start:s,end:e});});
+  cIY.setOption({graphic:[yoyNote()]});
+  const nb=zoomStart(zI);
+  if(nb!==_bI){_bI=nb;if(!_rbT)_rbT=setTimeout(()=>{_rbT=0;renderIdxL();},0);}   // deferred: re-drawing the chart inside its own zoom event left the tooltip half disposed (a wheel zoom over it threw)
+}
+(function(){
+  let busy=false;
+  const sync=fn=>{ if(busy) return; busy=true; try{ fn(); } finally{ busy=false; } };   // the mirrored call raises the same events on the other chart
+  const link=(a,b)=>{
+    a.on('updateAxisPointer',e=>sync(()=>{
+      const ax=(e.axesInfo||[]).find(x=>x.axisDim==='x');
+      if(ax) b.dispatchAction({type:'showTip',x:b.convertToPixel({xAxisIndex:0},Math.round(+ax.value)),y:Math.round((16+b.getHeight()-IDX_BOT)/2)});
+      else b.dispatchAction({type:'hideTip'});
+    }));
+    a.getZr().on('globalout',()=>sync(()=>b.dispatchAction({type:'hideTip'})));
+  };
+  link(cI,cIY); link(cIY,cI);
+})();
 const cV=echarts.init(document.getElementById('chartV'));let mV='tokshare',bV='all';
 const VC={anthropic:'#1d4ed8',google:'#0d9488',openai:'#8b5cf6','x-ai':'#0891b2',mistralai:'#6366f1',nvidia:'#65a30d',
   deepseek:'#dc2626',qwen:'#f97316',tencent:'#a16207',xiaomi:'#ec4899','z-ai':'#9d174d',minimax:'#fb7185',moonshotai:'#7c2d12',stepfun:'#facc15'};
@@ -12822,12 +12914,14 @@ document.querySelectorAll('#segVbloc button').forEach(b=>b.onclick=()=>{bV=b.dat
 document.querySelectorAll('#segPrice button').forEach(b=>b.onclick=()=>{gAsof=(b.dataset.p==='asof');document.querySelectorAll('#segPrice button').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderP();renderB();renderIdx();renderV();if(mA==='valshare')renderA();});
 document.querySelectorAll('#segPmode button').forEach(b=>b.onclick=()=>{pIndexed=(b.dataset.x==='idx');document.querySelectorAll('#segPmode button').forEach(x=>x.classList.remove('active'));b.classList.add('active');_bP=zoomStart(zP);renderP();});
 cP.on('dataZoom',()=>{const d=(cP.getOption().dataZoom||[])[0];if(!d)return;zP={start:d.start,end:d.end};const nb=zoomStart(zP);if(pIndexed&&nb!==_bP){_bP=nb;renderP();}});
-cI.on('dataZoom',()=>{const d=(cI.getOption().dataZoom||[])[0];if(!d)return;zI={start:d.start,end:d.end};const nb=zoomStart(zI);if(nb!==_bI){_bI=nb;renderIdxL();}});
-document.querySelectorAll('#segIdxAx button').forEach(b=>b.onclick=()=>{idxTwo=(b.dataset.ax==='two');document.querySelectorAll('#segIdxAx button').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderIdxL();});
-window.addEventListener('resize',()=>{cA.resize();cB.resize();cP.resize();cI.resize();cIY.resize();cV.resize();});
+[cI,cIY,cIZ].forEach(c=>c.on('dataZoom',()=>{const d=(c.getOption().dataZoom||[])[0];if(d)idxWindow(d.start,d.end,c);}));   // slider or wheel or touch zoom, on any of the three
+document.querySelectorAll('#segIdxAx button').forEach(b=>b.onclick=()=>{idxTwo=(b.dataset.ax==='two');document.querySelectorAll('#segIdxAx button').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderIdxL();if(stackedView()){renderIdxY();renderIdxZ();}});
+window.addEventListener('resize',()=>{cA.resize();cB.resize();cP.resize();cI.resize();cIY.resize();cIZ.resize();cV.resize();});
 (()=>{let nv=narrowView(),on=false;PQ.fontsReady.then(()=>{on=true;nv=narrowView();});
   window.addEventListener('resize',()=>{const n=narrowView();if(!on||n===nv)return;nv=n;
   renderA();renderB();renderP();renderIdx();renderV();});})();
+(()=>{let sv=stackedView(),on=false;PQ.fontsReady.then(()=>{on=true;sv=stackedView();});
+  window.addEventListener('resize',()=>{const s=stackedView();if(!on||s===sv)return;sv=s;renderIdx();});})();
 
 (function(){
   const {LCI,COMP,PROV,endISO,band,setH,DM}=PQ, $=id=>document.getElementById(id);
