@@ -130,6 +130,7 @@
   </div>
   <div id="chartIdxZ"></div>
   <p class="note" id="idxRead"></p>
+  <p class="note" id="idxRef"></p>
  </div>
 
  <div class="panel reveal" style="animation-delay:.70s">
@@ -12749,9 +12750,9 @@ function yoyMultiples(sc){
     return {volX,valX,priceX:valX/volX};
   });
 }
-const yoyFmt=v=>v.toFixed(v>=9.95? 0 : v>=1.995? 1 : 2)+'x';   // digits chosen from the rounded value, so 9.96 prints 10x and 1.996 prints 2.0x
+const yoyFmt=v=>(v<0.0995? String(+v.toPrecision(2)) : v.toFixed(v>=9.95? 0 : v>=1.995? 1 : 2))+'x';   // digits chosen from the rounded value, so 9.96 prints 10x and 1.996 prints 2.0x
 const yoyAxFmt=v=>(v>=1? String(Math.round(v)) : String(+v.toPrecision(2)))+'x';
-const YOY_LADDER=[0.01,0.02,0.05,0.1,0.2,0.5,1,2,5,10,20,50,100,200,500,1000];   // 1-2-5 ladder for the log axis labels
+const YOY_LADDER=[0.001,0.002,0.005,0.01,0.02,0.05,0.1,0.2,0.5,1,2,5,10,20,50,100,200,500,1000];   // 1-2-5 ladder for the log axis labels
 function idxReadLine(m,ts){
   const el=document.getElementById('idxRead'); if(!el) return;
   const nm=idxScopeName();
@@ -12774,6 +12775,53 @@ function idxReadLine(m,ts){
   if(PQ.PROV&&L===PQ.LCI) t+=' The latest week is provisional and can still be revised.';
   el.innerHTML=t;
 }
+const SK_NAME='Fixed-skill price, est.', SK_COL='#a14d0b', REF_INK='#7d828c', PR_DAY=864e5;
+let _sk=null;
+function skillMultiples(){
+  if(_sk) return _sk;
+  if(typeof PRICEREF==='undefined') return (_sk=weeks.map(()=>null));
+  const rows=PRICEREF.skill.map(r=>({s:r[0],d:Date.parse(r[1]),p:r[2]}));
+  const cheapest=(L,t)=>{let b=null;for(const r of rows){if(r.s>=L&&r.d<=t&&(!b||r.p<b))b=r.p;}return b;};
+  return (_sk=weeks.map((w,i)=>{
+    if(_PW.has(i)) return null;
+    const t=Date.parse(w)+6*PR_DAY, t0=t-364*PR_DAY;
+    const xs=PRICEREF.levels.map(L=>{const a=cheapest(L,t),z=cheapest(L,t0);return a&&z? a/z : null;});
+    if(xs.some(x=>x==null)) return null;   // every level needs a model on both dates; earlier weeks rest on one or two pricey models
+    xs.sort((a,b)=>a-b);
+    const h=xs.length>>1;
+    return {x:xs.length%2? xs[h] : Math.sqrt(xs[h-1]*xs[h]),lo:xs[0],hi:xs[xs.length-1]};   // even count: geometric middle of the two central levels
+  }));
+}
+const lc=n=>/^[A-Z]{2}/.test(n)? n : n.charAt(0).toLowerCase()+n.slice(1);   // 'Hard disk' -> 'hard disk'; DRAM and DNA keep their capitals
+const refItem=(y,txt,pos)=>({yAxis:y,lineStyle:{color:'#b9bec7',type:[2,3],width:1},label:{formatter:txt,color:REF_INK,fontFamily:FMONO,fontSize:9.5,position:pos}});
+function techRefLines(){
+  if(typeof PRICEREF==='undefined') return [];
+  const out=[refItem(PRICEREF.techTypical,'typical of '+PRICEREF.techN+' technologies '+yoyFmt(PRICEREF.techTypical),'insideStartBottom')];
+  const dna=PRICEREF.tech.find(x=>x.name==='DNA sequencing');
+  if(dna) out.push(refItem(dna.x,'DNA sequencing '+yoyFmt(dna.x),'insideStartBottom'));
+  return out;
+}
+function techRefBand(){
+  if(typeof PRICEREF==='undefined') return undefined;
+  const c=PRICEREF.tech.filter(x=>x.name!=='DNA sequencing');
+  if(!c.length) return undefined;
+  const lo=Math.min(...c.map(x=>x.x)), hi=Math.max(...c.map(x=>x.x));
+  return {silent:true,itemStyle:{color:'rgba(125,130,140,.12)'},
+    label:{formatter:c.map(x=>lc(x.name)).join(', ')+(narrowView()? '' : ' '+yoyFmt(lo)+' to '+yoyFmt(hi)),color:REF_INK,fontFamily:FMONO,fontSize:9.5,position:'insideTopLeft'},
+    data:[[{yAxis:hi},{yAxis:lo}]]};
+}
+function idxRefLine(sk){
+  const el=document.getElementById('idxRef'); if(!el||typeof PRICEREF==='undefined') return;
+  let L=-1; sk.forEach((q,t)=>{if(q)L=t;});
+  const lv=PRICEREF.levels, T=PRICEREF.tech.map(x=>`${lc(x.name)} ${yoyFmt(x.x)} (${x.from} to ${x.to})`).join(', ');
+  let h=`<b>Reference paths.</b> A token is not a fixed unit: a frontier model&rsquo;s token does more work than an older model&rsquo;s. The solid price line is the mix buyers pay. `+
+    `The dashed line holds skill fixed, as the past technologies hold a fixed unit (one transistor, one bit). `;
+  if(L>=0){ const q=sk[L];
+    h+=`Our estimate: for each <a href="https://artificialanalysis.ai/" target="_blank" rel="noopener">Artificial Analysis</a> Intelligence Index level from ${lv[0]} to ${lv[lv.length-1]}, the cheapest model on OpenRouter at or above it, list price blended 3:1 input to output, over the cheapest a year earlier; the line is the middle level and starts once every level has a model a year before. `+
+      `Week to ${xlab[L]}: <b>${yoyFmt(q.x)}</b> (levels ${yoyFmt(q.lo)} to ${yoyFmt(q.hi)}). Today&rsquo;s list prices stand in for past ones, and only models still listed count. `; }
+  h+=`Past technologies, average price change per year for a fixed unit (Farmer and Lafond 2016, via <a href="https://ourworldindata.org/grapher/costs-of-66-different-technologies-over-time" target="_blank" rel="noopener">Our World in Data</a>; the per-year rates are our arithmetic): ${T}; typical of ${PRICEREF.techN} technologies ${yoyFmt(PRICEREF.techTypical)}.`;
+  el.innerHTML=h;
+}
 function renderIdxY(){
   const m=yoyMultiples(idxScope());
   const ts=[];m.forEach((r,t)=>{if(r)ts.push(t);});
@@ -12781,27 +12829,33 @@ function renderIdxY(){
   idxReadLine(m,ts);
   const defs=[['Economic value','#7c3aed','valX',3.4],['Token volume','#1f8a4c','volX',2.4],['Price $/Mtok','#e0701a','priceX',2.4]];
   const series=defs.map(d=>({name:d[0],type:'line',smooth:true,symbol:'none',color:d[1],lineStyle:{width:d[3]},emphasis:{focus:'series'},data:m.map(r=>r? r[d[2]] : null)}));
+  const sk=skillMultiples();   // the same on every scope: it covers all listed models
+  series.push({name:SK_NAME,type:'line',step:'end',symbol:'none',color:SK_COL,lineStyle:{width:2,type:[6,4]},emphasis:{focus:'series'},data:sk.map(q=>q? q.x : null)});
+  idxRefLine(sk);
   const vals=[].concat(...series.map(s=>s.data)).filter(v=>v!=null);
   const below=YOY_LADDER.filter(x=>x<=Math.min(1,...vals)/1.1), above=YOY_LADDER.filter(x=>x>=Math.max(1,...vals)*1.1);
   const lo=below.length? below[below.length-1] : YOY_LADDER[0], hi=above.length? above[0] : YOY_LADDER[YOY_LADDER.length-1];
   const tk=YOY_LADDER.filter(x=>x>=lo&&x<=hi);   // the log axis spans every multiple in the history, so it does not jump when the window moves
   series[0].markLine={silent:true,symbol:'none',lineStyle:{color:'#c9cdd4',type:'dashed'},
-    data:[{yAxis:1}],label:{formatter:'flat year on year',color:'#9aa0ab',fontFamily:FMONO,fontSize:10,position:'insideEndTop'}};
+    data:[{yAxis:1}].concat(techRefLines()),label:{formatter:'flat year on year',color:'#9aa0ab',fontFamily:FMONO,fontSize:10,position:'insideEndTop'}};
+  series[0].markArea=techRefBand();
   const opt=idxShell(frame(series,yoyFmt,false,false));   // frame: the left chart's x axis, legend and partial-week marker
   endpointLabels(opt,yoyFmt);
+  if(!narrowView()) opt.legend=Object.assign({},opt.legend,{type:'plain',itemGap:8,data:series.map(x=>x.name),textStyle:Object.assign({},opt.legend.textStyle,{fontSize:10.5})});   // phone width keeps the paged legend
   if(stackedView()) opt.grid.right=idxMargins().rightL;   // stacked: the same plot width as the left chart, so a week lines up vertically
   opt.tooltip=Object.assign({},opt.tooltip,{formatter:ps=>{
     if(!ps.length) return '';
-    const t=ps[0].dataIndex, r=m[t];
+    const t=ps[0].dataIndex, r=m[t], q=sk[t], skM=(ps.find(p=>p.seriesName===SK_NAME)||{}).marker||'';
+    const skRow=q? `<div style="display:flex;justify-content:space-between;gap:22px;line-height:1.7;margin-top:4px"><span>${skM}Price at fixed skill, our estimate</span><b style="font-family:'IBM Plex Mono';font-variant-numeric:tabular-nums">${yoyFmt(q.x)}</b></div>` : '';
     if(!r){
       const why=_PW.has(t)? 'week in progress' : (ts.length&&t<ts[0]? 'no multiple yet, it needs a year of history' : 'no multiple, one of the 8 weeks compared has no traffic');
-      return `<div style="font-family:'IBM Plex Mono';font-size:11px;color:#6a7180">${xlab[t]}: ${why}</div>`;
+      return `<div style="font-family:'IBM Plex Mono';font-size:11px;color:#6a7180">${xlab[t]}: ${why}</div>`+skRow;
     }
     const mkr=n=>{const p=ps.find(q=>q.seriesName===n);return p?p.marker:'';};
     const row=(n,lab,v)=>`<div style="display:flex;justify-content:space-between;gap:22px;line-height:1.7"><span>${mkr(n)}${lab}</span><b style="font-family:'IBM Plex Mono';font-variant-numeric:tabular-nums">${yoyFmt(v)}</b></div>`;
     return `<div style="font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.05em;color:#6a7180;text-transform:uppercase;margin-bottom:7px">${YOY_WIN} weeks to ${xlab[t]} vs a year earlier</div>`+
       row('Token volume','Volume',r.volX)+row('Price $/Mtok','Price',r.priceX)+row('Economic value','Value',r.valX)+
-      `<div style="margin-top:6px;padding-top:6px;border-top:1px solid #efeae0;font-family:'IBM Plex Mono';font-size:11px;color:#454b57">volume ${yoyFmt(r.volX)} × price ${yoyFmt(r.priceX)} = value ${yoyFmt(r.valX)}</div>`;}});
+      `<div style="margin-top:6px;padding-top:6px;border-top:1px solid #efeae0;font-family:'IBM Plex Mono';font-size:11px;color:#454b57">volume ${yoyFmt(r.volX)} × price ${yoyFmt(r.priceX)} = value ${yoyFmt(r.valX)}</div>`+skRow;}});
   opt.yAxis={type:'log',logBase:10,min:lo,max:hi,
     axisLabel:{fontSize:10.5,color:AX,fontFamily:FMONO,customValues:tk,formatter:yoyAxFmt},
     axisTick:{show:false,customValues:tk},axisLine:{show:false},splitLine:{lineStyle:{color:GRID}}};   // the grid lines follow axisTick.customValues
