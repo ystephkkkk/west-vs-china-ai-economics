@@ -118,8 +118,8 @@
 
  <div class="panel reveal" style="animation-delay:.66s">
   <div class="phead">
-   <div class="ptitle">Value attribution <small>Estimated value = volume × price. One slider under both charts sets the window for both. Left: indexed to 100 at the first week of the window, so the gap between <b>volume</b> and <b>value</b> is the <b>price</b> contribution. Right: 4 complete weeks over the same 4 weeks a year earlier, log scale; a multiple needs a year of history, so the line starts later. <b>volume</b> × <b>price</b> = <b>value</b>. Pick an aggregate or a single vendor.</small></div>
-   <div class="ctrls"><select class="sel" id="selS">
+   <div class="ptitle">Value attribution <small>Estimated value = volume × price. One slider under both charts sets the window for both; <b>From 1 Jan</b> starts it at the week holding 1 January. Left: indexed to 100 at the first week of the window, so the gap between <b>volume</b> and <b>value</b> is the <b>price</b> contribution. Right: 4 complete weeks over the same 4 weeks a year earlier, log scale; a multiple needs a year of history, so the line starts later. <b>volume</b> × <b>price</b> = <b>value</b>. Pick an aggregate or a single vendor.</small></div>
+   <div class="ctrls"><div class="seg" id="segIdxWin"><button data-w="all" class="active">All weeks</button><button data-w="ytd">From 1 Jan</button></div><select class="sel" id="selS">
      <optgroup label="Aggregate"><option value="Overall">Overall</option><option value="Western">Western</option><option value="Chinese">Chinese</option></optgroup>
      <optgroup label="Single vendor" id="selVendors"></optgroup>
    </select></div>
@@ -12888,7 +12888,8 @@ function idxWindow(s,e,src){
   [cIZ,cI,cIY].forEach(c=>{if(c!==src)c.dispatchAction({type:'dataZoom',dataZoomIndex:0,start:s,end:e});});
   cIY.setOption({graphic:[yoyNote()]});
   const nb=zoomStart(zI);
-  if(nb!==_bI){_bI=nb;if(!_rbT)_rbT=setTimeout(()=>{_rbT=0;renderIdxL();},0);}   // deferred: re-drawing the chart inside its own zoom event left the tooltip half disposed (a wheel zoom over it threw)
+  if(nb!==_bI){_bI=nb;if(!_rbT)_rbT=setTimeout(()=>{_rbT=0;renderIdxL();},0);}
+  syncWinBtns();   // deferred: re-drawing the chart inside its own zoom event left the tooltip half disposed (a wheel zoom over it threw)
 }
 (function(){
   let busy=false;
@@ -12902,6 +12903,24 @@ function idxWindow(s,e,src){
     a.getZr().on('globalout',()=>sync(()=>b.dispatchAction({type:'hideTip'})));
   };
   link(cI,cIY); link(cIY,cI);
+})();
+function idxYtd(){
+  let L=N-1; while(L>0&&_PW.has(L)) L--;
+  const end=i=>{const d=new Date(weeks[i]+'T00:00:00');d.setDate(d.getDate()+6);return d;};
+  const y=end(L).getFullYear(), j=new Date(y,0,1);
+  let i=0; while(i<L&&end(i)<j) i++;
+  return {y,i};
+}
+function syncWinBtns(){
+  const b0=zoomStart(zI), full=zI.end>99.99, Y=idxYtd();
+  document.querySelectorAll('#segIdxWin button').forEach(x=>x.classList.toggle('active',full&&b0===(x.dataset.w==='ytd'? Y.i : 0)));
+}
+(function(){
+  const Y=idxYtd();
+  document.querySelectorAll('#segIdxWin button').forEach(b=>{
+    if(b.dataset.w==='ytd'){ if(Y.i===0){ b.hidden=true; return; } b.textContent='From 1 Jan '+Y.y; }
+    b.onclick=()=>{ idxWindow(b.dataset.w==='ytd'? 100*Y.i/(N-1) : 0,100,null); syncWinBtns(); };
+  });
 })();
 const cV=echarts.init(document.getElementById('chartV'));let mV='tokshare',bV='all';
 const VC={anthropic:'#1d4ed8',google:'#0d9488',openai:'#8b5cf6','x-ai':'#0891b2',mistralai:'#6366f1',nvidia:'#65a30d',
