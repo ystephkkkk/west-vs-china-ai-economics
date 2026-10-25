@@ -71,6 +71,70 @@
  #idxRead{font-size:13px;color:#3f4654;margin:6px 0 8px}
  @media(max-width:1100px){.idxgrid{grid-template-columns:minmax(0,1fr)}}
  #chartIdxZ{width:100%;height:46px;margin-top:2px}   
+</style><style id="phonefit">
+@media(max-width:640px){
+ html .wrap{padding:28px 12px 56px}
+ html .panel{padding:14px 12px 8px;border-radius:14px}
+ html #attiers .panel,html #attiers-oa .panel,html #attiers-go .panel,html #aaxc .panel,html #infra .panel{padding:14px 12px 10px;border-radius:14px}
+ html .context{padding:14px 14px;font-size:13px}
+ html .context .row{margin-top:0;padding-top:9px}
+ html .cards{gap:10px}
+ html .card{padding:13px 12px}
+ html .card .vsub{font-size:12.5px;line-height:1.4}
+ html #attiers-oa .cards{grid-template-columns:1fr 1fr;gap:10px}
+ html #attiers-oa .card .val{font-size:26px}
+ html .ctrls{gap:8px}
+ html .seg{display:flex;flex-wrap:wrap;max-width:100%}
+ html .seg button{flex:1 1 auto;min-height:38px;padding:9px 12px;font-size:12px}
+ html .sel{min-height:40px;padding:9px 12px;font-size:16px}
+ html #growth .gseg button{min-height:38px;padding:9px 12px;font-size:12px}
+ html #infra .chip{min-height:36px;padding:8px 12px}
+ html #infra .seg button{min-height:36px;font-size:11.5px}
+ html #infra .toggle,html #aaxc .toggle{min-height:36px}
+ html #infra input[type=date],html #infra select{min-height:38px;font-size:16px}
+ html .wrap>details{padding:6px 12px}
+ html .wrap>details>summary,html #infra details.aadef>summary{padding:9px 0}
+ html .ptitle small{font-size:12.5px;line-height:1.5}
+ html .note,html #growth .note,html #attiers .note,html #attiers-oa .note,html #attiers-go .note,html #aaxc .note,html #infra .note{font-size:13px;line-height:1.55}
+ html #infra .lead{font-size:13.5px;line-height:1.55}
+ html #infra .tcap{font-size:12.5px;line-height:1.5}
+ html #infra .secsub,html #aaxc .secsub{font-size:13px;line-height:1.5}
+ html .src,html #disclaimer{color:#6a7180;line-height:1.6;overflow-wrap:anywhere}
+ html #cards .card .lab,html #attiers-oa .card .lab,html #attiers-go .card .lab{font-size:10.5px;letter-spacing:.06em}
+ html .tag{font-size:10.5px}
+ html .context .k{font-size:11px}
+ html .seckick{font-size:11px;letter-spacing:.12em}
+ html #aaxc .aakey,html #infra .ixkey{font-size:11px}
+ html #infra .trow .tv small,html #infra .tcard .tct small,html #infra .hwc .hwk,html #infra .a3t td small{font-size:11px}
+ html #attiers .atptab th,html #attiers .atptab td,html #attiers-oa .atptab th,html #attiers-oa .atptab td,html #attiers-go .atptab th,html #attiers-go .atptab td{padding:6px 5px}
+ html #attiers .atptab th,html #attiers-oa .atptab th,html #attiers-go .atptab th{font-size:10.5px;letter-spacing:.04em}
+ html .chips{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+ html .chips span{margin:0;min-width:0;overflow-wrap:anywhere}
+ html #attiers .atleg,html #attiers-oa .atleg,html #attiers-go .atleg{display:grid;grid-template-columns:1fr 1fr;gap:5px 12px;line-height:1.3}
+ html #infra .tkey{flex-direction:column;gap:3px}
+ html #chartV{height:560px}
+ html #chartIdxY{height:560px}
+ html #gr_c1{height:600px}
+ html #aaxc #aa_c6{height:520px!important}
+ html #aaxc #aa_t7{height:680px}
+ html #aaxc #aa_t9{height:660px}
+ html #aaxc #aa_c3{height:420px}
+ html #oad_c1{height:110px!important}
+ html #infra table.cmp tr{display:grid;grid-template-columns:1fr 1fr;gap:2px 14px}
+ html #infra table.cmp tr.grph{display:block}
+ html #infra table.cmp td.nm,html #infra table.cmp td[data-l="What it measures"],html #infra table.cmp td[data-l="Method"],html #infra table.cmp td[data-l="Clouds covered"],html #infra table.cmp td[data-l="Unit"]{grid-column:1/-1}
+ html #infra .cmpbox{padding:14px 12px 10px}
+ html #infra .why{padding:9px 12px}
+ html #infra .a3t,html #infra .a3t thead,html #infra .a3t tbody{display:block;width:100%}
+ html #infra .a3t tr{display:flex;flex-wrap:wrap}
+ html #infra .a3t thead th:first-child{display:none}
+ html #infra .a3t thead th{flex:1 1 0;text-align:left}
+ html #infra .a3t tbody th{flex:0 0 100%;border:0;padding:6px 0 0}
+ html #infra .a3t td{flex:1 1 0;text-align:left;white-space:normal;padding:0 6px 4px 0}
+ html #infra .a3t td[colspan]{flex-basis:100%}
+ html #infra .hwc .hwv{display:flex;flex-wrap:wrap;align-items:baseline;gap:1px 8px}
+ html #infra .hwc .hwv em{margin-left:0}
+}
 </style><script>function __chartsReady(f){var done=0;function run(){if(!done){done=1;f();}}function go(){var p=window.__pageFonts;if(p&&typeof p.then==='function')p.then(run,run);else run();}window.addEventListener('load',go);document.addEventListener('DOMContentLoaded',function(){setTimeout(go,2000);});}</script>
 </head>
 <body><div class="wrap">
@@ -78,7 +142,7 @@
  <h1 class="reveal" style="animation-delay:.08s"><span class="a">West</span><em>vs</em><span class="b">China</span></h1>
  <div class="rule reveal" style="animation-delay:.14s"></div>
  <p class="sub reveal" style="animation-delay:.2s" id="hero"><span id="hx_tok">&mdash;</span> &mdash; but tokens aren't dollars. <span id="hx_val"></span> Weekly (Mon–Sun, labeled by week-ending date), <span id="hx_span">&mdash;</span>.</p>
- <p class="src reveal" style="animation-delay:.24s">SOURCE OpenRouter public rankings + model catalog list prices · updated 2026-10-24 · weekly Mon–Sun buckets labeled by ending date · value = token volume × estimated $/token (free tier = $0)</p>
+ <p class="src reveal" style="animation-delay:.24s">SOURCE OpenRouter public rankings + model catalog list prices · updated 2026-10-25 · weekly Mon–Sun buckets labeled by ending date · value = token volume × estimated $/token (free tier = $0)</p>
 
  <div class="cards" id="cards"></div>
 
@@ -323,8 +387,8 @@ __chartsReady(function(){        // echarts is inlined at the END of <body>
       if(showThis){ shownNames.push(a);
         series.push({name:vname(a),type:'line',smooth:false,symbol:'none',connectNulls:false,
           lineStyle:{width:2,color:VC[a]},itemStyle:{color:VC[a]},z:2,data:data,
-          endLabel:{show:true,formatter:'{a}',fontFamily:MONO,fontSize:narrow?9.5:11,
-                    color:'#181a1f',distance:narrow?5:9},
+          endLabel:{show:true,formatter:'{a}',fontFamily:MONO,fontSize:narrow?10.5:11,
+                    lineHeight:narrow?12:undefined,color:'#181a1f',distance:narrow?5:9},
           labelLayout:{moveOverlap:'shiftY'},
           markPoint:{symbol:'circle',symbolSize:8,silent:true,label:{show:false},
             itemStyle:{color:VC[a],borderColor:'#fff',borderWidth:2},
@@ -334,8 +398,8 @@ __chartsReady(function(){        // echarts is inlined at the END of <body>
     for(var p=first;p<=pos;p++) vdata.push(mom(vn,p));
     series.push({name:VENUE_NAME,type:'line',smooth:false,symbol:'none',z:5,
       lineStyle:{width:3.4,type:'dashed',color:'#3f3f3f'},itemStyle:{color:'#3f3f3f'},
-      endLabel:{show:true,formatter:narrow?'Venue':VENUE_NAME,fontFamily:MONO,fontSize:narrow?9.5:11.5,
-                fontWeight:600,color:'#181a1f',distance:narrow?5:9},
+      endLabel:{show:true,formatter:narrow?'Venue':VENUE_NAME,fontFamily:MONO,fontSize:narrow?10.5:11.5,
+                lineHeight:narrow?12:undefined,fontWeight:600,color:'#181a1f',distance:narrow?5:9},
       labelLayout:{moveOverlap:'shiftY'},
       markPoint:{symbol:'circle',symbolSize:8,silent:true,label:{show:false},
         itemStyle:{color:'#3f3f3f',borderColor:'#fff',borderWidth:2},
@@ -1404,20 +1468,25 @@ __chartsReady( function(){
  (function(){
   const w=__D.weekly, x=w.map(r=>mdy(wkEnd(r.wk)));
   const ch=echarts.init(document.getElementById('at_c1'));
-  ch.setOption({grid:{left:46,right:18,top:18,bottom:34},color:[__C.front,__C.mid],
+  let nar=false;
+  const monYr=wk=>new Date(wkEnd(wk)+'T00:00:00').toLocaleDateString('en-US',{month:'short',year:'2-digit'});
+  const draw=()=>{nar=ch.getWidth()<440; ch.setOption({grid:{left:46,right:18,top:18,bottom:34},color:[__C.front,__C.mid],
    tooltip:{trigger:'axis',confine:true,extraCssText:TIPWRAP,backgroundColor:'#fff',borderColor:__C.line,borderWidth:1,padding:[10,12],textStyle:{color:__C.ink,fontSize:12,fontFamily:SANS},
      axisPointer:{type:'line',lineStyle:{color:'#c9cdd4'}},
      formatter:p=>{const i=p[0].dataIndex;return tipbox('Week ending '+wkEndLab(w[i].wk),
        p.map(s=>`<div style="display:flex;justify-content:space-between;gap:24px;line-height:1.7"><span>${s.marker}${s.seriesName}</span><b style="font-family:${MONO}">${s.value.toFixed(1)}%</b></div>`).join('')
        +`<div style="color:${__C.dim};font-family:${MONO};font-size:10px;margin-top:6px">${w[i].ant_tok_b.toLocaleString()}B Anthropic tok</div>`);}},
-   xAxis:{type:'category',data:x,boundaryGap:false,axisLabel:{hideOverlap:true,fontSize:10.5,color:__C.ax,fontFamily:MONO,interval:Math.floor(w.length/9)},axisLine:{lineStyle:{color:'#d8d2c6'}},axisTick:{show:false}},
+   xAxis:{type:'category',data:x,boundaryGap:false,axisLabel:{hideOverlap:true,fontSize:10.5,color:__C.ax,fontFamily:MONO,interval:Math.floor(w.length/(nar?4:9)),
+     ...(nar?{formatter:(v,i)=>monYr(w[i].wk)}:{})},axisLine:{lineStyle:{color:'#d8d2c6'}},axisTick:{show:false}},
    yAxis:{type:'value',min:0,max:100,interval:25,axisLabel:{fontSize:10.5,color:__C.ax,fontFamily:MONO,formatter:'{value}%'},splitLine:{lineStyle:{color:__C.grid}}},
    series:[
      {name:'Frontier (Opus/Fable)',type:'line',stack:'t',areaStyle:{opacity:.92},lineStyle:{width:0},symbol:'none',emphasis:{focus:'series'},data:w.map(r=>r.frontier_pct),
-       markLine:{silent:true,symbol:'none',lineStyle:{color:__C.front,type:'solid',width:1.4,opacity:.5},label:{show:true,position:'middle',formatter:'50%',color:__C.front,fontFamily:MONO,fontSize:9.5},data:[{yAxis:50}]}},
+       markLine:{silent:true,symbol:'none',lineStyle:{color:__C.front,type:'solid',width:1.4,opacity:.5},label:{show:true,position:'middle',formatter:'50%',color:__C.front,fontFamily:MONO,fontSize:nar?10.5:9.5,
+         ...(nar?{backgroundColor:'rgba(255,255,255,.8)',padding:[1,4],borderRadius:3}:{})},data:[{yAxis:50}]}},
      {name:'Mid (Sonnet)',type:'line',stack:'t',areaStyle:{opacity:.92},lineStyle:{width:0},symbol:'none',emphasis:{focus:'series'},data:w.map(r=>r.mid_pct)},
-   ]});
-  window.addEventListener('resize',()=>ch.resize());
+   ]},true);};
+  draw();
+  window.addEventListener('resize',()=>{ch.resize(); if((ch.getWidth()<440)!==nar) draw();});
  })();
 
  (function(){
@@ -1453,6 +1522,7 @@ __chartsReady( function(){
  (function(){
   const ch=echarts.init(document.getElementById('at_c3'));
   const lastDate=__D.snapshot.date;
+  let nar=false, cur='out';
   function build(metric){
     const bySub={opus:[],fable:[],mid:[],low:[]};
     __D.pricing.forEach(p=>{ if (bySub[p.subtier]) bySub[p.subtier].push(p); });
@@ -1460,23 +1530,25 @@ __chartsReady( function(){
       const pts=bySub[t].slice().sort((a,b)=>a.date<b.date?-1:1);
       const data=pts.map(p=>[p.date,p[metric]]);
       if(data.length) data.push([lastDate, pts[pts.length-1][metric]]);
-      return {name:SUBLAB[t],type:'line',step:'end',symbol:'circle',symbolSize:7,lineStyle:{width:2.4,color:SUBCOL[t]},itemStyle:{color:SUBCOL[t]},emphasis:{focus:'series'},data};
+      return {name:SUBLAB[t],type:'line',step:'end',symbol:'circle',symbolSize:nar?5:7,lineStyle:{width:nar?2:2.4,color:SUBCOL[t]},itemStyle:{color:SUBCOL[t]},emphasis:{focus:'series'},data};
     });
   }
   function render(metric){
+    cur=metric; nar=ch.getWidth()<440;
     const vals=__D.pricing.map(p=>p[metric]).filter(v=>v>0);
     const ymin=Math.pow(10,Math.floor(Math.log10(Math.min.apply(null,vals))));
     const ymax=Math.pow(10,Math.ceil(Math.log10(Math.max.apply(null,vals))));
-    ch.setOption({grid:{left:54,right:78,top:18,bottom:34},
+    ch.setOption({grid:{left:nar?42:54,right:nar?18:78,top:nar&&OPUS&&OPUS.prev?40:18,bottom:34},
      tooltip:{trigger:'axis',confine:true,extraCssText:TIPWRAP,backgroundColor:'#fff',borderColor:__C.line,borderWidth:1,textStyle:{color:__C.ink,fontFamily:SANS,fontSize:12},axisPointer:{type:'line',lineStyle:{color:'#c9cdd4'}},
        formatter:p=>tipbox(new Date(p[0].axisValue).toLocaleDateString('en-US',{month:'short',year:'numeric'}),
          p.map(s=>`<div style="display:flex;justify-content:space-between;gap:24px;line-height:1.7"><span>${s.marker}${s.seriesName}</span><b style="font-family:${MONO}">$${(+s.value[1]).toFixed(2)}/M</b></div>`).join(''))},
-     xAxis:{type:'time',axisLabel:{hideOverlap:true,fontSize:10.5,color:__C.ax,fontFamily:MONO,formatter:v=>new Date(v).toLocaleDateString('en-US',{month:'short',year:'2-digit'})},axisLine:{lineStyle:{color:'#d8d2c6'}},axisTick:{show:false}},
+     xAxis:{type:'time',...(nar?{splitNumber:3}:{}),axisLabel:{hideOverlap:true,fontSize:10.5,color:__C.ax,fontFamily:MONO,formatter:v=>new Date(v).toLocaleDateString('en-US',{month:'short',year:'2-digit'})},axisLine:{lineStyle:{color:'#d8d2c6'}},axisTick:{show:false}},
      yAxis:{type:'log',min:ymin,max:ymax,axisLabel:{fontSize:10.5,color:__C.ax,fontFamily:MONO,formatter:v=>'$'+v},splitLine:{lineStyle:{color:__C.grid}}},
      series:build(metric).map(s=>{
        if(s.name===SUBLAB.opus && OPUS && OPUS.prev){
          s.markLine={silent:true,symbol:'none',lineStyle:{color:__C.front,type:'dashed',width:1.2,opacity:.55},
-           label:{show:true,formatter:shortName(OPUS.since.name)+' — Opus list price '+OPUS.dir+(OPUS.ratio?' '+OPUS.ratio+'×':''),rotate:0,position:'end',distance:6,color:__C.front,fontFamily:MONO,fontSize:10,backgroundColor:'rgba(255,255,255,.85)',padding:[2,4],borderRadius:3},
+           label:{show:true,formatter:shortName(OPUS.since.name)+' — Opus list price '+OPUS.dir+(OPUS.ratio?' '+OPUS.ratio+'×':''),rotate:0,position:'end',distance:6,color:__C.front,fontFamily:MONO,fontSize:nar?10.5:10,backgroundColor:'rgba(255,255,255,.85)',padding:[2,4],borderRadius:3,
+             ...(nar?{align:'right',width:150,overflow:'break'}:{})},
            data:[{xAxis:OPUS.since.date}]};
        }
        return s;
@@ -1485,7 +1557,7 @@ __chartsReady( function(){
   render('out');
   document.querySelectorAll('#at_pseg button').forEach(b=>b.onclick=()=>{
     document.querySelectorAll('#at_pseg button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); render(b.dataset.k);});
-  window.addEventListener('resize',()=>ch.resize());
+  window.addEventListener('resize',()=>{ch.resize(); if((ch.getWidth()<440)!==nar) render(cur);});
   const order={frontier:0,mid:1,low:2};
   const rows=__D.pricing.slice().sort((a,b)=>(order[a.tier]-order[b.tier])||(a.date<b.date?-1:1));
   let html='<thead><tr><th>Model</th><th>Tier</th><th>Released</th><th>Input&nbsp;$/M</th><th>Output&nbsp;$/M</th></tr></thead><tbody>';
@@ -4304,6 +4376,7 @@ TIERSHORT.gen_prev='Frontier (other)';
  (function(){
   const ch=echarts.init(document.getElementById('oad_c2'));
   const lastDate=__OD.snapshot.date;
+  let nar=false, cur='out';
   function build(metric){
     const byTier={}; ORDER.forEach(t=>{byTier[t]=[];});
     __OD.pricing.forEach(p=>{(byTier[p.tier]=byTier[p.tier]||[]).push(p);});
@@ -4311,11 +4384,12 @@ TIERSHORT.gen_prev='Frontier (other)';
       const pts=byTier[t].slice().sort((a,b)=>a.date<b.date?-1:1);
       const data=pts.map(p=>[p.date, Math.max(p[metric],0.02)]);
       if(data.length) data.push([lastDate, Math.max(pts[pts.length-1][metric],0.02)]);
-      return {name:TIERLAB[t],type:'line',step:'end',symbol:'circle',symbolSize:7,lineStyle:{width:2.4,color:TIERCOL[t]},itemStyle:{color:TIERCOL[t]},emphasis:{focus:'series'},data};
+      return {name:TIERLAB[t],type:'line',step:'end',symbol:'circle',symbolSize:nar?5:7,lineStyle:{width:nar?2:2.4,color:TIERCOL[t]},itemStyle:{color:TIERCOL[t]},emphasis:{focus:'series'},data};
     });
   }
   function render(metric){
-    ch.setOption({grid:{left:54,right:88,top:30,bottom:34},
+    cur=metric; nar=ch.getWidth()<440;
+    ch.setOption({grid:{left:nar?42:54,right:nar?18:88,top:30,bottom:34},
       tooltip:{trigger:'axis',confine:true,extraCssText:'white-space:normal;max-width:min(320px,calc(100vw - 32px));',backgroundColor:'#fff',borderColor:C.line,borderWidth:1,textStyle:{color:C.ink,fontFamily:SANS,fontSize:12},axisPointer:{type:'line',lineStyle:{color:'#c9cdd4'}},
         formatter:p=>tipbox(new Date(p[0].axisValue).toLocaleDateString('en-US',{month:'short',year:'numeric'}),
           p.map(s=>`<div style="display:flex;justify-content:space-between;gap:24px;line-height:1.7"><span>${s.marker}${s.seriesName}</span><b style="font-family:${MONO}">$${(+s.value[1]).toFixed(2)}/M</b></div>`).join(''))},
@@ -4331,7 +4405,7 @@ TIERSHORT.gen_prev='Frontier (other)';
               label:{show:true,formatter:shortSlug(p1.slug).replace(/^gpt-(?=\d+(\.\d+)?$)/,'')+': '+(mv.flat
                   ?'held at $'+(+p1[metric]).toFixed(2)
                   :'$'+(+p0[metric]).toFixed(2)+'→$'+(+p1[metric]).toFixed(2)+' ('+(mv.dir==='cut'?'−':'+')+mv.pct+'%)'),
-                rotate:0,position:'end',align:'right',distance:6,color:C.front,fontFamily:MONO,fontSize:9.5,backgroundColor:'rgba(255,255,255,.88)',padding:[2,4],borderRadius:3},
+                rotate:0,position:'end',align:'right',distance:6,color:C.front,fontFamily:MONO,fontSize:nar?10.5:9.5,backgroundColor:'rgba(255,255,255,.88)',padding:[2,4],borderRadius:3},
               data:[{xAxis:p1.date}]};
           }
         }
@@ -4434,7 +4508,7 @@ TIERSHORT.gen_prev='Frontier (other)';
   })();
   document.querySelectorAll('#oad_pseg button').forEach(b=>b.onclick=()=>{
     document.querySelectorAll('#oad_pseg button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); render(b.dataset.k);});
-  window.addEventListener('resize',()=>ch.resize());
+  window.addEventListener('resize',()=>{ch.resize(); if((ch.getWidth()<440)!==nar) render(cur);});
   const ord={}; ORDER.forEach((t,i)=>{ord[t]=i;});   // table order = tier order, one source
   const rows=__OD.pricing.slice().sort((a,b)=>((ord[a.tier]||0)-(ord[b.tier]||0))||(a.date<b.date?-1:1));
   let html='<thead><tr><th>Representative model</th><th>Tier</th><th>Released</th><th>Input&nbsp;$/M</th><th>Output&nbsp;$/M</th></tr></thead><tbody>';
@@ -5529,7 +5603,8 @@ __chartsReady( function(){
   set('gd_richest',richest); set('gd_cheapest',cheapest); set('gd_richratio',(b[richest].in/b[cheapest].in).toFixed(b[richest].in>=2*b[cheapest].in?0:1));
   const ch=echarts.init(document.getElementById('gd_c1'));
   const mctx=document.createElement('canvas').getContext('2d');
-  const tw=s=>{mctx.font='600 10px "'+MONO+'", Consolas, Menlo, monospace';return mctx.measureText(s).width;};
+  const lfs=()=>ch.getWidth()<440?11:10;   // in-bar label size: 11px on a phone-width chart, 10px otherwise (draw() reruns on every resize)
+  const tw=s=>{mctx.font='600 '+lfs()+'px "'+MONO+'", Consolas, Menlo, monospace';return mctx.measureText(s).width;};
   const labFor=(t,p)=>{const v=+p.value, seg=v/100*Math.max(ch.getWidth()-96,1), pc=v.toFixed(0)+'%', full=VLAB[p.name][t]+' '+pc;
     return tw(full)+10<=seg?full:(tw(pc)+6<=seg?pc:'');};
   const draw=()=>ch.setOption({grid:{left:80,right:16,top:6,bottom:6,containLabel:false},
@@ -5538,7 +5613,7 @@ __chartsReady( function(){
     xAxis:{type:'value',max:100,show:false},
     yAxis:{type:'category',data:VENDORS,axisTick:{show:false},axisLine:{show:false},axisLabel:{fontFamily:MONO,fontSize:13,color:C.ink,fontWeight:600}},
     series:CMPORDER.map(t=>({name:CMPLAB[t],type:'bar',stack:'s',barWidth:42,data:VENDORS.map(v=>cmp[v][t]||0),itemStyle:{color:CMPCOL[t]},
-      label:{show:true,position:'inside',formatter:p=>labFor(t,p),color:(t==='cheap'||t==='open'||t==='legacy')?C.ink:'#fff',fontFamily:MONO,fontSize:10,fontWeight:600},emphasis:{focus:'series'}}))});
+      label:{show:true,position:'inside',formatter:p=>labFor(t,p),color:(t==='cheap'||t==='open'||t==='legacy')?C.ink:'#fff',fontFamily:MONO,fontSize:lfs(),fontWeight:600},emphasis:{focus:'series'}}))});
   draw();
   window.addEventListener('resize',()=>{ch.resize();draw();});
   document.getElementById('gd_c1models').innerHTML='<span style="background:none;border:0;color:var(--dim);padding-left:0">Google models:</span>'+
@@ -5550,11 +5625,12 @@ __chartsReady( function(){
  (function(){
   const ch=echarts.init(document.getElementById('gd_c2'));
   const lastDate=__GD.snapshot.date;
+  let nar=false, cur='out';
   function build(metric){const byTier={};ORDER.forEach(t=>{byTier[t]=[];});__GD.pricing.forEach(p=>{(byTier[p.tier]=byTier[p.tier]||[]).push(p);});
     return ORDER.map(t=>{const pts=byTier[t].slice().sort((a,b)=>a.date<b.date?-1:1);const data=pts.map(p=>[p.date,Math.max(p[metric],0.02)]);
       if(data.length)data.push([lastDate,Math.max(pts[pts.length-1][metric],0.02)]);
-      return {name:TIERLAB[t],type:'line',step:'end',symbol:'circle',symbolSize:7,lineStyle:{width:2.4,color:TIERCOL[t]},itemStyle:{color:TIERCOL[t]},emphasis:{focus:'series'},data};});}
-  function render(metric){ch.setOption({grid:{left:54,right:90,top:16,bottom:34},
+      return {name:TIERLAB[t],type:'line',step:'end',symbol:'circle',symbolSize:nar?5:7,lineStyle:{width:nar?2:2.4,color:TIERCOL[t]},itemStyle:{color:TIERCOL[t]},emphasis:{focus:'series'},data};});}
+  function render(metric){cur=metric;nar=ch.getWidth()<440;ch.setOption({grid:{left:nar?42:54,right:nar?18:90,top:16,bottom:34},
     tooltip:{trigger:'axis',confine:true,extraCssText:'white-space:normal;max-width:min(320px,calc(100vw - 32px));',backgroundColor:'#fff',borderColor:C.line,borderWidth:1,textStyle:{color:C.ink,fontFamily:SANS,fontSize:12},axisPointer:{type:'line',lineStyle:{color:'#c9cdd4'}},
       formatter:p=>tipbox(new Date(p[0].axisValue).toLocaleDateString('en-US',{month:'short',year:'numeric'}),p.map(s=>`<div style="display:flex;justify-content:space-between;gap:24px;line-height:1.7"><span>${s.marker}${s.seriesName}</span><b style="font-family:${MONO}">$${(+s.value[1]).toFixed(2)}/M</b></div>`).join(''))},
     xAxis:{type:'time',axisLabel:{hideOverlap:true,fontSize:10.5,color:C.ax,fontFamily:MONO,formatter:v=>new Date(v).toLocaleDateString('en-US',{month:'short',year:'2-digit'})},axisLine:{lineStyle:{color:'#d8d2c6'}},axisTick:{show:false}},
@@ -5562,7 +5638,7 @@ __chartsReady( function(){
     series:build(metric)},true);}
   render('out');
   document.querySelectorAll('#gd_pseg button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#gd_pseg button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render(b.dataset.k);});
-  window.addEventListener('resize',()=>ch.resize());
+  window.addEventListener('resize',()=>{ch.resize(); if((ch.getWidth()<440)!==nar) render(cur);});
   const ord={};ORDER.forEach((t,i)=>{ord[t]=i;});
   const rk=t=>(ord[t]==null?ORDER.length:ord[t]);
   const rows=__GD.pricing.slice().sort((a,b)=>(rk(a.tier)-rk(b.tier))||(a.date<b.date?-1:1));
@@ -5859,20 +5935,20 @@ __chartsReady( function(){
  function responsive(ch,draw){var n=narrowOf(ch);draw(n);
    window.addEventListener('resize',function(){var m=narrowOf(ch);if(m!==n){n=m;draw(n);}});}
  function catAxis(names,nar){return {type:'category',data:names,
-   axisLabel:axL({fontFamily:SANS,fontSize:nar?9.5:11,color:'#3f4654',width:nar?96:124,overflow:'truncate',
+   axisLabel:axL({fontFamily:SANS,fontSize:nar?10.5:11,color:'#3f4654',width:nar?106:124,overflow:'truncate',
      formatter:function(v){return nar?v.replace(/^Claude /,''):v;}}),
    axisLine:{lineStyle:{color:'#d8d2c6'}},axisTick:{show:false}};}
- function vLine(x,text,color){return {silent:true,symbol:'none',lineStyle:{color:color,type:'dashed',width:1.1,opacity:.7},
-   label:{show:true,position:'end',distance:3,formatter:text,color:color,fontFamily:MONO,fontSize:9.5},data:[{xAxis:x}]};}
+ function vLine(x,text,color,nar){return {z:nar?1:5,silent:true,symbol:'none',lineStyle:{color:color,type:'dashed',width:1.1,opacity:.7},
+   label:{show:true,position:'end',distance:3,formatter:text,color:color,fontFamily:MONO,fontSize:nar?10.5:9.5},data:[{xAxis:x}]};}
 
  (function(){var ch=mk('aa_c1');if(!ch)return;var d=D.slice().sort(function(a,b){return a.idx-b.idx;});
-  responsive(ch,function(nar){ch.setOption({grid:{left:nar?102:128,right:nar?24:34,top:24,bottom:26},
+  responsive(ch,function(nar){ch.setOption({grid:{left:nar?106:128,right:nar?24:34,top:24,bottom:26},
    tooltip:tip({trigger:'item',formatter:function(p){return p.name+'<br/>AA Index <b>'+p.value+'</b>';}}),
    xAxis:{type:'value',min:0,max:70,axisLabel:axL(),splitLine:{lineStyle:{color:GRID}}},
    yAxis:catAxis(d.map(function(x){return x.m;}),nar),
    series:[{type:'bar',barWidth:'62%',data:d.map(function(x){return {value:x.idx,itemStyle:{color:col(x.c)}};}),
-     label:{show:true,position:'right',color:INK,fontFamily:MONO,fontSize:nar?9.5:10.5,formatter:function(p){return p.value;}},
-     markLine:vLine(chinaCeilD,'China ceiling '+chinaCeilD,CHINA)}]});});
+     label:{show:true,position:'right',color:INK,fontFamily:MONO,fontSize:10.5,textBorderColor:'#fff',textBorderWidth:nar?3:0,formatter:function(p){return p.value;}},
+     markLine:vLine(chinaCeilD,'China ceiling '+chinaCeilD,CHINA,nar)}]});});
  })();
 
  (function(){
@@ -5891,16 +5967,19 @@ __chartsReady( function(){
   var LPOS={'Claude Opus 4.7':'left','Claude Opus 4.8':'right','GPT-5.5':'bottom','Claude Fable 5':'top','Claude Sonnet 4.6':'bottom',
     'Gemini 3.1 Pro':'right','Qwen3.7 Max':'top','Kimi K2.6':'top','MiniMax M3':'top','DeepSeek V4 Pro':'bottom',
     'GLM-5.1':'left','DeepSeek V4 Flash':'right','Tencent Hy3':'right'};
+  var NUDGE={'Kimi K2.6':{position:'bottom',offset:[14,0]},'Claude Opus 4.7':{offset:[0,-6]}};
   function ser(c,name,nar){return {name:name,type:'scatter',symbolSize:nar?10:13,itemStyle:{color:col(c),opacity:.88,borderColor:'#fff',borderWidth:1},
     data:D.filter(function(x){return x.c===c && x.cost!=null;}).map(function(x){
-      return {value:[x.idx,x.cost],name:x.m,label:{position:LPOS[x.m]||'top'}};}),
-    label:{show:true,position:'top',distance:nar?3:4,formatter:function(p){return p.name.replace('Claude ','').replace('DeepSeek ','DS ');},color:DIM,fontFamily:MONO,fontSize:nar?8:9}};}
-  responsive(ch,function(nar){ch.setOption({grid:{left:nar?52:64,right:nar?12:22,top:30,bottom:38},
-   legend:{data:['US frontier','China'],top:0,right:0,textStyle:{color:DIM,fontFamily:MONO,fontSize:nar?10:11},itemWidth:11,itemHeight:11},
+      return {value:[x.idx,x.cost],name:x.m,label:Object.assign({position:LPOS[x.m]||'top',offset:[0,0]},nar&&NUDGE[x.m])};}),
+    label:{show:true,position:'top',distance:nar?3:4,formatter:function(p){return p.name.replace('Claude ','').replace('DeepSeek ','DS ');},color:DIM,fontFamily:MONO,fontSize:nar?10.5:9}};}
+  function draw3(nar){ch.setOption({grid:{left:nar?52:64,right:nar?12:22,top:30,bottom:38},
+   legend:Object.assign({data:['US frontier','China'],top:0,textStyle:{color:DIM,fontFamily:MONO,fontSize:nar?10.5:11},itemWidth:11,itemHeight:11},nar?{left:0,itemGap:18}:{right:0}),
    tooltip:tip({trigger:'item',formatter:function(p){return p.data.name+'<br/>AA Index '+p.value[0]+' &middot; $'+p.value[1].toLocaleString()+' to run index';}}),
-   xAxis:{type:'value',min:30,max:65,name:'AA Intelligence Index →',nameLocation:'middle',nameGap:26,nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:nar?10:11},axisLabel:axL(),splitLine:{lineStyle:{color:GRID}}},
+   xAxis:{type:'value',min:30,max:65,name:'AA Intelligence Index →',nameLocation:'middle',nameGap:26,nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:nar?10.5:11},axisLabel:axL(),splitLine:{lineStyle:{color:GRID}}},
    yAxis:{type:'log',min:30,max:8000,name:nar?'':'$ to run index (log)',nameLocation:'middle',nameGap:46,nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:11},axisLabel:axL({formatter:function(v){return '$'+v;}}),splitLine:{lineStyle:{color:GRID}}},
-   series:[ser('US','US frontier',nar),ser('CN','China',nar)]});});
+   series:[ser('US','US frontier',nar),ser('CN','China',nar)]},{replaceMerge:['legend']});}   // replaceMerge: a left-anchored phone legend leaves nothing behind when the chart widens
+  responsive(ch,draw3);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(function(){if(narrowOf(ch)) draw3(true);});
  })();
 
  (function(){
@@ -6587,10 +6666,10 @@ __chartsReady( function(){
      var byKey={}; S.labels.forEach(function(l){byKey[l.key]=l;});
      var keyed=S.labels.filter(function(l){return forced[l.key] || res.failed.indexOf(l.key)>=0;}).sort(function(a,b){return a.sortKey-b.sortKey;});
      var num={}; keyed.forEach(function(l,j){num[l.key]=j+1;});
-     var bfs=nar?8.5:9.5;
+     var bfs=9.5, bReach=nar?110:72;
      var bItems=keyed.map(function(l){return {key:l.key,txt:String(num[l.key]),fs:bfs,wt:700,dot:dotOf[l.key],badge:true,avoidSegs:!!S.avoidSegs};});
-     var bres=placeAll(bItems,state,72);
-     var bl=placeAll(bItems.filter(function(it){return bres.failed.indexOf(it.key)>=0;}),state,72,true);
+     var bres=placeAll(bItems,state,bReach);
+     var bl=placeAll(bItems.filter(function(it){return bres.failed.indexOf(it.key)>=0;}),state,bReach,true);
      Object.keys(bl.placed).forEach(function(k){bres.placed[k]=bl.placed[k];});
      var els=[];
      function leader(lead,color){
@@ -7137,13 +7216,13 @@ __chartsReady( function(){
       '(quality-adjusted, not cost per task) the '+blocName(gC.hi)+' median is <b>~'+Math.round(gC.x)+'&times;</b> the '+blocName(gC.lo)+' (Panel&nbsp;2). '+
       'Neither is the Anthropic&ndash;DeepSeek ratio on the price-gap card above, which compares one vendor pair at fixed reference prices.');
   })();
-  responsive(ch,function(nar){ch.setOption({grid:{left:nar?102:128,right:nar?34:40,top:24,bottom:26},
+  responsive(ch,function(nar){ch.setOption({grid:{left:nar?106:128,right:nar?34:40,top:24,bottom:26},
    tooltip:tip({trigger:'item',formatter:function(p){return p.name+'<br/><b>'+p.value+'M</b> tokens to run index';}}),
-   xAxis:{type:'value',min:0,max:240,axisLabel:axL({formatter:function(v){return v+'M';}}),splitLine:{lineStyle:{color:GRID}}},
+   xAxis:{type:'value',min:0,max:240,axisLabel:axL({formatter:function(v){return v+'M';},showMaxLabel:!nar}),splitLine:{lineStyle:{color:GRID}}},
    yAxis:catAxis(d.map(function(x){return x.m;}),nar),
    series:[{type:'bar',barWidth:'62%',data:d.map(function(x){return {value:x.tok,itemStyle:{color:col(x.c)}};}),
-     label:{show:true,position:'right',color:INK,fontFamily:MONO,fontSize:nar?9:10,formatter:function(p){return p.value+'M';}},
-     markLine:vLine(tokMed,(nar?'median ':'reasoning median ')+Math.round(tokMed)+'M',DIM)}]});});
+     label:{show:true,position:'right',color:INK,fontFamily:MONO,fontSize:nar?10.5:10,textBorderColor:'#fff',textBorderWidth:nar?3:0,formatter:function(p){return p.value+'M';}},
+     markLine:vLine(tokMed,(nar?'median ':'reasoning median ')+Math.round(tokMed)+'M',DIM,nar)}]});});
  })();
 
  var SPD=[
@@ -7163,17 +7242,19 @@ __chartsReady( function(){
   var d=SPD.slice().sort(function(a,b){return (a.fast/a.med)-(b.fast/b.med);});
   var nFirstParty=d.filter(function(x){return x.ep==='1p';}).length;
   function dot(key,sz,pos,nar){return {type:'scatter',symbolSize:nar?sz-2:sz,z:5,
-    data:d.map(function(x){return {value:[x[key],x.m],name:x.m};}),
+    data:d.map(function(x){var it={value:[x[key],x.m],name:x.m};
+      if(nar && key==='med' && x.own) it.label={position:'top'};
+      return it;}),
     itemStyle:{color:function(p){return key==='fast'?col(d[p.dataIndex].c):'#8d8676';},opacity:key==='fast'?.95:.8},
-    label:{show:true,position:pos,distance:nar?3:5,color:key==='fast'?INK:DIM,fontFamily:MONO,fontSize:nar?8.5:9.5,
+    label:{show:true,position:pos,distance:nar?3:5,color:key==='fast'?INK:DIM,fontFamily:MONO,fontSize:nar?10.5:9.5,
       fontWeight:key==='fast'?600:400,formatter:function(p){return Math.round(p.value[0]);}}};}
-  responsive(ch,function(nar){ch.setOption({grid:{left:nar?100:126,right:nar?34:58,top:16,bottom:34},
+  responsive(ch,function(nar){ch.setOption({grid:{left:nar?106:126,right:nar?34:58,top:16,bottom:34},
    tooltip:tip({trigger:'item',formatter:function(p){var x=d.filter(function(y){return y.m===p.value[1];})[0];
      return x.m+' <span style="color:#6a7180">('+(x.ep==='open'?'open weights, multi-provider':'closed weights, lab + licensed hosts')+')</span><br/>'+
        'median provider <b>'+Math.round(x.med)+'</b> &middot; fastest <b>'+Math.round(x.fast)+'</b> tok/s'+
        (x.own?'<br/>its own first-party API <b>'+Math.round(x.own)+'</b>':'')+
        '<br/>serving spread <b>'+(x.fast/x.med).toFixed(1)+'&times;</b>';}}),
-   xAxis:{type:'value',min:0,max:460,name:'output tok/s →',nameLocation:'middle',nameGap:24,nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:10.5},axisLabel:axL({fontSize:nar?9.5:10.5}),splitLine:{lineStyle:{color:GRID}}},
+   xAxis:{type:'value',min:0,max:460,name:'output tok/s →',nameLocation:'middle',nameGap:24,nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:10.5},axisLabel:axL({showMaxLabel:!nar}),splitLine:{lineStyle:{color:GRID}}},   // phone: the end tick (460) sits on top of 400
    yAxis:catAxis(d.map(function(x){return x.m;}),nar),
    series:[
     {type:'bar',stack:'sp',silent:true,barWidth:4,itemStyle:{color:'transparent'},data:d.map(function(x){return x.med;})},
@@ -7190,7 +7271,7 @@ __chartsReady( function(){
       data:d.filter(function(x){return x.own;}).map(function(x){return {value:[x.own,x.m],name:x.m};}),
       itemStyle:{color:'#fff',borderColor:CHINA,borderWidth:1.6},
       tooltip:{formatter:function(p){return p.value[1]+'<br/>its own first-party API <b>'+Math.round(p.value[0])+'</b> tok/s';}},
-      label:{show:true,position:'bottom',distance:4,formatter:function(p){return 'own API '+Math.round(p.value[0]);},color:CHINA,fontFamily:MONO,fontSize:8.5}}
+      label:{show:true,position:'bottom',distance:4,offset:nar?[22,0]:[0,0],formatter:function(p){return 'own API '+Math.round(p.value[0]);},color:CHINA,fontFamily:MONO,fontSize:nar?10.5:8.5}}
    ]});});
 
   function spr(x){return x.fast/x.med;}
@@ -7261,17 +7342,17 @@ __chartsReady( function(){
   if(ch) responsive(ch,function(nar){
    var areas=suites.map(function(s){var g=d.filter(function(x){return x.suite===s;});
      return [{yAxis:g[0].m,label:{show:true,position:s===current?'insideBottomRight':'insideTopRight',distance:4,
-               formatter:nar?s:(s===current?s+' suite':s+' suite (older)'),color:'#5b5470',fontFamily:MONO,fontSize:8.5}},
+               formatter:nar?s:(s===current?s+' suite':s+' suite (older)'),color:'#5b5470',fontFamily:MONO,fontSize:nar?10.5:8.5}},
              {yAxis:g[g.length-1].m,itemStyle:{color:s===current?'rgba(141,134,118,.075)':'transparent'}}];});
-   ch.setOption({grid:{left:nar?100:136,right:nar?30:44,top:24,bottom:26},
+   ch.setOption({grid:{left:nar?116:136,right:nar?30:44,top:24,bottom:26},
    tooltip:tip({trigger:'item',formatter:function(p){var x=d[p.dataIndex];if(!x) return '';
      return lab(x)+' <span style="color:#6a7180">('+x.suite+')</span><br/><b>'+fh(x.h)+'h</b> 50% time horizon<br/>METR interval '+fh(x.lo)+'&ndash;'+fh(x.hi)+'h';}}),
    xAxis:{type:'value',min:0,max:Math.ceil(hMax*1.35/4)*4,axisLabel:axL({formatter:function(v){return v+'h';}}),splitLine:{lineStyle:{color:GRID}}},
    yAxis:catAxis(d.map(function(x){return x.m;}),nar),
    series:[{type:'bar',barWidth:'56%',data:d.map(function(x){return {value:x.h,itemStyle:{color:col(x.c)}};}),
-     label:{show:true,position:'right',color:INK,fontFamily:MONO,fontSize:nar?9:10.5,formatter:function(p){return fh(p.value)+'h'+(p.value>UNREL?'*':'');}},
+     label:{show:true,position:'right',color:INK,fontFamily:MONO,fontSize:10.5,textBorderColor:'#fff',textBorderWidth:nar?3:0,formatter:function(p){return fh(p.value)+'h'+(p.value>UNREL?'*':'');}},
      markArea:{silent:true,data:areas},
-     markLine:vLine(UNREL,'*>'+UNREL+'h unreliable (METR)',DIM)}]});
+     markLine:vLine(UNREL,'*>'+UNREL+'h unreliable (METR)',DIM,nar)}]});
   });
 
   put('aa_c5src','update log through '+METR_SRC.updated+'; accessed '+METR_SRC.accessed);
@@ -9211,10 +9292,11 @@ __chartsReady( function(){
     .sort(function(a,b){return a.value[0]-b.value[0];});
 
   function buildScatter(showPareto){
+    var nr=narrowOf(ch);
     return blocs.filter(function(b){return models.some(function(m){return m.bloc===b;});}).map(function(b,bi){
       var pts = models.filter(function(m){return m.bloc===b;});
       var s = {name:blocLab[b],type:'scatter',
-        symbolSize:function(v,p){return (showPareto && paretoSet[p.data.value[2]])?18:12;},
+        symbolSize:function(v,p){return (showPareto && paretoSet[p.data.value[2]])?(nr?12:18):(nr?8:12);},
         itemStyle:{color:col3(b),opacity:.88,borderColor:'#fff',borderWidth:1.4},
         data:pts.map(function(m){return {value:[m.price,m.score,m.permaslug],name:m.name};})};
       if(showPareto && bi===0) s.markLine={silent:true,symbol:'none',animation:false,
@@ -9246,16 +9328,17 @@ __chartsReady( function(){
   function buildLabels(){
     var L=G.left, R=ch.getWidth()-G.right, T=G.top, Bo=ch.getHeight()-G.bottom;
     var placed=[], els=[], set=labelSet(), pos={}, dots=[];
+    var nar=narrowOf(ch), rP=nar?7:10, rO=nar?5:7;   // dot radii (+1 border) matching buildScatter's symbolSize
     function px2(m){
       if(!(m.permaslug in pos)) pos[m.permaslug]=ch.convertToPixel({xAxisIndex:0,yAxisIndex:0},[m.price,m.score]);
       return pos[m.permaslug];
     }
     set.forEach(function(m){
       var p=px2(m); if(!p) return;
-      var r=paretoSet[m.permaslug]?10:7;
+      var r=paretoSet[m.permaslug]?rP:rO;
       dots.push({slug:m.permaslug,x:p[0]-r,y:p[1]-r,w:2*r,h:2*r});
     });
-    var BLOB=12;
+    var BLOB=nar?10:12;
     function blobbed(m){
       var a=pos[m.permaslug]; if(!a) return false;
       return dots.some(function(d){
@@ -9264,7 +9347,7 @@ __chartsReady( function(){
         return Math.sqrt(dx*dx+dy*dy) < BLOB;
       });
     }
-    var nar=narrowOf(ch), fs=nar?9:FS, pitch=nar?11:PITCH;   // phone widths: smaller labels fit more honest slots
+    var fs=nar?9:FS, pitch=nar?11:PITCH;   // phone widths: smaller labels fit more honest slots
     var ladder=[0]; for(var k=1;k<=8;k++){ladder.push(k*pitch);ladder.push(-k*pitch);}
     set.forEach(function(m){
       var pt=px2(m);
@@ -9273,7 +9356,7 @@ __chartsReady( function(){
       if(px<L-1||px>R+1||py<T-1||py>Bo+1) return;
       var isP=!!paretoSet[m.permaslug];
       var txt=m.name.split(' (')[0]+((isP||blobbed(m))?'  '+m.score.toFixed(1):'');
-      var w=txt.length*fs*0.62+6, h=nar?10:11, gap=(isP?11:8);
+      var w=txt.length*fs*0.62+6, h=nar?10:11, gap=nar?(isP?9:7):(isP?11:8);
       var sides=(px+gap+w>R)?[-1,1]:[1,-1];
       var best=null;
       for(var s=0;s<sides.length && !best;s++){
@@ -9290,7 +9373,7 @@ __chartsReady( function(){
       var cy=best.r.y+h/2;
       if(best.dy!==0){                        // displaced -> leader line back to the dot
         var ax=best.side>0?best.r.x-4:best.r.x+w+4;
-        var dx=ax-px, dy=cy-py, d=Math.sqrt(dx*dx+dy*dy)||1, rad=isP?10:7;
+        var dx=ax-px, dy=cy-py, d=Math.sqrt(dx*dx+dy*dy)||1, rad=isP?rP:rO;
         els.push({type:'line',z:2,silent:true,
           shape:{x1:px+dx/d*rad,y1:py+dy/d*rad,x2:ax,y2:cy},
           style:{stroke:col3(m.bloc),lineWidth:1,opacity:.55}});
@@ -9886,7 +9969,7 @@ __chartsReady( function(){
 
  function tip(extra){return Object.assign({confine:true,extraCssText:'white-space:normal;max-width:min(320px,calc(100vw - 32px));',
    backgroundColor:'#fff',borderColor:LINE,borderWidth:1,padding:[9,11],textStyle:{color:INK,fontFamily:SANS,fontSize:12}},extra);}
- function axL(extra){return Object.assign({fontSize:10.5,color:AX,fontFamily:MONO},extra||{});}
+ function axL(extra,big){return Object.assign({fontSize:big?11:10.5,color:AX,fontFamily:MONO},extra||{});}
  function put(id,html){var n=document.getElementById(id); if(n) n.innerHTML=html;}
  function set(id,v){var n=document.getElementById(id); if(n) n.textContent=v;}
  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
@@ -10007,6 +10090,7 @@ __chartsReady( function(){
  var charts=[];
  function mk(id){var e=document.getElementById(id);if(!e)return null;var ch=echarts.init(e);charts.push(ch);return ch;}
  function narrowOf(ch){return ch.getDom().clientWidth<440;}
+ function phoneView(){return window.innerWidth<640;}
  function watch(ch,render){
   var tmr;
   function relay(){ch.dispatchAction({type:'hideTip'});clearTimeout(tmr);tmr=setTimeout(function(){ch.resize();render();},120);}
@@ -10014,10 +10098,10 @@ __chartsReady( function(){
   if(window.ResizeObserver) new ResizeObserver(relay).observe(ch.getDom());
   if(document.fonts && document.fonts.ready) document.fonts.ready.then(function(){render();});
  }
- function xAxis(min,max,nar){
+ function xAxis(min,max,nar,big){
   var short=(max-min)<230*DAY;
   return {type:'time',min:min,max:max,axisLabel:axL({hideOverlap:true,formatter:function(v){var d=new Date(v);
-   return short?d.getUTCDate()+' '+MN[d.getUTCMonth()]:MN[d.getUTCMonth()]+" '"+String(d.getUTCFullYear()).slice(2);}}),
+   return short?d.getUTCDate()+' '+MN[d.getUTCMonth()]:MN[d.getUTCMonth()]+" '"+String(d.getUTCFullYear()).slice(2);}},big),
    axisLine:{lineStyle:{color:'#d8d2c6'}},splitLine:{lineStyle:{color:GRID}},splitNumber:nar?3:(short?6:8)};}
  function yName(txt,nar){return {name:txt,nameLocation:'middle',nameGap:nar?30:40,nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:nar?10:11}};}
  function endLbl(show,fmt,col){
@@ -10400,8 +10484,9 @@ __chartsReady( function(){
    var dots=ROWS.filter(function(r){return !r.hdr&&r.s.r90;}).map(function(r){return r.s.st90?{value:[r.s.r90.c,r.key],itemStyle:{color:'#fff',borderColor:INK,borderWidth:2}}:[r.s.r90.c,r.key];});
    ch.setOption({grid:{left:LW,right:nar?44:56,top:8,bottom:30},
     tooltip:tip({trigger:'axis',axisPointer:{type:'shadow',shadowStyle:{color:'rgba(24,26,31,.05)'}},formatter:tipY}),
-    xAxis:{type:'value',min:function(v){return Math.min(0,Math.floor(v.min/10)*10);},max:function(v){return Math.max(10,Math.ceil(v.max*1.12/10)*10);},
-     axisLabel:axL({formatter:function(v){return (v>0?'+':(v<0?MINUS:''))+Math.abs(v)+'%';}}),splitLine:{lineStyle:{color:GRID}},splitNumber:nar?4:7},
+    xAxis:{type:'value',min:function(v){var st=nar?30:10; return Math.min(0,Math.floor(v.min/st)*st);},max:function(v){return Math.max(10,Math.ceil(v.max*1.12/10)*10);},
+     interval:nar?30:undefined,
+     axisLabel:axL({hideOverlap:nar,formatter:function(v){return (v>0?'+':(v<0?MINUS:''))+Math.abs(v)+'%';}},nar),splitLine:{lineStyle:{color:GRID}},splitNumber:nar?4:7},
     yAxis:{type:'category',inverse:true,data:ROWS.map(function(r){return r.key;}),axisLine:{show:false,onZero:false},axisTick:{show:false},
      axisLabel:{interval:0,align:'left',margin:LW-4,formatter:function(v){var r=RK[v]; return r.hdr?'{h|'+r.lbl+'}':'{r|'+r.lbl+'}';},
       rich:{h:{fontFamily:SANS,fontWeight:600,fontSize:nar?11.5:12.5,color:INK},r:{fontFamily:SANS,fontSize:nar?10.5:11.5,color:'#454b57',padding:[0,0,0,10]}}}},
@@ -10455,7 +10540,7 @@ __chartsReady( function(){
  var RULE_OFF=0;
  GPUS.forEach(function(s){if(!s.daily) return; [[s.r12,YEAR_DAYS],[s.r90,TREND_DAYS]].forEach(function(x){if(x[0]) RULE_OFF=Math.max(RULE_OFF,Math.abs(x[0].from-(GL-x[1])));});});
  function renderTier(o){
-  var ch=o.ch, t=o.t, V=t.ss.filter(function(s){return onP[s.provider];}), w=ch.getWidth();
+  var ch=o.ch, t=o.t, V=t.ss.filter(function(s){return onP[s.provider];}), w=ch.getWidth(), ph=phoneView();
   if(!V.length){
    put('ix_a_k'+o.k,'');
    ch.setOption({title:{text:'No index from the selected providers',left:'center',top:'middle',textStyle:{color:DIM,fontFamily:SANS,fontSize:12,fontWeight:400}},
@@ -10475,15 +10560,15 @@ __chartsReady( function(){
   });
   var RL={color:'#a49d8f',width:1,type:[3,3]};
   series[0].markLine={silent:true,symbol:'none',animation:false,lineStyle:RL,
-   label:{show:true,position:'end',distance:2,color:DIM,fontFamily:MONO,fontSize:9.5},
+   label:{show:true,position:'end',distance:2,color:DIM,fontFamily:MONO,fontSize:ph?10.5:9.5},
    data:[{xAxis:tOf(GL-YEAR_DAYS),label:{formatter:'12m'}},{xAxis:tOf(GL-TREND_DAYS),label:{formatter:TREND_DAYS+'d'}}]};
   series=series.concat(nbSeries(nbc,IW));
-  var lab=w>=300, M={top:16,bottom:28}, key=document.getElementById('ix_a_k'+o.k);
+  var lab=w>=(ph?380:300), M={top:16,bottom:28}, key=document.getElementById('ix_a_k'+o.k);
   if(key) key.innerHTML=(lab?'':V.map(function(s){return '<span><i style="border-bottom-color:'+colA(s)+'"></i>'+esc(endName(s))+' <b>'+f2(s.lastv)+'</b> <em>'+pds(tOf(s.last))+'</em></span>';}).join(''))+(nbc.length?nbKey(nbc):'');
   ch.setOption({useUTC:true,grid:{left:38,right:lab?92:14,top:M.top,bottom:M.bottom},
    tooltip:tip({trigger:'axis',axisPointer:{type:'line',lineStyle:{color:DIM,type:'dashed'}},formatter:function(ps){return tipRows(ps,V,nbc);}}),
-   xAxis:Object.assign(xAxis(xMin,xMax,true),{splitNumber:narrowOf(ch)?2:3}),
-   yAxis:{type:'value',min:0,splitNumber:4,axisLabel:axL(),splitLine:{lineStyle:{color:GRID}}},
+   xAxis:Object.assign(xAxis(xMin,xMax,true,ph),{splitNumber:narrowOf(ch)?2:3}),
+   yAxis:{type:'value',min:0,splitNumber:4,axisLabel:axL(null,ph),splitLine:{lineStyle:{color:GRID}}},
    series:series},true);
   placeEnds(ch,'ix_a_e'+o.k,V.map(function(s){return {t:tOf(s.last),v:s.lastv,c:colA(s),tc:txtA(s),held:!s.daily,l1:endName(s),l2:f2(s.lastv)+' '+DOT+' '+pds(tOf(s.last))};}),xMax,M,
    function(){return bracket(ch,V);},lab,tOf(GL));
@@ -10619,7 +10704,7 @@ __chartsReady( function(){
   var maxAge=Math.max.apply(null,A2.map(function(L){return Math.max.apply(null,[lastPt(L.main).age].concat(L.thin.map(function(o){return o.pts.length?lastPt(o).age:0;})));}));
   var XMAX=Math.ceil((maxAge+4)/12)*12;
   function gridA2(nar){return {left:nar?44:56,right:nar?70:84,top:18,bottom:nar?44:46};}
-  function xAxA2(nar){return {type:'value',min:0,max:XMAX,interval:12,axisLabel:axL(),axisLine:{lineStyle:{color:'#d8d2c6'}},splitLine:{lineStyle:{color:GRID}},
+  function xAxA2(nar){return {type:'value',min:0,max:XMAX,interval:12,axisLabel:axL(null,nar),axisLine:{lineStyle:{color:'#d8d2c6'}},splitLine:{lineStyle:{color:GRID}},
    name:nar?'Months since launch, our estimate':'Months since launch (launch month our estimate)',nameLocation:'middle',nameGap:nar?26:28,nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:nar?10:11}};}
   function mon(q){return MN[q.k%12]+' '+Math.floor(q.k/12);}
   var pms=CHIPS.map(function(c){return c.launch_pm;}).filter(function(v,k,a){return a.indexOf(v)===k;});
@@ -10644,10 +10729,10 @@ __chartsReady( function(){
    });
    return rows.length?'<b>'+ax+' months after launch</b> <span style="color:#6a7180">(launch month our estimate), monthly mean, USD per GPU-hour</span>'+rows.join(''):'';
   }
-  function partSeries(o,nm,ls,z,endLabel){
+  function partSeries(o,nm,ls,z,endLabel,preLs){
    var a=o.pts.filter(pre), b=o.pts.filter(function(p){return !pre(p);}), out=[];
    if(a.length) out.push({name:nm+' before public launch',type:'line',z:z-1,animation:false,showSymbol:false,connectNulls:false,
-    lineStyle:Object.assign({},ls,{type:'dotted',opacity:.5}),itemStyle:{color:ls.color},data:lineData(b.length?a.concat([b[0]]):a),emphasis:{disabled:true}});
+    lineStyle:Object.assign({},ls,{type:'dotted',opacity:.5},preLs),itemStyle:{color:ls.color},data:lineData(b.length?a.concat([b[0]]):a),emphasis:{disabled:true}});
    if(b.length) out.push({name:nm,type:'line',z:z,animation:false,showSymbol:false,connectNulls:false,lineStyle:ls,itemStyle:{color:ls.color},data:lineData(b),emphasis:{disabled:true}});
    if(endLabel&&out.length) out[out.length-1].endLabel=endLabel;
    return out;
@@ -10667,7 +10752,7 @@ __chartsReady( function(){
    ch.setOption({grid:gridA2(nar),
     tooltip:tip({trigger:'axis',axisPointer:{type:'line',snap:true,lineStyle:{color:DIM,type:'dashed'}},formatter:tipA2}),
     xAxis:xAxA2(nar),
-    yAxis:Object.assign({type:'value',min:0,axisLabel:axL(),splitLine:{lineStyle:{color:GRID}}},yName(nar?'USD / GPU-hour':'USD per GPU-hour',nar)),
+    yAxis:Object.assign({type:'value',min:0,axisLabel:axL(null,nar),splitLine:{lineStyle:{color:GRID}}},yName(nar?'USD / GPU-hour':'USD per GPU-hour',nar)),
     series:series},true);
   }
   render(); watch(ch,render);
@@ -10777,14 +10862,15 @@ __chartsReady( function(){
     return rows.length?'<b>'+ax+' months after launch</b> <span style="color:#6a7180">(launch month our estimate); index = 100 at the base shown on each line; rent = monthly mean, USD per GPU-hour</span>'+rows.join(''):'';
    }
    function renderI(){
-    var nar=narrowOf(chI), series=[];
+    var nar=narrowOf(chI), series=[], WM=nar?1.9:2.6, WT=nar?1.1:1.3;
+    function dotted(w){return nar?{width:Math.min(w,1.2),cap:'butt'}:undefined;}
     IX.forEach(function(x){
      if(x.main){var st=STYLE[x.main.s.id];
-      series=series.concat(partSeries(x.main,x.L.c.chip+' '+x.main.s.provider,{color:st.c,width:2.6,type:st.d},5,
-       {show:true,distance:5,color:PTXT[x.main.s.provider]||INK,fontFamily:MONO,fontSize:nar?10.5:11,fontWeight:600,textBorderColor:'#fff',textBorderWidth:3,formatter:x.L.c.chip+' '+f1(lastPt(x.main).m)}));}
+      series=series.concat(partSeries(x.main,x.L.c.chip+' '+x.main.s.provider,{color:st.c,width:WM,type:st.d},5,
+       {show:true,distance:nar?8:5,color:PTXT[x.main.s.provider]||INK,fontFamily:MONO,fontSize:nar?10.5:11,fontWeight:600,textBorderColor:'#fff',textBorderWidth:3,formatter:x.L.c.chip+' '+f1(lastPt(x.main).m)},dotted(WM)));}
      x.thin.forEach(function(o){var c2=STYLE[o.s.id];
-      series=series.concat(partSeries(o,x.L.c.chip+' '+o.s.provider,{color:c2.c,width:1.3,type:c2.d,opacity:.9},4,
-       {show:true,distance:5,color:PTXT[o.s.provider]||INK,fontFamily:MONO,fontSize:nar?10:10.5,fontWeight:600,textBorderColor:'#fff',textBorderWidth:3,formatter:o.s.provider+' '+f1(lastPt(o).m)}));});
+      series=series.concat(partSeries(o,x.L.c.chip+' '+o.s.provider,{color:c2.c,width:WT,type:c2.d,opacity:.9},4,
+       {show:true,distance:nar?8:5,color:PTXT[o.s.provider]||INK,fontFamily:MONO,fontSize:10.5,fontWeight:600,textBorderColor:'#fff',textBorderWidth:3,formatter:o.s.provider+' '+f1(lastPt(o).m)},dotted(WT)));});
     });
     series.forEach(function(sr){if(sr.endLabel) sr.labelLayout=SHIFT;});
     var BD=[];
@@ -10797,7 +10883,7 @@ __chartsReady( function(){
     chI.setOption({grid:gridA2(nar),
      tooltip:tip({trigger:'axis',axisPointer:{type:'line',snap:true,lineStyle:{color:DIM,type:'dashed'}},formatter:tipIx}),
      xAxis:xAxA2(nar),
-     yAxis:Object.assign({type:'value',min:Y.min,max:Y.max,interval:Y.st,axisLabel:axL(),splitLine:{lineStyle:{color:GRID}}},yName('Index, base = 100',nar)),
+     yAxis:Object.assign({type:'value',min:Y.min,max:Y.max,interval:Y.st,axisLabel:axL(null,nar),splitLine:{lineStyle:{color:GRID}}},yName('Index, base = 100',nar)),
      series:series},true);
    }
    var segEl=document.getElementById('ix_a2i_base'), selEl=document.getElementById('ix_a2i_mon');
@@ -11036,7 +11122,7 @@ __chartsReady( function(){
    return any?h:'';
   }
   function renderP(o){
-   var ch=o.ch, P=o.P, w=ch.getWidth(), lab=w>=300, M={top:16,bottom:28}, key=document.getElementById('ix_a3_k'+o.k);
+   var ch=o.ch, P=o.P, w=ch.getWidth(), ph=phoneView(), lab=w>=(ph?380:300), M={top:16,bottom:28}, key=document.getElementById('ix_a3_k'+o.k);
    if(!P.L.length){
     if(key) key.innerHTML='';
     ch.setOption({title:{text:'No provider has a daily index for both chips',left:'center',top:'middle',textStyle:{color:DIM,fontFamily:SANS,fontSize:12,fontWeight:400}},
@@ -11060,8 +11146,8 @@ __chartsReady( function(){
     series.push(ln); main.push(ln);
    });
    var ml=[{yAxis:0,lineStyle:{color:INK,width:1,type:'solid'},label:{show:false}},
-    {xAxis:tOf(GL-YEAR_DAYS),lineStyle:RLS,label:{show:true,position:'end',distance:2,formatter:'12m',color:DIM,fontFamily:MONO,fontSize:9.5}},
-    {xAxis:tOf(GL-TREND_DAYS),lineStyle:RLS,label:{show:true,position:'end',distance:2,formatter:TREND_DAYS+'d',color:DIM,fontFamily:MONO,fontSize:9.5}}];
+    {xAxis:tOf(GL-YEAR_DAYS),lineStyle:RLS,label:{show:true,position:'end',distance:2,formatter:'12m',color:DIM,fontFamily:MONO,fontSize:ph?10.5:9.5}},
+    {xAxis:tOf(GL-TREND_DAYS),lineStyle:RLS,label:{show:true,position:'end',distance:2,formatter:TREND_DAYS+'d',color:DIM,fontFamily:MONO,fontSize:ph?10.5:9.5}}];
    if(P.hw){
     ml.push({yAxis:P.hw.p,lineStyle:{color:HWC,width:1.5,type:[6,4]},label:{show:false}});
     if(P.hw.hi>P.hw.lo) [P.hw.lo,P.hw.hi].forEach(function(v){ml.push({yAxis:v,lineStyle:{color:HWC,width:1,type:[1,3],opacity:.8},label:{show:false}});});
@@ -11070,8 +11156,8 @@ __chartsReady( function(){
    if(key) key.innerHTML=lab?'':P.L.map(function(L){return '<span><i style="border-bottom-color:'+PCOL[L.p]+'"></i>'+esc(L.p)+' <b>'+pct(L.lp)+'</b> <em>'+pds(tOf(L.last))+'</em></span>';}).join('')+(P.hw?'<span><i class="hwl"></i>'+(isPrice()?'hardware':'all-in capex')+' <b>'+pct(P.hw.p)+'</b></span>':'');
    ch.setOption({useUTC:true,grid:{left:50,right:lab?92:14,top:M.top,bottom:M.bottom},
     tooltip:tip({trigger:'axis',axisPointer:{type:'line',lineStyle:{color:DIM,type:'dashed'}},formatter:function(ps){return tipP(ps,P);}}),
-    xAxis:Object.assign(xAxis(tOf(IW),xMax,true),{splitNumber:narrowOf(ch)?2:3}),
-    yAxis:{type:'value',min:Y.min,max:Y.max,interval:Y.st,axisLabel:axL({formatter:function(v){return (v>0?'+':(v<0?MINUS:''))+Math.abs(v)+'%';}}),splitLine:{lineStyle:{color:GRID}}},
+    xAxis:Object.assign(xAxis(tOf(IW),xMax,true,ph),{splitNumber:narrowOf(ch)?2:3}),
+    yAxis:{type:'value',min:Y.min,max:Y.max,interval:Y.st,axisLabel:axL({formatter:function(v){return (v>0?'+':(v<0?MINUS:''))+Math.abs(v)+'%';}},ph),splitLine:{lineStyle:{color:GRID}}},
     series:series},true);
    placeEnds(ch,'ix_a3_e'+o.k,P.L.map(function(L){return {t:tOf(L.last),v:L.lp,c:PCOL[L.p]||INK,tc:PTXT[L.p]||INK,l1:L.p,l2:pct(L.lp)};})
     .concat(P.hw?[{t:xMax,v:P.hw.p,c:HWC,tc:HWC,l1:isPrice()?'hardware':'all-in',l2:pct(P.hw.p)}]:[]),xMax,M,null,lab);
@@ -11217,7 +11303,7 @@ __chartsReady( function(){
    put('ix_a3_psub','One bar per daily index: its chip&rsquo;s capex per GPU on the basis above over a year of its latest 7-day median rent at the chosen utilisation'+(pwUsed()?', less power at '+kwhTxt()+' for each rented hour, our estimate':'')+'. Colour = provider. The axis stays fixed when the utilisation or the capex basis changes'+(MX>axEnd(PFIX)?'; this custom share needs a longer axis, so it widens':'')+'.');
    chP.setOption({grid:{left:LW,right:nar?40:52,top:8,bottom:44},
     tooltip:tip({trigger:'axis',axisPointer:{type:'shadow',shadowStyle:{color:'rgba(24,26,31,.05)'}},formatter:tipPB}),
-    xAxis:{type:'value',min:0,max:MX,axisLabel:axL(),splitLine:{lineStyle:{color:GRID}},
+    xAxis:{type:'value',min:0,max:MX,axisLabel:axL(null,nar),splitLine:{lineStyle:{color:GRID}},
      name:ip?(nar?'Years, hardware price alone':'Years to earn back the hardware price alone'):(nar?'Years, all-in capex, our estimate':'Years to earn back all-in capex, our estimate'),nameLocation:'middle',nameGap:26,nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:nar?10:11}},
     yAxis:{type:'category',inverse:true,data:PB.map(function(r){return r.key;}),axisLine:{show:false},axisTick:{show:false},
      axisLabel:{interval:0,inside:nar,align:'left',margin:nar?0:LW-4,formatter:function(v){var r=PBK[v]; return r.hdr?'{h|'+hdrLbl(r)+'}':'{r|'+r.lbl+'}';},
@@ -11429,8 +11515,8 @@ __chartsReady( function(){
    });
    ch.setOption({useUTC:true,grid:{left:nar?42:56,right:nar?28:168,top:18,bottom:nar?36:40},
     tooltip:tip({trigger:'axis',axisPointer:{type:'line',lineStyle:{color:DIM,type:'dashed'}},formatter:tipB}),
-    xAxis:xAxis(xMin,xMax,nar),
-    yAxis:Object.assign({type:'value',min:0,axisLabel:axL(),splitLine:{lineStyle:{color:GRID}}},yName(nar?'USD / 1M tokens':'USD per 1M tokens',nar)),
+    xAxis:xAxis(xMin,xMax,nar,nar),
+    yAxis:Object.assign({type:'value',min:0,axisLabel:axL(null,nar),splitLine:{lineStyle:{color:GRID}}},yName(nar?'USD / 1M tokens':'USD per 1M tokens',nar)),
     series:series},true);
   }
   render(); watch(ch,render);
@@ -11608,8 +11694,8 @@ __chartsReady( function(){
    var M={top:18,bottom:nar?36:40};
    ch.setOption({useUTC:true,grid:{left:nar?42:56,right:nar?28:184,top:M.top,bottom:M.bottom},
     tooltip:tip({trigger:'axis',axisPointer:{type:'line',lineStyle:{color:DIM,type:'dashed'}},formatter:tipC}),
-    xAxis:xAxis(tOf(base),xMax,nar),
-    yAxis:Object.assign({type:'value',scale:true,axisLabel:axL(),splitLine:{lineStyle:{color:GRID}}},yName(nar?'Base day = 100':'Level, base day = 100',nar)),
+    xAxis:xAxis(tOf(base),xMax,nar,nar),
+    yAxis:Object.assign({type:'value',scale:true,axisLabel:axL(null,nar),splitLine:{lineStyle:{color:GRID}}},yName(nar?'Base day = 100':'Level, base day = 100',nar)),
     series:series},true);
    var items=[];
    if(famLast>=0) items.push({t:tOf(famLast),v:F[famLast],c:FAMC,l1:R.fam.name,l2:f1(F[famLast])+' '+DOT+' '+pds(tOf(famLast))});
@@ -12072,7 +12158,9 @@ __chartsReady( function(){
   function tipRent(d){return '<b>'+esc(d.r.s.short)+'</b> <span style="'+DIMS+'">7-day median of '+pdt(tOf(d.r.i))+'</span><div style="margin-top:4px">Rent <b>'+money(d.r.v)+'</b> per GPU-hour. A mark right of this line earns it at '+pc(st.ut)+' use.</div>';}
   function renderD(){
    if(!chD) return;
-   var nar=narrowOf(chD), LW=nar?120:196, RM=22, U=st.ut;
+   var nar=narrowOf(chD), LW=nar?124:196, RM=nar?10:22, U=st.ut;
+   var XLO=nar?Math.max(XMIN,minOf(XV)/1.5):XMIN, XHI=nar?Math.min(XMAX,maxOf(XV)*1.5):XMAX;
+   var SLOTS=[[0,1],[0,-1],[1,1],[1,-1],[2,1],[2,-1]];
    var dots=[], bands=[], wk=[], txt=[], rl=[];
    ROWS.forEach(function(r){
     if(r.k==='text'){txt.push({i:r.i,t:nar?r.n:r.t}); return;}
@@ -12084,16 +12172,16 @@ __chartsReady( function(){
    });
    var reps=[];
    REP.forEach(function(x){var row=ROWS.filter(function(r){return r.k==='open'&&r.chip===x.t.chip&&r.m.key===x.t.model;})[0]; if(row) reps.push({x:x,i:row.i,v:x.t.usd_per_gpu_hour});});
-   var plotW=Math.max(60,chD.getWidth()-LW-RM), dec=Math.log10(XMAX/XMIN);
-   function px(x){return Math.log10(Math.min(XMAX,Math.max(XMIN,x))/XMIN)/dec*plotW;}
+   var plotW=Math.max(60,chD.getWidth()-LW-RM), dec=Math.log10(XHI/XLO);
+   function px(x){return Math.log10(Math.min(XHI,Math.max(XLO,x))/XLO)/dec*plotW;}
    DCH.forEach(function(c){
     var cr=chipRows(c.chip); if(!cr.length) return;
     var placed=[], drawnX=[], hd=cr[0].i, last=cr[cr.length-1].i;
     rents(c.chip).map(function(r){return {r:r,x:r.v};}).sort(function(a,b){return a.x-b.x;}).forEach(function(d){
      d.txt=d.r.p+' '+money(d.x);
-     var tw=d.txt.length*6.2+4, p=px(d.x), pick=null, best=null;
+     var tw=d.txt.length*(nar?6.5:6.2)+4, p=px(d.x), pick=null, best=null;
      d.dash=drawnX.some(function(q){return Math.abs(q-p)<3;}); drawnX.push(p);
-     [[0,1],[0,-1],[1,1],[1,-1],[2,1],[2,-1]].forEach(function(o){
+     (nar?SLOTS.slice(0,4):SLOTS).forEach(function(o){
       if(pick) return;
       var a=Math.max(0,Math.min(o[1]>0?p+4:p-4-tw,plotW-tw)), b=a+tw;
       var n=placed.filter(function(q){return q.lv===o[0]&&b>q.a&&a<q.b;}).length;
@@ -12110,7 +12198,7 @@ __chartsReady( function(){
      tooltip:{formatter:function(p){return tipRent(rl[p.dataIndex]);}}},
     {type:'custom',name:'rent labels',z:7,clip:true,silent:true,data:rl.map(function(d){return [d.x,d.hd];}),encode:{x:0,y:1},
      renderItem:function(p,api){var d=rl[p.dataIndex], a=api.coord([d.x,d.hd]), hb=api.size([0,1])[1];
-      return {type:'text',style:{x:a[0]+d.off,y:a[1]-hb/2+1+d.lv*11,text:d.txt,fill:PTXT[d.r.p]||INK,font:'600 10px '+MONO,align:'left',verticalAlign:'top',stroke:'#fff',lineWidth:3}};}},
+      return {type:'text',style:{x:a[0]+d.off,y:a[1]-hb/2+1+d.lv*11,text:d.txt,fill:PTXT[d.r.p]||INK,font:'600 '+(nar?10.5:10)+'px '+MONO,align:'left',verticalAlign:'top',stroke:'#fff',lineWidth:3}};}},
     {type:'custom',name:'estimate',z:3,clip:true,data:bands.map(function(d){return [d.a,d.b,d.r.i];}),encode:{x:[0,1],y:2},
      renderItem:function(p,api){
       var d=bands[p.dataIndex], a=api.coord([d.a,d.r.i]), b=api.coord([d.b,d.r.i]), h=11, kids=[
@@ -12142,15 +12230,15 @@ __chartsReady( function(){
       return {type:'group',children:kids};
      },
      tooltip:{formatter:function(p){return tipRep(reps[p.dataIndex].x);}}},
-    {type:'custom',name:'notes',z:4,silent:true,clip:true,data:txt.map(function(d){return [XMIN,d.i];}),encode:{x:0,y:1},
-     renderItem:function(p,api){var d=txt[p.dataIndex], a=api.coord([XMIN,d.i]);
-      return {type:'text',style:{x:a[0]+4,y:a[1],text:d.t,fill:'#8a909b',font:'italic 10.5px '+SANS,align:'left',verticalAlign:'middle',stroke:'#fff',lineWidth:3}};}}
+    {type:'custom',name:'notes',z:4,silent:true,clip:true,data:txt.map(function(d){return [XLO,d.i];}),encode:{x:0,y:1},
+     renderItem:function(p,api){var d=txt[p.dataIndex], a=api.coord([XLO,d.i]);
+      return {type:'text',style:{x:a[0]+4,y:a[1],text:d.t,fill:nar?'#6a7180':'#8a909b',font:'italic '+(nar?11:10.5)+'px '+SANS,align:'left',verticalAlign:'middle',stroke:'#fff',lineWidth:3}};}}
    ];
    chD.setOption({grid:{left:LW,right:RM,top:4,bottom:44},
     tooltip:tip({trigger:'item'}),
-    xAxis:{type:'log',logBase:10,min:XMIN,max:XMAX,axisLabel:axL({formatter:function(v){return '$'+v;}}),splitLine:{lineStyle:{color:GRID}},
+    xAxis:{type:'log',logBase:10,min:XLO,max:XHI,axisLabel:axL({formatter:function(v){var l=Math.log10(v); return nar&&Math.abs(l-Math.round(l))>1e-6?'':'$'+v;}},nar),splitLine:{lineStyle:{color:GRID}},
      minorTick:{show:true,splitNumber:9},minorSplitLine:{show:true,lineStyle:{color:'#f5f1e8'}},
-     name:nar?'USD per GPU-hour at '+pc(U)+' use, log':'Revenue per GPU-hour at '+pc(U)+' use, USD (log scale)',nameLocation:'middle',nameGap:28,nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:nar?10:11}},
+     name:nar?'USD per GPU-hour at '+pc(U)+' use, log':'Revenue per GPU-hour at '+pc(U)+' use, USD (log scale)',nameLocation:'middle',nameGap:28,nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:nar?10.5:11}},
     yAxis:{type:'category',inverse:true,data:ROWS.map(function(r){return String(r.i);}),axisLine:{show:false},axisTick:{show:false},splitLine:{show:false},
      axisLabel:{interval:0,align:'left',margin:LW-4,width:LW-8,overflow:'truncate',formatter:function(v){var r=ROWS[+v];
        if(r.k==='chip') return '{h|'+r.chip+'}';
@@ -12158,9 +12246,9 @@ __chartsReady( function(){
        if(r.k==='text') return '';
        if(r.k==='band') return '{e|'+r.m.label+(nar?' (est.)':'')+'}';
        return (r.m.in_rule?'{r|':'{o|')+r.m.label+(r.m.ix&&r.m.ix.stand_in?' ('+r.m.ix.stand_in+' runs)':'')+'}';},
-      rich:{h:{fontFamily:SANS,fontWeight:600,fontSize:nar?12:13,color:INK},g:{fontFamily:MONO,fontSize:nar?9.5:10,color:'#6a7180',padding:[0,0,0,4]},
-       r:{fontFamily:SANS,fontSize:nar?10.5:11.5,color:'#2a2f38',padding:[0,0,0,10]},o:{fontFamily:SANS,fontSize:nar?10.5:11.5,color:'#7a808c',padding:[0,0,0,10]},
-       e:{fontFamily:SANS,fontStyle:'italic',fontSize:nar?10.5:11.5,color:'#4a505c',padding:[0,0,0,10]}}}},
+      rich:{h:{fontFamily:SANS,fontWeight:600,fontSize:nar?12:13,color:INK},g:{fontFamily:MONO,fontSize:nar?10.5:10,color:'#6a7180',padding:[0,0,0,4]},
+       r:{fontFamily:SANS,fontSize:nar?11:11.5,color:'#2a2f38',padding:[0,0,0,nar?4:10]},o:{fontFamily:SANS,fontSize:nar?11:11.5,color:'#7a808c',padding:[0,0,0,nar?4:10]},
+       e:{fontFamily:SANS,fontStyle:'italic',fontSize:nar?11:11.5,color:'#4a505c',padding:[0,0,0,nar?4:10]}}}},
     series:series},true);
   }
   function renderPsub(){
@@ -12245,20 +12333,20 @@ __chartsReady( function(){
   RLO=Math.pow(10,Math.floor(Math.log10(Math.min(RLO,0.9)))); RHI=Math.pow(10,Math.ceil(Math.log10(Math.max(RHI,1.1))));
   function renderR(){
    if(!chR) return;
-   var nar=narrowOf(chR), LW=nar?118:170, pts=[], defs=[];
+   var nar=narrowOf(chR), LW=nar?104:170, pts=[], defs=[];
    RROWS.forEach(function(r,i){robOf(r.m,RCH).forEach(function(q){(q.s.def?defs:pts).push({v:[q.x,i],q:q,m:r.m});});});
    function tp(d){return '<b>'+esc(d.m.label)+'</b> on the '+esc(RCH)+' <span style="'+DIMS+'">our estimate</span><div style="margin-top:4px">'+setTxt(d.q.s)+', '+pc(st.ut)+' use: slow end <b>'+x2(d.q.x)+'</b> the rent ('+lbl(d.q.p)+' throughput)</div>';}
-   chR.setOption({grid:{left:LW,right:nar?12:18,top:6,bottom:42},tooltip:tip({trigger:'item'}),
-    xAxis:{type:'log',logBase:10,min:RLO,max:RHI,axisLabel:axL({formatter:function(v){return 'x'+v;}}),splitLine:{lineStyle:{color:GRID}},
+   chR.setOption({grid:{left:LW,right:nar?10:18,top:6,bottom:42},tooltip:tip({trigger:'item'}),
+    xAxis:{type:'log',logBase:10,min:RLO,max:RHI,axisLabel:axL({formatter:function(v){return 'x'+v;}},nar),splitLine:{lineStyle:{color:GRID}},
      minorTick:{show:true,splitNumber:9},minorSplitLine:{show:true,lineStyle:{color:'#f5f1e8'}},
-     name:nar?'Slow end, times the rent (log)':'Slow end of our estimate, times the rent (log scale)',nameLocation:'middle',nameGap:26,nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:nar?10:11}},
+     name:nar?'Slow end, times the rent (log)':'Slow end of our estimate, times the rent (log scale)',nameLocation:'middle',nameGap:26,nameTextStyle:{color:DIM,fontFamily:MONO,fontSize:nar?10.5:11}},
     yAxis:{type:'category',inverse:true,data:RROWS.map(function(r,i){return String(i);}),axisLine:{show:false},axisTick:{show:false},
      axisLabel:{interval:0,align:'left',margin:LW-4,formatter:function(v){var l=lineOf(RROWS[+v].m,RCH); return '{n|'+l.m.label+'}\n{v|middle '+x2(l.mid)+' '+DOT+' '+l.n+' of '+l.N+' earn it}';},
-      rich:{n:{fontFamily:SANS,fontSize:nar?11:11.5,color:INK,fontWeight:600,fontStyle:'italic',lineHeight:15},v:{fontFamily:MONO,fontSize:10,color:'#6a7180',lineHeight:13}}}},
-    series:[{type:'scatter',name:'settings',z:3,symbolSize:8,itemStyle:{color:'rgba(106,113,128,.5)',borderColor:'#fff',borderWidth:1},data:pts.map(function(d){return d.v;}),
+      rich:{n:{fontFamily:SANS,fontSize:nar?11:11.5,color:INK,fontWeight:600,fontStyle:'italic',lineHeight:15},v:{fontFamily:MONO,fontSize:nar?10.5:10,color:'#6a7180',lineHeight:13}}}},
+    series:[{type:'scatter',name:'settings',z:3,symbolSize:nar?6:8,itemStyle:{color:'rgba(106,113,128,.5)',borderColor:'#fff',borderWidth:1},data:pts.map(function(d){return d.v;}),
       tooltip:{formatter:function(p){return tp(pts[p.dataIndex]);}},
       markLine:{silent:true,symbol:'none',animation:false,lineStyle:{color:INK,width:1.2,type:'solid'},label:{show:!nar,formatter:'pays the rent',position:'insideEndTop',color:INK,fontFamily:MONO,fontSize:10},data:[{xAxis:1}]}},
-     {type:'scatter',name:'chart setting',z:5,symbol:'diamond',symbolSize:12,itemStyle:{color:'#fff',borderColor:INK,borderWidth:1.6,borderType:'dashed'},data:defs.map(function(d){return d.v;}),
+     {type:'scatter',name:'chart setting',z:5,symbol:'diamond',symbolSize:nar?9:12,itemStyle:{color:'#fff',borderColor:INK,borderWidth:1.6,borderType:'dashed'},data:defs.map(function(d){return d.v;}),
       tooltip:{formatter:function(p){return tp(defs[p.dataIndex]);}}}]},true);
   }
   function renderRT(){
@@ -12483,13 +12571,22 @@ function shareOf(obj,i){const tot=blocs.reduce((s,b)=>s+ +obj[b][i],0);return b=
 const AX='#6a7180', GRID='#efeae0';
 const FMONO="'IBM Plex Mono',Consolas,Menlo,monospace", FSANS="'IBM Plex Sans','Segoe UI',-apple-system,sans-serif";
 const narrowView=()=>window.innerWidth<640;   // phone width: tighter chart margins, no side value labels
+const legendH=(names,fs)=>{const w=window.innerWidth-60;let rows=1,x=0;
+  names.forEach(n=>{const e=17+String(n).length*0.6*(fs||11)+8;if(x&&x+e>w){rows++;x=0;}x+=e;});
+  return 22*rows-8;};
+const PHONE_SLIDER={bottom:6,height:28,handleSize:'140%',textStyle:{color:'#9aa0ab',fontSize:10.5,fontFamily:FMONO}}, PHONE_INSIDE={moveOnMouseMove:false,preventDefaultMouseMove:false};
+const phoneMarks=opt=>{
+  if(narrowView()) (opt.series||[]).forEach(s=>{const l=s.markLine&&s.markLine.label;if(l&&l.fontSize<10.5) l.fontSize=10.5;});
+  return opt;
+};
+const baseLab=b0=>narrowView()? 'base = 100\nwk '+xlab[b0] : 'base = 100 · wk '+xlab[b0];
 function frame(series,fmtY,isPct,stacked){
   const _pl=(D.partialWeeks||[]).map(w=>xlab[weeks.indexOf(w)]).filter(Boolean);
   const _all=_pl.length?series.concat([{name:'partial wk',type:'line',data:[],color:'#b9491f',silent:true,markLine:{silent:true,symbol:'none',lineStyle:{color:'#b9491f',type:'dashed',width:1.2,opacity:.65},label:{show:true,formatter:'partial',position:'end',align:'right',color:'#b9491f',fontFamily:'IBM Plex Mono',fontSize:9.5},data:_pl.map(x=>({xAxis:x}))}}]):series;
   return{
   color:_all.map(s=>s.color),
-  grid:{left:62,right:22,top:_pl.length?30:16,bottom:80},
-  legend:{type:'scroll',bottom:44,textStyle:{fontSize:11,color:AX,fontFamily:FMONO},icon:'roundRect',itemWidth:12,itemHeight:8},
+  grid:{left:62,right:22,top:_pl.length?30:16,bottom:narrowView()?65+legendH(_all.map(s=>s.name)):80},   // phone: 40 under the legend + its rows + 4 + 21 for the x labels
+  legend:Object.assign({type:'scroll',bottom:44,textStyle:{fontSize:11,color:AX,fontFamily:FMONO},icon:'roundRect',itemWidth:12,itemHeight:8},narrowView()?{type:'plain',bottom:40,itemGap:8}:null),
   tooltip:{trigger:'axis',confine:true,backgroundColor:'#fff',borderColor:'#e7e1d6',borderWidth:1,padding:[10,12],
     textStyle:{color:'#181a1f',fontSize:12,fontFamily:FSANS},
     extraCssText:'box-shadow:0 14px 38px -16px rgba(24,26,31,.35);border-radius:10px',
@@ -12500,14 +12597,14 @@ function frame(series,fmtY,isPct,stacked){
       return h+it.map(p=>`<div style="display:flex;justify-content:space-between;gap:22px;line-height:1.7"><span>${p.marker}${p.seriesName}</span><b style="font-family:'IBM Plex Mono';font-variant-numeric:tabular-nums">${fmtY(p.value)}</b></div>`).join('');}},
   xAxis:{type:'category',data:xlab,boundaryGap:stacked,axisLabel:{fontSize:10.5,color:AX,fontFamily:FMONO,interval:narrowView()?Math.ceil(N/3):Math.floor(N/11),hideOverlap:true},axisLine:{lineStyle:{color:'#d8d2c6'}},axisTick:{show:false}},
   yAxis:{type:'value',min:0,max:isPct?100:null,axisLabel:{fontSize:10.5,color:AX,fontFamily:FMONO,formatter:isPct?'{value}%':fmtY},splitLine:{lineStyle:{color:GRID}}},
-  dataZoom:[{type:'slider',bottom:12,height:16,start:0,end:100,borderColor:'#e7e1d6',fillerColor:'rgba(31,99,214,.10)',
-    handleStyle:{color:'#1f63d6'},textStyle:{color:'#9aa0ab',fontSize:10,fontFamily:FMONO}},{type:'inside'}],
+  dataZoom:[Object.assign({type:'slider',bottom:12,height:16,start:0,end:100,borderColor:'#e7e1d6',fillerColor:'rgba(31,99,214,.10)',
+    handleStyle:{color:'#1f63d6'},textStyle:{color:'#9aa0ab',fontSize:10,fontFamily:FMONO}},narrowView()?PHONE_SLIDER:null),Object.assign({type:'inside'},narrowView()?PHONE_INSIDE:null)],
   series:_all};
 }
 
 const OSPLIT_NAME='others split, est.', OSPLIT_COL='#8a909c';
 function othersSplitMark(opt){
-  if(!OSPLIT) return opt;
+  if(!OSPLIT) return phoneMarks(opt);
   const x=xlab[weeks.indexOf(OSPLIT.start)];
   opt.series.push({name:OSPLIT_NAME,type:'line',data:[],color:OSPLIT_COL,silent:true,markLine:{silent:true,symbol:'none',
     lineStyle:{color:OSPLIT_COL,type:'dashed',width:1.2,opacity:.8},
@@ -12515,7 +12612,7 @@ function othersSplitMark(opt){
   if(opt.color) opt.color.push(OSPLIT_COL);
   opt.grid.top=Math.max(opt.grid.top||0,30);   // room above the plot for the label, as frame() gives the partial-week label
   opt.legend=Object.assign({},opt.legend,{data:opt.series.filter(s=>s.name!==OSPLIT_NAME).map(s=>s.name)});   // no legend entry for the marker
-  return opt;
+  return phoneMarks(opt);
 }
 
 function endpointLabels(opt,fmt){
@@ -12575,7 +12672,7 @@ function renderP(){
   const opt=frame(series,fy,false,false);
   opt.dataZoom[0].start=zP.start;opt.dataZoom[0].end=zP.end;
   if(pIndexed) series[0].markLine={silent:true,symbol:'none',lineStyle:{color:'#c9cdd4',type:'dashed'},
-    data:[{yAxis:100}],label:{formatter:'base = 100 · wk '+xlab[b0],color:'#9aa0ab',fontFamily:FMONO,fontSize:10,position:'insideEndTop'}};
+    data:[{yAxis:100}],label:{formatter:baseLab(b0),color:'#9aa0ab',fontFamily:FMONO,fontSize:narrowView()?10.5:10,position:'insideEndTop'}};
   endpointLabels(opt,fy);
   othersSplitMark(opt);
   cP.setOption(opt,true);
@@ -12586,10 +12683,11 @@ const IDX_BOT=44;   // room under each plot for the x labels and the legend; the
 const stackedView=()=>window.matchMedia('(max-width:1100px)').matches;   // same breakpoint as .idxgrid
 const idxMargins=()=>{const nar=narrowView();return {left:nar?54:62,rightL:idxTwo?(nar?70:134):(nar?18:74),rightR:nar?18:74};};   // plot margins: left chart (with or without the price axis) and right chart
 const idxShell=opt=>{
-  opt.dataZoom=[{type:'inside',start:zI.start,end:zI.end}];
-  opt.grid.bottom=IDX_BOT;
+  const nar=narrowView();
+  opt.dataZoom=[Object.assign({type:'inside',start:zI.start,end:zI.end},nar?PHONE_INSIDE:null)];
+  opt.grid.bottom=nar? 29+legendH(opt.series.map(s=>s.name)) : IDX_BOT;   // phone: the legend wraps (see frame): 4 under it + its rows + 4 + 21 for the x labels
   opt.legend=Object.assign({},opt.legend,{bottom:4});
-  return opt;
+  return phoneMarks(opt);
 };
 const PRICEREF=/*PRICEREF_START*/{"tech":[{"name":"DNA sequencing","kind":"service","x":0.4318,"from":2001,"to":2013,"phase":{"from":2007,"to":2011,"x":0.1788}},{"name":"Hard disk","kind":"part","x":0.5624,"from":1988,"to":2007},{"name":"Transistor","kind":"part","x":0.6076,"from":1968,"to":2005},{"name":"DRAM","kind":"part","x":0.64,"from":1971,"to":2007}],"techTypical":0.9426,"techN":66}/*PRICEREF_END*/;
 const YOY_WIN=4,YOY_LAG=52,YOY_TREND=8,YOY_FLAT=0.02;   // weeks in each window, lag in weeks, weeks back for the trend read, band around 1x (or around the earlier read) that counts as flat
@@ -12625,14 +12723,14 @@ function renderIdxL(){
   const opt=frame(series,x=>(+x).toFixed(0),false,false);
   idxShell(opt);
   series[0].markLine={silent:true,symbol:'none',lineStyle:{color:'#c9cdd4',type:'dashed'},
-    data:[{yAxis:100}],label:{formatter:'base = 100 · wk '+xlab[b0],color:'#9aa0ab',fontFamily:FMONO,fontSize:10,position:'insideEndTop'}};
+    data:[{yAxis:100}],label:{formatter:baseLab(b0),color:'#9aa0ab',fontFamily:FMONO,fontSize:narrowView()?10.5:10,position:'insideEndTop'}};
   endpointLabels(opt,x=>(+x).toFixed(0));
   if(idxTwo){   // price on its own right axis (still indexed to 100); the right axis sits clear of the endpoint labels
     const nar=narrowView(), PC='#e0701a';
     series[2].name='Price $/Mtok (right axis)';
     series[2].yAxisIndex=1;
     series[2].markLine={silent:true,symbol:'none',lineStyle:{color:'#f1d3b9',type:'dashed'},
-      data:[{yAxis:100}],label:{formatter:'base = 100 (right axis)',color:'#d99a66',fontFamily:FMONO,fontSize:10,position:'insideStartTop'}};
+      data:[{yAxis:100}],label:{formatter:'base = 100 (right axis)',color:'#d99a66',fontFamily:FMONO,fontSize:nar?10.5:10,position:'insideStartTop'}};
     opt.yAxis=[opt.yAxis,{type:'value',position:'right',scale:true,offset:nar?0:56,
       axisLine:{show:false},axisTick:{show:false},splitLine:{show:false},
       axisLabel:{fontSize:10.5,color:PC,fontFamily:FMONO,formatter:x=>(+x).toFixed(0)},
@@ -12686,7 +12784,7 @@ function idxReadLine(m,ts){
 }
 const REF_INK='#7d828c';
 const lc=n=>/^[A-Z]{2}/.test(n)? n : n.charAt(0).toLowerCase()+n.slice(1);   // 'Hard disk' -> 'hard disk'; DRAM and DNA keep their capitals
-const refItem=(y,txt,pos)=>({yAxis:y,lineStyle:{color:'#b9bec7',type:[2,3],width:1},label:{formatter:txt,color:REF_INK,fontFamily:FMONO,fontSize:9.5,position:pos}});
+const refItem=(y,txt,pos)=>({yAxis:y,lineStyle:{color:'#b9bec7',type:[2,3],width:1},label:{formatter:txt,color:REF_INK,fontFamily:FMONO,fontSize:narrowView()?10.5:9.5,position:pos}});
 function techRefLines(){
   if(typeof PRICEREF==='undefined') return [];
   const out=[refItem(PRICEREF.techTypical,'typical of '+PRICEREF.techN+' technologies '+yoyFmt(PRICEREF.techTypical),'insideStartBottom')];
@@ -12703,7 +12801,7 @@ function techRefBand(){
   if(!c.length) return undefined;
   const lo=Math.min(...c.map(x=>x.x)), hi=Math.max(...c.map(x=>x.x));
   return {silent:true,itemStyle:{color:'rgba(125,130,140,.12)'},
-    label:{formatter:'parts: '+c.map(x=>lc(x.name)).join(', ')+(narrowView()? '' : ' '+yoyFmt(lo)+' to '+yoyFmt(hi)),color:REF_INK,fontFamily:FMONO,fontSize:9.5,position:'insideTopLeft'},
+    label:{formatter:'parts: '+c.map(x=>lc(x.name)).join(', ')+(narrowView()? '' : ' '+yoyFmt(lo)+' to '+yoyFmt(hi)),color:REF_INK,fontFamily:FMONO,fontSize:narrowView()?10.5:9.5,position:'insideTopLeft'},
     data:[[{yAxis:hi},{yAxis:lo}]]};
 }
 function idxRefLine(){
@@ -12730,11 +12828,12 @@ function renderIdxY(){
   const lo=below.length? below[below.length-1] : YOY_LADDER[0], hi=above.length? above[0] : YOY_LADDER[YOY_LADDER.length-1];
   const tk=YOY_LADDER.filter(x=>x>=lo&&x<=hi);   // the log axis spans every multiple in the history, so it does not jump when the window moves
   series[0].markLine={silent:true,symbol:'none',lineStyle:{color:'#c9cdd4',type:'dashed'},
-    data:[{yAxis:1}].concat(techRefLines()),label:{formatter:'flat year on year',color:'#9aa0ab',fontFamily:FMONO,fontSize:10,position:'insideEndTop'}};
+    data:[{yAxis:1}].concat(techRefLines()),label:{formatter:'flat year on year',color:'#9aa0ab',fontFamily:FMONO,fontSize:narrowView()?10.5:10,position:'insideEndTop'}};
   series[0].markArea=techRefBand();
   const opt=idxShell(frame(series,yoyFmt,false,false)); if(idxSplitScope()) opt.grid.top=Math.max(opt.grid.top||0,30);   // frame: the left chart's x axis, legend and partial-week marker
   endpointLabels(opt,yoyFmt);
-  if(!narrowView()) opt.legend=Object.assign({},opt.legend,{type:'plain',itemGap:8,data:series.map(x=>x.name),textStyle:Object.assign({},opt.legend.textStyle,{fontSize:10.5})});   // phone width keeps the paged legend
+  opt.legend=Object.assign({},opt.legend,{type:'plain',itemGap:8,data:series.map(x=>x.name),textStyle:Object.assign({},opt.legend.textStyle,{fontSize:10.5})});
+  if(narrowView()) opt.grid.bottom=29+legendH(opt.legend.data,10.5);   // phone: this legend has no partial-week entry, so it is shorter than the one idxShell sized for
   if(stackedView()) opt.grid.right=idxMargins().rightL;   // stacked: the same plot width as the left chart, so a week lines up vertically
   opt.tooltip=Object.assign({},opt.tooltip,{formatter:ps=>{
     if(!ps.length) return '';
@@ -12839,7 +12938,7 @@ function renderV(){
   series.forEach(s=>{s.name=DN(s.name);});   // legend + tooltip names (renamed after the width test on the key)
   const isShare=(mV==='tokshare'||mV==='valshare'), isPrice=mV==='price', isTok=mV==='tokens';
   const fy = isShare? (x=>(+x).toFixed(0)+'%') : isPrice? (x=>'$'+(+x).toFixed(2)) : isTok? fmtT : fmt$;
-  cV.setOption(frame(series,fy,false,false),true);
+  cV.setOption(phoneMarks(frame(series,fy,false,false)),true);
 }
 const PQ=(()=>{
   const DM=(typeof DMETA!=='undefined')?DMETA:{};
