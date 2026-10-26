@@ -6,7 +6,7 @@ Weekly token volume and estimated economic value on OpenRouter, split between We
 model vendors, with the within-vendor tier mix for Anthropic, OpenAI and Google, an external
 capability cross-check (Artificial Analysis, METR) and third-party GPU rental and token price indexes.
 
-Data through the week ending 2026-10-18 (weeks run Monday to Sunday and are labelled by their ending date).
+Data through the week ending 2026-10-25 (weeks run Monday to Sunday and are labelled by their ending date). That week is provisional: its totals were still being revised when the dashboard was built.
 
 - **Sources:** [OpenRouter rankings](https://openrouter.ai/rankings) and
   [model catalog](https://openrouter.ai/models) (token volume, list prices);
@@ -15,7 +15,7 @@ Data through the week ending 2026-10-18 (weeks run Monday to Sunday and are labe
   live feed); [METR time horizons](https://metr.org/time-horizons/) (task length);
   [Silicon Data](https://www.silicondata.com/), [SemiAnalysis](https://gpu-index.semianalysis.com/)
   and [Ornn AI](https://data.ornn.com/) (GPU rental and LLM token price indexes, mostly daily, from
-  a manual, dated snapshot pulled 2026-10-23, with no live feed); [Nebius](https://nebius.com/prices) (its own posted GPU prices and public spot prices, with
+  a manual, dated snapshot pulled 2026-10-26, with no live feed); [Nebius](https://nebius.com/prices) (its own posted GPU prices and public spot prices, with
   price-page copies from the [Internet Archive](https://web.archive.org/web/*/nebius.com/prices));
   Farmer and Lafond (2016), "How predictable is technological progress?", via
   [Our World in Data](https://ourworldindata.org/grapher/costs-of-66-different-technologies-over-time)
