@@ -142,16 +142,74 @@
  <h1 class="reveal" style="animation-delay:.08s"><span class="a">West</span><em>vs</em><span class="b">China</span></h1>
  <div class="rule reveal" style="animation-delay:.14s"></div>
  <p class="sub reveal" style="animation-delay:.2s" id="hero"><span id="hx_tok">&mdash;</span> &mdash; but tokens aren't dollars. <span id="hx_val"></span> Weekly (Mon–Sun, labeled by week-ending date), <span id="hx_span">&mdash;</span>.</p>
- <p class="src reveal" style="animation-delay:.24s">SOURCE OpenRouter public rankings + model catalog list prices · updated 2026-10-26 · weekly Mon–Sun buckets labeled by ending date · value = token volume × estimated $/token (free tier = $0)</p>
+ <p class="src reveal" style="animation-delay:.24s">SOURCE OpenRouter public rankings + model catalog list prices · updated 2026-10-27 · weekly Mon–Sun buckets labeled by ending date · value = token volume × estimated $/token (free tier = $0)</p>
 
  <div class="cards" id="cards"></div>
 
  <div class="context reveal" style="animation-delay:.5s">
   <h3>How to read this — coverage &amp; bias</h3>
-  <p class="sb">OpenRouter is a price-comparison API router for developers — a transparent but partial slice of demand, not the whole market. The coverage rows below are a qualitative reading of the venue, not measurements.</p>
+  <p class="sb">OpenRouter is a price-comparison API router for developers — a transparent but partial slice of demand, not the whole market. The coverage rows below are a qualitative reading of the venue; the Scale row charts published figures.</p>
   <div class="row"><div class="k">What it is</div><div><span id="cx_tokwk">&mdash;</span> &mdash; <b>a small, developer- and agent-skewed slice of global token processing</b>. For scale, Google reported ~3.2 quadrillion tokens/month of its own (Google I/O, May 2026).</div></div>
   <div class="row"><div class="k">Over-represents</div><div>price-sensitive <b>developer / agent</b> workloads, <b class="warm">open-weight &amp; Chinese</b> models (DeepSeek, Qwen, Kimi, MiniMax) and free tiers.</div></div>
   <div class="row"><div class="k dn">Under-represents</div><div>first-party consumer apps (ChatGPT, Gemini, Claude.ai), <b>hyperscaler enterprise</b> (Bedrock / Azure / Vertex), regulated &amp; gov — and <b>Gemini's</b> first-party volume especially; on the Chinese side, <b>first-party apps and domestic clouds</b> (e.g. Alibaba Cloud, Baidu Qianfan) that serve Chinese users directly.</div></div>
+  
+  <div class="row"><div class="k">Scale</div><div><b>Daily tokens: this venue against published totals.</b> <span id="cxs_read"></span>
+   <div id="chartCxs" style="height:290px;margin-top:6px"></div>
+   <div class="sb">Log scale: each gridline is ten times the one below. OpenRouter lines are our weekly data divided by seven. The other lines are published figures with different scopes: Doubao counts ByteDance's own apps (company figure); IDC counts paid cloud API calls by outside customers; the National Data Administration and CAICT count all of China. Sources: Volcano Engine, IDC, National Data Administration, CAICT, OpenRouter.</div></div></div>
+  <script>
+  __chartsReady(function(){        // echarts is inlined at the END of <body>
+   if(typeof echarts==='undefined'||typeof D==='undefined') return;
+   var S={"s": {"doubao_daily_tokens": [{"d": "2024-05-15", "m": "2024-05", "v": 0.12, "src": "Volcano Engine keynote via ifanr"}, {"d": "2024-07-15", "m": "2024-07", "v": 0.5, "src": "Volcano Engine via ifanr"}, {"d": "2024-09-15", "m": "2024-09", "v": 1.3, "src": "Volcano Engine (Tan Dai) via CLS"}, {"d": "2024-12-15", "m": "2024-12", "v": 4.0, "src": "Volcano Engine via AIbase"}, {"d": "2025-04-15", "m": "2025-04", "v": 12.7, "src": "Volcano Engine (Tan Dai) via Sina"}, {"d": "2025-05-15", "m": "2025-05", "v": 16.4, "src": "Volcano Engine via NetEase"}, {"d": "2025-09-15", "m": "2025-09", "v": 30.0, "src": "Volcano Engine via IT Home"}, {"d": "2025-12-15", "m": "2025-12", "v": 50.0, "src": "Volcano Engine (Tan Dai) via Sina"}, {"d": "2026-03-15", "m": "2026-03", "v": 120.0, "src": "Volcano Engine (Tan Dai) via QbitAI"}, {"d": "2026-06-15", "m": "2026-06", "v": 180.0, "src": "Volcano Engine via cnfin"}], "china_maas_daily_tokens": [{"d": "2025-01-15", "m": "2025-01", "v": 1.6, "src": "IDC"}, {"d": "2025-12-15", "m": "2025-12", "v": 9.6, "src": "IDC"}], "china_daily_tokens": [{"d": "2026-03-15", "m": "2026-03", "v": 140.0, "src": "National Data Administration via Xinhua"}, {"d": "2026-06-15", "m": "2026-06", "v": 500.0, "src": "CAICT via Sina"}]}};
+   var MONO=getComputedStyle(document.body).getPropertyValue('--mono')||'monospace';
+   var PART={}; (D.partialWeeks||[]).forEach(function(w){PART[w]=1;});
+   function endSun(w){var p=w.split('-');return new Date(Date.UTC(+p[0],+p[1]-1,+p[2]+6)).toISOString().slice(0,10);}
+   var orCn=[], orAll=[];
+   D.weeks.forEach(function(w,i){ if(PART[w]) return;
+     var c=+D.tok.Chinese[i], t=c+(+D.tok.Western[i])+(+D.tok.Other[i]); if(!(t>0)) return;
+     orCn.push([endSun(w),c/7/1e12]); orAll.push([endSun(w),t/7/1e12]); });
+   function fT(v){ return (v<1? v.toFixed(2) : v<10? v.toFixed(1) : Math.round(v).toLocaleString('en-US'))+'T'; }
+   function mon(m){ var p=m.split('-'); return new Date(Date.UTC(+p[0],+p[1]-1,15)).toLocaleDateString('en-US',{month:'short',year:'numeric',timeZone:'UTC'}); }
+   var DEF=[
+     {k:'china_daily_tokens',name:'All of China (NDA, CAICT)',end:'China',col:'#7f1d1d',sym:'circle'},
+     {k:'doubao_daily_tokens',name:'Doubao (Volcano Engine, company figure)',end:'Doubao',col:'#7c3aed',sym:'diamond'},
+     {k:'china_maas_daily_tokens',name:'China paid cloud API (IDC)',end:'IDC',col:'#e0701a',sym:'triangle'},
+     {name:'OpenRouter, Chinese models',end:'OR China',col:'#d83a2c',data:orCn},
+     {name:'OpenRouter, all models',end:'OR all',col:'#3f3f3f',data:orAll}];
+   var cz=S.s.china_daily_tokens[S.s.china_daily_tokens.length-1], db=S.s.doubao_daily_tokens.filter(function(p){return p.m===cz.m;})[0];
+   var inM=orCn.filter(function(p){return p[0].slice(0,7)===cz.m;});
+   var t='';
+   if(inM.length){ var av=inM.reduce(function(s,p){return s+p[1];},0)/inM.length;
+     t='In '+mon(cz.m)+' Chinese models on OpenRouter ran <b>'+fT(av)+'</b> tokens a day'+(db?'; Doubao reported <b>'+fT(db.v)+'</b>':'')+
+       ' and all of China about <b>'+fT(cz.v)+'</b> ('+cz.src.split(' via ')[0]+').'; }
+   var rd=document.getElementById('cxs_read'); if(rd) rd.innerHTML=t;
+   var el=document.getElementById('chartCxs'); if(!el) return;
+   var ch=echarts.init(el);
+   function draw(){
+     var nar=el.clientWidth<560;
+     var series=DEF.map(function(s){
+       var pub=!s.data, data=pub? S.s[s.k].map(function(p){return {value:[p.d,p.v],src:p.src,m:p.m};}) : s.data;
+       return {name:s.name,type:'line',data:data,color:s.col,showSymbol:pub,symbol:s.sym||'none',symbolSize:pub?8:0,
+         lineStyle:{width:pub?1.6:2.2,type:pub?'dashed':'solid'},connectNulls:true,
+         endLabel:{show:!nar,formatter:s.end,fontFamily:MONO,fontSize:10.5,color:'#3f3f3f'}};
+     });
+     ch.setOption({
+       grid:{left:nar?40:48,right:nar?14:72,top:nar?84:52,bottom:30},
+       legend:{top:0,itemWidth:14,itemHeight:8,textStyle:{fontFamily:MONO,fontSize:nar?10:11}},
+       tooltip:{trigger:'item',confine:true,formatter:function(p){
+         var d=p.data, pub=d&&d.src, v=pub? d.value[1] : p.value[1];
+         return p.seriesName+'<br/>'+(pub? mon(d.m) : 'week ending '+p.value[0])+': <b>'+fT(v)+'</b> tokens a day'+(pub?'<br/><span style="opacity:.75">'+d.src+'</span>':''); }},
+       xAxis:{type:'time',min:'2024-05-01',axisLabel:{fontFamily:MONO,fontSize:nar?9.5:10.5,hideOverlap:true,
+         formatter:function(v){return new Date(v).toLocaleDateString('en-US',{month:'short',year:'2-digit',timeZone:'UTC'});}},
+         splitLine:{show:false}},
+       yAxis:{type:'log',logBase:10,min:0.01,max:1000,axisLabel:{fontFamily:MONO,fontSize:nar?9.5:10.5,formatter:function(v){return fT(v);}},
+         splitLine:{lineStyle:{opacity:.35}}},
+       series:series},true);
+   }
+   draw();
+   window.addEventListener('resize',function(){ch.resize();draw();});
+  });
+  </script>
+  
   <div class="row"><div class="k">So read it as</div><div>token share = a <b>momentum</b> signal on this venue, not a global share. West value share is <b>not a measured floor</b>: the Western first-party and hyperscaler spend this venue misses would raise it, the Chinese domestic spend it misses would lower it, and which is larger in dollars is not measured here. It is not a floor for any single vendor either: the missed spend includes ChatGPT and Gemini first-party use as well as enterprise Claude, so Anthropic&#39;s share could move either way. For a view of Western enterprise buyers, likely mark <b>Gemini up</b> and <b class="warm">Chinese-open down</b> (an inference).</div></div>
   <div class="row"><div class="k">Verbosity</div><div><span id="cx_verb">tokens used and cost to run the same benchmark are compared in Panels 2&ndash;3 of the External cross-check below.</span> <i class="sb">Artificial Analysis benchmark, not OpenRouter traffic; see <a href="#aaxc">External cross-check</a> below.</i></div></div>
  </div>
