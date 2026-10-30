@@ -142,7 +142,7 @@
  <h1 class="reveal" style="animation-delay:.08s"><span class="a">West</span><em>vs</em><span class="b">China</span></h1>
  <div class="rule reveal" style="animation-delay:.14s"></div>
  <p class="sub reveal" style="animation-delay:.2s" id="hero"><span id="hx_tok">&mdash;</span> &mdash; but tokens aren't dollars. <span id="hx_val"></span> Weekly (Mon–Sun, labeled by week-ending date), <span id="hx_span">&mdash;</span>.</p>
- <p class="src reveal" style="animation-delay:.24s">SOURCE OpenRouter public rankings + model catalog list prices · updated 2026-10-27 · weekly Mon–Sun buckets labeled by ending date · value = token volume × estimated $/token (free tier = $0)</p>
+ <p class="src reveal" style="animation-delay:.24s">SOURCE OpenRouter public rankings + model catalog list prices · updated 2026-10-30 · weekly Mon–Sun buckets labeled by ending date · value = token volume × estimated $/token (free tier = $0)</p>
 
  <div class="cards" id="cards"></div>
 
@@ -10087,6 +10087,7 @@ __chartsReady( function(){
   <div class="tgrid" id="ix_a_grid"></div>
   <p class="tcap" id="ix_a_nb"></p>
   <p class="lead"><b>Read:</b> <span id="ix_a_n1"></span></p>
+  <p class="lead" id="ix_a_n6"></p>
   <p class="lead" id="ix_a_n4"></p>
   <p class="lead" id="ix_a_n3"></p>
   <p class="lead" id="ix_a_n5"></p>
@@ -10755,6 +10756,15 @@ __chartsReady( function(){
  var onN=true;
  function heldPrint(s,i){var j=-1; for(var q=0;q<s.idx.length;q++){if(s.idx[q]<=i) j=s.idx[q]; else break;} return j<0?null:{i:j,v:s.v[j]};}
  function endName(s){return s.daily?s.provider:rowLbl(s).replace(s.provider+' ','')+' contract';}
+ function ratioOf(i){var Y=BY.sa_h100_1y, C=BY.sa_h100; return (!Y||!C||Y.v[i]==null||C.v[i]==null)?null:Y.v[i]/C.v[i];}
+ function pct0(r){return Math.round(r*100)+'%';}
+ function ratioMarks(from){
+  var Y=BY.sa_h100_1y; if(!Y) return [];
+  var P=Y.idx.filter(function(i){return i>=from&&ratioOf(i)!=null;}); if(!P.length) return [];
+  var L=P[P.length-1], A=null;
+  P.forEach(function(i){var d=Math.abs(L-YEAR_DAYS-i); if(d<=20&&(A===null||d<Math.abs(L-YEAR_DAYS-A))) A=i;});
+  return A===null?[L]:[A,L];
+ }
  function bracket(ch,V){
   var g=GAP;
   if(!g||ch.getWidth()<300||['sa_h100','sd_h100','on_h100'].some(function(id){return V.indexOf(BY[id])<0;})) return [];
@@ -10807,6 +10817,14 @@ __chartsReady( function(){
    if(step){
     data=s.idx.filter(function(i){return i>=IW;}).map(function(i){return [tOf(i),s.v[i]];});
     var hp=heldPrint(s,IW); if(hp&&hp.i<IW) data.unshift({value:[tOf(IW),hp.v],symbol:'none'});
+    if(s.id==='sa_h100_1y'&&BY.sa_h100&&onP[BY.sa_h100.provider]){
+     var RM=ratioMarks(IW).map(tOf);
+     data=data.map(function(d){
+      if(!Array.isArray(d)||RM.indexOf(d[0])<0) return d;
+      var r=ratioOf(iOf(d[0]));
+      return {value:d,label:{show:true,position:'bottom',distance:7,formatter:pct0(r),color:c,fontFamily:MONO,fontSize:ph?10.5:9.5,fontWeight:600,textBorderColor:'#fff',textBorderWidth:3}};
+     });
+    }
    } else data=seg(s.v,IW,null);
    return {name:s.short,type:'line',z:step?5:4,animation:false,showSymbol:step,symbol:'circle',symbolSize:5,step:step?'end':false,
     lineStyle:{color:c,width:step?2:1.7},itemStyle:{color:c,borderColor:'#fff',borderWidth:1},data:data,emphasis:{disabled:true}};
@@ -10863,6 +10881,18 @@ __chartsReady( function(){
    var mid=tierOf('H100');
    put('ix_a_n1',(GAP?'In the '+esc(mid?mid.toLowerCase():'H100')+' chart <b>SemiAnalysis sits '+bd('$'+f2(Math.abs(GAP.dSd))+' ('+f1(Math.abs(GAP.pSd))+'%)')+' '+rel(GAP.dSd)+' Silicon Data and '+bd('$'+f2(Math.abs(GAP.dOn))+' ('+f1(Math.abs(GAP.pOn))+'%)')+' '+rel(GAP.dOn)+' Ornn on '+pdt(tOf(GAP.i))+'</b> (the bracket), while Silicon Data and Ornn are within '+bd('$'+f2(GAP.z))+' of each other that day'+(GAP.n>1?' ('+bd('$'+f2(GAP.aZ))+' apart on average over the '+GAP.n+' days with all three prints in the '+GAPWIN+' days to then)':'')+'; the table above gives the likely reason, and the note under it shows how the gap has moved.':'')+
     (GAPB?' On the B200 that note compares Ornn with Silicon Data on '+pdt(tOf(GAPB.i))+', the last day both have a print.':''));
+   (function(){
+    var Y=BY.sa_h100_1y, D=BY.sd_h100;
+    var P=Y?Y.idx.filter(function(i){return ratioOf(i)!=null;}):[];
+    if(P.length<2){put('ix_a_n6',''); return;}
+    var L=P[P.length-1], lo=P[0], A=null;
+    P.forEach(function(i){if(ratioOf(i)<ratioOf(lo)) lo=i; var d=Math.abs(L-YEAR_DAYS-i); if(d<=20&&(A===null||d<Math.abs(L-YEAR_DAYS-A))) A=i;});
+    var sd=(D&&D.v[L]!=null)?Y.v[L]/D.v[L]:null;
+    put('ix_a_n6','<b>1-year contract against spot (our arithmetic, H100 only):</b> the '+esc(Y.short)+' print of '+pdt(tOf(L))+' ($'+f2(Y.v[L])+') is '+bd(pct0(ratioOf(L)))+' of the SemiAnalysis H100 composite that day ($'+f2(BY.sa_h100.v[L])+')'+
+     (A!==null&&A!==L?', against '+bd(pct0(ratioOf(A)))+' on '+pdt(tOf(A)):'')+(lo!==L&&lo!==A?' and a low of '+bd(pct0(ratioOf(lo)))+' on '+pdt(tOf(lo)):'')+'. '+
+     (sd!==null?'Against the Silicon Data H100 index that day ($'+f2(D.v[L])+') it is '+bd(pct0(sd))+'. ':'')+
+     'The labels on the contract line in the chart above show the same ratio for the latest print and the one a year before. A contract with prepayment terms is a different product from the daily indexes (see the definitions), and this is one tenor, so it is a single point on a term curve.');
+   })();
    var R=GPUS.filter(function(s){return s.r12;}), MISS=GPUS.filter(function(s){return !s.r12;}), MO=R.filter(function(s){return !s.daily;});
    var t='Each bar is the change in an index&rsquo;s trailing '+SMOOTH+'-day median over the 12 months to its last print; the dot is the same change over the last '+TREND_DAYS+' days. Medians at both ends, the same basis as Panel C, so one-day prints do not set the sign; each row runs over its own window.'+
     MO.map(function(s){return ' The '+esc(s.title)+' is a monthly print: its bar is the print of '+pdt(tOf(s.last))+' against the print of '+pdt(tOf(s.r12.from))+(s.r90?', its dot against the print of '+pdt(tOf(s.r90.from)):'')+'.';}).join('')+
