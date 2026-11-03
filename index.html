@@ -10300,6 +10300,7 @@ function endpointLabels(opt,fmt){
       itemStyle:{color:col,borderColor:'#fff',borderWidth:1.5},label:lab(pos)}; };
     if(l>=0) wrap(l,'right');   // end value only: a start label sat on the y-axis gutter, over the tick numbers
     s.labelLayout={moveOverlap:'shiftY',hideOverlap:false};
+    s.showAllSymbol=true;   // 'auto' thins symbols on a long category axis and can drop the end point, taking its label with it; only the wrapped point has a symbol
   });
   return opt;
 }
