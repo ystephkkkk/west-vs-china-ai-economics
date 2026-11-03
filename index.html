@@ -139,7 +139,28 @@
  html #infra .hwc .hwv{display:flex;flex-wrap:wrap;align-items:baseline;gap:1px 8px}
  html #infra .hwc .hwv em{margin-left:0}
 }
-</style><script>function __chartsReady(f){var done=0;function run(){if(!done){done=1;f();}}function go(){var p=window.__pageFonts;if(p&&typeof p.then==='function')p.then(run,run);else run();}window.addEventListener('load',go);document.addEventListener('DOMContentLoaded',function(){setTimeout(go,2000);});}</script>
+</style><style>
+html.night{filter:invert(.9) hue-rotate(180deg);background:#fff}
+#nightbtn{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:9999;
+ font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.02em;padding:9px 13px;border-radius:18px;
+ border:1px solid #c9c3b6;background:#fffdf8;color:#2f343d;cursor:pointer;box-shadow:0 1px 5px rgba(0,0,0,.14)}
+#nightbtn:hover{border-color:#8d8676}
+@media print{html.night{filter:none}#nightbtn{display:none}}
+</style><script>
+(function(){
+ var KEY='wvc_night', d=document.documentElement, on=null;
+ try{var v=localStorage.getItem(KEY); if(v==='1') on=true; else if(v==='0') on=false;}catch(e){}
+ if(on===null) on=!!(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+ d.classList.toggle('night',on);
+ function label(b){var n=d.classList.contains('night'); b.textContent=n?'☀ Day':'☾ Night'; b.setAttribute('aria-pressed',n?'true':'false');}
+ document.addEventListener('DOMContentLoaded',function(){
+  var b=document.createElement('button'); b.id='nightbtn'; b.type='button'; b.title='Switch between day and night view'; label(b);
+  b.onclick=function(){var n=!d.classList.contains('night'); d.classList.toggle('night',n); label(b);
+   try{localStorage.setItem(KEY,n?'1':'0');}catch(e){}};
+  document.body.appendChild(b);
+ });
+})();
+</script><script>function __chartsReady(f){var done=0;function run(){if(!done){done=1;f();}}function go(){var p=window.__pageFonts;if(p&&typeof p.then==='function')p.then(run,run);else run();}window.addEventListener('load',go);document.addEventListener('DOMContentLoaded',function(){setTimeout(go,2000);});}</script>
 </head>
 <body><div class="wrap">
  <div class="kicker reveal" style="animation-delay:.02s"><span class="dot"></span>OpenRouter · tokens vs dollars</div>
