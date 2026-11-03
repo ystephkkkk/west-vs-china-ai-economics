@@ -7268,6 +7268,15 @@ __chartsReady( function(){
  #infra .tcap{font-size:12px;color:var(--dim);margin:7px 2px 0;line-height:1.55;max-width:112ch}
  #infra .subhd{font-family:var(--sans);font-weight:600;font-size:15px;color:var(--ink);margin:22px 2px 2px}
  #infra .subhd small{display:block;font-weight:400;font-size:12px;color:var(--dim);margin-top:2px;line-height:1.5;max-width:104ch}
+ #infra .ixclamp:not(.ixopen){display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+ #infra small.ixclamp:not(.ixopen){-webkit-line-clamp:2;line-clamp:2}
+ #infra .ixmore{display:block;border:0;background:none;padding:0 2px;margin:-4px 0 8px;font-family:var(--mono);font-size:11px;color:var(--west);cursor:pointer}
+ #infra .subhd .ixmore{margin:2px 0 0;font-weight:400}
+ #infra .ixnotes .note>p{margin:0 0 10px}
+ #infra .tsgrid{display:grid;grid-template-columns:3fr 2fr;gap:18px;align-items:start}
+ #infra .tsgrid>div{min-width:0}
+ #infra .tshead{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;justify-content:space-between;font-size:12px;color:var(--dim);margin:6px 2px 0}
+ @media(max-width:900px){#infra .tsgrid{grid-template-columns:1fr}}
  #infra .ixkey i.bar{width:16px;height:9px;border:0;border-radius:2px;background:linear-gradient(90deg,#7d8c2a 0 33%,#7b8190 33% 66%,#7d6fbf 66%)}
  #infra .ixkey i.dot{width:8px;height:8px;border:1.5px solid #fff;border-radius:50%;background:#181a1f;box-shadow:0 0 0 1px #181a1f}
  #infra .ixkey i.hatch{width:16px;height:9px;border:0;border-radius:2px;background:repeating-linear-gradient(135deg,#7d6fbf 0 3px,rgba(255,255,255,.85) 3px 5px)}
@@ -7451,7 +7460,6 @@ __chartsReady( function(){
   <div class="ptitle">A &middot; GPU rental prices by tier
     <small>What it costs to rent one GPU for an hour, USD per GPU-hour. Colour = provider.</small></div>
   <div class="tiers" id="ix_a_tiers"></div>
-  <p class="tcap" id="ix_a_tcap"></p>
   <div class="subhd">Change in rent over 12 months
     <small id="ix_a_ysub"></small></div>
   <div class="ixkey" id="ix_a_ykey"></div>
@@ -7461,15 +7469,19 @@ __chartsReady( function(){
     <small id="ix_a_gsub"></small></div>
   <div class="ixctl" id="ix_a_ctl"></div>
   <div class="tgrid" id="ix_a_grid"></div>
-  <p class="tcap" id="ix_a_nb"></p>
   <p class="lead"><b>Read:</b> <span id="ix_a_n1"></span></p>
   <div class="subhd">H100 term structure: 1-year contract against near-term rent
     <small id="ix_a_tssub"></small></div>
-  <div id="ix_a_ts" class="chart"></div>
+  <div class="tsgrid"><div><div id="ix_a_ts" class="chart"></div></div>
+   <div><div class="tshead"><span id="ix_a_tsscap"></span><div class="seg" id="ix_a_tsref"></div></div><div id="ix_a_tss" class="chart"></div></div></div>
   <p class="lead" id="ix_a_n6"></p>
-  <p class="lead" id="ix_a_n4"></p>
-  <p class="lead" id="ix_a_n3"></p>
-  <p class="lead" id="ix_a_n5"></p>
+  <details class="aadef ixnotes"><summary>Notes</summary><div class="note">
+   <p class="tcap" id="ix_a_tcap"></p>
+   <p class="tcap" id="ix_a_nb"></p>
+   <p class="lead" id="ix_a_n4"></p>
+   <p class="lead" id="ix_a_n3"></p>
+   <p class="lead" id="ix_a_n5"></p>
+  </div></details>
   <details class="aadef"><summary>Definitions and caveats</summary><div class="note" id="ix_a_def"></div></details>
  </div>
 
@@ -7488,7 +7500,9 @@ __chartsReady( function(){
   <div id="ix_a2i" class="chart"></div>
   <p class="lead" id="ix_a2i_n0"></p>
   <p class="lead" id="ix_a2i_n1"></p>
-  <p class="lead" id="ix_a2_n2"></p>
+  <details class="aadef ixnotes"><summary>Notes</summary><div class="note">
+   <p class="lead" id="ix_a2_n2"></p>
+  </div></details>
   <details class="aadef"><summary>Launch months and definitions</summary><div class="note" id="ix_a2_def"></div></details>
  </div>
 
@@ -7499,14 +7513,12 @@ __chartsReady( function(){
     <small id="ix_a3_gsub"></small></div>
   <div class="ixkey" id="ix_a3_key"></div>
   <div class="tgrid" id="ix_a3_grid"></div>
-  <p class="tcap" id="ix_a3_gn"></p>
   <div class="subhd">Capex basis
     <small>What share of a GPU&rsquo;s all-in capex its hardware price stands for, and how the rest of the build scales. It sets the dashed line in the charts above, the tables, the payback bars and the strip. Utilisation and the power cost, set above the payback bars, change the bars alone.</small></div>
   <div class="ixctl a3cx">
    <span class="grp"><b>Capex scope</b><span class="seg" id="ix_a3_scope"></span></span>
    <span class="grp"><b>Non-chip capex scales with</b><span class="seg" id="ix_a3_scale"></span></span>
   </div>
-  <p class="tcap a3cxn" id="ix_a3_cxn"></p>
   <div class="a3row">
    <div>
     <div class="subhd">Years to earn back a GPU&rsquo;s capex at today&rsquo;s rent
@@ -7522,7 +7534,11 @@ __chartsReady( function(){
     <p class="tcap" id="ix_a3_hwn"></p>
    </div>
   </div>
-  <p class="lead" id="ix_a3_n1"></p>
+  <details class="aadef ixnotes"><summary>Notes</summary><div class="note">
+   <p class="tcap" id="ix_a3_gn"></p>
+   <p class="tcap a3cxn" id="ix_a3_cxn"></p>
+   <p class="lead" id="ix_a3_n1"></p>
+  </div></details>
   <details class="aadef"><summary>Definitions and caveats</summary><div class="note" id="ix_a3_def"></div></details>
  </div>
 
@@ -7531,8 +7547,10 @@ __chartsReady( function(){
     <small>USD per 1M tokens, one axis, for the token price indexes. Thin line = daily value, bold = trailing 7-day median. They are different baskets (a usage-weighted blend of a defined set of models, and what Ornn labels realised Anthropic and OpenAI prices), so read each against its own history; levels are not comparable across indexes or with list prices.</small></div>
   <div class="ixkey" id="ix_b_key"></div>
   <div id="ix_b" class="chart"></div>
-  <p class="lead"><b>Unit check:</b> Silicon Data&rsquo;s unit is checked against its own published level; Ornn&rsquo;s indexes take theirs from Ornn&rsquo;s documentation and the series names, with no published level to check them against.</p>
   <p class="lead"><b>Read:</b> <span id="ix_b_n1"></span> <span id="ix_b_n3"></span></p>
+  <details class="aadef ixnotes"><summary>Notes</summary><div class="note">
+   <p class="lead"><b>Unit check:</b> Silicon Data&rsquo;s unit is checked against its own published level; Ornn&rsquo;s indexes take theirs from Ornn&rsquo;s documentation and the series names, with no published level to check them against.</p>
+  </div></details>
   <details class="aadef"><summary>What the unit rests on, and caveats</summary><div class="note" id="ix_b_def"></div></details>
  </div>
 
@@ -7547,7 +7565,9 @@ __chartsReady( function(){
   <div class="ixkey" id="ix_c_key"></div>
   <div id="ix_c" class="chart tall"></div>
   <p class="lead"><b>Read:</b> <span id="ix_c_n1"></span> <span id="ix_c_n2"></span> <span id="ix_c_n3"></span> <span id="ix_c_n4"></span></p>
-  <p class="lead" id="ix_c_basis"></p>
+  <details class="aadef ixnotes"><summary>Notes</summary><div class="note">
+   <p class="lead" id="ix_c_basis"></p>
+  </div></details>
   <details class="aadef"><summary>Definitions and caveats</summary><div class="note" id="ix_c_def"></div></details>
  </div>
 
@@ -7564,19 +7584,21 @@ __chartsReady( function(){
     <small id="ix_d_psub"></small></div>
   <div class="ixkey" id="ix_d_key"></div>
   <div id="ix_d" class="chart"></div>
-  <p class="tcap" id="ix_d_nd"></p>
-  <p class="why" id="ix_d_what"></p>
-  <p class="tcap" id="ix_d_loo"></p>
-  <p class="tcap" id="ix_d_td"></p>
-  <p class="tcap" id="ix_d_rep"></p>
-  <p class="tcap" id="ix_d_nb"></p>
   <div class="subhd">How firm the frontier&rsquo;s slow end is <span class="gtag">our estimate</span>
     <small id="ix_d_rsub"></small></div>
   <div class="ixkey" id="ix_d_rkey"></div>
   <div id="ix_d_rob" class="chart"></div>
   <p class="lead" id="ix_d_rn"></p>
-  <p class="tcap" id="ix_d_rules"></p>
-  <p class="lead" id="ix_d_cav"></p>
+  <details class="aadef ixnotes"><summary>Notes</summary><div class="note">
+   <p class="tcap" id="ix_d_nd"></p>
+   <p class="why" id="ix_d_what"></p>
+   <p class="tcap" id="ix_d_loo"></p>
+   <p class="tcap" id="ix_d_td"></p>
+   <p class="tcap" id="ix_d_rep"></p>
+   <p class="tcap" id="ix_d_nb"></p>
+   <p class="tcap" id="ix_d_rules"></p>
+   <p class="lead" id="ix_d_cav"></p>
+  </div></details>
   <details class="aadef"><summary>Gross margin by model and rent index</summary><p class="tcap" id="ix_d_tsub"></p><div class="dtw" id="ix_d_tbl"></div></details>
   <details class="aadef"><summary>Robustness table: the frontier&rsquo;s slow end under each setting</summary><div class="dtw" id="ix_d_rtb"></div></details>
   <details class="aadef"><summary>Model facts: score, size, prices, runs</summary><div class="dled" id="ix_d_facts"></div></details>
@@ -8336,7 +8358,7 @@ __chartsReady( function(){
   function pc(r){return Math.round(r*100)+'%';}
   function refName(C){return C.id==='sa_h100'?'the SemiAnalysis composite':'the '+C.short+' index';}
   put('ix_a_tssub','Each dot is a '+esc(Y.short)+' contract print as a % of a near-term H100 index on the same day (our arithmetic). '+
-   'Over 100%: a one-year lock costs more than renting now (contango). Under 100%: it costs less (backwardation).');
+   'Over 100%: a one-year lock costs more than renting now (contango). Under 100%: it costs less (backwardation). The second chart draws the same prints as a curve on a few dates.');
   function render(){
    var nar=narrowOf(ch), all=[];
    R.forEach(function(x){x.pts.forEach(function(p){all.push(p.r);});});
@@ -8358,12 +8380,45 @@ __chartsReady( function(){
     legend:{top:0,left:nar?0:'center',itemWidth:14,itemHeight:8,textStyle:{fontFamily:MONO,fontSize:nar?10:11,color:INK}},
     tooltip:tip({trigger:'item',formatter:function(q){var p=q.data.p;
      return '<b>'+pdt(tOf(p.i))+'</b>, '+esc(q.seriesName)+'<br>1-year contract $'+f2(p.y)+' / near-term $'+f2(p.c)+' = <b>'+pc(p.r)+'</b> ('+st(p.r)+')';}}),
-    xAxis:xAxis(tOf(x0)-30*DAY,tOf(x1)+(nar?20:45)*DAY,nar,nar),
+    xAxis:xAxis(tOf(x0)-30*DAY,tOf(x1)+(nar?20:45)*DAY,ch.getWidth()<760,nar),   // beside the curve chart it is about 640px wide: fewer date labels
     yAxis:{type:'value',min:lo*100,max:hi*100,interval:10,axisLabel:axL({formatter:function(v){return v+'%';}},nar),
      axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:GRID}}},
     series:series},true);
   }
   render(); watch(ch,render);
+  var chS=mk('ix_a_tss'), REFI=0, SHADE=['#c9ccd2','#a0a5ae','#6a7180','#2f343d'];
+  function snapDates(P){
+   var L=P[P.length-1], out=[L];
+   [182,365,730].forEach(function(back){var b=null;
+    P.forEach(function(p){var d=Math.abs(L.i-back-p.i); if(d<=45&&(b===null||d<Math.abs(L.i-back-b.i))) b=p;});
+    if(b&&out.indexOf(b)<0) out.push(b);});
+   return out.reverse();
+  }
+  function mo(p){var d=new Date(tOf(p.i)); return MN[d.getUTCMonth()]+" '"+String(d.getUTCFullYear()).slice(2);}
+  function renderS(){
+   if(!chS) return;
+   var x=R[REFI], nar=narrowOf(chS), Ds=snapDates(x.pts), sh=SHADE.slice(SHADE.length-Ds.length);
+   var vs=[]; Ds.forEach(function(p){vs.push(p.y,p.c);});
+   var lo=Math.floor(Math.min.apply(null,vs)*2)/2-0.5, hi=Math.ceil(Math.max.apply(null,vs)*2)/2+0.5;
+   put('ix_a_tsscap','$ per GPU-hour, near-term against 1-year');
+   chS.setOption({animation:false,
+    grid:{left:nar?40:46,right:nar?92:112,top:14,bottom:28},
+    tooltip:tip({trigger:'item',formatter:function(q){var p=q.data.p;
+     return '<b>'+pdt(tOf(p.i))+'</b><br>near-term $'+f2(p.c)+' ('+esc(x.C.short)+')<br>1-year contract $'+f2(p.y)+'<br>1-year = <b>'+pc(p.r)+'</b> of near-term, '+st(p.r);}}),
+    xAxis:{type:'category',data:['Near-term','1-year'],boundaryGap:true,axisLabel:axL({},nar),axisTick:{show:false},axisLine:{lineStyle:{color:'#d8d2c6'}}},
+    yAxis:{type:'value',min:Math.max(0,lo),max:hi,axisLabel:axL({formatter:function(v){return '$'+v;}},nar),axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:GRID}}},
+    series:Ds.map(function(p,k){var c=sh[k], top=k===Ds.length-1;
+     return {name:mo(p),type:'line',color:c,symbol:'circle',symbolSize:top?8:6,z:top?5:3,lineStyle:{width:top?3:2,color:c},itemStyle:{color:c},
+      data:[{value:p.c,p:p},{value:p.y,p:p}],labelLayout:{moveOverlap:'shiftY'},
+      endLabel:{show:true,formatter:mo(p)+'  '+pc(p.r),color:top?INK:DIM,fontFamily:MONO,fontSize:nar?10:11,fontWeight:top?700:400,distance:6}};})},true);
+  }
+  var seg=document.getElementById('ix_a_tsref');
+  if(seg&&R.length>1){
+   seg.innerHTML=R.map(function(x,k){return '<button type="button" data-k="'+k+'"'+(k===REFI?' class="active"':'')+'>'+esc(x.C.provider)+'</button>';}).join('');
+   seg.querySelectorAll('button').forEach(function(b){b.onclick=function(){REFI=+b.dataset.k;
+    seg.querySelectorAll('button').forEach(function(o){o.classList.toggle('active',o===b);}); renderS();};});
+  }
+  if(chS){renderS(); watch(chS,renderS);}
   var parts=R.map(function(x){
    var P=x.pts, L=P[P.length-1], A=null, now=st(L.r);
    P.forEach(function(p){var d=Math.abs(L.i-YEAR_DAYS-p.i); if(d<=45&&(A===null||d<Math.abs(L.i-YEAR_DAYS-A.i))) A=p;});
@@ -10205,6 +10260,27 @@ __chartsReady( function(){
   renderAll();
   if(chD) watch(chD,renderD);
   if(chR) watch(chR,renderR);
+ })();
+
+ (function(){
+  var IDS=['ix_a_n2','ix_a_n1','ix_a_n6','ix_a_gsub','ix_a_tssub','ix_a2_n1','ix_a2i_n1','ix_a2i_sub','ix_a3_pn','ix_a3_gsub','ix_a3_psub','ix_a3_hsub',
+   'ix_b_n1','ix_c_n1','ix_d_psub','ix_d_rsub','ix_d_rn'];
+  var items=[];
+  IDS.forEach(function(id){
+   var el=document.getElementById(id); if(!el) return;
+   var t=(el.tagName==='SPAN'&&el.parentElement&&el.parentElement.tagName==='P')?el.parentElement:el;
+   if(t.classList.contains('ixclamp')) return;
+   t.classList.add('ixclamp');
+   var b=document.createElement('button'); b.type='button'; b.className='ixmore'; b.textContent='more';
+   b.onclick=function(){var o=t.classList.toggle('ixopen'); b.textContent=o?'less':'more';};
+   t.insertAdjacentElement('afterend',b);
+   items.push({t:t,b:b});
+  });
+  function check(){items.forEach(function(x){ if(x.t.classList.contains('ixopen')) return; x.b.hidden=!(x.t.scrollHeight>x.t.clientHeight+2); });}
+  check(); setTimeout(check,400); window.addEventListener('resize',check);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(check);
+  if(window.MutationObserver){var mo=new MutationObserver(function(){clearTimeout(mo.t); mo.t=setTimeout(check,60);});
+   items.forEach(function(x){mo.observe(x.t,{childList:true,subtree:true,characterData:true});});}
  })();
 
  window.addEventListener('resize',function(){charts.forEach(function(c){c.resize();});});
