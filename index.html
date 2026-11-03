@@ -43,6 +43,10 @@
  .context .k{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--west);min-width:128px;flex:none}
  .context .k.dn{color:var(--china)}
  @media(max-width:680px){.context .row{flex-direction:column;gap:2px}.context .k{min-width:0}}
+ .context .cxlead{margin:0;font-size:13.5px;line-height:1.5;color:var(--ink);max-width:80ch}
+ .context details{margin-top:10px;background:transparent;border:0;border-top:1px dashed var(--line);border-radius:0;padding:8px 0 0}
+ .context details>summary{font-size:11px;color:var(--west)}
+ .context details[open]>summary{margin-bottom:8px}
  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px 10px;margin-top:18px;box-shadow:0 18px 50px -34px rgba(24,26,31,.5)}
  .phead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:8px}
  .ptitle{font-family:var(--serif);font-size:21px;font-weight:560;letter-spacing:-.01em}
@@ -147,7 +151,9 @@
  <div class="cards" id="cards"></div>
 
  <div class="context reveal" style="animation-delay:.5s">
-  <h3>How to read this — coverage &amp; bias</h3>
+  <h3>How to read this</h3>
+  <p class="cxlead">One developer venue, a small slice of global tokens. It over-weights price-sensitive agent work and Chinese open models, and misses first-party apps and hyperscaler enterprise on both sides. Token share here is momentum on this venue only. Value share could move either way once the missed spend is counted.</p>
+  <details id="cxmore"><summary>Detail: coverage, scale against published totals, verbosity</summary>
   <p class="sb">OpenRouter is a price-comparison API router for developers — a transparent but partial slice of demand, not the whole market. The coverage rows below are a qualitative reading of the venue; the Scale row charts published figures.</p>
   <div class="row"><div class="k">What it is</div><div><span id="cx_tokwk">&mdash;</span> &mdash; <b>a small, developer- and agent-skewed slice of global token processing</b>. For scale, Google reported ~3.2 quadrillion tokens/month of its own (Google I/O, May 2026).</div></div>
   <div class="row"><div class="k">Over-represents</div><div>price-sensitive <b>developer / agent</b> workloads, <b class="warm">open-weight &amp; Chinese</b> models (DeepSeek, Qwen, Kimi, MiniMax) and free tiers.</div></div>
@@ -207,11 +213,13 @@
    }
    draw();
    window.addEventListener('resize',function(){ch.resize();draw();});
+   var det=el.closest('details'); if(det) det.addEventListener('toggle',function(){ if(det.open){ ch.resize(); draw(); } });
   });
   </script>
   
   <div class="row"><div class="k">So read it as</div><div>token share = a <b>momentum</b> signal on this venue, not a global share. West value share is <b>not a measured floor</b>: the Western first-party and hyperscaler spend this venue misses would raise it, the Chinese domestic spend it misses would lower it, and which is larger in dollars is not measured here. It is not a floor for any single vendor either: the missed spend includes ChatGPT and Gemini first-party use as well as enterprise Claude, so Anthropic&#39;s share could move either way. For a view of Western enterprise buyers, likely mark <b>Gemini up</b> and <b class="warm">Chinese-open down</b> (an inference).</div></div>
   <div class="row"><div class="k">Verbosity</div><div><span id="cx_verb">tokens used and cost to run the same benchmark are compared in Panels 2&ndash;3 of the External cross-check below.</span> <i class="sb">Artificial Analysis benchmark, not OpenRouter traffic; see <a href="#aaxc">External cross-check</a> below.</i></div></div>
+  </details>
  </div>
 
  <div class="panel reveal" style="animation-delay:.56s">
