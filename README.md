@@ -15,7 +15,7 @@ Data through the week ending 2026-11-01 (weeks run Monday to Sunday and are labe
   live feed); [METR time horizons](https://metr.org/time-horizons/) (task length);
   [Silicon Data](https://www.silicondata.com/), [SemiAnalysis](https://gpu-index.semianalysis.com/)
   and [Ornn AI](https://data.ornn.com/) (GPU rental and LLM token price indexes, mostly daily, from
-  a manual, dated snapshot pulled 2026-10-26, with no live feed); [Nebius](https://nebius.com/prices) (its own posted GPU prices and public spot prices, with
+  a manual, dated snapshot pulled 2026-11-03, with no live feed); [Nebius](https://nebius.com/prices) (its own posted GPU prices and public spot prices, with
   price-page copies from the [Internet Archive](https://web.archive.org/web/*/nebius.com/prices));
   Farmer and Lafond (2016), "How predictable is technological progress?", via
   [Our World in Data](https://ourworldindata.org/grapher/costs-of-66-different-technologies-over-time)
