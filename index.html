@@ -7273,7 +7273,7 @@ __chartsReady( function(){
  #infra .ixmore{display:block;border:0;background:none;padding:0 2px;margin:-4px 0 8px;font-family:var(--mono);font-size:11px;color:var(--west);cursor:pointer}
  #infra .subhd .ixmore{margin:2px 0 0;font-weight:400}
  #infra .ixnotes .note>p{margin:0 0 10px}
- #infra .tsgrid{display:grid;grid-template-columns:3fr 2fr;gap:18px;align-items:start}
+ #infra .tsgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
  #infra .tsgrid>div{min-width:0}
  #infra .tshead{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;justify-content:space-between;font-size:12px;color:var(--dim);margin:6px 2px 0}
  @media(max-width:900px){#infra .tsgrid{grid-template-columns:1fr}}
@@ -7473,7 +7473,7 @@ __chartsReady( function(){
   <div class="subhd">H100 term structure: 1-year contract against near-term rent
     <small id="ix_a_tssub"></small></div>
   <div class="tsgrid"><div><div id="ix_a_ts" class="chart"></div></div>
-   <div><div class="tshead"><span id="ix_a_tsscap"></span><div class="seg" id="ix_a_tsref"></div></div><div id="ix_a_tss" class="chart"></div></div></div>
+   <div><div class="tshead"><span id="ix_a_tsscap"></span></div><div id="ix_a_tss" class="chart"></div></div></div>
   <p class="lead" id="ix_a_n6"></p>
   <details class="aadef ixnotes"><summary>Notes</summary><div class="note">
    <p class="tcap" id="ix_a_tcap"></p>
@@ -8358,7 +8358,7 @@ __chartsReady( function(){
   function pc(r){return Math.round(r*100)+'%';}
   function refName(C){return C.id==='sa_h100'?'the SemiAnalysis composite':'the '+C.short+' index';}
   put('ix_a_tssub','Each dot is a '+esc(Y.short)+' contract print as a % of a near-term H100 index on the same day (our arithmetic). '+
-   'Over 100%: a one-year lock costs more than renting now (contango). Under 100%: it costs less (backwardation). The second chart draws the same prints as a curve on a few dates.');
+   'Over 100%: a one-year lock costs more than renting now (contango). Under 100%: it costs less (backwardation). The second chart draws the curve on a few dates against each near-term index, side by side on one price scale.');
   function render(){
    var nar=narrowOf(ch), all=[];
    R.forEach(function(x){x.pts.forEach(function(p){all.push(p.r);});});
@@ -8386,7 +8386,7 @@ __chartsReady( function(){
     series:series},true);
   }
   render(); watch(ch,render);
-  var chS=mk('ix_a_tss'), REFI=0, SHADE=['#c9ccd2','#a0a5ae','#6a7180','#2f343d'];
+  var chS=mk('ix_a_tss'), SHADE=['#c9ccd2','#a0a5ae','#6a7180','#2f343d'];
   function snapDates(P){
    var L=P[P.length-1], out=[L];
    [182,365,730].forEach(function(back){var b=null;
@@ -8394,29 +8394,35 @@ __chartsReady( function(){
     if(b&&out.indexOf(b)<0) out.push(b);});
    return out.reverse();
   }
-  function mo(p){var d=new Date(tOf(p.i)); return MN[d.getUTCMonth()]+" '"+String(d.getUTCFullYear()).slice(2);}
+  function mo(i){var d=new Date(tOf(i)); return MN[d.getUTCMonth()]+" '"+String(d.getUTCFullYear()).slice(2);}
+  var common=R[0].pts.filter(function(p){return R.every(function(x){return x.pts.some(function(q){return q.i===p.i;});});});
+  var DI=snapDates(common.length>=2?common:R[0].pts).map(function(p){return p.i;});
   function renderS(){
    if(!chS) return;
-   var x=R[REFI], nar=narrowOf(chS), Ds=snapDates(x.pts), sh=SHADE.slice(SHADE.length-Ds.length);
-   var vs=[]; Ds.forEach(function(p){vs.push(p.y,p.c);});
+   var nar=narrowOf(chS), W=chS.getWidth(), sh=SHADE.slice(SHADE.length-DI.length), n=R.length;
+   var P=R.map(function(x){return DI.map(function(i){return x.pts.filter(function(p){return p.i===i;})[0]||null;});});
+   var vs=[]; P.forEach(function(a){a.forEach(function(p){if(p) vs.push(p.y,p.c);});});
    var lo=Math.floor(Math.min.apply(null,vs)*2)/2-0.5, hi=Math.ceil(Math.max.apply(null,vs)*2)/2+0.5;
-   put('ix_a_tsscap','$ per GPU-hour, near-term against 1-year');
-   chS.setOption({animation:false,
-    grid:{left:nar?40:46,right:nar?92:112,top:14,bottom:28},
+   var YL=nar?38:44, EL=nar?36:42, GAP=nar?8:14, pw=Math.max(60,(W-YL-n*EL-(n-1)*GAP)/n), TOP=nar?66:62;
+   put('ix_a_tsscap','$ per GPU-hour, near-term against 1-year, one price scale');
+   var grids=[],xs=[],ys=[],titles=[],series=[];
+   R.forEach(function(x,g){
+    var left=YL+g*(pw+EL+GAP), L=P[g][P[g].length-1];
+    grids.push({left:left,width:pw,top:TOP,bottom:28});
+    titles.push({text:x.C.provider,subtext:L?st(L.r)+', latest '+pc(L.r):'',left:left,top:nar?22:20,itemGap:3,   // title in the left chart's colour for that index
+     textStyle:{fontFamily:MONO,fontSize:nar?10.5:11.5,fontWeight:700,color:STYLE[x.C.id].c},subtextStyle:{fontFamily:MONO,fontSize:nar?10:10.5,color:DIM}});
+    xs.push({gridIndex:g,type:'category',data:nar?['Now','1-yr']:['Near-term','1-year'],boundaryGap:true,axisLabel:axL({interval:0},nar),axisTick:{show:false},axisLine:{lineStyle:{color:'#d8d2c6'}}});
+    ys.push({gridIndex:g,type:'value',min:Math.max(0,lo),max:hi,axisLabel:axL({show:g===0,formatter:function(v){return '$'+v;}},nar),axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:GRID}}});
+    P[g].forEach(function(p,k){ if(!p) return; var c=sh[k], top=k===DI.length-1;
+     series.push({name:mo(DI[k]),type:'line',xAxisIndex:g,yAxisIndex:g,color:c,symbol:'circle',symbolSize:top?8:6,z:top?5:3,lineStyle:{width:top?3:2,color:c},itemStyle:{color:c},
+      data:[{value:p.c,p:p,ref:x.C.short},{value:p.y,p:p,ref:x.C.short}],labelLayout:{moveOverlap:'shiftY'},
+      endLabel:{show:true,formatter:pc(p.r),color:top?INK:DIM,fontFamily:MONO,fontSize:nar?10:11,fontWeight:top?700:400,distance:5}});
+    });
+   });
+   chS.setOption({animation:false,title:titles,grid:grids,xAxis:xs,yAxis:ys,series:series,
+    legend:{top:0,left:0,itemWidth:14,itemHeight:8,data:DI.map(mo),textStyle:{fontFamily:MONO,fontSize:nar?10:11,color:INK}},
     tooltip:tip({trigger:'item',formatter:function(q){var p=q.data.p;
-     return '<b>'+pdt(tOf(p.i))+'</b><br>near-term $'+f2(p.c)+' ('+esc(x.C.short)+')<br>1-year contract $'+f2(p.y)+'<br>1-year = <b>'+pc(p.r)+'</b> of near-term, '+st(p.r);}}),
-    xAxis:{type:'category',data:['Near-term','1-year'],boundaryGap:true,axisLabel:axL({},nar),axisTick:{show:false},axisLine:{lineStyle:{color:'#d8d2c6'}}},
-    yAxis:{type:'value',min:Math.max(0,lo),max:hi,axisLabel:axL({formatter:function(v){return '$'+v;}},nar),axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:GRID}}},
-    series:Ds.map(function(p,k){var c=sh[k], top=k===Ds.length-1;
-     return {name:mo(p),type:'line',color:c,symbol:'circle',symbolSize:top?8:6,z:top?5:3,lineStyle:{width:top?3:2,color:c},itemStyle:{color:c},
-      data:[{value:p.c,p:p},{value:p.y,p:p}],labelLayout:{moveOverlap:'shiftY'},
-      endLabel:{show:true,formatter:mo(p)+'  '+pc(p.r),color:top?INK:DIM,fontFamily:MONO,fontSize:nar?10:11,fontWeight:top?700:400,distance:6}};})},true);
-  }
-  var seg=document.getElementById('ix_a_tsref');
-  if(seg&&R.length>1){
-   seg.innerHTML=R.map(function(x,k){return '<button type="button" data-k="'+k+'"'+(k===REFI?' class="active"':'')+'>'+esc(x.C.provider)+'</button>';}).join('');
-   seg.querySelectorAll('button').forEach(function(b){b.onclick=function(){REFI=+b.dataset.k;
-    seg.querySelectorAll('button').forEach(function(o){o.classList.toggle('active',o===b);}); renderS();};});
+     return '<b>'+pdt(tOf(p.i))+'</b><br>near-term $'+f2(p.c)+' ('+esc(q.data.ref)+')<br>1-year contract $'+f2(p.y)+'<br>1-year = <b>'+pc(p.r)+'</b> of near-term, '+st(p.r);}})},true);
   }
   if(chS){renderS(); watch(chS,renderS);}
   var parts=R.map(function(x){
