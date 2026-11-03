@@ -146,7 +146,7 @@
  <h1 class="reveal" style="animation-delay:.08s"><span class="a">West</span><em>vs</em><span class="b">China</span></h1>
  <div class="rule reveal" style="animation-delay:.14s"></div>
  <p class="sub reveal" style="animation-delay:.2s" id="hero"><span id="hx_tok">&mdash;</span> &mdash; but tokens aren't dollars. <span id="hx_val"></span> Weekly (Mon–Sun, labeled by week-ending date), <span id="hx_span">&mdash;</span>.</p>
- <p class="src reveal" style="animation-delay:.24s">SOURCE OpenRouter public rankings + model catalog list prices · updated 2026-11-03 · weekly Mon–Sun buckets labeled by ending date · value = token volume × estimated $/token (free tier = $0)</p>
+ <p class="src reveal" style="animation-delay:.24s">SOURCE OpenRouter public rankings + model catalog list prices · updated 2026-11-04 · weekly Mon–Sun buckets labeled by ending date · value = token volume × estimated $/token (free tier = $0)</p>
 
  <div class="cards" id="cards"></div>
 
@@ -7463,6 +7463,9 @@ __chartsReady( function(){
   <div class="tgrid" id="ix_a_grid"></div>
   <p class="tcap" id="ix_a_nb"></p>
   <p class="lead"><b>Read:</b> <span id="ix_a_n1"></span></p>
+  <div class="subhd">H100 term structure: 1-year contract against near-term rent
+    <small id="ix_a_tssub"></small></div>
+  <div id="ix_a_ts" class="chart"></div>
   <p class="lead" id="ix_a_n6"></p>
   <p class="lead" id="ix_a_n4"></p>
   <p class="lead" id="ix_a_n3"></p>
@@ -8257,18 +8260,6 @@ __chartsReady( function(){
    var mid=tierOf('H100');
    put('ix_a_n1',(GAP?'In the '+esc(mid?mid.toLowerCase():'H100')+' chart <b>SemiAnalysis sits '+bd('$'+f2(Math.abs(GAP.dSd))+' ('+f1(Math.abs(GAP.pSd))+'%)')+' '+rel(GAP.dSd)+' Silicon Data and '+bd('$'+f2(Math.abs(GAP.dOn))+' ('+f1(Math.abs(GAP.pOn))+'%)')+' '+rel(GAP.dOn)+' Ornn on '+pdt(tOf(GAP.i))+'</b> (the bracket), while Silicon Data and Ornn are within '+bd('$'+f2(GAP.z))+' of each other that day'+(GAP.n>1?' ('+bd('$'+f2(GAP.aZ))+' apart on average over the '+GAP.n+' days with all three prints in the '+GAPWIN+' days to then)':'')+'; the table above gives the likely reason, and the note under it shows how the gap has moved.':'')+
     (GAPB?' On the B200 that note compares Ornn with Silicon Data on '+pdt(tOf(GAPB.i))+', the last day both have a print.':''));
-   (function(){
-    var Y=BY.sa_h100_1y, D=BY.sd_h100;
-    var P=Y?Y.idx.filter(function(i){return ratioOf(i)!=null;}):[];
-    if(P.length<2){put('ix_a_n6',''); return;}
-    var L=P[P.length-1], lo=P[0], A=null;
-    P.forEach(function(i){if(ratioOf(i)<ratioOf(lo)) lo=i; var d=Math.abs(L-YEAR_DAYS-i); if(d<=20&&(A===null||d<Math.abs(L-YEAR_DAYS-A))) A=i;});
-    var sd=(D&&D.v[L]!=null)?Y.v[L]/D.v[L]:null;
-    put('ix_a_n6','<b>1-year contract against spot (our arithmetic, H100 only):</b> the '+esc(Y.short)+' print of '+pdt(tOf(L))+' ($'+f2(Y.v[L])+') is '+bd(pct0(ratioOf(L)))+' of the SemiAnalysis H100 composite that day ($'+f2(BY.sa_h100.v[L])+')'+
-     (A!==null&&A!==L?', against '+bd(pct0(ratioOf(A)))+' on '+pdt(tOf(A)):'')+(lo!==L&&lo!==A?' and a low of '+bd(pct0(ratioOf(lo)))+' on '+pdt(tOf(lo)):'')+'. '+
-     (sd!==null?'Against the Silicon Data H100 index that day ($'+f2(D.v[L])+') it is '+bd(pct0(sd))+'. ':'')+
-     'The labels on the contract line in the chart above show the same ratio for the latest print and the one a year before. A contract with prepayment terms is a different product from the daily indexes (see the definitions), and this is one tenor, so it is a single point on a term curve.');
-   })();
    var R=GPUS.filter(function(s){return s.r12;}), MISS=GPUS.filter(function(s){return !s.r12;}), MO=R.filter(function(s){return !s.daily;});
    var t='Each bar is the change in an index&rsquo;s trailing '+SMOOTH+'-day median over the 12 months to its last print; the dot is the same change over the last '+TREND_DAYS+' days. Medians at both ends, the same basis as Panel C, so one-day prints do not set the sign; each row runs over its own window.'+
     MO.map(function(s){return ' The '+esc(s.title)+' is a monthly print: its bar is the print of '+pdt(tOf(s.last))+' against the print of '+pdt(tOf(s.r12.from))+(s.r90?', its dot against the print of '+pdt(tOf(s.r90.from)):'')+'.';}).join('')+
@@ -8331,6 +8322,61 @@ __chartsReady( function(){
    if(NB) h.push(nbDefTxt());
    put('ix_a_def',h.join(''));
   })();
+ })();
+
+ var TS_FLAT=0.02;   // within 2% of 100% reads flat
+ (function(){
+  var Y=BY.sa_h100_1y; if(!Y) return;
+  var R=[BY.sa_h100,BY.sd_h100].filter(Boolean).map(function(C){
+   return {C:C,pts:Y.idx.filter(function(i){return C.v[i]!=null&&Y.v[i]!=null;}).map(function(i){return {i:i,y:Y.v[i],c:C.v[i],r:Y.v[i]/C.v[i]};})};
+  }).filter(function(x){return x.pts.length>=2;});
+  if(!R.length){put('ix_a_n6',''); return;}
+  var ch=mk('ix_a_ts'); if(!ch) return;
+  function st(r){return r>1+TS_FLAT?'contango':(r<1-TS_FLAT?'backwardation':'flat');}
+  function pc(r){return Math.round(r*100)+'%';}
+  function refName(C){return C.id==='sa_h100'?'the SemiAnalysis composite':'the '+C.short+' index';}
+  put('ix_a_tssub','Each dot is a '+esc(Y.short)+' contract print as a % of a near-term H100 index on the same day (our arithmetic). '+
+   'Over 100%: a one-year lock costs more than renting now (contango). Under 100%: it costs less (backwardation).');
+  function render(){
+   var nar=narrowOf(ch), all=[];
+   R.forEach(function(x){x.pts.forEach(function(p){all.push(p.r);});});
+   var lo=Math.min(0.9,Math.floor(Math.min.apply(null,all)*10)/10), hi=Math.max(1.1,Math.ceil(Math.max.apply(null,all)*10)/10+0.1);   // headroom over the top dot for the area label
+   var x0=Math.min.apply(null,R.map(function(x){return x.pts[0].i;})), x1=Math.max.apply(null,R.map(function(x){return x.pts[x.pts.length-1].i;}));
+   var series=R.map(function(x){
+    var c=STYLE[x.C.id].c, last=x.pts[x.pts.length-1];
+    return {name:'against '+x.C.short,type:'line',color:c,symbol:'circle',symbolSize:nar?5:6,showAllSymbol:true,lineStyle:{width:2,color:c},itemStyle:{color:c},
+     data:x.pts.map(function(p){return {value:[tOf(p.i),+(p.r*100).toFixed(1)],p:p};}),
+     endLabel:{show:!nar,formatter:function(){return pc(last.r);},color:c,fontFamily:MONO,fontSize:11,fontWeight:700,distance:6}};
+   });
+   series[0].markLine={silent:true,symbol:'none',lineStyle:{color:'#8d8676',type:'dashed',width:1},
+    data:[{yAxis:100}],label:{formatter:'100% = flat',color:DIM,fontFamily:MONO,fontSize:nar?10:10.5,position:'insideStartBottom'}};
+   series[0].markArea={silent:true,data:[
+    [{yAxis:100,itemStyle:{color:'rgba(47,52,61,.05)'},label:{show:true,formatter:'contango: 1-year above near-term',position:'insideTopLeft',color:DIM,fontFamily:MONO,fontSize:nar?10:10.5}},{yAxis:hi*100}],
+    [{yAxis:lo*100,itemStyle:{color:'rgba(0,0,0,0)'},label:{show:true,formatter:'backwardation: 1-year below near-term',position:'insideBottomRight',color:DIM,fontFamily:MONO,fontSize:nar?10:10.5}},{yAxis:100}]]};
+   ch.setOption({animation:false,
+    grid:{left:nar?44:52,right:nar?14:56,top:nar?52:36,bottom:28},
+    legend:{top:0,left:nar?0:'center',itemWidth:14,itemHeight:8,textStyle:{fontFamily:MONO,fontSize:nar?10:11,color:INK}},
+    tooltip:tip({trigger:'item',formatter:function(q){var p=q.data.p;
+     return '<b>'+pdt(tOf(p.i))+'</b>, '+esc(q.seriesName)+'<br>1-year contract $'+f2(p.y)+' / near-term $'+f2(p.c)+' = <b>'+pc(p.r)+'</b> ('+st(p.r)+')';}}),
+    xAxis:xAxis(tOf(x0)-30*DAY,tOf(x1)+(nar?20:45)*DAY,nar,nar),
+    yAxis:{type:'value',min:lo*100,max:hi*100,interval:10,axisLabel:axL({formatter:function(v){return v+'%';}},nar),
+     axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:GRID}}},
+    series:series},true);
+  }
+  render(); watch(ch,render);
+  var parts=R.map(function(x){
+   var P=x.pts, L=P[P.length-1], A=null, now=st(L.r);
+   P.forEach(function(p){var d=Math.abs(L.i-YEAR_DAYS-p.i); if(d<=45&&(A===null||d<Math.abs(L.i-YEAR_DAYS-A.i))) A=p;});
+   var t='Against '+refName(x.C)+', the 1-year print of '+pdt(tOf(L.i))+' ($'+f2(L.y)+') is '+bd(pc(L.r))+' of the near-term price ($'+f2(L.c)+'): '+now+(A?', from '+pc(A.r)+' a year earlier':'')+'.';
+   var first=P.filter(function(p){return st(p.r)===now;})[0];
+   if(now==='contango') t+=' First above 100% on the print of '+pdt(tOf(first.i))+'.';
+   else if(now==='backwardation'&&P.every(function(p){return st(p.r)==='backwardation';})) t+=' Below 100% at every print since '+pdt(tOf(P[0].i))+'.';
+   return t;
+  });
+  var up=R.every(function(x){var P=x.pts; return P.length>=2&&P[P.length-1].r>P[0].r;});
+  put('ix_a_n6','<b>Read (our arithmetic, H100 only):</b> '+parts.join(' ')+' '+
+   (up?'Both lines have risen since their first print: a one-year lock now costs more against renting today than it used to. ':'')+
+   'Two tenors only, so each dot is the slope between two points of the curve. The SemiAnalysis composite blends spot and contract prices, and SemiAnalysis states the 1-year contract assumes partial prepayment, so part of any gap is a product difference.');
  })();
 
  var MM_MIN=3, RING_APART=0.12, A2_THIN={'Ornn':true};
