@@ -167,7 +167,7 @@ html.night{filter:invert(.9) hue-rotate(180deg);background:#fff}
  <h1 class="reveal" style="animation-delay:.08s"><span class="a">West</span><em>vs</em><span class="b">China</span></h1>
  <div class="rule reveal" style="animation-delay:.14s"></div>
  <p class="sub reveal" style="animation-delay:.2s" id="hero"><span id="hx_tok">&mdash;</span> &mdash; but tokens aren't dollars. <span id="hx_val"></span> Weekly (Mon–Sun, labeled by week-ending date), <span id="hx_span">&mdash;</span>.</p>
- <p class="src reveal" style="animation-delay:.24s">SOURCE OpenRouter public rankings + model catalog list prices · updated 2026-11-04 · weekly Mon–Sun buckets labeled by ending date · value = token volume × estimated $/token (free tier = $0)</p>
+ <p class="src reveal" style="animation-delay:.24s">SOURCE OpenRouter public rankings + model catalog list prices · updated 2026-11-05 · weekly Mon–Sun buckets labeled by ending date · value = token volume × estimated $/token (free tier = $0)</p>
 
  <div class="cards" id="cards"></div>
 
@@ -7313,6 +7313,12 @@ __chartsReady( function(){
  #infra .tcard .tkey{margin:0 6px 8px}
  #infra .tcard .tread{margin:0 0 10px}
  #infra .tgrid+.tcap{margin-top:10px}
+ #infra .tgrid.tstack{grid-template-columns:minmax(0,1fr);gap:14px}
+ #infra .tgrid.tstack>.tcard{grid-column:auto;padding:12px 10px 4px}
+ #infra .tstack .chart.tp{height:340px}
+ #infra .tstack .chart.ty{height:200px}
+ #infra .tstack .tyh{font-family:var(--mono);font-size:11px;color:var(--dim);margin:4px 6px 0}
+ @media(max-width:520px){#infra .tstack .chart.tp{height:290px} #infra .tstack .chart.ty{height:180px}}
  #infra .a3row{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:4px 24px;align-items:start}
  #infra .hwgrid{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin-top:10px}
  #infra .hwc{border:1px solid var(--line);border-radius:12px;padding:9px 12px 10px;background:var(--paper);min-width:0}
@@ -7486,10 +7492,10 @@ __chartsReady( function(){
   <div class="ixkey" id="ix_a_ykey"></div>
   <div id="ix_a_yoy" class="chart"></div>
   <p class="lead" id="ix_a_n2"></p>
-  <div class="subhd">Rent over time, one chart per tier
+  <div class="subhd">Rent over time and its change on a year earlier, one chart per tier
     <small id="ix_a_gsub"></small></div>
   <div class="ixctl" id="ix_a_ctl"></div>
-  <div class="tgrid" id="ix_a_grid"></div>
+  <div class="tgrid tstack" id="ix_a_grid"></div>
   <p class="lead"><b>Read:</b> <span id="ix_a_n1"></span></p>
   <div class="subhd">H100 term structure: 1-year contract against near-term rent
     <small id="ix_a_tssub"></small></div>
@@ -7801,8 +7807,16 @@ __chartsReady( function(){
    if(over>0){P[P.length-1].pos-=over; for(var k=P.length-2;k>=0;k--) P[k].pos=Math.min(P[k].pos,P[k+1].pos-h-gap);}
   }
   var lx=xr[0]+12, ch0=[];
+  function tw(it){return Math.max(String(it.l1).length,String(it.l2).length)*6.1;}
+  P.forEach(function(p){p.early=(xe[0]-p.x)>24&&!p.it.held;});
+  var MB=P.filter(function(p){return !p.early;}).map(function(p){return {x:lx,y:p.pos,w:tw(p.it),h:h};});
   P.forEach(function(p){
-   var ly=p.pos+h/2, early=(xe[0]-p.x)>24&&!p.it.held, tc=p.it.tc||p.it.c;
+   if(!p.early) return;
+   var b={x:p.x+5,y:p.y-h-2,w:tw(p.it),h:h};
+   if(b.x+b.w>lx-3||MB.some(function(m){return b.x<m.x+m.w&&m.x<b.x+b.w&&b.y<m.y+m.h&&m.y<b.y+b.h;})) p.early=false;
+  });
+  P.forEach(function(p){
+   var ly=p.pos+h/2, early=p.early, tc=p.it.tc||p.it.c;
    if(early){
     ch0.push({type:'text',silent:true,z:10,x:p.x+5,y:p.y-h-2,style:{text:p.it.l1+'\n'+p.it.l2,fill:tc,font:'10px '+MONO,lineHeight:LH,textVerticalAlign:'top',textAlign:'left',stroke:'#fff',lineWidth:3}});
     return;
@@ -8214,6 +8228,8 @@ __chartsReady( function(){
      var rm=s.rem.filter(function(r){return r.i===i;})[0];
      txt=rm?'<span style="color:#9aa0ab">print of '+f2(rm.v)+' removed as a data error</span>':'<span style="color:#9aa0ab">no print this day</span>';
     }
+    var yq=s.daily?s.yy[i]:(function(){var hp=heldPrint(s,i); return hp?s.yy[hp.i]:null;})();
+    if(yq) txt+=' <span style="color:#6a7180">'+yoyTxt(yq.c)+' on a year earlier'+(s.daily?'':' (print to print)')+(yq.why.length?'; '+yq.why.join('; '):'')+'</span>';
     h+='<div style="margin-top:5px">'+dot(colA(s))+'<b>'+esc(s.short)+'</b> '+txt+'<div style="color:#6a7180;font-size:11px;line-height:1.35">'+esc(s.tipwhat)+'</div></div>';
    });
    return h+nh;
@@ -8223,17 +8239,51 @@ __chartsReady( function(){
  var GL=Math.max.apply(null,GPUS.map(function(s){return s.last;}));
  var IW=(function(){var d=new Date(tOf(GL)); return Math.max(0,iOf(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()-WIN_MONTHS,d.getUTCDate())));})();
  var RULE_OFF=0;
+ var AWINS=[['all','All'],[24,'2 years'],[12,'1 year'],[6,'6 months']], AWIN='all';
+ function aStart(V){
+  var f=Math.min.apply(null,V.map(function(s){return s.first;}));
+  if(AWIN==='all') return f;
+  var d=new Date(tOf(GL)); return Math.max(f,iOf(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()-AWIN,d.getUTCDate())));
+ }
+ function yoyAt(s,i){
+  if(s.daily){
+   if(s.tm[i]==null) return null;
+   for(var k=0;k<=TOL_D;k++){
+    var c=[i-YEAR_DAYS-k,i-YEAR_DAYS+k];
+    for(var q=0;q<(k?2:1);q++){var b=c[q]; if(b>=0&&s.tm[b]!=null) return {c:(s.tm[i]/s.tm[b]-1)*100,b:b,why:edgeOf(s,{from:b})};}
+   }
+   return null;
+  }
+  if(s.v[i]==null) return null;
+  var best=-1; s.idx.forEach(function(j){if(Math.abs(j-(i-YEAR_DAYS))<=TOL_M&&(best<0||Math.abs(j-(i-YEAR_DAYS))<Math.abs(best-(i-YEAR_DAYS)))) best=j;});
+  return best<0?null:{c:(s.v[i]/s.v[best]-1)*100,b:best,why:edgeOf(s,{from:best})};
+ }
+ S.forEach(function(s){if(s.kind!=='gpu') return; s.yy=[]; for(var i=0;i<N;i++) s.yy.push(i>=s.first&&i<=s.last?yoyAt(s,i):null);});
+ function yoyTxt(c){return (c>=0?'+':'\u2212')+f1(Math.abs(c))+'%';}
+ function yoyName(s){return s.daily?s.provider:'1-yr';}
+ function yoyLast(s){for(var i=s.last;i>=s.first;i--){if(s.yy[i]) return {y:s.yy[i],i:i};} return null;}
+ function yoyLbl(s,y){return yoyName(s)+' '+yoyTxt(y.c)+(y.why.length?'\u2020':'');}
+ var _yc=null;
+ function yoyLabW(V,ph){
+  try{_yc=_yc||document.createElement('canvas').getContext('2d'); _yc.font=(ph?10.5:10)+'px '+MONO;}catch(e){_yc=null;}
+  var w=0; V.forEach(function(s){var L=yoyLast(s); if(!L) return; var t=yoyLbl(s,L.y); w=Math.max(w,_yc?_yc.measureText(t).width:t.length*6.2);});
+  return Math.ceil(w)+6;   // + endLabel distance
+ }
+ function yoyRaw(s,q){return s.v[q]!=null&&(s.tm[q]==null||!!s.yy[q]);}
  GPUS.forEach(function(s){if(!s.daily) return; [[s.r12,YEAR_DAYS],[s.r90,TREND_DAYS]].forEach(function(x){if(x[0]) RULE_OFF=Math.max(RULE_OFF,Math.abs(x[0].from-(GL-x[1])));});});
+ function aTicks(ch){return Math.max(3,Math.min(12,Math.floor(ch.getWidth()/130)));}   // about one date label per 130px
  function renderTier(o){
   var ch=o.ch, t=o.t, V=t.ss.filter(function(s){return onP[s.provider];}), w=ch.getWidth(), ph=phoneView();
   if(!V.length){
+   o.xMin=null;
    put('ix_a_k'+o.k,'');
    ch.setOption({title:{text:'No index from the selected providers',left:'center',top:'middle',textStyle:{color:DIM,fontFamily:SANS,fontSize:12,fontWeight:400}},
     xAxis:{show:false},yAxis:{show:false},series:[],tooltip:{show:false},grid:{show:false}},true);
    return;
   }
   var nbc=(NB&&onN)?t.chips.filter(function(c){return NB.shown.indexOf(c)>=0;}):[];
-  var xMin=tOf(IW), xMax=(NB&&onN)?Math.max(tOf(GL),NB.lastT):tOf(GL);
+  var IW=aStart(V); o.w0=IW;   // Panel A's window start for this tier (shadows the shared IW)
+  var xMin=tOf(IW), xMax=(NB&&onN)?Math.max(tOf(GL),NB.lastT):tOf(GL); o.xMin=xMin; o.xMax=xMax;
   var series=V.map(function(s){
    var c=colA(s), step=!s.daily, data;
    if(step){
@@ -8254,37 +8304,114 @@ __chartsReady( function(){
   var RL={color:'#a49d8f',width:1,type:[3,3]};
   series[0].markLine={silent:true,symbol:'none',animation:false,lineStyle:RL,
    label:{show:true,position:'end',distance:2,color:DIM,fontFamily:MONO,fontSize:ph?10.5:9.5},
-   data:[{xAxis:tOf(GL-YEAR_DAYS),label:{formatter:'12m'}},{xAxis:tOf(GL-TREND_DAYS),label:{formatter:TREND_DAYS+'d'}}]};
+   data:[{xAxis:tOf(GL-YEAR_DAYS),label:{formatter:'12m'}},{xAxis:tOf(GL-TREND_DAYS),label:{formatter:TREND_DAYS+'d'}}].filter(function(d){return d.xAxis>xMin;})};
   series=series.concat(nbSeries(nbc,IW));
   var lab=w>=(ph?380:300), M={top:16,bottom:28}, key=document.getElementById('ix_a_k'+o.k);
   if(key) key.innerHTML=(lab?'':V.map(function(s){return '<span><i style="border-bottom-color:'+colA(s)+'"></i>'+esc(endName(s))+' <b>'+f2(s.lastv)+'</b> <em>'+pds(tOf(s.last))+'</em></span>';}).join(''))+(nbc.length?nbKey(nbc):'');
-  ch.setOption({useUTC:true,grid:{left:38,right:lab?92:14,top:M.top,bottom:M.bottom},
+  o.right=lab?Math.max(92,yoyLabW(V,ph)+14):14; o.left=ph?44:42;   // room for the widest year-on-year end label (and the price ends)   // both charts of the card use these margins, so their dates line up
+  ch.setOption({useUTC:true,grid:{left:o.left,right:o.right,top:M.top,bottom:M.bottom},
    tooltip:tip({trigger:'axis',axisPointer:{type:'line',lineStyle:{color:DIM,type:'dashed'}},formatter:function(ps){return tipRows(ps,V,nbc);}}),
-   xAxis:Object.assign(xAxis(xMin,xMax,true,ph),{splitNumber:narrowOf(ch)?2:3}),
+   xAxis:Object.assign(xAxis(xMin,xMax,narrowOf(ch),ph),{splitNumber:aTicks(ch)}),
    yAxis:{type:'value',min:0,splitNumber:4,axisLabel:axL(null,ph),splitLine:{lineStyle:{color:GRID}}},
    series:series},true);
   placeEnds(ch,'ix_a_e'+o.k,V.map(function(s){return {t:tOf(s.last),v:s.lastv,c:colA(s),tc:txtA(s),held:!s.daily,l1:endName(s),l2:f2(s.lastv)+' '+DOT+' '+pds(tOf(s.last))};}),xMax,M,
    function(){return bracket(ch,V);},lab,tOf(GL));
  }
+ function yoySeg(s,w0){
+  var SO=[],DO=[],prevI=-1,prevK=null,pv=null;
+  for(var i=w0;i<=s.last;i++){
+   var y=s.yy[i]; if(!y) continue;
+   var v=+y.c.toFixed(2), k=y.why.length?DO:SO;
+   if(prevI>=0){
+    var w=0,r=0; for(var q=prevI+1;q<i;q++){if(!yoyRaw(s,q)){r++; if(r>w) w=r;} else r=0;}
+    if(w>BRIDGE){SO.push([tOf(prevI+1),null]); DO.push([tOf(prevI+1),null]);}
+    else if(k!==prevK){prevK.push([tOf(i),null]); k.push([tOf(prevI),pv]);}   // the old run stops at its last day; the new one starts there
+   }
+   k.push([tOf(i),v]); prevI=i; prevK=k; pv=v;
+  }
+  return {sol:SO,dt:DO};
+ }
+ function renderYoy(o){
+  var ch=o.cy; if(!ch) return;
+  var V=o.t.ss.filter(function(s){return onP[s.provider];}), ph=phoneView(), all=[], ends=[], anyWeak=false;
+  var key=document.getElementById('ix_a_yk'+o.k);
+  function empty(msg){
+   if(key) key.innerHTML='';
+   ch.setOption({title:{text:msg,left:'center',top:'middle',textStyle:{color:DIM,fontFamily:SANS,fontSize:12,fontWeight:400}},xAxis:{show:false},yAxis:{show:false},series:[],tooltip:{show:false},grid:{show:false}},true);
+  }
+  if(!V.length){empty('No index from the selected providers'); return;}
+  if(o.xMin==null) return;
+  var lab=o.right>14, series=[];
+  V.forEach(function(s){
+   var c=colA(s), step=!s.daily, sol=[], dt=[], last=null, lastI=-1;
+   if(step){
+    var hp=heldPrint(s,o.w0); if(hp&&hp.i<o.w0&&s.yy[hp.i]){sol.push({value:[tOf(o.w0),+s.yy[hp.i].c.toFixed(2)],symbol:'none'}); last=s.yy[hp.i]; lastI=hp.i;}
+    s.idx.forEach(function(i){
+     if(i<o.w0) return;
+     var y=s.yy[i];
+     if(y){sol.push({value:[tOf(i),+y.c.toFixed(2)],symbol:y.why.length?'emptyCircle':'circle'}); last=y; lastI=i; if(y.why.length) anyWeak=true;}
+     else if(sol.length){var pv=sol[sol.length-1], pvv=(pv.value||pv)[1]; if(pvv!=null){sol.push({value:[tOf(i),pvv],symbol:'none'}); sol.push([tOf(i),null]);}}
+    });
+   } else {
+    var g=yoySeg(s,o.w0); sol=g.sol; dt=g.dt;
+    for(var i=s.last;i>=o.w0;i--){if(s.yy[i]){last=s.yy[i]; lastI=i; break;}}
+    if(dt.some(function(d){return d[1]!=null;})) anyWeak=true;
+   }
+   var mine=sol.concat(dt).map(function(d){return (d.value||d)[1];}).filter(function(v){return v!=null;});
+   if(!mine.length) return;
+   all=all.concat(mine);
+   var weak=!!(last&&last.why.length), lbl=last?yoyLbl(s,last):'';
+   ends.push({s:s,last:last,i:lastI,weak:weak});
+   var base={type:'line',animation:false,showSymbol:step,symbol:'circle',symbolSize:5,step:step?'end':false,connectNulls:false,emphasis:{disabled:true},itemStyle:{color:c,borderColor:'#fff',borderWidth:1}};
+   var main=Object.assign({},base,{name:s.short,z:4,lineStyle:{color:c,width:step?2:1.7},data:sol});
+   var dot2=dt.some(function(d){return d[1]!=null;})?Object.assign({},base,{name:s.short+' (weak base)',z:3,showSymbol:false,lineStyle:{color:c,width:1.5,type:[2,3]},data:dt}):null;
+   var host=(dot2&&weak&&!step)?dot2:main;
+   host.endLabel={show:lab&&!!last,formatter:lbl,color:txtA(s),fontFamily:MONO,fontSize:ph?10.5:10,fontWeight:weak?400:700,distance:6,textBorderColor:'#fff',textBorderWidth:3};
+   host.labelLayout={moveOverlap:'shiftY'};
+   series.push(main); if(dot2) series.push(dot2);
+  });
+  if(!series.length){empty('No index here has a year of history in this window'); return;}
+  if(key) key.innerHTML=lab?'':ends.map(function(e){return '<span><i style="border-bottom-color:'+colA(e.s)+'"></i>'+esc(yoyName(e.s))+' <b>'+yoyTxt(e.last.c)+(e.weak?'\u2020':'')+'</b> <em>'+pds(tOf(e.i))+'</em></span>';}).join('')+
+   (anyWeak?'<span><i class="pre"></i>dotted'+(V.some(function(s){return !s.daily;})?' or hollow':'')+(ends.some(function(e){return e.weak;})?', \u2020':'')+': weak base (see definitions)</span>':'');
+  series[0].markLine={silent:true,symbol:'none',animation:false,lineStyle:{color:'#8d8676',width:1},label:{show:false},data:[{yAxis:0}]};
+  var lo=Math.min(0,Math.min.apply(null,all)), hi=Math.max(0,Math.max.apply(null,all));
+  var STP=[5,10,20,25,50,100,200], st=STP.filter(function(x){return Math.ceil(hi/x)-Math.floor(lo/x)<=6;})[0]||500;
+  ch.setOption({useUTC:true,grid:{left:o.left,right:o.right,top:12,bottom:28},
+   tooltip:tip({trigger:'axis',axisPointer:{type:'line',lineStyle:{color:DIM,type:'dashed'}},formatter:function(ps){
+    if(!ps||!ps.length) return ''; var i=iOf(ps[0].axisValue), h='<b>'+pdt(ps[0].axisValue)+'</b> <span style="color:#6a7180">change on a year earlier</span>';
+    V.forEach(function(s){
+     if(i<s.first||i>s.last) return;
+     var y=s.daily?s.yy[i]:(function(){var hp=heldPrint(s,i); return hp?s.yy[hp.i]:null;})(); if(!y) return;
+     h+='<div style="margin-top:4px">'+dot(colA(s))+'<b>'+esc(s.short)+'</b> <b>'+yoyTxt(y.c)+'</b> <span style="color:#6a7180">against '+pdt(tOf(y.b))+(s.daily?'':' (print to print)')+(y.why.length?'; '+y.why.join('; '):'')+'</span></div>';});
+    return h;}}),
+   xAxis:Object.assign(xAxis(o.xMin,o.xMax,narrowOf(ch),ph),{splitNumber:aTicks(ch)}),
+   yAxis:{type:'value',min:Math.floor(lo/st)*st,max:Math.ceil(hi/st)*st,interval:st,axisLabel:axL({formatter:function(v){return (v>0?'+':(v<0?MINUS:''))+Math.abs(v)+'%';}},ph),splitLine:{lineStyle:{color:GRID}}},
+   series:series},true);
+ }
  var TCH=[];
  (function(){
   var grid=document.getElementById('ix_a_grid'); if(!grid) return;
-  grid.innerHTML=TIERS.map(function(t,k){return '<div class="tcard"><div class="tct">'+esc(t.name)+'<small>'+t.ss.length+' index'+(t.ss.length>1?'es':'')+'</small></div><div class="chart sm" id="ix_a_t'+k+'"></div><div class="ixkey tkey" id="ix_a_k'+k+'"></div></div>';}).join('');
+  grid.innerHTML=TIERS.map(function(t,k){return '<div class="tcard"><div class="tct">'+esc(t.name)+'<small>'+t.ss.length+' index'+(t.ss.length>1?'es':'')+', USD per GPU-hour</small></div><div class="chart tp" id="ix_a_t'+k+'"></div><div class="ixkey tkey" id="ix_a_k'+k+'"></div>'+
+   '<div class="tyh">Change on a year earlier, % (our arithmetic)</div><div class="chart ty" id="ix_a_y'+k+'"></div><div class="ixkey tkey" id="ix_a_yk'+k+'"></div></div>';}).join('');
   var MO=GPUS.filter(function(s){return !s.daily;});
-  put('ix_a_gsub','Each chart has its own scale. All three show the same window, the '+WIN_MONTHS+' months to '+pdt(tOf(GL))+' for the indexes. The thin vertical lines mark 12 months and '+TREND_DAYS+' days before that day; each daily index&rsquo;s own 12-month and '+TREND_DAYS+'-day bases sit within '+RULE_OFF+' day'+(RULE_OFF===1?'':'s')+' of them.'+
+  put('ix_a_gsub','One chart per tier, each with its own scale. Every window ends on '+pdt(tOf(GL))+'; All starts at the tier&rsquo;s first print. Thin vertical lines mark 12 months and '+TREND_DAYS+' days before '+pdt(tOf(GL))+' where they fall inside the window; each daily index&rsquo;s own 12-month and '+TREND_DAYS+'-day bases sit within '+RULE_OFF+' day'+(RULE_OFF===1?'':'s')+' of them. '+
+   'Under each price chart, each index&rsquo;s change on a year earlier, on the bar chart&rsquo;s basis (a daily index&rsquo;s trailing '+SMOOTH+'-day median against the one a year before; the contract print to print), from the first day a year of history exists. Dotted where the base is weak by the tests that hatch a bar; a latest value on a weak base carries &dagger;. Hover for the day&rsquo;s prices and changes.'+
    MO.map(function(s){return ' The '+esc(s.title)+' is published at the start of some months, so it is drawn as a step held until the next print.';}).join('')+
-   (CHIPS.length?' Panel A2 shows each chip&rsquo;s longer history.':'')+
-   (NB?' Nebius&rsquo;s own posted prices run to '+pdt(NB.lastT)+', so while they are shown the charts reach that day.':''));
+   (NB?(NB.lastT>tOf(GL)?' Nebius&rsquo;s own posted prices run to '+pdt(NB.lastT)+', so while they are shown the charts reach that day.':' Nebius&rsquo;s own posted prices run to '+pdt(NB.lastT)+'.'):''));
   TIERS.forEach(function(t,k){
    var ch=mk('ix_a_t'+k); if(!ch) return;
-   var o={t:t,ch:ch,k:k}; o.render=function(){renderTier(o);}; TCH.push(o);
+   var o={t:t,ch:ch,k:k,cy:mk('ix_a_y'+k)}; o.render=function(){renderTier(o); renderYoy(o);}; TCH.push(o);
+   if(o.cy) watch(o.cy,function(){renderYoy(o);});
    o.render(); watch(ch,o.render);
   });
   var ctl=document.getElementById('ix_a_ctl');
   if(ctl){
-   ctl.innerHTML='<span class="grp"><b>Provider</b>'+PROVS.map(function(p){return '<button type="button" class="chip" data-p="'+esc(p)+'" aria-pressed="true"><i style="background:'+PCOL[p]+'"></i>'+esc(p)+'</button>';}).join('')+'</span>'+
+   ctl.innerHTML='<span class="grp"><b>Window</b><span class="seg" id="ix_a_win">'+AWINS.map(function(w){return '<button type="button" data-w="'+w[0]+'" aria-pressed="'+(w[0]===AWIN)+'"'+(w[0]===AWIN?' class="active"':'')+'>'+w[1]+'</button>';}).join('')+'</span></span>'+
+    '<span class="grp"><b>Provider</b>'+PROVS.map(function(p){return '<button type="button" class="chip" data-p="'+esc(p)+'" aria-pressed="true"><i style="background:'+PCOL[p]+'"></i>'+esc(p)+'</button>';}).join('')+'</span>'+
     (NB?'<span class="grp"><b>Posted prices</b><button type="button" class="chip" data-n="1" aria-pressed="true"><i style="background:'+NBC+'"></i>Nebius</button></span>':'');
    ctl.addEventListener('click',function(e){
+    var wb=e.target.closest('#ix_a_win button');
+    if(wb){var v=wb.getAttribute('data-w'); AWIN=v==='all'?'all':+v; ctl.querySelectorAll('#ix_a_win button').forEach(function(x){x.classList.toggle('active',x===wb); x.setAttribute('aria-pressed',x===wb?'true':'false');}); TCH.forEach(function(o){o.render();}); return;}
     var b=e.target.closest('button.chip'); if(!b) return;
     if(b.hasAttribute('data-n')){onN=!onN; b.setAttribute('aria-pressed',onN?'true':'false'); TCH.forEach(function(o){o.render();}); return;}
     var k=b.getAttribute('data-p'); onP[k]=!onP[k]; b.setAttribute('aria-pressed',onP[k]?'true':'false');
@@ -8348,7 +8475,8 @@ __chartsReady( function(){
      (other.length?'; a chip outside that list goes in an Other tier ('+listJoin(other.map(function(t){return esc(t.chips.join(', '));}))+')':'')+'. Each tier has its own time chart and scale.</p>',
     '<p><b>The word with each tier.</b> Each daily index reads rising when its trailing '+SMOOTH+'-day median rose by over '+FLAT_BAND+'% in the last '+TREND_DAYS+' days, falling when it fell by over '+FLAT_BAND+'%, and flat in between. A tier reads rising, flat or falling when all its daily indexes read the same way, and mixed otherwise, with each index&rsquo;s own reading named. Rising becomes still rising only when every index also rose by over '+FLAT_BAND+'% in the last '+TURN_DAYS+' days. When the '+TURN_DAYS+'-day readings do not all match the word, the row says what the last '+TURN_DAYS+' days did and every index shows its '+TURN_DAYS+'-day change in brackets; elsewhere a '+TURN_DAYS+'-day change is shown only where it points the other way. When every index&rsquo;s 12-month change points against the word, the row adds where the tier stands on a year ago. The contract price is a monthly print, so it is compared print to print and kept out of the word.</p>',
     '<p><b>The change windows.</b> 12 months: the 7-day median on the index&rsquo;s last print day against the median nearest to '+YEAR_DAYS+' days earlier (within '+TOL_D+' days); '+TREND_DAYS+' and '+TURN_DAYS+' days the same way. For the contract price, the print against the print nearest to that date (within '+TOL_M+' days). A bar is hatched when its base sits within '+LAUNCH_EDGE+' days after the provider&rsquo;s public launch of the index (or before it), or within '+SHORT_HIST+' days of the index&rsquo;s first print; when the 7-day median then moves '+Math.round(STEP*100)+'% or more within '+AFTER_DAYS+' days, the note under the chart says so. A base sits on a step when the 7-day median moves '+Math.round(STEP*100)+'% or more within '+BASE_WIN+' days either side of it: the bar is then hatched, or the dot hollow, and the note says so.</p>',
-    '<p>Each line in the time charts is a provider&rsquo;s own index, in USD per GPU-hour, on a seven-day calendar, over the same window in all three charts. Gaps of up to '+BRIDGE+' days are drawn through; longer gaps break the line. Nothing is filled in or extrapolated, and each line ends on its last print.</p>'];
+    '<p>Each line in the time charts is a provider&rsquo;s own index, in USD per GPU-hour, on a seven-day calendar, over the window set by the buttons. Gaps of up to '+BRIDGE+' days are drawn through; longer gaps break the line. Nothing is filled in or extrapolated, and each line ends on its last print.</p>',
+    '<p><b>Change on a year earlier</b> (the chart under each price chart, our arithmetic). For a daily index, on each day with a trailing '+SMOOTH+'-day median: that median against the median nearest to '+YEAR_DAYS+' days earlier (within '+TOL_D+' days); the line starts on the first day such a base exists. Gaps of up to '+BRIDGE+' days are drawn through, as in the price chart; it breaks where no base exists for longer. For the contract price, each print against the print nearest to a year before it (within '+TOL_M+' days), held as a step until the next print; a print with no such base ends the step. A value is drawn dotted (a hollow marker on the contract step) when its base fails one of the tests that hatch a 12-month bar: before the provider&rsquo;s public launch or within '+LAUNCH_EDGE+' days after it, within '+SHORT_HIST+' days of the index&rsquo;s first print, or on a step in the 7-day median. A latest value on such a base carries &dagger;.</p>'];
    GPUS.forEach(function(s){
     var g=gapsOf(s), br=g.filter(function(r){return r.n<=BRIDGE;}), lg=g.filter(function(r){return r.n>BRIDGE;});
     var gtxt='';
@@ -8887,7 +9015,7 @@ __chartsReady( function(){
     (ANYHW?'<span><i class="hwl"></i>'+(isPrice()?'hardware price premium, reference':'all-in capex premium, our estimate')+'</span>'+(ANYBAND?'<span><i class="hwr"></i>its range</span>':'')+
      '<span><i class="cush'+(MULTI?'':' one')+'"></i>shaded: rent premium above the '+hw+' premium'+(MULTI?', darker where '+(KP.length>2?'two or more providers are':'both providers are')+' above it':'')+'</span>':''));
   }
-  put('ix_a3_gsub','Each chart has its own scale. The window is Panel A&rsquo;s, the '+WIN_MONTHS+' months to '+pdt(tOf(GL))+', with thin lines at 12 months and '+TREND_DAYS+' days before that day. A line is drawn on days where its provider has a 7-day median for both chips; gaps of up to '+BRIDGE+' days are drawn through. The dashed line follows the capex basis set under the charts.');
+  put('ix_a3_gsub','Each chart has its own scale. The window is the '+WIN_MONTHS+' months to '+pdt(tOf(GL))+', with thin lines at 12 months and '+TREND_DAYS+' days before that day. A line is drawn on days where its provider has a 7-day median for both chips; gaps of up to '+BRIDGE+' days are drawn through. The dashed line follows the capex basis set under the charts.');
 
   var RLS={color:'#a49d8f',width:1,type:[3,3]};
   function yAx(P){
