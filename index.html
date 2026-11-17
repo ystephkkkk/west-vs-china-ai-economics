@@ -250,7 +250,7 @@ html.night{filter:invert(.9) hue-rotate(180deg);background:#fff}
      <button data-m="valshare" class="active">Value share %</button>
      <button data-m="tokshare">Token share %</button></div></div>
   </div><div id="chartA" class="chart"></div>
-  <p class="note" id="leadnote" style="margin-top:0"></p>
+  <p class="note" id="leadnote" style="margin-top:0"></p><p class="note" id="dbx_main" style="margin-top:6px"><b>Cross-check from a different venue</b>, enterprise traffic (<a href="https://developers.databricks.com/ai-index" target="_blank" rel="noopener">Databricks AI Index</a>, 10,000+ companies, week of <span data-dbx="week">2 Nov</span> on Databricks' own week labels): open-weight models are <span data-dbx="ow_latest">31%</span> of Databricks-hosted tokens (<span data-dbx="ow_first">7%</span> on <span data-dbx="first">20 Jul</span>, <span data-dbx="ow_band">29% to 33%</span> since <span data-dbx="since">14 Sep</span>). Closed models, all gateway traffic: Anthropic has <span data-dbx="a_tok">62%</span> of tokens and <span data-dbx="a_spend">70%</span> of spend at list prices; OpenAI <span data-dbx="o_tok">37%</span> of tokens and <span data-dbx="o_spend">27%</span> of spend.</p>
  </div>
 
  <div class="panel reveal" style="animation-delay:.58s">
@@ -871,6 +871,7 @@ __chartsReady(function(){        // echarts is inlined at the END of <body>
   <div class="note"><b>Read:</b> <span id="at_p3midnote"></span> <span id="at_p3opusnote"></span> <span id="at_p3fablenote"></span> <span id="at_p3lownote"></span>
     <b>Caveat:</b> <span id="at_p3why"></span></div>
  </div>
+ <div class="note" id="at_dbx"><b>Cross-check from a different venue</b>, enterprise traffic (<a href="https://developers.databricks.com/ai-index" target="_blank" rel="noopener">Databricks AI Index</a>, 10,000+ companies, week of <span data-dbx="week">2 Nov</span> on Databricks' own week labels): Closed models, all gateway traffic: Anthropic has <span data-dbx="a_tok">62%</span> of tokens and <span data-dbx="a_spend">70%</span> of spend at list prices; OpenAI <span data-dbx="o_tok">37%</span> of tokens and <span data-dbx="o_spend">27%</span> of spend.</div>
 </section>
 <script>
 __chartsReady( function(){
