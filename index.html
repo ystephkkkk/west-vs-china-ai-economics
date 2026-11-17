@@ -3883,7 +3883,7 @@ TIERSHORT.gen_prev='Frontier (other)';
  <div class="seckick">&hellip; and the capstone &middot; Google &amp; the three-way</div>
  <div class="sechead">Inside Google: <b id="gd_h1a">where the tokens sit</b>. Three vendors, <span id="gd_sechead_tail"></span></div>
  <div class="secsub">Google is <span id="gd_distinct"></span>: <b><span id="gd_goword"></span></b>. The <b>Flash</b> and <b>Flash-Lite</b> lines are ~<b><span id="gd_fl_top"></span>%</b> of its routed tokens, <b>Gemma</b> ~<span id="gd_op_top"></span>%,
-   and the frontier tier (<span id="gd_fr_names"></span>) is ~<b><span id="gd_fr_top"></span>%</b> (<span id="gd_range"></span>). Side by side, <span id="gd_strategies"></span>. On the narrower frontier-vs-tail rule, OpenAI's mix reads <b><span id="gd_oa_shape"></span></b>. <span class="dim"><span id="gd_fp_clause"></span> Every share in this section comes from one developer- and agent-heavy third-party router. First-party demand is not visible here, so whether it skews more to the frontier tier is not measured.</span></div>
+   and the frontier tier (<span id="gd_fr_names"></span>) is ~<b><span id="gd_fr_top"></span>%</b>. <span id="gd_range"></span> Side by side, <span id="gd_strategies"></span>. On the narrower frontier-vs-tail rule, OpenAI's mix reads <b><span id="gd_oa_shape"></span></b> and Google's reads <b><span id="gd_g_shape"></span></b>. <span class="dim"><span id="gd_fp_clause"></span> Every share in this section comes from one developer- and agent-heavy third-party router. First-party demand is not visible here, so whether it skews more to the frontier tier is not measured.</span></div>
 
  <div class="cards" id="gd_cards"></div>
 
@@ -3924,12 +3924,12 @@ __chartsReady( function(){
         "pct": 20.4
       },
       "mid": {
-        "tok_b": 12868.6,
-        "pct": 46.4
+        "tok_b": 162.3,
+        "pct": 0.6
       },
       "cheap": {
-        "tok_b": 5181.7,
-        "pct": 18.7
+        "tok_b": 17888.0,
+        "pct": 64.5
       },
       "open": {
         "tok_b": 4052.0,
@@ -3939,7 +3939,7 @@ __chartsReady( function(){
     "models": [
       {
         "slug": "google/gemini-3.8-flash-20260902",
-        "tier": "mid",
+        "tier": "cheap",
         "tok_b": 6658.6,
         "pct": 24.0
       },
@@ -3951,7 +3951,7 @@ __chartsReady( function(){
       },
       {
         "slug": "google/gemini-3-flash-preview-20251217",
-        "tier": "mid",
+        "tier": "cheap",
         "tok_b": 2784.6,
         "pct": 10.0
       },
@@ -3975,7 +3975,7 @@ __chartsReady( function(){
       },
       {
         "slug": "google/gemini-3.7-flash-20260813",
-        "tier": "mid",
+        "tier": "cheap",
         "tok_b": 1533.7,
         "pct": 5.5
       },
@@ -3987,7 +3987,7 @@ __chartsReady( function(){
       },
       {
         "slug": "google/gemini-2.5-flash",
-        "tier": "mid",
+        "tier": "cheap",
         "tok_b": 1105.8,
         "pct": 4.0
       },
@@ -4017,13 +4017,13 @@ __chartsReady( function(){
       },
       {
         "slug": "google/gemini-3.6-flash-20260721",
-        "tier": "mid",
+        "tier": "cheap",
         "tok_b": 390.2,
         "pct": 1.4
       },
       {
         "slug": "google/gemini-3.5-flash-20260519",
-        "tier": "mid",
+        "tier": "cheap",
         "tok_b": 233.3,
         "pct": 0.8
       },
@@ -4052,7 +4052,7 @@ __chartsReady( function(){
       "hydrogen": "mid",
       "pro": "frontier",
       "ultra": "frontier",
-      "flash": "mid",
+      "flash": "cheap",
       "flash-lite": "cheap",
       "gemma": "open"
     },
@@ -4096,7 +4096,7 @@ __chartsReady( function(){
       },
       {
         "line": "flash",
-        "tier": "mid",
+        "tier": "cheap",
         "gen": "3.8",
         "date": "2026-09-02",
         "slug": "google/gemini-3.8-flash-20260902",
@@ -4223,47 +4223,26 @@ __chartsReady( function(){
       }
     ],
     "sensitivity": {
-      "argon_as_mid": {
-        "frontier": 4.4,
-        "mid": 62.4,
-        "cheap": 18.7,
-        "open": 14.6
-      },
-      "flash_as_cheap": {
+      "flash_as_mid": {
         "frontier": 20.4,
-        "mid": 0.6,
-        "cheap": 64.5,
+        "mid": 46.4,
+        "cheap": 18.7,
         "open": 14.6
       }
     },
     "judgement_calls": [
       {
-        "line": "argon",
-        "now": "frontier",
-        "alt": "mid",
-        "why": "Google calls it the flagship; the external capability index has it at 50.4, Hydrogen at 53.9",
-        "aa_score": 50.4,
-        "newest": "google/gemini-4-argon-20261013",
-        "line_pct": 16.0,
-        "mix_if_alt": {
-          "frontier": 4.4,
-          "mid": 62.4,
-          "cheap": 18.7,
-          "open": 14.6
-        }
-      },
-      {
         "line": "flash",
-        "now": "mid",
-        "alt": "cheap",
-        "why": "Google calls it the workhorse; the external capability index has OpenAI's cheap luna at 27.9 and its mid terra at 51.3",
+        "now": "cheap",
+        "alt": "mid",
+        "why": "Google calls it the workhorse; the external capability index has it at 30.8, OpenAI's cheap luna at 27.9 and its mid terra at 51.3",
         "aa_score": 30.8,
         "newest": "google/gemini-3.8-flash-20260902",
         "line_pct": 45.8,
         "mix_if_alt": {
           "frontier": 20.4,
-          "mid": 0.6,
-          "cheap": 64.5,
+          "mid": 46.4,
+          "cheap": 18.7,
           "open": 14.6
         }
       }
@@ -4288,9 +4267,9 @@ __chartsReady( function(){
     },
     "Google": {
       "frontier": 20.4,
-      "mid": 46.4,
+      "mid": 0.6,
       "legacy": 0.0,
-      "cheap": 18.7,
+      "cheap": 64.5,
       "open": 14.6
     }
   },
@@ -4357,6 +4336,14 @@ __chartsReady( function(){
   },
   "pricing": [
     {
+      "date": "2025-06-17",
+      "tier": "cheap",
+      "slug": "google/gemini-2.5-flash",
+      "line": "flash",
+      "in": 0.3,
+      "out": 2.5
+    },
+    {
       "date": "2025-07-22",
       "tier": "cheap",
       "slug": "google/gemini-2.5-flash-lite",
@@ -4365,12 +4352,52 @@ __chartsReady( function(){
       "out": 0.4
     },
     {
+      "date": "2025-12-17",
+      "tier": "cheap",
+      "slug": "google/gemini-3-flash-preview",
+      "line": "flash",
+      "in": 0.5,
+      "out": 3.0
+    },
+    {
       "date": "2026-05-07",
       "tier": "cheap",
       "slug": "google/gemini-3.1-flash-lite",
       "line": "flash-lite",
       "in": 0.25,
       "out": 1.5
+    },
+    {
+      "date": "2026-05-19",
+      "tier": "cheap",
+      "slug": "google/gemini-3.5-flash",
+      "line": "flash",
+      "in": 1.5,
+      "out": 9.0
+    },
+    {
+      "date": "2026-07-21",
+      "tier": "cheap",
+      "slug": "google/gemini-3.6-flash",
+      "line": "flash",
+      "in": 0.75,
+      "out": 3.75
+    },
+    {
+      "date": "2026-08-13",
+      "tier": "cheap",
+      "slug": "google/gemini-3.7-flash",
+      "line": "flash",
+      "in": 0.75,
+      "out": 3.75
+    },
+    {
+      "date": "2026-09-02",
+      "tier": "cheap",
+      "slug": "google/gemini-3.8-flash",
+      "line": "flash",
+      "in": 0.75,
+      "out": 3.75
     },
     {
       "date": "2025-06-17",
@@ -4403,54 +4430,6 @@ __chartsReady( function(){
       "line": "carbon",
       "in": 2.0,
       "out": 10.0
-    },
-    {
-      "date": "2025-06-17",
-      "tier": "mid",
-      "slug": "google/gemini-2.5-flash",
-      "line": "flash",
-      "in": 0.3,
-      "out": 2.5
-    },
-    {
-      "date": "2025-12-17",
-      "tier": "mid",
-      "slug": "google/gemini-3-flash-preview",
-      "line": "flash",
-      "in": 0.5,
-      "out": 3.0
-    },
-    {
-      "date": "2026-05-19",
-      "tier": "mid",
-      "slug": "google/gemini-3.5-flash",
-      "line": "flash",
-      "in": 1.5,
-      "out": 9.0
-    },
-    {
-      "date": "2026-07-21",
-      "tier": "mid",
-      "slug": "google/gemini-3.6-flash",
-      "line": "flash",
-      "in": 0.75,
-      "out": 3.75
-    },
-    {
-      "date": "2026-08-13",
-      "tier": "mid",
-      "slug": "google/gemini-3.7-flash",
-      "line": "flash",
-      "in": 0.75,
-      "out": 3.75
-    },
-    {
-      "date": "2026-09-02",
-      "tier": "mid",
-      "slug": "google/gemini-3.8-flash",
-      "line": "flash",
-      "in": 0.75,
-      "out": 3.75
     },
     {
       "date": "2026-11-12",
@@ -4487,12 +4466,28 @@ __chartsReady( function(){
   ],
   "pricing_all": [
     {
+      "date": "2025-06-17",
+      "tier": "cheap",
+      "slug": "google/gemini-2.5-flash",
+      "line": "flash",
+      "in": 0.3,
+      "out": 2.5
+    },
+    {
       "date": "2025-07-22",
       "tier": "cheap",
       "slug": "google/gemini-2.5-flash-lite",
       "line": "flash-lite",
       "in": 0.1,
       "out": 0.4
+    },
+    {
+      "date": "2025-12-17",
+      "tier": "cheap",
+      "slug": "google/gemini-3-flash-preview",
+      "line": "flash",
+      "in": 0.5,
+      "out": 3.0
     },
     {
       "date": "2026-03-03",
@@ -4511,12 +4506,44 @@ __chartsReady( function(){
       "out": 1.5
     },
     {
+      "date": "2026-05-19",
+      "tier": "cheap",
+      "slug": "google/gemini-3.5-flash",
+      "line": "flash",
+      "in": 1.5,
+      "out": 9.0
+    },
+    {
+      "date": "2026-07-21",
+      "tier": "cheap",
+      "slug": "google/gemini-3.6-flash",
+      "line": "flash",
+      "in": 0.75,
+      "out": 3.75
+    },
+    {
       "date": "2026-07-21",
       "tier": "cheap",
       "slug": "google/gemini-3.5-flash-lite",
       "line": "flash-lite",
       "in": 0.3,
       "out": 2.5
+    },
+    {
+      "date": "2026-08-13",
+      "tier": "cheap",
+      "slug": "google/gemini-3.7-flash",
+      "line": "flash",
+      "in": 0.75,
+      "out": 3.75
+    },
+    {
+      "date": "2026-09-02",
+      "tier": "cheap",
+      "slug": "google/gemini-3.8-flash",
+      "line": "flash",
+      "in": 0.75,
+      "out": 3.75
     },
     {
       "date": "2025-06-05",
@@ -4565,54 +4592,6 @@ __chartsReady( function(){
       "line": "carbon",
       "in": 2.0,
       "out": 10.0
-    },
-    {
-      "date": "2025-06-17",
-      "tier": "mid",
-      "slug": "google/gemini-2.5-flash",
-      "line": "flash",
-      "in": 0.3,
-      "out": 2.5
-    },
-    {
-      "date": "2025-12-17",
-      "tier": "mid",
-      "slug": "google/gemini-3-flash-preview",
-      "line": "flash",
-      "in": 0.5,
-      "out": 3.0
-    },
-    {
-      "date": "2026-05-19",
-      "tier": "mid",
-      "slug": "google/gemini-3.5-flash",
-      "line": "flash",
-      "in": 1.5,
-      "out": 9.0
-    },
-    {
-      "date": "2026-07-21",
-      "tier": "mid",
-      "slug": "google/gemini-3.6-flash",
-      "line": "flash",
-      "in": 0.75,
-      "out": 3.75
-    },
-    {
-      "date": "2026-08-13",
-      "tier": "mid",
-      "slug": "google/gemini-3.7-flash",
-      "line": "flash",
-      "in": 0.75,
-      "out": 3.75
-    },
-    {
-      "date": "2026-09-02",
-      "tier": "mid",
-      "slug": "google/gemini-3.8-flash",
-      "line": "flash",
-      "in": 0.75,
-      "out": 3.75
     },
     {
       "date": "2026-11-12",
@@ -5113,6 +5092,20 @@ __chartsReady( function(){
  const TIERSHORT={frontier:'Frontier', mid:'Workhorse', cheap:'Cheap', open:'Open-weight'};
  const TIERCOL={frontier:C.front, mid:C.mid, cheap:C.cheap, open:C.open};
  const ORDER=['frontier','mid','cheap','open'];
+ const SERIES=(function(){
+  const out=[];
+  ORDER.forEach(t=>{
+    const pts=(__GD.pricing||[]).filter(p=>p.tier===t); if(!pts.length) return;
+    const byL={}; pts.forEach(p=>{(byL[p.line]=byL[p.line]||[]).push(p);});
+    const par=Object.keys(byL).filter(l=>byL[l].length>=2).sort((a,b)=>byL[b].length-byL[a].length);
+    if(par.length<2){ out.push({tier:t,name:TIERLAB[t],dash:'solid',pts:pts}); return; }
+    par.forEach((l,i)=>{
+      const extra=i===0?Object.keys(byL).filter(k=>!par.includes(k)).reduce((a,k)=>a.concat(byL[k]),[]):[];
+      out.push({tier:t,name:CAP(l)+' ('+TIERSHORT[t].toLowerCase()+')',dash:i===0?'solid':'dashed',pts:byL[l].concat(extra)});
+    });
+  });
+  return out;
+ })();
  const CMPORDER=['frontier','mid','legacy','cheap','open'];
  const CMPLAB={frontier:'Frontier', mid:'Workhorse', legacy:'Legacy', cheap:'Cheap', open:'Open-weight'};
  const CMPCOL={frontier:C.front, mid:C.mid, legacy:C.legacy, cheap:C.cheap, open:C.open};
@@ -5134,7 +5127,7 @@ __chartsReady( function(){
  const MASSWORD={frontier:'top-heavy', mid:'middle-heavy', legacy:'legacy-heavy', cheap:'bottom-heavy', open:'open-weight-heavy'};
  const SLOTWORD={frontier:'frontier', mid:'workhorse', legacy:'legacy', cheap:'cheap', open:'open-weight'};
  const CALLS=(__GD.snapshot.judgement_calls)||[];
- const ARGON=CALLS.map(c=>({c:c,d:Math.abs(c.mix_if_alt.frontier-__GD.snapshot.mix.frontier.pct)})).filter(x=>x.d>=0.5).sort((x,y)=>y.d-x.d).map(x=>x.c)[0];   /* the call that moves the frontier share most */
+ const FRCALL=CALLS.map(c=>({c:c,d:Math.abs(c.mix_if_alt.frontier-__GD.snapshot.mix.frontier.pct)})).filter(x=>x.d>=0.5).sort((x,y)=>y.d-x.d).map(x=>x.c)[0];   /* the call that moves the frontier share most (none today: Flash does not touch frontier) */
  const bigOf=mix=>ORDER.reduce((a,t)=>((mix[t]||0)>(mix[a]||0)?t:a),ORDER[0]);
  const underCall=c=>{const ba=bigOf(c.mix_if_alt), others=VENDORS.filter(v=>v!=='Google'), same=others.filter(v=>bigTier(v)===ba),
    n=new Set(others.map(bigTier).concat([ba])).size; return {ba:ba, same:same, n:n};};
@@ -5144,17 +5137,16 @@ __chartsReady( function(){
    `<span><i style="background:${C.legacy}"></i>Legacy: GPT-4 family (OpenAI only)</span>`+
    `<span><i style="background:${C.cheap}"></i>Cheap: ${GL('cheap')||'Flash-Lite'} (Google) / Haiku (Anthropic) / ${oaJoin('cheap')?oaJoin('cheap')+' + ':''}mini&middot;nano (OpenAI)</span>`+
    `<span><i style="background:${C.open}"></i>Open-weight: ${GL('open')||'Gemma'} (Google) / gpt-oss (OpenAI)</span>`;
- document.getElementById('gd_leg2').innerHTML=ORDER.map(t=>`<span><i style="background:${TIERCOL[t]}"></i>${TIERLAB[t]}</span>`).join('');
+ document.getElementById('gd_leg2').innerHTML=SERIES.map(S=>`<span><i style="background:${TIERCOL[S.tier]}"></i>${S.name}</span>`).join('');
 
  (function(){
   const m=__GD.snapshot.mix, b=__GD.blends, cmp=__GD.cmp;
   const rAG=b.Anthropic.in/b.Google.in, xf=x=>x>=2?x.toFixed(0):x.toFixed(1);
   const agWord=rAG>=1.05?`Anthropic&rsquo;s mix lists <b>~${xf(rAG)}&times;</b> Google&rsquo;s`
     :(rAG<=1/1.05?`Google&rsquo;s mix lists <b>~${xf(1/rAG)}&times;</b> Anthropic&rsquo;s`:`the two are about level`);
-  const OTHERMID=GL('mid').split(' / ').filter(n=>n&&n!=='Flash');
   const cards=[
-    {lab:'Google frontier tier', val:m.frontier.pct.toFixed(0)+'%', cls:'f', sub:'of Google tokens as filed'+(ARGON?' (<b>'+ARGON.mix_if_alt.frontier.toFixed(1)+'%</b> if '+CAP(ARGON.line)+' is filed '+SLOTWORD[ARGON.alt]+')':'')+'; Anthropic <b>'+cmp.Anthropic.frontier.toFixed(0)+'%</b>, OpenAI <b>'+cmp.OpenAI.frontier.toFixed(0)+'%</b>'},
-    {lab:'Flash + Flash-Lite', val:__GD.flash_plus_lite.toFixed(0)+'%', cls:'', sub:'of Google tokens, Flash and Flash-Lite lines only'+(OTHERMID.length?' ('+OTHERMID.join(' / ')+' is also in the workhorse tier)':'')},
+    {lab:'Google frontier tier', val:m.frontier.pct.toFixed(0)+'%', cls:'f', sub:'of Google tokens as filed'+(FRCALL?' (<b>'+FRCALL.mix_if_alt.frontier.toFixed(1)+'%</b> if '+CAP(FRCALL.line)+' is filed '+SLOTWORD[FRCALL.alt]+')':'')+'; Anthropic <b>'+cmp.Anthropic.frontier.toFixed(0)+'%</b>, OpenAI <b>'+cmp.OpenAI.frontier.toFixed(0)+'%</b>'},
+    {lab:'Google cheap tier ('+GL('cheap')+')', val:m.cheap.pct.toFixed(0)+'%', cls:'', sub:'of Google tokens; OpenAI <b>'+cmp.OpenAI.cheap.toFixed(0)+'%</b>, Anthropic <b>'+cmp.Anthropic.cheap.toFixed(0)+'%</b>'},
     {lab:'Gemma (open-weight)', val:m.open.pct.toFixed(0)+'%', cls:'o', sub:'open models, Google\'s commodity tier'},
     {lab:'Blended mix price', val:'$'+b.Google.in.toFixed(2)+'/M', cls:'f', sub:'Google input vs Anthropic <b>$'+b.Anthropic.in.toFixed(2)+'</b>: '+agWord},
   ];
@@ -5165,7 +5157,8 @@ __chartsReady( function(){
   const m=__GD.snapshot.mix, cmp=__GD.cmp;
   set('gd_fl_top', __GD.flash_plus_lite.toFixed(0)); set('gd_op_top', m.open.pct.toFixed(0)); set('gd_fr_top', m.frontier.pct.toFixed(0));
   set('gd_fr_names', GL('frontier'));
-  setH('gd_range', ARGON ? `${m.frontier.pct.toFixed(1)}% as filed, ${ARGON.mix_if_alt.frontier.toFixed(1)}% if ${CAP(ARGON.line)} is filed ${SLOTWORD[ARGON.alt]}` : 'as filed');
+  setH('gd_range', CALLS.map(c=>{const u=underCall(c);
+    return `${CAP(c.line)} is filed ${SLOTWORD[c.now]} (${c.line_pct.toFixed(1)}% of Google tokens). Filed ${SLOTWORD[c.alt]} instead, the largest slot would be ${SLOTWORD[u.ba]} at ${c.mix_if_alt[u.ba].toFixed(1)}% and the frontier tier ${c.mix_if_alt.frontier.toFixed(1)}% (our arithmetic).`;}).join(' '));
   const FP=__GD.footprint||[];
   if(FP.length>=2){
     const wkEnd=s=>{const d=new Date(s+'T00:00:00');d.setDate(d.getDate()+6);return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});};
@@ -5188,22 +5181,26 @@ __chartsReady( function(){
   }
   const bigs=VENDORS.map(bigTier), nshapes=new Set(bigs).size;
   const breaks=nshapes===VENDORS.length ? CALLS.map(c=>({c:c,u:underCall(c)})).filter(x=>x.u.n<VENDORS.length) : [];
+  const gains=nshapes<VENDORS.length ? CALLS.map(c=>({c:c,u:underCall(c)})).filter(x=>x.u.n===VENDORS.length) : [];
+  const sameAsG=VENDORS.filter(v=>v!=='Google'&&bigTier(v)===bigTier('Google'));
   setH('gd_distinct', nshapes===VENDORS.length ? `a <b>third distinct shape</b> as filed`
       + (breaks.length ? ` (it merges with ${breaks.map(x=>x.u.same.join(' and ')+`'s if ${CAP(x.c.line)} is filed ${SLOTWORD[x.c.alt]}`).join(' and ')})` : '')
-    : `<b>one of ${nshapes} distinct shape${nshapes===1?'':'s'}</b> across the three`);
+    : (sameAsG.length ? `<b>level with ${sameAsG.join(' and ')}</b> on the slot that carries its mass as filed`
+        + (gains.length ? ` (it would be a third distinct shape if ${gains.map(x=>`${CAP(x.c.line)} is filed ${SLOTWORD[x.c.alt]}`).join(' and ')})` : '')
+       : `<b>one of ${nshapes} distinct shape${nshapes===1?'':'s'}</b> across the three`));
   set('gd_goword', MASSWORD[bigTier('Google')]);
   set('gd_h1a', `the ${SLOTWORD[bigTier('Google')]} tier holds the largest share`);
   set('gd_sechead_tail', nshapes+' shape'+(nshapes===1?'':'s')+' as filed');
   setH('gd_strategies', 'the largest slice of each vendor&rsquo;s own routed tokens is <b>'
     + VENDORS.map(v=>`${SLOTWORD[bigTier(v)]} for ${v} (${(cmp[v][bigTier(v)]||0).toFixed(0)}%)`).join(', ')
     + '</b>');
-  set('gd_oa_shape', vshape('OpenAI'));
+  set('gd_oa_shape', vshape('OpenAI')); set('gd_g_shape', vshape('Google'));
 
   const F=__GD.flash_first, P=__GD.flash_peak, N=__GD.flash_newest, DM=__GD.flash_dominant;
   const px=r=>`<b>$${r.in.toFixed(2)}/$${r.out.toFixed(2)}</b>`;
   const shr=r=>r.pct!=null?` (${r.pct.toFixed(1)}% of tokens)`:'';
   if(F&&N&&F.out>0){
-    const rungs=(__GD.pricing||[]).filter(p=>p.tier==='mid'&&p.line==='flash');   /* Flash line only; Hydrogen is a different line */
+    const rungs=(__GD.pricing||[]).filter(p=>p.line==='flash');   /* Flash line only (by line, not by tier); Hydrogen and Flash-Lite are different lines */
     const peaked=P&&P.out>N.out&&P.out>F.out;
     const dir=peaked?'ran up, then came back':(N.out>F.out?'stepped up':(N.out<F.out?'stepped down':'held flat'));
     setH('gd_flladder', `The top-end Flash <b>${dir}</b>: ${px(F)} on <b>${F.pretty}</b>`
@@ -5235,8 +5232,8 @@ __chartsReady( function(){
       const diffs=ORDER.filter(t=>Math.abs((c.mix_if_alt[t]||0)-(__GD.snapshot.mix[t].pct||0))>=0.5)
         .map(t=>`${SLOTWORD[t]} ${__GD.snapshot.mix[t].pct.toFixed(1)}% &rarr; ${c.mix_if_alt[t].toFixed(1)}%`).join(', ');
       const u=underCall(c), bg=bigTier('Google');
-      return `<b>${CAP(c.line)}</b> (${c.line_pct.toFixed(1)}% of Google tokens${c.aa_score!=null?', score '+c.aa_score.toFixed(1):''}) is filed ${SLOTWORD[c.now]}. Filed ${SLOTWORD[c.alt]}: ${diffs}.`
-        + (u.ba!==bg ? ` Google's largest slot would be ${SLOTWORD[u.ba]}`+(u.same.length?`, level with ${u.same.join(' and ')}'s, so the "third distinct shape" reading would fail.`:'.') : '');
+      return `<b>${CAP(c.line)}</b> (${c.line_pct.toFixed(1)}% of Google tokens; ${c.why}) is filed ${SLOTWORD[c.now]}. Filed ${SLOTWORD[c.alt]}: ${diffs}.`
+        + (u.ba!==bg ? ` Google's largest slot would then be ${SLOTWORD[u.ba]}`+(u.same.length?`, level with ${u.same.join(' and ')}'s.`:(u.n===VENDORS.length?`, which would make it a third distinct shape.`:'.')) : '');
     }).join(' ') + ' Alternative-cut shares are our arithmetic on the same tokens.');
   const um=Array.isArray(__GD.snapshot.unmapped)?__GD.snapshot.unmapped:null;
   setH('gd_unmapped', um===null ? 'Line-map check unavailable: this data has no unmapped list.' : um.length
@@ -5292,10 +5289,10 @@ __chartsReady( function(){
   const ch=echarts.init(document.getElementById('gd_c2'));
   const lastDate=__GD.snapshot.date;
   let nar=false, cur='out';
-  function build(metric){const byTier={};ORDER.forEach(t=>{byTier[t]=[];});__GD.pricing.forEach(p=>{(byTier[p.tier]=byTier[p.tier]||[]).push(p);});
-    return ORDER.map(t=>{const pts=byTier[t].slice().sort((a,b)=>a.date<b.date?-1:1);const data=pts.map(p=>[p.date,Math.max(p[metric],0.02)]);
+  function build(metric){
+    return SERIES.map(S=>{const pts=S.pts.slice().sort((a,b)=>a.date<b.date?-1:1);const data=pts.map(p=>[p.date,Math.max(p[metric],0.02)]);
       if(data.length)data.push([lastDate,Math.max(pts[pts.length-1][metric],0.02)]);
-      return {name:TIERLAB[t],type:'line',step:'end',symbol:'circle',symbolSize:nar?5:7,lineStyle:{width:nar?2:2.4,color:TIERCOL[t]},itemStyle:{color:TIERCOL[t]},emphasis:{focus:'series'},data};});}
+      return {name:S.name,type:'line',step:'end',symbol:'circle',symbolSize:nar?5:7,lineStyle:{width:nar?2:2.4,color:TIERCOL[S.tier],type:S.dash},itemStyle:{color:TIERCOL[S.tier]},emphasis:{focus:'series'},data};});}
   function render(metric){cur=metric;nar=ch.getWidth()<440;ch.setOption({grid:{left:nar?42:54,right:nar?18:90,top:16,bottom:34},
     tooltip:{trigger:'axis',confine:true,extraCssText:'white-space:normal;max-width:min(320px,calc(100vw - 32px));',backgroundColor:'#fff',borderColor:C.line,borderWidth:1,textStyle:{color:C.ink,fontFamily:SANS,fontSize:12},axisPointer:{type:'line',lineStyle:{color:'#c9cdd4'}},
       formatter:p=>tipbox(new Date(p[0].axisValue).toLocaleDateString('en-US',{month:'short',year:'numeric'}),p.map(s=>`<div style="display:flex;justify-content:space-between;gap:24px;line-height:1.7"><span>${s.marker}${s.seriesName}</span><b style="font-family:${MONO}">$${(+s.value[1]).toFixed(2)}/M</b></div>`).join(''))},
