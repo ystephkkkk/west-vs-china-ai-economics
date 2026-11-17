@@ -168,7 +168,7 @@ html.night{filter:invert(.9) hue-rotate(180deg);background:#fff}
  <h1 class="reveal" style="animation-delay:.08s"><span class="a">West</span><em>vs</em><span class="b">China</span></h1>
  <div class="rule reveal" style="animation-delay:.14s"></div>
  <p class="sub reveal" style="animation-delay:.2s" id="hero"><span id="hx_tok">&mdash;</span> &mdash; but tokens aren't dollars. <span id="hx_val"></span> Weekly (Mon–Sun, labeled by week-ending date), <span id="hx_span">&mdash;</span>.</p>
- <p class="src reveal" style="animation-delay:.24s">SOURCE OpenRouter public rankings + model catalog list prices · updated 2026-11-17 · weekly Mon–Sun buckets labeled by ending date · value = token volume × estimated $/token (free tier = $0)</p>
+ <p class="src reveal" style="animation-delay:.24s">SOURCE OpenRouter public rankings + model catalog list prices · updated 2026-11-18 · weekly Mon–Sun buckets labeled by ending date · value = token volume × estimated $/token (free tier = $0)</p>
 
  <div class="cards" id="cards"></div>
 
@@ -805,7 +805,6 @@ __chartsReady(function(){        // echarts is inlined at the END of <body>
  .tx .chart{width:100%;height:380px}
  .tx .atleg{display:flex;gap:16px;flex-wrap:wrap;margin:2px 2px 10px;font-family:var(--mono);font-size:11px;color:var(--dim)}
  .tx .atleg i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
- .tx .atleg i.dashkey{width:18px;height:0;border-radius:0;border-top:2px dashed var(--ink);vertical-align:3px}
  .tx .atleg b{color:var(--ink)}
  .tx .note{color:var(--dim);font-size:12.5px;margin:8px 2px 4px;line-height:1.65;max-width:100ch}
  .tx .note b{color:var(--ink)}
@@ -822,7 +821,8 @@ __chartsReady(function(){        // echarts is inlined at the END of <body>
  .tx .vtitle{font-family:var(--serif);font-size:20px;font-weight:560;letter-spacing:-.01em;line-height:1.3;margin:0 0 10px}
  .tx .vtitle .vname{color:var(--vc)}
  .tx .vtitle .vrest{font-family:var(--sans);font-size:14px;font-weight:400;color:var(--ink);letter-spacing:0}
- .tx .vfull{margin:0 0 14px;padding:0 0 12px;border-bottom:1px solid var(--line)}
+ .tx .thist{margin:16px 0 0;padding:14px 0 0;border-top:1px solid var(--line)}
+ .tx .chart.hist{height:300px}
  .tx .vgrid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:22px;align-items:start}
  .tx .vcol{min-width:0}
  .tx .vh{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:500;margin:2px 0 8px}
@@ -869,17 +869,19 @@ __chartsReady(function(){        // echarts is inlined at the END of <body>
   <div class="atptab-wrap"><table class="atptab txcmp" id="tx_cmp"></table></div>
   <div class="note" id="tx_read"></div>
   <div class="note" id="tx_jcalls" style="display:none"></div>
+  <div class="thist" id="tx_hist">
+   <h4 class="vh">Frontier share over time</h4>
+   <div class="note" id="tx_hist_sub">Share of each vendor's own text tokens in the month to each date. The tier lines listed in the key above are those as filed today, applied to every earlier month.</div>
+   <div class="atleg" id="tx_c2leg" style="display:none"></div>
+   <div id="tx_c2" class="chart hist"></div>
+   <div class="note" id="tx_hist_read"></div>
+   <div class="note" id="tx_hist_note"></div>
+  </div>
   <div class="note" id="at_dbx"><b>Cross-check from a different venue</b>, enterprise traffic (<a href="https://developers.databricks.com/ai-index" target="_blank" rel="noopener">Databricks AI Index</a>, 10,000+ companies, week of <span data-dbx="week">2 Nov</span> on Databricks' own week labels): Closed models, all gateway traffic: Anthropic has <span data-dbx="a_tok">62%</span> of tokens and <span data-dbx="a_spend">70%</span> of spend at list prices; OpenAI <span data-dbx="o_tok">37%</span> of tokens and <span data-dbx="o_spend">27%</span> of spend.</div>
  </div>
 
  <article class="vcard" id="at_card">
   <h3 class="vtitle" id="at_take"></h3>
-  <div class="vfull">
-   <h4 class="vh">Frontier share over time (Opus, Fable and Sonnet basis, Haiku excluded)</h4>
-   <div class="atleg"><span><i style="background:#9e3d1a"></i>Frontier</span><span><i style="background:#cf7a2f"></i>Mid (Sonnet)</span><span id="at_p1caplg" style="display:none"><i class="dashkey"></i>Monthly window, Opus, Fable and Sonnet only: frontier share</span></div>
-   <div id="at_c1" class="chart"></div>
-   <div class="note" id="at_p1read"></div>
-  </div>
   <div class="vgrid">
    <div class="vcol">
     <h4 class="vh">Model mix, latest month</h4>
@@ -1236,6 +1238,127 @@ __chartsReady( function(){
     "weekly_last_frontier_pct": 73.3,
     "gap_pp_last": 11.7
   },
+  "frontier_hist": [
+    {
+      "wk": "2026-06-15",
+      "window_end": "2026-06-15",
+      "frontier": 58.8,
+      "tok_b": 23904.9,
+      "front_b": 14064.5
+    },
+    {
+      "wk": "2026-06-22",
+      "window_end": "2026-06-28",
+      "frontier": 65.9,
+      "tok_b": 26371.1,
+      "front_b": 17371.6
+    },
+    {
+      "wk": "2026-06-29",
+      "window_end": "2026-06-30",
+      "frontier": 66.1,
+      "tok_b": 27119.3,
+      "front_b": 17922.1
+    },
+    {
+      "wk": "2026-07-06",
+      "window_end": "2026-07-12",
+      "frontier": 69.4,
+      "tok_b": 28896.2,
+      "front_b": 20067.5
+    },
+    {
+      "wk": "2026-07-13",
+      "window_end": "2026-07-19",
+      "frontier": 68.7,
+      "tok_b": 29426.6,
+      "front_b": 20221.9
+    },
+    {
+      "wk": "2026-07-20",
+      "window_end": "2026-07-26",
+      "frontier": 66.1,
+      "tok_b": 28155.7,
+      "front_b": 18610.9
+    },
+    {
+      "wk": "2026-07-27",
+      "window_end": "2026-07-30",
+      "frontier": 64.2,
+      "tok_b": 28051.7,
+      "front_b": 18014.9
+    },
+    {
+      "wk": "2026-08-10",
+      "window_end": "2026-08-16",
+      "frontier": 58.0,
+      "tok_b": 22440.7,
+      "front_b": 13020.3
+    },
+    {
+      "wk": "2026-08-31",
+      "window_end": "2026-09-06",
+      "frontier": 57.0,
+      "tok_b": 22885.9,
+      "front_b": 13046.3
+    },
+    {
+      "wk": "2026-09-07",
+      "window_end": "2026-09-07",
+      "frontier": 56.6,
+      "tok_b": 23252.5,
+      "front_b": 13161.0
+    },
+    {
+      "wk": "2026-09-14",
+      "window_end": "2026-09-14",
+      "frontier": 53.5,
+      "tok_b": 22065.9,
+      "front_b": 11797.7
+    },
+    {
+      "wk": "2026-09-21",
+      "window_end": "2026-09-27",
+      "frontier": 52.5,
+      "tok_b": 21389.3,
+      "front_b": 11232.8
+    },
+    {
+      "wk": "2026-09-28",
+      "window_end": "2026-09-28",
+      "frontier": 52.9,
+      "tok_b": 21807.1,
+      "front_b": 11544.3
+    },
+    {
+      "wk": "2026-10-05",
+      "window_end": "2026-10-05",
+      "frontier": 56.1,
+      "tok_b": 22988.9,
+      "front_b": 12896.4
+    },
+    {
+      "wk": "2026-10-19",
+      "window_end": "2026-10-25",
+      "frontier": 58.6,
+      "tok_b": 48766.7,
+      "front_b": 28573.7
+    },
+    {
+      "wk": "2026-10-26",
+      "window_end": "2026-11-01",
+      "frontier": 57.2,
+      "tok_b": 57022.1,
+      "front_b": 32632.2
+    },
+    {
+      "wk": "2026-11-09",
+      "window_end": "2026-11-15",
+      "frontier": 57.1,
+      "tok_b": 62021.1,
+      "front_b": 35413.3
+    }
+  ],
   "snapshot": {
     "date": "2026-11-15",
     "total_b": 62021.1,
@@ -1931,6 +2054,331 @@ __chartsReady( function(){
       "open": 14.6
     }
   },
+  "cmp_history": [
+    {
+      "window_end": "2026-06-15",
+      "wk": "2026-06-15",
+      "Anthropic": {
+        "frontier": 58.8,
+        "tok_b": 23904.9,
+        "front_b": 14064.5
+      },
+      "OpenAI": {
+        "frontier": 37.1,
+        "tok_b": 12438.7,
+        "front_b": 4613.1
+      },
+      "Google": {
+        "frontier": 9.0,
+        "tok_b": 18177.1,
+        "front_b": 1643.8
+      }
+    },
+    {
+      "window_end": "2026-06-28",
+      "wk": "2026-06-22",
+      "Anthropic": {
+        "frontier": 65.9,
+        "tok_b": 26371.1,
+        "front_b": 17371.6
+      },
+      "OpenAI": {
+        "frontier": 41.5,
+        "tok_b": 13753.9,
+        "front_b": 5707.3
+      },
+      "Google": {
+        "frontier": 7.6,
+        "tok_b": 17727.3,
+        "front_b": 1345.6
+      }
+    },
+    {
+      "window_end": "2026-06-30",
+      "wk": "2026-06-29",
+      "Anthropic": {
+        "frontier": 66.1,
+        "tok_b": 27119.3,
+        "front_b": 17922.1
+      },
+      "OpenAI": {
+        "frontier": 42.8,
+        "tok_b": 14092.4,
+        "front_b": 6025.0
+      },
+      "Google": {
+        "frontier": 7.6,
+        "tok_b": 18016.2,
+        "front_b": 1375.8
+      }
+    },
+    {
+      "window_end": "2026-07-12",
+      "wk": "2026-07-06",
+      "Anthropic": {
+        "frontier": 69.4,
+        "tok_b": 28896.2,
+        "front_b": 20067.5
+      },
+      "OpenAI": {
+        "frontier": 46.3,
+        "tok_b": 14986.6,
+        "front_b": 6945.5
+      },
+      "Google": {
+        "frontier": 7.5,
+        "tok_b": 17597.9,
+        "front_b": 1327.1
+      }
+    },
+    {
+      "window_end": "2026-07-19",
+      "wk": "2026-07-13",
+      "Anthropic": {
+        "frontier": 68.7,
+        "tok_b": 29426.6,
+        "front_b": 20221.9
+      },
+      "OpenAI": {
+        "frontier": 46.6,
+        "tok_b": 15482.9,
+        "front_b": 7209.5
+      },
+      "Google": {
+        "frontier": 7.1,
+        "tok_b": 17577.2,
+        "front_b": 1245.9
+      }
+    },
+    {
+      "window_end": "2026-07-26",
+      "wk": "2026-07-20",
+      "Anthropic": {
+        "frontier": 66.1,
+        "tok_b": 28155.7,
+        "front_b": 18610.9
+      },
+      "OpenAI": {
+        "frontier": 45.8,
+        "tok_b": 15790.7,
+        "front_b": 7226.6
+      },
+      "Google": {
+        "frontier": 6.6,
+        "tok_b": 18419.7,
+        "front_b": 1207.5
+      }
+    },
+    {
+      "window_end": "2026-07-30",
+      "wk": "2026-07-27",
+      "Anthropic": {
+        "frontier": 64.2,
+        "tok_b": 28051.7,
+        "front_b": 18014.9
+      },
+      "OpenAI": {
+        "frontier": 43.1,
+        "tok_b": 16331.1,
+        "front_b": 7037.1
+      },
+      "Google": {
+        "frontier": 6.3,
+        "tok_b": 19123.9,
+        "front_b": 1213.3
+      }
+    },
+    {
+      "window_end": "2026-08-16",
+      "wk": "2026-08-10",
+      "Anthropic": {
+        "frontier": 58.0,
+        "tok_b": 22440.7,
+        "front_b": 13020.3
+      },
+      "OpenAI": {
+        "frontier": 19.5,
+        "tok_b": 28198.7,
+        "front_b": 5490.0
+      },
+      "Google": {
+        "frontier": 4.3,
+        "tok_b": 23777.7,
+        "front_b": 1031.4
+      }
+    },
+    {
+      "window_end": "2026-09-06",
+      "wk": "2026-08-31",
+      "Anthropic": {
+        "frontier": 57.0,
+        "tok_b": 22885.9,
+        "front_b": 13046.3
+      },
+      "OpenAI": {
+        "frontier": 15.7,
+        "tok_b": 52391.2,
+        "front_b": 8250.3
+      },
+      "Google": {
+        "frontier": 3.7,
+        "tok_b": 30315.8,
+        "front_b": 1127.2
+      }
+    },
+    {
+      "window_end": "2026-09-07",
+      "wk": "2026-09-07",
+      "Anthropic": {
+        "frontier": 56.6,
+        "tok_b": 23252.5,
+        "front_b": 13161.0
+      },
+      "OpenAI": {
+        "frontier": 15.8,
+        "tok_b": 54799.0,
+        "front_b": 8631.0
+      },
+      "Google": {
+        "frontier": 3.7,
+        "tok_b": 30726.2,
+        "front_b": 1139.6
+      }
+    },
+    {
+      "window_end": "2026-09-14",
+      "wk": "2026-09-14",
+      "Anthropic": {
+        "frontier": 53.5,
+        "tok_b": 22065.9,
+        "front_b": 11797.7
+      },
+      "OpenAI": {
+        "frontier": 14.7,
+        "tok_b": 69018.1,
+        "front_b": 10156.8
+      },
+      "Google": {
+        "frontier": 3.7,
+        "tok_b": 31957.9,
+        "front_b": 1173.4
+      }
+    },
+    {
+      "window_end": "2026-09-27",
+      "wk": "2026-09-21",
+      "Anthropic": {
+        "frontier": 52.5,
+        "tok_b": 21389.3,
+        "front_b": 11232.8
+      },
+      "OpenAI": {
+        "frontier": 17.0,
+        "tok_b": 80371.0,
+        "front_b": 13679.7
+      },
+      "Google": {
+        "frontier": 3.9,
+        "tok_b": 30087.0,
+        "front_b": 1183.2
+      }
+    },
+    {
+      "window_end": "2026-09-28",
+      "wk": "2026-09-28",
+      "Anthropic": {
+        "frontier": 52.9,
+        "tok_b": 21807.1,
+        "front_b": 11544.3
+      },
+      "OpenAI": {
+        "frontier": 17.3,
+        "tok_b": 82006.3,
+        "front_b": 14195.2
+      },
+      "Google": {
+        "frontier": 3.9,
+        "tok_b": 30219.5,
+        "front_b": 1173.7
+      }
+    },
+    {
+      "window_end": "2026-10-05",
+      "wk": "2026-10-05",
+      "Anthropic": {
+        "frontier": 56.1,
+        "tok_b": 22988.9,
+        "front_b": 12896.4
+      },
+      "OpenAI": {
+        "frontier": 20.6,
+        "tok_b": 82261.1,
+        "front_b": 16949.8
+      },
+      "Google": {
+        "frontier": 4.1,
+        "tok_b": 29663.8,
+        "front_b": 1205.0
+      }
+    },
+    {
+      "window_end": "2026-10-25",
+      "wk": "2026-10-19",
+      "Anthropic": {
+        "frontier": 58.6,
+        "tok_b": 48766.7,
+        "front_b": 28573.7
+      },
+      "OpenAI": {
+        "frontier": 27.4,
+        "tok_b": 71461.3,
+        "front_b": 19571.4
+      },
+      "Google": {
+        "frontier": 9.4,
+        "tok_b": 28276.3,
+        "front_b": 2660.8
+      }
+    },
+    {
+      "window_end": "2026-11-01",
+      "wk": "2026-10-26",
+      "Anthropic": {
+        "frontier": 57.2,
+        "tok_b": 57022.1,
+        "front_b": 32632.2
+      },
+      "OpenAI": {
+        "frontier": 26.8,
+        "tok_b": 73165.9,
+        "front_b": 19579.4
+      },
+      "Google": {
+        "frontier": 13.1,
+        "tok_b": 27967.6,
+        "front_b": 3652.3
+      }
+    },
+    {
+      "window_end": "2026-11-15",
+      "wk": "2026-11-09",
+      "Anthropic": {
+        "frontier": 57.1,
+        "tok_b": 62021.1,
+        "front_b": 35413.3
+      },
+      "OpenAI": {
+        "frontier": 25.7,
+        "tok_b": 77696.0,
+        "front_b": 19929.3
+      },
+      "Google": {
+        "frontier": 20.4,
+        "tok_b": 27751.9,
+        "front_b": 5649.6
+      }
+    }
+  ],
   "blends": {
     "Anthropic": {
       "in": 3.034,
@@ -2769,10 +3217,7 @@ __chartsReady( function(){
  const MONS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
  const dmy=s=>(+s.slice(8,10))+' '+MONS[+s.slice(5,7)-1]+' '+s.slice(0,4);
  const dateLab=dmy;
- const CAPNAME='Monthly window, Opus, Fable and Sonnet only';
- const CAPS=__D.captures||[];
  const lastWkEnd=wkEnd(__D.last_complete_wk);
- const capsLater=CAPS.filter(c=>c.window_end>lastWkEnd);
  const tipbox=(t,r)=>`<div style="font-family:${MONO};font-size:11px;letter-spacing:.04em;color:${C.dim};text-transform:uppercase;margin-bottom:7px">${t}</div>`+r;
  const TIPWRAP='white-space:normal;max-width:min(320px,calc(100vw - 32px));';
  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
@@ -2780,7 +3225,6 @@ __chartsReady( function(){
  const CAP=n=>String(n).split('-').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join('-');
  const shortName=n=>String(n||'').replace(/^Anthropic: */,'').replace(/^Claude\s+(?=[A-Za-z])/,'');
  const usd=v=>'$'+(Number.isInteger(v)&&v>=1?String(v):v.toFixed(2));
- const majShare=p=>p>50?'a <b>majority</b> (<b>'+p.toFixed(1)+'%</b>)':'<b>'+p.toFixed(1)+'%</b>';
  const COUNTW=['no','one','two','three','four','five','six','seven','eight'];
  const countw=n=>COUNTW[n]||String(n);
  const AGREE_THRESHOLD_PP = 5;
@@ -2909,16 +3353,69 @@ __chartsReady( function(){
   window.addEventListener('resize',()=>{ch.resize();draw();});
  })();
 
- setH('at_take', takeHTML('Anthropic',{frontier:MX.frontier,mid:MX.mid,cheap:MX.low},['frontier','mid','cheap'],GB.Anthropic.in));
-
  (function(){
-  const w=__D.weekly;
-  const dir=__D.front_last>w[0].frontier_pct?'rose':(__D.front_last<w[0].frontier_pct?'fell':'moved');
-  setH('at_p1read','Frontier share '+dir+' from about <b>'+w[0].frontier_pct.toFixed(0)+'%</b> to '+majShare(__D.front_last)+' in the single week ending <b>'+wkEndLab(__D.last_complete_wk)+'</b> '
-   +'(range '+__D.front_min.toFixed(0)+' to '+__D.front_max.toFixed(0)+'%, trailing four-week mean '+__D.front_t4mean.toFixed(0)+'%). '
-   +'The month to '+snapLab+' reads <b>'+__D.snap_front_ex_haiku.toFixed(1)+'%</b> on Opus, Fable and Sonnet only (Haiku, <b>'+MX.low.pct.toFixed(1)+'%</b> of tokens, is excluded); on all Anthropic tokens frontier is <b>'+MX.frontier.pct.toFixed(1)+'%</b>.');
-  if (CAPS.length){const e=document.getElementById('at_p1caplg'); if(e) e.style.display='';}
+  const box=document.getElementById('tx_hist');
+  const GH=__GX.cmp_history;
+  if(!Array.isArray(GH)||!GH.length){if(box)box.style.display='none';return;}
+  const num=(r,v)=>!!(r&&r[v]&&typeof r[v].frontier==='number'&&isFinite(r[v].frontier));
+  const ch=echarts.init(document.getElementById('tx_c2'));
+  const leg=document.getElementById('tx_c2leg');
+  const dotc=c=>`<span style="display:inline-block;margin-right:4px;border-radius:10px;width:10px;height:10px;background-color:${c}"></span>`;
+  const tipRows=r=>VENDORS.map(v=>{
+   const x=r[v];
+   return `<div style="line-height:1.5;margin-bottom:4px"><div style="display:flex;justify-content:space-between;gap:24px"><span>${dotc(VCOL[v])}${v}</span><b style="font-family:${MONO}">${num(r,v)?x.frontier.toFixed(1)+'%':'no tokens'}</b></div>`
+    +(num(r,v)&&typeof x.tok_b==='number'?`<div style="color:${C.dim};font-family:${MONO};font-size:10px">${(x.tok_b/1000).toFixed(1)}T tokens in the window</div>`:'')+'</div>';}).join('');
+  const d0=new Date(GH[0].window_end+'T00:00:00'), x0=new Date(d0.getFullYear(),d0.getMonth(),1).getTime();
+  let nar=false;
+  const draw=()=>{nar=ch.getWidth()<440;
+   if(leg){leg.innerHTML=VENDORS.map(v=>'<span><i style="background:'+VCOL[v]+'"></i>'+v+'</span>').join('');leg.style.display=nar?'':'none';}
+   ch.setOption({grid:nar?{left:40,right:46,top:14,bottom:30}:{left:46,right:122,top:14,bottom:30},
+    tooltip:{trigger:'axis',confine:true,extraCssText:TIPWRAP,backgroundColor:'#fff',borderColor:C.line,borderWidth:1,padding:[10,12],textStyle:{color:C.ink,fontSize:12,fontFamily:SANS},
+     axisPointer:{type:'line',lineStyle:{color:'#c9cdd4'}},
+     formatter:p=>{if(!p||!p.length||!GH[p[0].dataIndex])return '';const r=GH[p[0].dataIndex];return tipbox('Month to '+dmy(r.window_end),tipRows(r));}},
+    xAxis:{type:'time',min:x0,max:'dataMax',...(nar?{splitNumber:3}:{}),axisLabel:{hideOverlap:true,fontSize:10.5,color:C.ax,fontFamily:MONO,
+     formatter:v=>new Date(v).toLocaleDateString('en-US',{month:'short',year:'numeric'})},axisLine:{lineStyle:{color:'#d8d2c6'}},axisTick:{show:false}},
+    yAxis:{type:'value',min:0,max:100,interval:25,axisLabel:{fontSize:10.5,color:C.ax,fontFamily:MONO,formatter:'{value}%'},splitLine:{lineStyle:{color:C.grid}}},
+    series:VENDORS.map(v=>({name:v,type:'line',symbol:'circle',symbolSize:nar?4:5,showSymbol:true,connectNulls:false,
+     lineStyle:{width:nar?2:2.4,color:VCOL[v]},itemStyle:{color:VCOL[v]},emphasis:{focus:'series'},
+     data:GH.map(r=>[r.window_end,num(r,v)?r[v].frontier:null]),
+     endLabel:{show:true,distance:6,formatter:p=>(p.value&&p.value[1]!=null)?((nar?'':v+' ')+(+p.value[1]).toFixed(1)+'%'):'',color:C.ink,fontFamily:MONO,fontSize:nar?10.5:11,fontWeight:600},
+     labelLayout:{moveOverlap:'shiftY'}}))},true);};
+  draw();
+  window.addEventListener('resize',()=>{ch.resize(); if((ch.getWidth()<440)!==nar) draw();});
+  const f=GH[0], l=GH[GH.length-1];
+  const T=b=>(b/1000).toFixed(1)+'T';
+  const BAND=3;
+  const dir=(a,b)=>b>a+BAND?'rose':(b<a-BAND?'fell':'ended near where it began');
+  const ext=v=>{let hi=0,lo=0;GH.forEach((r,i)=>{if(!num(r,v))return;if(r[v].frontier>GH[hi][v].frontier)hi=i;if(r[v].frontier<GH[lo][v].frontier)lo=i;});return {hi:hi,lo:lo};};
+  let s2='';
+  const endsOk=VENDORS.every(v=>num(f,v)&&num(l,v)&&typeof f[v].front_b==='number'&&typeof l[v].front_b==='number');
+  if(endsOk){
+   const one=v=>{
+    const e=ext(v), n=GH.length-1, a=f[v].frontier, b=l[v].frontier, x=[];
+    if(e.hi>0&&e.hi<n)x.push('peak '+GH[e.hi][v].frontier.toFixed(1)+'%');
+    if(e.lo>0&&e.lo<n)x.push('low '+GH[e.lo][v].frontier.toFixed(1)+'%');
+    return v+' '+dir(a,b)+' ('+a.toFixed(1)+'% to <b>'+b.toFixed(1)+'%</b>'+(x.length?'; '+x.join(', '):'')+')';};
+   const s1='From '+dmy(f.window_end)+' to '+dmy(l.window_end)+' (our arithmetic): '+VENDORS.map(one).join('; ')+'.';
+   s2=' Frontier tokens over the same dates (our arithmetic): '+VENDORS.map(v=>v+' '+T(f[v].front_b)+' to '+T(l[v].front_b)).join(', ')+'.';
+   let s3='';
+   const gm=((__GX.snapshot||{}).models||[]).filter(m=>m.tier==='frontier'&&/^google\/gemini-\d+(?:\.\d+)?-/.test(m.slug));
+   const gen=m=>parseFloat(m.slug.match(/^google\/gemini-(\d+(?:\.\d+)?)-/)[1]);
+   if(gm.length&&l.Google.front_b>0&&l.Google.tok_b>0){
+    const g=Math.max.apply(null,gm.map(gen)), nw=gm.filter(m=>gen(m)===g);
+    const nb=nw.reduce((a,m)=>a+m.tok_b,0), names=nw.map(m=>CAP(m.slug.replace(/^google\/gemini-[\d.]+-/,'').replace(/-.*$/,''))).sort();
+    s3=' '+names.join(' and ')+', Google\'s newest frontier lines, are <b>'+(100*nb/l.Google.front_b).toFixed(1)+'%</b> of its frontier tokens in the latest month; without them its frontier share is <b>'
+     +(100*Math.max(l.Google.front_b-nb,0)/l.Google.tok_b).toFixed(1)+'%</b> (our arithmetic).';
+   }
+   setH('tx_hist_read','<b>Read.</b> '+s1+s3);
+  }
+  const gaps=[];for(let i=1;i<GH.length;i++)gaps.push(daysBetween(GH[i-1].window_end,GH[i].window_end));
+  setH('tx_hist_note','Each of the '+GH.length+' points is the trailing month to its date.'
+   +(gaps.length?' Points are '+Math.min.apply(null,gaps)+' to '+Math.max.apply(null,gaps)+' days apart, so neighbouring points overlap.':'')+s2
+   +' Tiers are within-vendor and not equivalent across vendors, and this venue is a small slice of global tokens.');
  })();
+
+ setH('at_take', takeHTML('Anthropic',{frontier:MX.frontier,mid:MX.mid,cheap:MX.low},['frontier','mid','cheap'],GB.Anthropic.in));
 
  (function(){
   const m4=__D.snapshot.mix4, models=(__D.snapshot.models||[]);
@@ -2960,7 +3457,13 @@ __chartsReady( function(){
  (function(){
   const B=[];
   const nf=__D.weekly_fable_wks, nl=__D.weekly_low_wks, nw=__D.weekly_wks_on_file;
-  let b1='<b>Weekly series basis.</b> It counts only Anthropic models inside OpenRouter\'s global top 9 that week. ';
+  (function(){
+   const w=__D.weekly;
+   const dir=__D.front_last>w[0].frontier_pct?'rose':(__D.front_last<w[0].frontier_pct?'fell':'moved');
+   B.push('<b>Weekly history.</b> On the weekly feed (Opus, Fable and Sonnet basis, Haiku excluded), frontier share '+dir+' from <b>'+w[0].frontier_pct.toFixed(1)+'%</b> in the week ending '+wkEndLab(w0)
+    +' to <b>'+__D.front_last.toFixed(1)+'%</b> in the week ending '+wkEndLab(__D.last_complete_wk)+' ('+w.length+' weeks, range '+__D.front_min.toFixed(1)+' to '+__D.front_max.toFixed(1)+'%, trailing four-week mean '+__D.front_t4mean.toFixed(1)+'%).');
+  })();
+  let b1='<b>Weekly basis.</b> It counts only Anthropic models inside OpenRouter\'s global top 9 that week. ';
   b1+=startIsFirstClear
    ?'It begins in the first week of the weekly history in which Opus clears the cutoff (week ending '+wkEndLab(w0)+')'
      +(cutNear?', '+cutGapDays+' days after '+shortName(OPUS.since.name)+' listed at the '+(OPUS.dir==='cut'?'lower':'new')+' price; the newer model and the price could each account for that, and this data cannot separate them.':'.')
@@ -2968,21 +3471,20 @@ __chartsReady( function(){
    :'It begins at the start of the weekly history (week ending '+wkEndLab(w0)+'). ';
   if (nf!=null && nl!=null && nw!=null){
    b1+=(nf===0 && nl===0)
-    ?'Fable and Haiku clear the cutoff in none of the '+nw+' weeks on file, so every weekly frontier point is Opus.'
+    ?'Fable and Haiku clear the cutoff in none of the '+nw+' weeks on file, so every weekly frontier reading is Opus.'
     :'Fable clears the cutoff in '+nf+' and Haiku in '+nl+' of '+nw+' weeks on file (Haiku is outside this basis).';
   }
   B.push(b1);
   (function(){
    const tail=__D.tail_dropped_wks||[], zero=__D.zero_dropped_wks||[];
-   if (!tail.length && !zero.length && !capsLater.length) return;
+   if (!tail.length && !zero.length) return;
    const wl=w=>dmy(wkEnd(w));
    const lst=a=>a.length<=4?'ending '+a.map(wl).join(', '):'between '+wl(a[0])+' and '+wl(a[a.length-1]);
    const sonnetLeft=tail[0]===addDays(__D.last_complete_wk,7);
    let s='<b>Series end.</b> Weekly top-model data ends <b>'+dmy(lastWkEnd)+'</b>'+(sonnetLeft?', when Sonnet left OpenRouter\'s top 9':'')+'. ';
-   if (tail.length) s+='The weekly series leaves out '+tail.length+' week'+(tail.length===1?'':'s')+' '+lst(tail)+' where Sonnet fell below the cutoff while a frontier model stayed visible (left in, they would read as all frontier). ';
+   if (tail.length) s+='The weekly-feed series leaves out '+tail.length+' week'+(tail.length===1?'':'s')+' '+lst(tail)+' where Sonnet fell below the cutoff while a frontier model stayed visible (left in, they would read as all frontier). ';
    if (zero.length) s+='It also leaves out '+zero.length+' week'+(zero.length===1?'':'s')+' '+lst(zero)+' where no Anthropic model cleared the cutoff. ';
-   if (capsLater.length) s+='Dashed points are the trailing-month split of Opus, Fable and Sonnet, which the cutoff does not limit; the month to '+snapLab+' counts '+(__D.snapshot.total_b/1000).toFixed(1)+'T tokens across all lines.';
-   B.push(s);
+   B.push(s.trim());
   })();
   const cov=(__D.weekly_fable_wks===0?'never Fable':(__D.weekly_fable_wks!=null?'Fable in only '+__D.weekly_fable_wks+' of '+__D.weekly_wks_on_file+' weeks':'Fable only when it cleared the cutoff'))
    +'; older Opus and Sonnet versions below the cutoff are missing';
@@ -2990,11 +3492,11 @@ __chartsReady( function(){
   let ovs='';
   if (OV&&OV.gap_pp_nearest!=null&&OV.gap_pp_last!=null){
    const rel=(OV.weekly_last_frontier_pct>OV.capture_frontier_pct)?'above':'below';
-   ovs=' In the one overlap, the monthly capture ending <b>'+dmy(OV.capture_window_end)+'</b> reads <b>'+OV.capture_frontier_pct.toFixed(1)+'%</b>. The nearest weekly point (week ending '+dmy(OV.weekly_nearest_end)+', '+OV.weekly_nearest_frontier_pct.toFixed(1)+'%) is <b>'+OV.gap_pp_nearest.toFixed(1)+'pp</b> from it, '
-    +(OV.gap_pp_nearest<=AGREE_THRESHOLD_PP?'within':'more than')+' '+AGREE_THRESHOLD_PP+'pp. The last weekly point (week ending '+dmy(OV.weekly_last_end)+', '+OV.weekly_last_frontier_pct.toFixed(1)+'%) sits <b>'+OV.gap_pp_last.toFixed(1)+'pp</b> '+rel+' it'
+   ovs=' In the one overlap, the monthly split ending <b>'+dmy(OV.capture_window_end)+'</b> reads <b>'+OV.capture_frontier_pct.toFixed(1)+'%</b> on the Opus, Fable and Sonnet basis with Haiku excluded. The nearest weekly-feed point (week ending '+dmy(OV.weekly_nearest_end)+', '+OV.weekly_nearest_frontier_pct.toFixed(1)+'%) is <b>'+OV.gap_pp_nearest.toFixed(1)+'pp</b> from it, '
+    +(OV.gap_pp_nearest<=AGREE_THRESHOLD_PP?'within':'more than')+' '+AGREE_THRESHOLD_PP+'pp. The last weekly-feed point (week ending '+dmy(OV.weekly_last_end)+', '+OV.weekly_last_frontier_pct.toFixed(1)+'%) sits <b>'+OV.gap_pp_last.toFixed(1)+'pp</b> '+rel+' it'
     +(OV.gap_pp_last<=AGREE_THRESHOLD_PP?', within':', more than')+' '+AGREE_THRESHOLD_PP+'pp.';
   }
-  B.push('<b>Weekly and monthly readings.</b> The weekly figure counts only models that cleared the top 9 that week ('+cov+'). The monthly figure counts every Opus, Fable and Sonnet model and excludes Haiku.'+ovs);
+  B.push('<b>Monthly reading.</b> The month to '+snapLab+' counts '+(__D.snapshot.total_b/1000).toFixed(1)+'T Anthropic tokens across all lines. On Opus, Fable and Sonnet only (Haiku, <b>'+MX.low.pct.toFixed(1)+'%</b> of tokens, excluded) frontier is <b>'+__D.snap_front_ex_haiku.toFixed(1)+'%</b>; on all Anthropic tokens it is <b>'+MX.frontier.pct.toFixed(1)+'%</b>, the basis of the title and of the lead exhibit, the lead exhibit\'s over-time chart included. The weekly feed counts only models that cleared the top 9 that week ('+cov+'); the monthly split counts every Opus, Fable and Sonnet model.'+ovs);
   (function(){
    const skus=((__D.snapshot||{}).models||[]).filter(m=>m.subtier==='fable');
    const nm=m=>{const s=m.slug.replace('anthropic/claude-','').replace(/-20\d{6}$/,''), v=s.match(/\d+(?:\.\d+)?/); return v?'Fable '+v[0]:s;};
@@ -3029,43 +3531,6 @@ __chartsReady( function(){
    B.push('<b>Pricing power.</b> '+why);
   })();
   bul('at_cav',B);
- })();
-
- (function(){
-  const w=__D.weekly, cp=CAPS;
-  const fr=w.map(r=>[wkEnd(r.wk),r.frontier_pct]), md=w.map(r=>[wkEnd(r.wk),r.mid_pct]);
-  const capData=cp.map(c=>[c.window_end,c.frontier_pct]);
-  const ch=echarts.init(document.getElementById('at_c1'));
-  const trow=(dot,name,v)=>`<div style="display:flex;justify-content:space-between;gap:24px;line-height:1.7"><span>${dot}${name}</span><b style="font-family:${MONO}">${v.toFixed(1)}%</b></div>`;
-  const dotc=c=>`<span style="display:inline-block;margin-right:4px;border-radius:10px;width:10px;height:10px;background-color:${c}"></span>`;
-  let nar=false;
-  const draw=()=>{nar=ch.getWidth()<440; ch.setOption({grid:{left:46,right:18,top:18,bottom:34},color:[C.front,C.mid,C.ink],
-   tooltip:{trigger:'axis',confine:true,extraCssText:TIPWRAP,backgroundColor:'#fff',borderColor:C.line,borderWidth:1,padding:[10,12],textStyle:{color:C.ink,fontSize:12,fontFamily:SANS},
-     axisPointer:{type:'line',lineStyle:{color:'#c9cdd4'}},
-     formatter:p=>{
-       const wp=p.filter(s=>s.seriesName!==CAPNAME), cpp=p.filter(s=>s.seriesName===CAPNAME);
-       let out='';
-       if (wp.length){const i=wp[0].dataIndex; out+=tipbox('Week ending '+wkEndLab(w[i].wk),
-         wp.map(s=>trow(s.marker,s.seriesName,s.value[1])).join('')
-         +`<div style="color:${C.dim};font-family:${MONO};font-size:10px;margin-top:6px">${w[i].ant_tok_b.toLocaleString()}B Anthropic tok</div>`);}
-       if (cpp.length){const c=cp[cpp[0].dataIndex]; out+=tipbox('Month to '+dateLab(c.window_end),
-         trow(dotc(C.front),'Frontier (Opus/Fable)',c.frontier_pct)+trow(dotc(C.mid),'Mid (Sonnet)',c.mid_pct)
-         +`<div style="color:${C.dim};font-family:${MONO};font-size:10px;margin-top:6px">${c.ant_tok_b.toLocaleString()}B Anthropic tok in the trailing month, all lines counted; shares exclude Haiku</div>`);}
-       return out;}},
-   xAxis:{type:'time',min:'dataMin',max:'dataMax',...(nar?{splitNumber:3}:{}),axisLabel:{hideOverlap:true,fontSize:10.5,color:C.ax,fontFamily:MONO,
-     formatter:v=>new Date(v).toLocaleDateString('en-US',{month:'short',year:'2-digit'})},axisLine:{lineStyle:{color:'#d8d2c6'}},axisTick:{show:false}},
-   yAxis:{type:'value',min:0,max:100,interval:25,axisLabel:{fontSize:10.5,color:C.ax,fontFamily:MONO,formatter:'{value}%'},splitLine:{lineStyle:{color:C.grid}}},
-   series:[
-     {name:'Frontier (Opus/Fable)',type:'line',stack:'t',areaStyle:{opacity:.92},lineStyle:{width:0},symbol:'none',emphasis:{focus:'series'},data:fr,
-       markLine:{silent:true,symbol:'none',lineStyle:{color:C.front,type:'solid',width:1.4,opacity:.5},label:{show:true,position:'middle',formatter:'50%',color:C.front,fontFamily:MONO,fontSize:nar?10.5:9.5,
-         ...(nar?{backgroundColor:'rgba(255,255,255,.8)',padding:[1,4],borderRadius:3}:{})},data:[{yAxis:50}]}},
-     {name:'Mid (Sonnet)',type:'line',stack:'t',areaStyle:{opacity:.92},lineStyle:{width:0},symbol:'none',emphasis:{focus:'series'},data:md},
-     ...(cp.length?[{name:CAPNAME,type:'line',z:4,symbol:'circle',symbolSize:nar?6:7,showSymbol:true,
-       lineStyle:{width:2,type:'dashed',color:C.ink},itemStyle:{color:'#fff',borderColor:C.ink,borderWidth:1.8},
-       emphasis:{focus:'series'},data:capData}]:[]),
-   ]},true);};
-  draw();
-  window.addEventListener('resize',()=>{ch.resize(); if((ch.getWidth()<440)!==nar) draw();});
  })();
 
  (function(){
@@ -3447,6 +3912,127 @@ __chartsReady( function(){
     ],
     "unmapped": []
   },
+  "frontier_hist": [
+    {
+      "wk": "2026-06-15",
+      "window_end": "2026-06-15",
+      "frontier": 37.1,
+      "tok_b": 12438.7,
+      "front_b": 4613.1
+    },
+    {
+      "wk": "2026-06-22",
+      "window_end": "2026-06-28",
+      "frontier": 41.5,
+      "tok_b": 13753.9,
+      "front_b": 5707.3
+    },
+    {
+      "wk": "2026-06-29",
+      "window_end": "2026-06-30",
+      "frontier": 42.8,
+      "tok_b": 14092.4,
+      "front_b": 6025.0
+    },
+    {
+      "wk": "2026-07-06",
+      "window_end": "2026-07-12",
+      "frontier": 46.3,
+      "tok_b": 14986.6,
+      "front_b": 6945.5
+    },
+    {
+      "wk": "2026-07-13",
+      "window_end": "2026-07-19",
+      "frontier": 46.6,
+      "tok_b": 15482.9,
+      "front_b": 7209.5
+    },
+    {
+      "wk": "2026-07-20",
+      "window_end": "2026-07-26",
+      "frontier": 45.8,
+      "tok_b": 15790.7,
+      "front_b": 7226.6
+    },
+    {
+      "wk": "2026-07-27",
+      "window_end": "2026-07-30",
+      "frontier": 43.1,
+      "tok_b": 16331.1,
+      "front_b": 7037.1
+    },
+    {
+      "wk": "2026-08-10",
+      "window_end": "2026-08-16",
+      "frontier": 19.5,
+      "tok_b": 28198.7,
+      "front_b": 5490.0
+    },
+    {
+      "wk": "2026-08-31",
+      "window_end": "2026-09-06",
+      "frontier": 15.7,
+      "tok_b": 52391.2,
+      "front_b": 8250.3
+    },
+    {
+      "wk": "2026-09-07",
+      "window_end": "2026-09-07",
+      "frontier": 15.8,
+      "tok_b": 54799.0,
+      "front_b": 8631.0
+    },
+    {
+      "wk": "2026-09-14",
+      "window_end": "2026-09-14",
+      "frontier": 14.7,
+      "tok_b": 69018.1,
+      "front_b": 10156.8
+    },
+    {
+      "wk": "2026-09-21",
+      "window_end": "2026-09-27",
+      "frontier": 17.0,
+      "tok_b": 80371.0,
+      "front_b": 13679.7
+    },
+    {
+      "wk": "2026-09-28",
+      "window_end": "2026-09-28",
+      "frontier": 17.3,
+      "tok_b": 82006.3,
+      "front_b": 14195.2
+    },
+    {
+      "wk": "2026-10-05",
+      "window_end": "2026-10-05",
+      "frontier": 20.6,
+      "tok_b": 82261.1,
+      "front_b": 16949.8
+    },
+    {
+      "wk": "2026-10-19",
+      "window_end": "2026-10-25",
+      "frontier": 27.4,
+      "tok_b": 71461.3,
+      "front_b": 19571.4
+    },
+    {
+      "wk": "2026-10-26",
+      "window_end": "2026-11-01",
+      "frontier": 26.8,
+      "tok_b": 73165.9,
+      "front_b": 19579.4
+    },
+    {
+      "wk": "2026-11-09",
+      "window_end": "2026-11-15",
+      "frontier": 25.7,
+      "tok_b": 77696.0,
+      "front_b": 19929.3
+    }
+  ],
   "anthropic_cmp": {
     "frontier": 57.1,
     "mid": 23.3,
@@ -5276,6 +5862,331 @@ __chartsReady( function(){
       "open": 14.6
     }
   },
+  "cmp_history": [
+    {
+      "window_end": "2026-06-15",
+      "wk": "2026-06-15",
+      "Anthropic": {
+        "frontier": 58.8,
+        "tok_b": 23904.9,
+        "front_b": 14064.5
+      },
+      "OpenAI": {
+        "frontier": 37.1,
+        "tok_b": 12438.7,
+        "front_b": 4613.1
+      },
+      "Google": {
+        "frontier": 9.0,
+        "tok_b": 18177.1,
+        "front_b": 1643.8
+      }
+    },
+    {
+      "window_end": "2026-06-28",
+      "wk": "2026-06-22",
+      "Anthropic": {
+        "frontier": 65.9,
+        "tok_b": 26371.1,
+        "front_b": 17371.6
+      },
+      "OpenAI": {
+        "frontier": 41.5,
+        "tok_b": 13753.9,
+        "front_b": 5707.3
+      },
+      "Google": {
+        "frontier": 7.6,
+        "tok_b": 17727.3,
+        "front_b": 1345.6
+      }
+    },
+    {
+      "window_end": "2026-06-30",
+      "wk": "2026-06-29",
+      "Anthropic": {
+        "frontier": 66.1,
+        "tok_b": 27119.3,
+        "front_b": 17922.1
+      },
+      "OpenAI": {
+        "frontier": 42.8,
+        "tok_b": 14092.4,
+        "front_b": 6025.0
+      },
+      "Google": {
+        "frontier": 7.6,
+        "tok_b": 18016.2,
+        "front_b": 1375.8
+      }
+    },
+    {
+      "window_end": "2026-07-12",
+      "wk": "2026-07-06",
+      "Anthropic": {
+        "frontier": 69.4,
+        "tok_b": 28896.2,
+        "front_b": 20067.5
+      },
+      "OpenAI": {
+        "frontier": 46.3,
+        "tok_b": 14986.6,
+        "front_b": 6945.5
+      },
+      "Google": {
+        "frontier": 7.5,
+        "tok_b": 17597.9,
+        "front_b": 1327.1
+      }
+    },
+    {
+      "window_end": "2026-07-19",
+      "wk": "2026-07-13",
+      "Anthropic": {
+        "frontier": 68.7,
+        "tok_b": 29426.6,
+        "front_b": 20221.9
+      },
+      "OpenAI": {
+        "frontier": 46.6,
+        "tok_b": 15482.9,
+        "front_b": 7209.5
+      },
+      "Google": {
+        "frontier": 7.1,
+        "tok_b": 17577.2,
+        "front_b": 1245.9
+      }
+    },
+    {
+      "window_end": "2026-07-26",
+      "wk": "2026-07-20",
+      "Anthropic": {
+        "frontier": 66.1,
+        "tok_b": 28155.7,
+        "front_b": 18610.9
+      },
+      "OpenAI": {
+        "frontier": 45.8,
+        "tok_b": 15790.7,
+        "front_b": 7226.6
+      },
+      "Google": {
+        "frontier": 6.6,
+        "tok_b": 18419.7,
+        "front_b": 1207.5
+      }
+    },
+    {
+      "window_end": "2026-07-30",
+      "wk": "2026-07-27",
+      "Anthropic": {
+        "frontier": 64.2,
+        "tok_b": 28051.7,
+        "front_b": 18014.9
+      },
+      "OpenAI": {
+        "frontier": 43.1,
+        "tok_b": 16331.1,
+        "front_b": 7037.1
+      },
+      "Google": {
+        "frontier": 6.3,
+        "tok_b": 19123.9,
+        "front_b": 1213.3
+      }
+    },
+    {
+      "window_end": "2026-08-16",
+      "wk": "2026-08-10",
+      "Anthropic": {
+        "frontier": 58.0,
+        "tok_b": 22440.7,
+        "front_b": 13020.3
+      },
+      "OpenAI": {
+        "frontier": 19.5,
+        "tok_b": 28198.7,
+        "front_b": 5490.0
+      },
+      "Google": {
+        "frontier": 4.3,
+        "tok_b": 23777.7,
+        "front_b": 1031.4
+      }
+    },
+    {
+      "window_end": "2026-09-06",
+      "wk": "2026-08-31",
+      "Anthropic": {
+        "frontier": 57.0,
+        "tok_b": 22885.9,
+        "front_b": 13046.3
+      },
+      "OpenAI": {
+        "frontier": 15.7,
+        "tok_b": 52391.2,
+        "front_b": 8250.3
+      },
+      "Google": {
+        "frontier": 3.7,
+        "tok_b": 30315.8,
+        "front_b": 1127.2
+      }
+    },
+    {
+      "window_end": "2026-09-07",
+      "wk": "2026-09-07",
+      "Anthropic": {
+        "frontier": 56.6,
+        "tok_b": 23252.5,
+        "front_b": 13161.0
+      },
+      "OpenAI": {
+        "frontier": 15.8,
+        "tok_b": 54799.0,
+        "front_b": 8631.0
+      },
+      "Google": {
+        "frontier": 3.7,
+        "tok_b": 30726.2,
+        "front_b": 1139.6
+      }
+    },
+    {
+      "window_end": "2026-09-14",
+      "wk": "2026-09-14",
+      "Anthropic": {
+        "frontier": 53.5,
+        "tok_b": 22065.9,
+        "front_b": 11797.7
+      },
+      "OpenAI": {
+        "frontier": 14.7,
+        "tok_b": 69018.1,
+        "front_b": 10156.8
+      },
+      "Google": {
+        "frontier": 3.7,
+        "tok_b": 31957.9,
+        "front_b": 1173.4
+      }
+    },
+    {
+      "window_end": "2026-09-27",
+      "wk": "2026-09-21",
+      "Anthropic": {
+        "frontier": 52.5,
+        "tok_b": 21389.3,
+        "front_b": 11232.8
+      },
+      "OpenAI": {
+        "frontier": 17.0,
+        "tok_b": 80371.0,
+        "front_b": 13679.7
+      },
+      "Google": {
+        "frontier": 3.9,
+        "tok_b": 30087.0,
+        "front_b": 1183.2
+      }
+    },
+    {
+      "window_end": "2026-09-28",
+      "wk": "2026-09-28",
+      "Anthropic": {
+        "frontier": 52.9,
+        "tok_b": 21807.1,
+        "front_b": 11544.3
+      },
+      "OpenAI": {
+        "frontier": 17.3,
+        "tok_b": 82006.3,
+        "front_b": 14195.2
+      },
+      "Google": {
+        "frontier": 3.9,
+        "tok_b": 30219.5,
+        "front_b": 1173.7
+      }
+    },
+    {
+      "window_end": "2026-10-05",
+      "wk": "2026-10-05",
+      "Anthropic": {
+        "frontier": 56.1,
+        "tok_b": 22988.9,
+        "front_b": 12896.4
+      },
+      "OpenAI": {
+        "frontier": 20.6,
+        "tok_b": 82261.1,
+        "front_b": 16949.8
+      },
+      "Google": {
+        "frontier": 4.1,
+        "tok_b": 29663.8,
+        "front_b": 1205.0
+      }
+    },
+    {
+      "window_end": "2026-10-25",
+      "wk": "2026-10-19",
+      "Anthropic": {
+        "frontier": 58.6,
+        "tok_b": 48766.7,
+        "front_b": 28573.7
+      },
+      "OpenAI": {
+        "frontier": 27.4,
+        "tok_b": 71461.3,
+        "front_b": 19571.4
+      },
+      "Google": {
+        "frontier": 9.4,
+        "tok_b": 28276.3,
+        "front_b": 2660.8
+      }
+    },
+    {
+      "window_end": "2026-11-01",
+      "wk": "2026-10-26",
+      "Anthropic": {
+        "frontier": 57.2,
+        "tok_b": 57022.1,
+        "front_b": 32632.2
+      },
+      "OpenAI": {
+        "frontier": 26.8,
+        "tok_b": 73165.9,
+        "front_b": 19579.4
+      },
+      "Google": {
+        "frontier": 13.1,
+        "tok_b": 27967.6,
+        "front_b": 3652.3
+      }
+    },
+    {
+      "window_end": "2026-11-15",
+      "wk": "2026-11-09",
+      "Anthropic": {
+        "frontier": 57.1,
+        "tok_b": 62021.1,
+        "front_b": 35413.3
+      },
+      "OpenAI": {
+        "frontier": 25.7,
+        "tok_b": 77696.0,
+        "front_b": 19929.3
+      },
+      "Google": {
+        "frontier": 20.4,
+        "tok_b": 27751.9,
+        "front_b": 5649.6
+      }
+    }
+  ],
   "blends": {
     "Anthropic": {
       "in": 3.034,
