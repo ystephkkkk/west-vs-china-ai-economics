@@ -274,6 +274,12 @@ html.night{filter:invert(.9) hue-rotate(180deg);background:#fff}
  #premium .pmleg i{display:inline-block;width:14px;border-top:3px solid;margin-right:5px;vertical-align:middle}
  #premium .pmleg b{color:var(--ink)}
  #premium .seg{align-self:flex-start}
+ #premium .pmrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 22px;margin-top:2px}
+ #premium .pmcol{min-width:0;display:flex;flex-direction:column}
+ #premium .pmsub{font-family:var(--mono);font-size:11.5px;color:var(--ink);font-weight:600;margin:6px 2px 2px}
+ #premium .pmcol .chart{margin-top:auto}
+ #premium .pmrow.one{grid-template-columns:minmax(0,1fr)}
+ @media(max-width:900px){#premium .pmrow{grid-template-columns:minmax(0,1fr)}}
  #premium .note b{color:var(--ink)}
  #premium details.pmdet{margin-top:6px}
  #premium details.pmdet>summary{cursor:pointer;font-family:var(--mono);font-size:11px;color:var(--dim);padding:3px 0;list-style:revert}
@@ -283,9 +289,20 @@ html.night{filter:invert(.9) hue-rotate(180deg);background:#fff}
   <div class="ptitle"><span id="pm_head"></span><small id="pm_sub"></small></div>
   <div class="ctrls"><div class="seg" id="pm_win"><button data-w="cap" id="pm_wcap" class="active"></button><button data-w="all">All weeks</button></div></div>
  </div>
- <div class="pmleg" id="pm_leg"></div>
- <div id="pm_c1" class="chart short"></div>
+ <div class="pmrow" id="pm_row">
+  <div class="pmcol">
+   <div class="pmsub" id="pm_sub1"></div>
+   <div class="pmleg" id="pm_leg"></div>
+   <div id="pm_c1" class="chart short"></div>
+  </div>
+  <div class="pmcol">
+   <div class="pmsub" id="pm_sub2"></div>
+   <div class="pmleg" id="pm_leg2"></div>
+   <div id="pm_c2" class="chart short"></div>
+  </div>
+ </div>
  <p class="note" id="pm_read"></p>
+ <p class="note" id="pm_map"></p>
  <details class="pmdet"><summary>Method and caveats</summary><p class="note" id="pm_note"></p></details>
 </div>
 <script>
@@ -297,8 +314,12 @@ __chartsReady(function(){        // echarts is inlined at the END of <body>
   if(!__PM||!Array.isArray(__PM.caps)||!__PM.caps.length||!__PM.l1||!__PM.l1.r||!__PM.l1.r.length){if(panel)panel.style.display='none';return;}
   const MONO="'IBM Plex Mono',Menlo,Consolas,monospace", SANS="'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
   const C={ink:'#181a1f',dim:'#6a7180',line:'#e7e1d6',grid:'#efe9dd',ax:'#8d8676'};
-  const COL={l1:C.ink,l2:'#1f63d6',l3:'#8a55c0'};
-  const NAME={l1:'All West / all China',l2:'Frontier / all China',l3:'Frontier / flagship China lines'};
+  const COL={l1:C.ink,l2:'#b7791f',l3:'#8a55c0'};      /* ratio lines: ink, amber, purple; no blue or red, which belong to the dollar chart */
+  const PCOL={w:'#1f63d6',lw:'#8fb0ec',ct:'#d83a2c',ca:'#ea8e84',lc:'#f4c4be'};      /* blue family West, red family China; dark = frontier / flagship */
+  const PNAME={w:'Western frontier',lw:'All West, weekly',ct:'Flagship China lines',ca:'All China paid text',lc:'All China, weekly'};
+  const PEND={w:'Western frontier',lw:'All West, weekly',ct:'Flagship China lines',ca:'All China paid text'};
+  const NAME={l1:'All West / all China, weekly',l2:'Frontier / all China paid text',l3:'Frontier / flagship China lines'};
+  const NEND={l1:'All West / all China',l2:'Frontier / all China',l3:'Frontier / flagship China lines'};
   const MONS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const dmy=s=>(+s.slice(8,10))+' '+MONS[+s.slice(5,7)-1]+' '+s.slice(0,4);
   const loc=s=>new Date(+s.slice(0,4),+s.slice(5,7)-1,+s.slice(8,10)).getTime();
@@ -316,17 +337,21 @@ __chartsReady(function(){        // echarts is inlined at the END of <body>
 
   set('pm_head','Western price over Chinese price');
   set('pm_sub','Western dollars per 1M tokens divided by Chinese dollars per 1M tokens, at three levels. Our arithmetic from listed prices and tokens routed on this venue.');
+  set('pm_sub1','Ratio: Western price over Chinese price');
+  set('pm_sub2','Dollars per 1M tokens behind each ratio, log scale');
   set('pm_wcap','From '+dmy(L1.start));
   const rd=[];
   const lowOf=k=>CP.reduce((m,c)=>(c.ratio[k]<m.ratio[k]?c:m),CP[0]);
   const lw=lowOf('l3');
   const dpair=(a,b)=>usd(a)+' to '+usd(b);
   const mF=dmy(f.window_end), mL=dmy(l.window_end);
-  rd.push('Month to '+mF+' against month to '+mL+' (our arithmetic). Western frontier over Chinese flagship lines: '+x1(f.ratio.l3)+' to '+x1(l.ratio.l3)
-   +'. Western frontier over all Chinese paid text models: '+x1(f.ratio.l2)+' to '+x1(l.ratio.l2)+'.');
-  if(sn<n1) rd.push('All Western over all Chinese, week to '+dmy(L1.end[sn])+' against week to '+dmy(L1.end[n1-1])+': '+x1(L1.r[sn])+' to '+x1(L1.r[n1-1])+'.');
-  rd.push('Dollars per 1M tokens over the same months: Western frontier '+dpair(f.w.real,l.w.real)
-   +'; Chinese flagship lines '+dpair(f.ct.real,l.ct.real)+'; all Chinese paid text '+dpair(f.ca.real,l.ca.real)+'.');
+  rd.push('Month to '+mF+' against month to '+mL+' (our arithmetic). Western frontier over flagship China lines: '+x1(f.ratio.l3)+' to '+x1(l.ratio.l3)
+   +'. Western frontier over all China paid text: '+x1(f.ratio.l2)+' to '+x1(l.ratio.l2)+'.');
+  if(sn<n1) rd.push('All West over all China, week to '+dmy(L1.end[sn])+' against week to '+dmy(L1.end[n1-1])+': '+x1(L1.r[sn])+' to '+x1(L1.r[n1-1])+'.');
+  const both=(a,b)=>a>0&&b>0;
+  const chg=(a,b)=>{const p=Math.floor(100*(b/a-1)+0.5);return p===0?'unchanged':(p>0?'rose ':'fell ')+Math.abs(p)+'%';};
+  const dps=[['Western frontier','w',1],['flagship China lines','ct',1],['all China paid text','ca',0]].filter(p=>both(f[p[1]].real,l[p[1]].real));
+  if(dps.length) rd.push('Dollars per 1M tokens over the same months: '+dps.map(p=>p[0]+' '+dpair(f[p[1]].real,l[p[1]].real)+(p[2]?' ('+chg(f[p[1]].real,l[p[1]].real)+')':'')).join('; ')+'.');
   setH('pm_read','<b>Read.</b> '+rd.join(' '));
   const pre=L1.pre||null;
   const topLab=c=>c.top_lab&&c.top_lab.lab?{k:c.top_lab.lab.charAt(0).toUpperCase()+c.top_lab.lab.slice(1),s:c.top_lab.share}:null;
@@ -335,9 +360,15 @@ __chartsReady(function(){        // echarts is inlined at the END of <body>
    return a.k===b.k?'The largest lab, '+a.k+', holds '+pct(a.s)+'% then '+pct(b.s)+'% of those tokens.'
     :'The largest lab is '+a.k+' ('+pct(a.s)+'% of those tokens) in the first month and '+b.k+' ('+pct(b.s)+'%) in the last.';
   };
+  const setMap=()=>{
+   const m=['<b>Reading the charts.</b> Each ratio is the two same-named lines in the dollar chart, divided. The dollar axis is log, so equal gaps are equal ratios.',
+    PNAME.lc+' is one week of all tokens; '+PNAME.ca+' is the trailing month of paid text models, so the two differ by date.'];
+   if(win==='all'&&sn>0&&sn<n1) m.push('Dashed lines are the earlier method and do not compare with the solid ones. The weekly ratio moves from '+x1(L1.r[sn-1])+' to '+x1(L1.r[sn])+' across the change.');
+   setH('pm_map',m.join(' '));
+  };
   const setNote=()=>{
    const P=[];
-   P.push('<b>Prices.</b> Each model is priced at the one endpoint the catalog lists on that date, after any discount, at the real prompt and completion mix (our arithmetic). '
+   P.push('<b>Prices.</b> Each model is priced at the one endpoint the venue lists on that date, after any discount, at the real prompt and completion mix (our arithmetic). '
     +'For many Chinese models that endpoint is a third-party host, so the Chinese level can sit below the lab\'s own list price. Before discounts the last readings are '
     +x1(l.ratio.l2_list)+' for frontier over all Chinese and '+x1(l.ratio.l3_list)+' for frontier over flagship lines.');
    P.push('<b>Weekly line.</b> The page\'s as-of dollars over tokens for all Western and all Chinese models; free models count at zero. It is dashed before '+dmy(L1.start)+(win==='cap'?' (shown under All weeks)':'')
@@ -355,18 +386,19 @@ __chartsReady(function(){        // echarts is inlined at the END of <body>
     }
     P.push(h);
    }
-   P.push('<b>Points.</b> Each point on those two lines is the trailing month to its date. Points sit '+B.gap_min+' to '+B.gap_max+' days apart'+(B.gap_max<B.window_days?', so they overlap':'')
-    +'. Captures to '+dmy(B.one_catalog_through)+' share one catalog, so a list price change before then shows only through the mix.'
-    +(nc>1&&CP[nc-2].catalogSha256!==l.catalogSha256?' The newest capture reads a newer catalog than the one before it.':'')
+   P.push('<b>Points.</b> Each point on '+((q)=>q.slice(0,-1).join(', ')+' and '+q[q.length-1])([NAME.l2,NAME.l3,PNAME.w,PNAME.ct,PNAME.ca])+' is the trailing month to its date; weekly points are one week. Those lines start on '+dmy(f.window_end)+', the first reading with tokens for every model. Points sit '+B.gap_min+' to '+B.gap_max+' days apart'+(B.gap_max<B.window_days?', so they overlap':'')
+    +'. Readings to '+dmy(B.one_catalog_through)+' use the same price list, so a list price change before then shows only through the mix.'
+    +(nc>1&&CP[nc-2].catalogSha256!==l.catalogSha256?' The newest reading uses a newer price list than the one before it.':'')
     +(lw.window_end!==l.window_end?' Flagship low: '+x1(lw.ratio.l3)+', month to '+dmy(lw.window_end)+'.':'')
-    +' List price is not the invoice. The newest week and the newest capture can still be revised. This venue is a small slice of global tokens.');
+    +' Prices are list prices; invoices can differ. The newest week and the newest reading can still be revised. This venue is a small slice of global tokens.');
    setH('pm_note',P.map((t,i)=>'<span style="display:block'+(i?';margin-top:8px':'')+'">'+t+'</span>').join(''));
   };
 
   const ch=echarts.init(document.getElementById('pm_c1'));
-  const leg=document.getElementById('pm_leg');
+  const ch2=echarts.init(document.getElementById('pm_c2'));
+  const leg=document.getElementById('pm_leg'), leg2=document.getElementById('pm_leg2');
   const wbtns=document.querySelectorAll('#pm_win button');
-  let nar=false, win=null;
+  let nar=false, win=null, curFrom='0000-00-00';
   const THR=Math.max(10,Math.ceil((B.gap_max||0)/2)+1)*DAY;
   const l1pts=(a,b,from)=>{const o=[];for(let i=a;i<b;i++){if(L1.end[i]>=from)o.push({value:[L1.end[i],L1.r[i]],kind:'l1',i:i});}return o;};
   const cpts=(k,from)=>CP.filter(c=>c.window_end>=from).map(c=>({value:[c.window_end,c.ratio[k]],kind:k,i:CP.indexOf(c)}));
@@ -387,14 +419,38 @@ __chartsReady(function(){        // echarts is inlined at the END of <body>
      'Western frontier '+usd(c.w.real)+', flagship lines '+usd(c.ct.real)+' per 1M',
      T(c.ct.tok_b)+' tokens, '+pct(c.ct_share)+'% of Chinese paid text','Largest labs: '+topLabs(c)]);
   };
+  const nearest=(n,endAt,ax,from,ok)=>{let bi=-1,bd=Infinity;for(let i=0;i<n;i++){const e=endAt(i);if(e<from||!ok(i))continue;const d=Math.abs(loc(e)-ax);if(d<bd){bd=d;bi=i;}}return bd<=THR?bi:-1;};
+  const nearW=(ax,ok)=>nearest(n1,i=>L1.end[i],ax,curFrom,ok);
+  const nearC=(ax,ok)=>nearest(nc,i=>CP[i].window_end,ax,curFrom,ok);
   const fmt=p=>{
    if(!p||!p.length) return '';
-   const ax=p[0].axisValue, byKind={};
-   p.forEach(q=>{const d=q.data;if(!d||!d.kind)return;
-    const dist=Math.abs(loc(d.value[0])-ax);
-    if(dist>THR)return;
-    if(!byKind[d.kind]||dist<byKind[d.kind].dist)byKind[d.kind]={dist:dist,d:d};});
-   return ['l1','l2','l3'].filter(k=>byKind[k]).map(k=>rowFor(byKind[k].d)).join('');
+   const ax=p[0].axisValue, o=[];
+   const wi=nearW(ax,()=>true), ci=nearC(ax,()=>true);
+   if(wi>=0) o.push(rowFor({kind:'l1',i:wi}));
+   if(ci>=0){o.push(rowFor({kind:'l2',i:ci}));o.push(rowFor({kind:'l3',i:ci}));}
+   return o.join('');
+  };
+  const cdol=(k,from)=>CP.filter(c=>c.window_end>=from&&c[k].real>0).map(c=>({value:[c.window_end,c[k].real],kind:k,i:CP.indexOf(c)}));
+  const wdol=(arr,kind,a,b,from)=>{const o=[];for(let i=a;i<b;i++){if(L1.end[i]>=from&&arr[i]>0)o.push({value:[L1.end[i],arr[i]],kind:kind,i:i});}return o;};
+  const rowP=(k,val,sub)=>Dv('margin-bottom:8px;line-height:1.45',
+   Dv('display:flex;justify-content:space-between;gap:20px','<span>'+dot(PCOL[k])+PNAME[k]+'</span><b style="font-family:'+MONO+'">'+val+' per 1M</b>')+subs(sub));
+  const rowForP=d=>{
+   if(d.kind==='lw'||d.kind==='lc'){const i=d.i;
+    return rowP(d.kind,usd(d.kind==='lw'?L1.w[i]:L1.c[i]),['Week to '+dmy(L1.end[i])+(i<sn?', earlier method':'')]);}
+   const c=CP[d.i];
+   return rowP(d.kind,usd(c[d.kind].real),['Month to '+dmy(c.window_end),T(c[d.kind].tok_b)+' tokens']);
+  };
+  const fmt2=p=>{
+   if(!p||!p.length) return '';
+   const ax=p[0].axisValue, r={};
+   const wi=nearW(ax,i=>L1.w[i]>0), ci=nearC(ax,i=>CP[i].w.real>0);
+   const wj=nearW(ax,i=>L1.c[i]>0), ck=nearC(ax,i=>CP[i].ct.real>0), cm=nearC(ax,i=>CP[i].ca.real>0);
+   if(ci>=0) r.w=rowForP({kind:'w',i:ci});
+   if(wi>=0) r.lw=rowForP({kind:'lw',i:wi});
+   if(ck>=0) r.ct=rowForP({kind:'ct',i:ck});
+   if(cm>=0) r.ca=rowForP({kind:'ca',i:cm});
+   if(wj>=0) r.lc=rowForP({kind:'lc',i:wj});
+   return ['w','lw','ct','ca','lc'].filter(k=>r[k]).map(k=>r[k]).join('');
   };
   const draw=()=>{
    nar=ch.getWidth()<640;
@@ -402,21 +458,24 @@ __chartsReady(function(){        // echarts is inlined at the END of <body>
    if(win===null) win='cap';   /* opens on the stretch all three lines cover; All weeks is one click away */
    wbtns.forEach(b=>b.classList.toggle('active',b.getAttribute('data-w')===win));
    setNote();
+   setMap();
    if(leg){leg.innerHTML=['l1','l2','l3'].map(k=>'<span><i style="border-top-color:'+COL[k]+'"></i>'+NAME[k]+'</span>').join('');leg.style.display=nar?'flex':'none';}
+   if(leg2){leg2.innerHTML=['w','lw','ct','ca','lc'].map(k=>'<span><i style="border-top-color:'+PCOL[k]+(k==='lw'||k==='lc'?';border-top-width:2px':'')+'"></i>'+PNAME[k]+'</span>').join('');leg2.style.display=nar?'flex':'none';}
    const from=win==='cap'?L1.start:'0000-00-00';
+   curFrom=from;
    const first=win==='cap'?L1.start:L1.end[0];
    const d0=new Date(loc(first)), x0=new Date(d0.getFullYear(),d0.getMonth(),1).getTime();
    const sA=l1pts(0,sn,from), sB=l1pts(sn,n1,from), s2=cpts('l2',from), s3=cpts('l3',from);
    let mx=0; [sA,sB,s2,s3].forEach(a=>a.forEach(d=>{if(d.value[1]>mx)mx=d.value[1];}));
    const ymax=Math.max(5,Math.ceil(mx*1.08/5)*5);
    if(sA.length>2){const m=sA[Math.floor(sA.length/2)];m.label={show:true,formatter:'Earlier method',position:'bottom',distance:16,color:C.dim,fontFamily:MONO,fontSize:nar?10:10.5};}
-   const end=(k)=>({show:true,distance:6,formatter:q=>(q.value&&q.value[1]!=null)?((nar?'':NAME[k]+' ')+x1(+q.value[1])):'',color:C.ink,fontFamily:MONO,fontSize:nar?10.5:11,fontWeight:600});
+   const end=(k)=>({show:true,distance:6,formatter:q=>(q.value&&q.value[1]!=null)?((nar?'':NEND[k]+' ')+x1(+q.value[1])):'',color:C.ink,fontFamily:MONO,fontSize:nar?10.5:11,fontWeight:600});
    const base=(k,name,data,o)=>Object.assign({name:name,type:'line',data:data,symbol:'circle',showSymbol:true,connectNulls:false,
     lineStyle:{width:nar?2:2.4,color:COL[k]},itemStyle:{color:COL[k]},emphasis:{focus:'none'},animation:false},o||{});
    ch.setOption({grid:nar?{left:40,right:46,top:14,bottom:30}:{left:46,right:258,top:14,bottom:30},
     tooltip:{trigger:'axis',confine:true,extraCssText:TIPWRAP,backgroundColor:'#fff',borderColor:C.line,borderWidth:1,padding:[10,12],textStyle:{color:C.ink,fontSize:12,fontFamily:SANS},
      axisPointer:{type:'line',lineStyle:{color:'#c9cdd4'}},formatter:fmt},
-    xAxis:{type:'time',min:x0,max:'dataMax',...(nar?{splitNumber:3}:{}),axisLabel:{hideOverlap:true,fontSize:10.5,color:C.ax,fontFamily:MONO,
+    xAxis:{type:'time',min:x0,max:'dataMax',...(nar?{splitNumber:win==='all'?2:3}:{}),axisLabel:{hideOverlap:true,fontSize:10.5,color:C.ax,fontFamily:MONO,
      formatter:v=>{const d=new Date(v);return nar?(win==='cap'?MONS[d.getMonth()]:MONS[d.getMonth()]+" '"+String(d.getFullYear()).slice(2)):MONS[d.getMonth()]+' '+d.getFullYear();}},axisLine:{lineStyle:{color:'#d8d2c6'}},axisTick:{show:false}},
     yAxis:{type:'value',min:0,max:ymax,interval:5,axisLabel:{fontSize:10.5,color:C.ax,fontFamily:MONO,formatter:'{value}x'},splitLine:{lineStyle:{color:C.grid}}},
     series:[
@@ -425,10 +484,41 @@ __chartsReady(function(){        // echarts is inlined at the END of <body>
      base('l2','l2',s2,{symbolSize:nar?4:5,endLabel:end('l2'),labelLayout:{moveOverlap:'shiftY'}}),
      base('l3','l3',s3,{symbolSize:nar?4:5,endLabel:end('l3'),labelLayout:{moveOverlap:'shiftY'}})
     ]},true);
+   const pW=cdol('w',from), pT=cdol('ct',from), pA=cdol('ca',from);
+   const wA=wdol(L1.w,'lw',0,sn,from), wB=wdol(L1.w,'lw',sn,n1,from), cA=wdol(L1.c,'lc',0,sn,from), cB=wdol(L1.c,'lc',sn,n1,from);
+   let lo=Infinity,hi=0; [pW,pT,pA,wA,wB,cA,cB].forEach(a=>a.forEach(d=>{if(d.value[1]<lo)lo=d.value[1];if(d.value[1]>hi)hi=d.value[1];}));
+   const hasP=isFinite(lo)&&hi>0;
+   document.getElementById('pm_c2').parentNode.style.display=hasP?'':'none';
+   document.getElementById('pm_row').classList.toggle('one',!hasP);
+   if(leg2&&!hasP) leg2.style.display='none';
+   if(!hasP) return;
+   ch2.resize();
+   const pmin=Math.pow(10,Math.floor(Math.log10(lo*0.95))), pmax=Math.pow(10,Math.ceil(Math.log10(hi*1.05)));
+   if(wA.length>2){const m=wA[Math.floor(wA.length/2)];m.label={show:true,formatter:'Earlier method',position:'bottom',distance:16,color:C.dim,fontFamily:MONO,fontSize:nar?10:10.5};}
+   if(cA.length>2){const m=cA[Math.floor(cA.length/2)];m.label={show:true,formatter:'Earlier method',position:'bottom',distance:16,color:C.dim,fontFamily:MONO,fontSize:nar?10:10.5};}
+   const endP=(k)=>({show:true,distance:6,formatter:q=>(q.value&&q.value[1]!=null)?((nar?'':PEND[k]+' ')+usd(+q.value[1])):'',color:C.ink,fontFamily:MONO,fontSize:nar?10.5:11,fontWeight:600});
+   const baseP=(k,name,data,o)=>Object.assign({name:name,type:'line',data:data,symbol:'circle',showSymbol:true,connectNulls:false,
+    lineStyle:{width:nar?2:2.4,color:PCOL[k]},itemStyle:{color:PCOL[k]},emphasis:{focus:'none'},animation:false},o||{});
+   const weekly=(k,name,data,end)=>baseP(k,name,data,Object.assign({symbolSize:3,lineStyle:{width:1.8,color:PCOL[k]}},end?{endLabel:endP(k),labelLayout:{moveOverlap:'shiftY'}}:{}));
+   const dashed=(k,name,data)=>baseP(k,name,data,{symbolSize:0,lineStyle:{width:1.8,color:PCOL[k],type:'dashed'},itemStyle:{color:PCOL[k]}});   /* tinted in its own family: dashed means the earlier method */
+   ch2.setOption({grid:nar?{left:44,right:46,top:14,bottom:30}:{left:50,right:258,top:14,bottom:30},
+    tooltip:{trigger:'axis',confine:true,extraCssText:TIPWRAP,backgroundColor:'#fff',borderColor:C.line,borderWidth:1,padding:[10,12],textStyle:{color:C.ink,fontSize:12,fontFamily:SANS},
+     axisPointer:{type:'line',lineStyle:{color:'#c9cdd4'}},formatter:fmt2},
+    xAxis:{type:'time',min:x0,max:'dataMax',...(nar?{splitNumber:win==='all'?2:3}:{}),axisLabel:{hideOverlap:true,fontSize:10.5,color:C.ax,fontFamily:MONO,
+     formatter:v=>{const d=new Date(v);return nar?(win==='cap'?MONS[d.getMonth()]:MONS[d.getMonth()]+" '"+String(d.getFullYear()).slice(2)):MONS[d.getMonth()]+' '+d.getFullYear();}},axisLine:{lineStyle:{color:'#d8d2c6'}},axisTick:{show:false}},
+    yAxis:{type:'log',logBase:10,min:pmin,max:pmax,axisLabel:{fontSize:10.5,color:C.ax,fontFamily:MONO,formatter:v=>'$'+(+v.toPrecision(2))},
+     splitLine:{lineStyle:{color:C.grid}},minorTick:{show:true,splitNumber:9},minorSplitLine:{show:true,lineStyle:{color:'#f5f1e8'}}},
+    series:[
+     dashed('lw','lwa',wA), dashed('lc','lca',cA),
+     weekly('lw','lwb',wB,true), weekly('lc','lcb',cB,false),
+     baseP('ca','ca',pA,{symbolSize:nar?4:5,endLabel:endP('ca'),labelLayout:{moveOverlap:'shiftY'}}),
+     baseP('ct','ct',pT,{symbolSize:nar?4:5,endLabel:endP('ct'),labelLayout:{moveOverlap:'shiftY'}}),
+     baseP('w','w',pW,{symbolSize:nar?4:5,endLabel:endP('w'),labelLayout:{moveOverlap:'shiftY'}})
+    ]},true);
   };
   draw();
   wbtns.forEach(b=>b.addEventListener('click',function(){win=b.getAttribute('data-w');draw();}));
-  window.addEventListener('resize',function(){ch.resize();if((ch.getWidth()<640)!==nar)draw();});
+  window.addEventListener('resize',function(){ch.resize();ch2.resize();if((ch.getWidth()<640)!==nar)draw();});
  })();
 });
 </script>
